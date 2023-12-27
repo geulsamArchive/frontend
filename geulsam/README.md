@@ -1,1 +1,0 @@
-geulsam archive입니다.
