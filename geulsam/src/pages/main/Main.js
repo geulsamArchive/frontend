@@ -3,8 +3,9 @@ import Login from '../../components/Login';
 
 const Main = () => {
 
-    //로그인 성공시 true 반환
-    let Logined = 0
+
+    const Logined = 0 //로그인 성공시 true 반환
+
     const admin = () => {
         if (user.user_level === 'master')
             return true
@@ -20,12 +21,12 @@ const Main = () => {
             )
 
         } else {
-            <>
-                <Author />
-                <Seacrch />
-                <Critic />
-                <Awards />
-            </>
+            // <> 아마도 navbar로 묶을듯
+            //     <Author />
+            //     <Seacrch />
+            //     <Critic />
+            //     <Awards />
+            // </>
         }
     } else {
         return <Login />

@@ -1,11 +1,18 @@
 import React from 'react';
 import styled from 'styled-components'
 import { useForms } from '../hooks/useForms';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [id, onChangeId] = useForms();
     const [pw, onChangePw] = useForms();
-    const onClick = () => {
+    const redirect = useNavigate();
+    const onClick = async () => {
+        const result = await LoginAPi(id, pw);
+        const { accessToken, refreshToken } = result;
+        localStorage.setItem('access', accessToken);
+        localStorage.setItem('refresh', refreshToken);
+        redirect('/');
         //api 내놔
     }
     return (
@@ -25,8 +32,6 @@ const Login = () => {
 export default Login;
 
 const Wrapper = styled.div`
-display:flex;
-
 `;
 const Title = styled.div`
 `;
