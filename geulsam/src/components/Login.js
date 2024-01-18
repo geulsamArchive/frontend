@@ -1,19 +1,19 @@
 import React from 'react';
-import styled from 'styled-components'
 import { useForms } from '../hooks/useForms';
 import { useNavigate } from 'react-router-dom';
+import { LoginApi } from '../apis/LoginApi';
+import { Wrapper, Title, Form, Input, Inputs, Button } from '../style/StyledComponent';
 
 const Login = () => {
     const [id, onChangeId] = useForms();
     const [pw, onChangePw] = useForms();
     const redirect = useNavigate();
     const onClick = async () => {
-        const result = await LoginAPi(id, pw);
+        const result = await LoginApi(id, pw);
         const { accessToken, refreshToken } = result;
         localStorage.setItem('access', accessToken);
         localStorage.setItem('refresh', refreshToken);
-        redirect('/');
-        //api 내놔
+        redirect('/main');
     }
     return (
         <Wrapper>
@@ -30,16 +30,3 @@ const Login = () => {
 };
 
 export default Login;
-
-const Wrapper = styled.div`
-`;
-const Title = styled.div`
-`;
-const Form = styled.div`
-`;
-const Inputs = styled.div`
-`;
-const Input = styled.input`
-`;
-const Button = styled.button`
-`;
