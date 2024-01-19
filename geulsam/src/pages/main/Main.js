@@ -1,11 +1,9 @@
 import React from 'react';
 import Login from '../../components/Login';
-import LinkAll from '../../components/LinkAll';
 
 const Main = () => {
     return (
         <>
-            <LinkAll />
             <Login />
         </>
     )

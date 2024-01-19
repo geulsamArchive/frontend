@@ -1,33 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { AuthorInfoApi } from '../../apis/AuthorInfoApi';
 import Authorpage from './Authorpage';
-import { AuthorNovelApi } from '../../apis/AuthorNovelApi';
+import { useData } from '../../hooks/useData';
+
+const apiAddressAuthor = ''
+const apiAddressWork = ''
 
 const AuthorInfo = () => {
-    const [authorInfo, setAuthorInfo] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
-    const [works, setWorks] = useState([])
     const { id } = useParams();
-
-    const getData = async () => {
-        try {
-            const authordata = await AuthorInfoApi(id);
-            const noveldata = await AuthorNovelApi(id);
-            setAuthorInfo(authordata);
-            setWorks(noveldata);
-            setIsLoading(false);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    useEffect(() => {
-        getData();
-    })
+    const { authorInfo, isLoading } = useData(apiAddressAuthor, id);
+    const { works, isLoading2 } = useData(apiAddressWork, id)
 
     return (
         <>
             {isLoading ? LoadingMessage : <Authorpage author={authorInfo} work={works} />}
+            {isLoading2 ? <>작업정보로딩중</> : ''}
         </>
     );
 };

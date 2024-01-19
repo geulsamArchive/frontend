@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { AuthorNameApi } from '../apis/AuthorNamesApi';
+import React from 'react';
 import { LinkToAuthor } from './LinkToAuthor';
+import { useData } from '../hooks/useData';
+
+const apiAddress = 'https://jsonplaceholder.typicode.com/albums'
 
 const LinkAuthor = () => {
-    const [authors, setAuthors] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    const getData = async () => {
-        try {
-            const data = await AuthorNameApi();
-            setAuthors(data);
-            setIsLoading(false);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    useEffect(() => {
-        getData();
-    }, [])
+    const { authors, isLoading } = useData(apiAddress);
 
     return (
         <>
