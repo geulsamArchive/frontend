@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Criticism from './pages/criticism/Criticism';
 import AuthorInfo from './pages/authors/AuthorInfo';
 import LinkAll from './components/LinkAll';
+import SignUp from './components/Admin/SignUp';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/award' element={<Award />} />
         <Route path='/criticism' element={<Criticism />} />
         <Route path='/author/:id' element={<AuthorInfo />} />
+        <Route path='/admin/signup' element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );
