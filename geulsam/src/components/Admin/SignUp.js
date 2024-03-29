@@ -2,14 +2,16 @@ import React from 'react';
 import { useForms } from '../../hooks/useForms';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper, Title, Form, Input, Inputs, Button } from '../../style/StyledComponent';
+import { SignUpApi } from '../../apis/SignUpApi';
 
 const SignUp = () => {
     const [schoolNum, onChangeSchoolNum] = useForms();
     const [phone, onChangePhone] = useForms();
     const [name, onChangeName] = useForms();
     const redirect = useNavigate();
-    const onClick = async () => {
-
+    const onClick = async (name, schoolNum, phone) => {
+        const result = await SignUpApi(name, schoolNum, phone);
+        console.log('success', result)
         redirect('/main');
     }
     return (

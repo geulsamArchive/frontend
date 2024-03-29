@@ -10,9 +10,10 @@ const Login = () => {
     const redirect = useNavigate();
     const onClick = async () => {
         const result = await LoginApi(id, pw);
-        const { accessToken, refreshToken } = result;
+        const { accessToken, refreshToken } = result.data;
         localStorage.setItem('access', accessToken);
         localStorage.setItem('refresh', refreshToken);
+        console.log(result)
         redirect('/main');
     }
     return (

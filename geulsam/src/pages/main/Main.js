@@ -4,7 +4,8 @@ import Login from '../../components/Login';
 const Main = () => {
     return (
         <>
-            <Login />
+            Main페이지
+
         </>
     )
 
