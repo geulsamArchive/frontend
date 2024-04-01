@@ -1,10 +1,14 @@
 import React from 'react';
 import Login from '../../components/Login';
+import Calendar from './calendar/Calendar';
+import RecentWork from './recentwork/RecentWork';
 
 const Main = () => {
     return (
         <>
             Main페이지
+            <Calendar />
+            <RecentWork />
 
         </>
     )

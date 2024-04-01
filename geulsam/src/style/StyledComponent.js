@@ -55,6 +55,7 @@ margin: 0 auto;
 `;
 export const Footers = styled.footer`
 background-color: rgba(234, 233, 227, 1);
+height: 57px;
 `;
 
 export const Left = styled.div`
@@ -66,6 +67,24 @@ export const Right = styled.div`
 //Sidebar 관련 요소
 export const Sidebars = styled.div`
 position: fixed;
+background-color: darkgray;
 right: 10px;
 bottom: 10%;
+`;
+
+
+
+//Calenar 관련 요소
+export const Calendars = styled.div`
+width: 100%;
+background-color: aquamarine;
+height: 838px;
+`;
+
+
+//최근 공개된 작품 관련 요소
+export const RecentWorks = styled.div`
+width: 100%;
+height: 1400px;
+background-color: blue;
 `;
