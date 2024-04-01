@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/geulsamArchive/frontend/static/css/main.90f6920e.css",
+    "main.js": "/geulsamArchive/frontend/static/js/main.4be430af.js",
+    "static/js/787.e97a04fd.chunk.js": "/geulsamArchive/frontend/static/js/787.e97a04fd.chunk.js",
+    "index.html": "/geulsamArchive/frontend/index.html",
+    "main.90f6920e.css.map": "/geulsamArchive/frontend/static/css/main.90f6920e.css.map",
+    "main.4be430af.js.map": "/geulsamArchive/frontend/static/js/main.4be430af.js.map",
+    "787.e97a04fd.chunk.js.map": "/geulsamArchive/frontend/static/js/787.e97a04fd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.90f6920e.css",
+    "static/js/main.4be430af.js"
+  ]
+}
