@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/geulsamArchive/frontend/static/css/main.90f6920e.css",
-    "main.js": "/geulsamArchive/frontend/static/js/main.70a3febc.js",
-    "static/js/787.e97a04fd.chunk.js": "/geulsamArchive/frontend/static/js/787.e97a04fd.chunk.js",
-    "index.html": "/geulsamArchive/frontend/index.html",
-    "main.90f6920e.css.map": "/geulsamArchive/frontend/static/css/main.90f6920e.css.map",
-    "main.70a3febc.js.map": "/geulsamArchive/frontend/static/js/main.70a3febc.js.map",
-    "787.e97a04fd.chunk.js.map": "/geulsamArchive/frontend/static/js/787.e97a04fd.chunk.js.map"
+    "main.css": "/frontend/static/css/main.90f6920e.css",
+    "main.js": "/frontend/static/js/main.8e42bc16.js",
+    "static/js/787.e97a04fd.chunk.js": "/frontend/static/js/787.e97a04fd.chunk.js",
+    "index.html": "/frontend/index.html",
+    "main.90f6920e.css.map": "/frontend/static/css/main.90f6920e.css.map",
+    "main.8e42bc16.js.map": "/frontend/static/js/main.8e42bc16.js.map",
+    "787.e97a04fd.chunk.js.map": "/frontend/static/js/787.e97a04fd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.90f6920e.css",
-    "static/js/main.70a3febc.js"
+    "static/js/main.8e42bc16.js"
   ]
 }
