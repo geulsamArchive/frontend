@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForms } from '../../hooks/useForms';
 import { useNavigate } from 'react-router-dom';
 import { Wrapper, Title, Form, Input, Inputs, Button } from '../../style/StyledComponent';
@@ -9,11 +9,12 @@ const SignUp = () => {
     const [phone, onChangePhone] = useForms();
     const [name, onChangeName] = useForms();
     const redirect = useNavigate();
-    const onClick = async (name, schoolNum, phone) => {
-        const result = await SignUpApi(name, schoolNum, phone);
-        console.log('success', result)
-        redirect('/main');
-    }
+
+    const onClick =
+        async (name, schoolNum, phone) => {
+            const result = await SignUpApi(name, schoolNum, phone);
+            redirect('/main');
+        }
     return (
         <Wrapper>
             <Title>회원가입 페이지</Title>

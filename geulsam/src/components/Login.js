@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { LoginApi } from '../apis/LoginApi';
 import { Wrapper, Title, Form, Input, Inputs, Button } from '../style/StyledComponent';
 
-const Login = () => {
+const Logins = () => {
     const [id, onChangeId] = useForms();
     const [pw, onChangePw] = useForms();
     const redirect = useNavigate();
@@ -30,4 +30,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Logins;

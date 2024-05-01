@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-pdf/renderer": "^3.4.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -10,10 +11,12 @@
     "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-pdf": "^7.7.1",
     "react-router-dom": "^6.21.1",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,5 +44,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://github.com/geulsamArchive/frontend"
+  "homepage": "https://geulsamarchive.github.io/frontend/",
+  "devDependencies": {
+    "copy-webpack-plugin": "^12.0.2"
+  }
 }

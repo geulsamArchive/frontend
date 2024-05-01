@@ -14,6 +14,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
+        <Route path='/' element={<Main />} />
         <Route path='/main' element={<Main />} />
         <Route path='/work' element={<Work />} />
         <Route path='/critic' element={<Critic />} />
