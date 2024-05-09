@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -32,27 +33,43 @@ export const Button = styled.button`
 //NavBar, Footer 관련 요소
 
 export const Navs = styled.div`
+font-family: 'MaruBuri-Regular';
 position: relative;
 top: 0;
 left: 0;
 width: 100%;
-height: 100px;
-background-color: yellow;
+height: 85px;
+background-color: black;
+
 ul{
     display: flex;
     list-style: none;
+
 }
 li+li{
-    margin-left: 30px;
+    margin-left: 25px;
 }`;
 export const NavContent = styled.div`
 display: flex;
-justify-content: space-between;
+justify-content: center;
 width: 96%;
-align-items: center;
+align-items: flex-start;
 height: 100%;
-margin: 0 auto;
+padding-top: 50px;
 `;
+export const NavLink = styled(Link)`
+color:white;
+text-decoration: none;
+border: 1px solid white;
+padding: 20px 30px;
+border-radius: 43px 43px 0 0;
+margin-top: 15px;
+`
+
+
+
+
+
 export const Footers = styled.footer`
 background-color: rgba(234, 233, 227, 1);
 height: 57px;
@@ -77,7 +94,7 @@ bottom: 10%;
 //Calenar 관련 요소
 export const Calendars = styled.div`
 width: 100%;
-background-color: aquamarine;
+background-color: none;
 height: 838px;
 `;
 
@@ -86,5 +103,5 @@ height: 838px;
 export const RecentWorks = styled.div`
 width: 100%;
 height: 1400px;
-background-color: blue;
+background-color: black;
 `;

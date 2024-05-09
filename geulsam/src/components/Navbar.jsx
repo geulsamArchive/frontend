@@ -1,5 +1,5 @@
 import React from 'react';
-import { Left, Navs, Right, NavContent } from '../style/StyledComponent';
+import { Left, Navs, Right, NavContent, NavLink } from '../style/StyledComponent';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -8,22 +8,28 @@ const Navbar = () => {
             <NavContent>
                 <Left>
                     <ul>
-                        <li><Link to={'/main'}>1 글샘문학회</Link></li>
-                        <li><Link to={'/work'}>2 작품</Link></li>
-                        <li><Link to={'/critic'}>3 합평회</Link></li>
-                        <li><Link to={'/archive'}>4 문집ㆍ포스터</Link></li>
+                        <li>
+                            <NavLink to={'/main'}>
+                                1 글샘문학회
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/work'}>
+                                2 작품
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/critic'}>
+                                3 합평회
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/archive'}>
+                                4 문집ㆍ포스터
+                            </NavLink>
+                        </li>
                     </ul>
                 </Left>
-                <Right>
-                    <ul>
-                        <li>
-                            <a href='https://www.instagram.com/hongik_geulsaem/'>
-                                인스타
-                            </a>
-                        </li>
-                        <li>i</li>
-                    </ul>
-                </Right>
             </NavContent>
         </Navs>
     );
