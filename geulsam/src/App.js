@@ -8,6 +8,8 @@ import Archive from './pages/archive/Archive';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 import Sidebar from './components/Sidebar/Sidebar';
+import Poster from './pages/archive/poster/Poster';
+import PDFView from './components/pdf/PDFView';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path='/work' element={<Work />} />
         <Route path='/critic' element={<Critic />} />
         <Route path='/archive' element={<Archive />} />
+        <Route path='/archive/book/:id' element={<bookb />} />
+        <Route path='/archive/poster' element={<Poster />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>

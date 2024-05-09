@@ -1,21 +1,21 @@
 import React from 'react';
-import PDFView from '../../components/pdf/PDFView';
-import Example from '../../components/pdf/example.pdf'
+import { Link } from 'react-router-dom';
+import Book from './book/Book';
 
-const info = {
-    date: "2022년 12월 1일",
-    name: "정성훈",
-    bookSize: "A4",
-    pages: 10,
-    pdf: "https://www.hongik.ac.kr/kr/newscenter/notice.do?mode=download&articleNo=94266&attachNo=49368",
-}
+
+//import PDFView from '../../components/pdf/PDFView';
+
+//<PDFView data={info} />
+
 const Archive = () => {
     return (
-        <div>
-            문집 & 포스터 페이지
-            <PDFView data={info} />
-        </div>
+        <>
+            <Link to="/archive">문집</Link>
+            <Link to="/archive/poster">포스터</Link>
+            <Book />
+        </>
     );
 };
 
 export default Archive;
+

@@ -8,13 +8,19 @@ const SignUp = () => {
     const [schoolNum, onChangeSchoolNum] = useForms();
     const [phone, onChangePhone] = useForms();
     const [name, onChangeName] = useForms();
+    const [email, onChangeEmail] = useForms();
+    const [joinedAt, onChangeJoinedAt] = useForms();
+    const [birthDay, onChangeBirthDay] = useForms();
     const redirect = useNavigate();
 
     const onClick =
-        async (name, schoolNum, phone) => {
-            const result = await SignUpApi(name, schoolNum, phone);
+        async () => {
+            const result = await SignUpApi(
+                name, schoolNum, phone, email, joinedAt, birthDay);
+            console.log(result)
             redirect('/main');
         }
+
     return (
         <Wrapper>
             <Title>회원가입 페이지</Title>
