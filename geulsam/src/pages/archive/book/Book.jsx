@@ -2,17 +2,20 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
-
+const apiEndpoint = "https://jsonplaceholder.typicode.com/photos"
 
 
 const Book = () => {
     const [bookList, setBookList] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [bookPerPage, setBookPerPage] = useState(12)
 
     const getBookList = async () => {
         try {
-            const resp = await axios.get('https://jsonplaceholder.typicode.com/photos')
+            const resp = await axios.get(apiEndpoint)
             setBookList(resp.data);
+            setLoading(false)
             console.log(bookList)
         } catch (error) {
             console.error('api fetching failed', error)
