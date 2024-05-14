@@ -60,7 +60,7 @@ padding-top: 50px;
 export const NavLink = styled(Link)`
 color:white;
 text-decoration: none;
-border: 1px solid white;
+border: 1.8px solid white;
 padding: 20px 30px;
 border-radius: 43px 43px 0 0;
 margin-top: 15px;
@@ -71,24 +71,48 @@ margin-top: 15px;
 
 
 export const Footers = styled.footer`
+font-family: 'MaruBuri-Regular';
 background-color: rgba(234, 233, 227, 1);
 height: 57px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+font-size: 20px;
 `;
 
 export const Left = styled.div`
+margin-left: 80px;
 `;
 
 export const Right = styled.div`
+margin-right: 80px;
 `;
+
+export const Icons = styled.img`
+margin: 10px;
+`
 
 //Sidebar 관련 요소
 export const Sidebars = styled.div`
 position: fixed;
-background-color: darkgray;
-right: 10px;
+right: 0px;
 bottom: 10%;
+text-align:right;
 `;
-
+export const SideBox = styled.div`
+margin-bottom: 44px;
+`
+export const SideLink = styled(Link)`
+font-family: 'MaruBuri-Regular';
+color: white;
+text-decoration: none;
+border: 1px solid rgba(171, 170, 170, 1);
+border-right: none;
+border-radius: 43px 0 0 43px;
+padding: 20px 30px;
+padding-right: 85px;
+background-color: black;
+`
 
 
 //Calenar 관련 요소

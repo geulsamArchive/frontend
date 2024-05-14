@@ -1,13 +1,19 @@
 import React from 'react';
-import { Sidebars } from '../../style/StyledComponent';
+import { SideBox, SideLink, Sidebars } from '../../style/StyledComponent';
 import { Link } from 'react-router-dom';
 const Sidebar = () => {
     return (
         <Sidebars>
-            사이드바<br />
-            <Link to={'/login'}>로그인</Link>
-            <br />
-            <Link to={'/signup'}>회원가입</Link>
+            <SideBox>
+                <SideLink to="/login">
+                    로그인
+                </SideLink>
+            </SideBox>
+            <SideBox>
+                <SideLink to='/signup'>
+                    회원가입
+                </SideLink>
+            </SideBox>
         </Sidebars>
     )
 };
