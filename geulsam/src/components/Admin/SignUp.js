@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForms } from '../../hooks/useForms';
 import { useNavigate } from 'react-router-dom';
-import { Wrapper, Title, Form, Input, Inputs, Button } from '../../style/StyledComponent';
+import { Wrapper, Title, Form, Input, Inputs, Button, InputTitle, NextButton } from '../../style/StyledComponent';
 import { SignUpApi } from '../../apis/SignUpApi';
 
 const SignUp = () => {
@@ -23,14 +23,26 @@ const SignUp = () => {
 
     return (
         <Wrapper>
-            <Title>회원가입 페이지</Title>
             <Form>
                 <Inputs>
-                    <Input placeholder='학번' type='text' value={schoolNum} onChange={onChangeSchoolNum} />
-                    <Input placeholder='전화번호' type='text' value={phone} onChange={onChangePhone} />
+                    <InputTitle>
+                        이름
+                    </InputTitle>
                     <Input placeholder='이름' type='text' value={name} onChange={onChangeName} />
+                    <InputTitle>
+                        학번
+                    </InputTitle>
+                    <Input placeholder='예) C012345' type='text' value={schoolNum} onChange={onChangeSchoolNum} />
+                    <InputTitle>
+                        생년월일
+                    </InputTitle>
+                    <Input placeholder='예) 2000.12.31' type='text' value={birthDay} onChange={onChangeBirthDay} />
+                    <InputTitle>
+                        글샘 가입연도
+                    </InputTitle>
+                    <Input placeholder='예) 2024' type='text' value={joinedAt} onChange={onChangeJoinedAt} />
                 </Inputs>
-                <Button onClick={onClick}>회원가입</Button>
+                <NextButton onClick={onClick}>다음</NextButton>
             </Form>
         </Wrapper>
     );

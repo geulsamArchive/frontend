@@ -2,26 +2,21 @@ import React, { useEffect, useState } from 'react';
 import PDFView from '../../../components/pdf/PDFView';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
-
-const info = {
-    date: "2022년 12월 1일",
-    name: "정성훈",
-    bookSize: "A4",
-    pages: 10,
-    pdf: "",
-}
+import { ViewerAndLinks, BookInfoContainer, BookTitle, BookInfos, BookInfoContents, BookInfoAndButton, BookButtons } from '../../../style/StyledComponent';
+import CopyURL from '../../../components/CopyURL/CopyURL';
+import PDFDownload from '../../../components/Download/PDFDownload';
 
 const BookInfo = () => {
     const [bookData, setBooktData] = useState({})
     const [loading, setLoading] = useState(true)
-    const bookId = useParams();
+    const { bookId } = useParams()
 
 
     const getBookData = async () => {
         try {
-            const resp = await axios.get('' + bookId)
-            setBooktData(resp.data);
+            const resp = await axios.get(`http://3.38.162.235:8080/book/${bookId}`)
+            console.log(resp.data)
+            setBooktData(resp.data.data);
             setLoading(false);
         } catch (error) {
             console.error('api fetching error', error)
@@ -34,9 +29,49 @@ const BookInfo = () => {
     )
 
     return (
-        <>
-            <PDFView data={info} />
-        </>
+        <BookInfoContainer>
+            <BookTitle>
+                {/* {bookData.title} ㅆㅂ API 책 제목 넣는거 까먹었다*/}
+                2023 와우 문학
+            </BookTitle>
+            <BookInfoAndButton>
+                <BookInfoContents>
+                    <BookInfos>
+                        발간일
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        {bookData.release}
+                    </BookInfos>
+                    <BookInfos>
+                        디자인
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        {bookData.designer}
+                    </BookInfos>
+                    <BookInfos>
+                        판형 / 쪽수
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;
+                        {bookData.plate} / {bookData.page}
+                    </BookInfos>
+                    <ViewerAndLinks>
+                        <PDFView PDF={bookData.url} />
+                    </ViewerAndLinks>
+                </BookInfoContents>
+                <BookButtons>
+                    <br />
+                    <br />
+                    <PDFDownload PDFLink={bookData.url} />
+                    <CopyURL />
+                </BookButtons>
+            </BookInfoAndButton>
+        </BookInfoContainer>
+
     );
 };
 

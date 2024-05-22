@@ -2,7 +2,7 @@ import React from 'react';
 import { useForms } from '../hooks/useForms';
 import { useNavigate } from 'react-router-dom';
 import { LoginApi } from '../apis/LoginApi';
-import { Wrapper, Title, Form, Input, Inputs, Button } from '../style/StyledComponent';
+import { Wrapper, Title, Form, Input, Inputs, Button, InputTitle, Buttons } from '../style/StyledComponent';
 
 const Logins = () => {
     const [id, onChangeId] = useForms();
@@ -18,13 +18,21 @@ const Logins = () => {
     }
     return (
         <Wrapper>
-            <Title>로그인하세요</Title>
             <Form>
+                <Title>회원 로그인</Title>
                 <Inputs>
-                    <Input placeholder='ID' value={id} onChange={onChangeId} />
-                    <Input placeholder='Password' type='password' value={pw} onChange={onChangePw} />
+                    <InputTitle>
+                        학번
+                    </InputTitle>
+                    <Input value={id} onChange={onChangeId} />
+                    <InputTitle>
+                        비밀번호
+                    </InputTitle>
+                    <Input type='password' value={pw} onChange={onChangePw} />
                 </Inputs>
-                <Button onClick={onClick}>로그인</Button>
+                <Buttons>
+                    <Button onClick={onClick}>로그인</Button>
+                </Buttons>
             </Form>
         </Wrapper>
     );

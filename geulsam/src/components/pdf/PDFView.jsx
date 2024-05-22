@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Page, Document, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
+import { PDFPage, PageRow } from '../../style/StyledComponent';
 
 
-function PDFView({ data }) {
+function PDFView({ PDF }) {
     useEffect(() => {
         pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
     });
@@ -17,25 +18,14 @@ function PDFView({ data }) {
         setNumPages(numPages);
     }
 
-    const pdfstyle = {
-        width: '500px',
-        display: 'flex',
-    }
-
     return (
         <div>
-            발간일:{data.date}
-            디자인:{data.name}
-            판형:{data.bookSize}
-            {data.pages}쪽
-            <div>
-                <Document file={data.pdf} onLoadSuccess={onDocumentLoadSuccess}>
-                    <div style={pdfstyle}>
-                        <Page pageNumber={pageNumber} width={400} />
-                        <Page pageNumber={pageNumber + 1} width={400} />
-                    </div>
-                </Document>
-            </div>
+            <Document file={PDF} onLoadSuccess={onDocumentLoadSuccess}>
+                <PageRow>
+                    <PDFPage pageNumber={pageNumber} canvasBackground='rgba(235, 235, 235, 1)' scale='0.5' />
+                    <PDFPage pageNumber={pageNumber + 1} canvasBackground='rgba(235, 235, 235, 1)' scale='0.5' />
+                </PageRow>
+            </Document>
             <div>
                 <button onClick={() => {
                     setPageNumber(pageNumber === 1 ? pageNumber : pageNumber - 2)

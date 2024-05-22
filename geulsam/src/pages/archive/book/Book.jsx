@@ -2,23 +2,23 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const apiEndpoint = "https://jsonplaceholder.typicode.com/photos"
+const apiEndpoint = "http://3.38.162.235:8080/book"
 
 
 const Book = () => {
     const [bookList, setBookList] = useState([])
     const [loading, setLoading] = useState(true)
-    const [currentPage, setCurrentPage] = useState(1)
-    const [bookPerPage, setBookPerPage] = useState(12)
+    // const [currentPage, setCurrentPage] = useState(1)
+    // const [bookPerPage, setBookPerPage] = useState(12)
 
     const getBookList = async () => {
         try {
             const resp = await axios.get(apiEndpoint)
-            setBookList(resp.data);
+            console.log(resp.data.data)
+            setBookList(resp.data.data);
             setLoading(false)
-            console.log(bookList)
-        } catch (error) {
-            console.error('api fetching failed', error)
+        } catch (err) {
+            console.log('api fetching failed', err)
         }
     }
 
@@ -28,13 +28,14 @@ const Book = () => {
 
     return (
         <>
-            문집페이지
             <div>
+                문집페이지
+
                 <ul>
                     {bookList.map((book) => (
                         <li key={book.id}>
-                            <Link to={`/archive/book/${book.id}`}>
-                                <img src={book.thumbnailUrl} alt='' />
+                            <Link to={`/archive/book/${book.bookId}`}>
+                                <img src={book.bookCover} alt={book.description} />
                             </Link>
                         </li>
                     ))}

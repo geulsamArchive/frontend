@@ -1,6 +1,5 @@
 import React from 'react';
-import { Left, Navs, Right, NavContent, NavLink } from '../style/StyledComponent';
-import { Link } from 'react-router-dom';
+import { Left, Navs, NavContent, NavLink } from '../style/StyledComponent';
 
 const Navbar = () => {
     return (
@@ -24,7 +23,7 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/archive'}>
+                            <NavLink to={'/archive/poster'}>
                                 4 문집ㆍ포스터
                             </NavLink>
                         </li>

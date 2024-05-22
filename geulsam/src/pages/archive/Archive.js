@@ -1,18 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Book from './book/Book';
-
-
-//import PDFView from '../../components/pdf/PDFView';
-
-//<PDFView data={info} />
+import { Link, Outlet } from 'react-router-dom';
+import { Button, ArchiveButtonContainer } from '../../style/StyledComponent';
 
 const Archive = () => {
     return (
         <>
-            <Link to="/archive">문집</Link>
-            <Link to="/archive/poster">포스터</Link>
-            <Book />
+            <ArchiveButtonContainer>
+                <Link to="/archive/book">
+                    <Button>
+                        문집
+                    </Button>
+                </Link>
+                <Link to="/archive/poster">
+                    <Button>
+                        포스터
+                    </Button>
+                </Link>
+            </ArchiveButtonContainer>
+            <Outlet />
+
         </>
     );
 };
