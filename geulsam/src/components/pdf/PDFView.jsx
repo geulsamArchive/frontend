@@ -22,8 +22,8 @@ function PDFView({ PDF }) {
         <div>
             <Document file={PDF} onLoadSuccess={onDocumentLoadSuccess}>
                 <PageRow>
-                    <PDFPage pageNumber={pageNumber} canvasBackground='rgba(235, 235, 235, 1)' scale='0.5' />
-                    <PDFPage pageNumber={pageNumber + 1} canvasBackground='rgba(235, 235, 235, 1)' scale='0.5' />
+                    <PDFPage pageNumber={pageNumber} canvasBackground='rgba(235, 235, 235, 1)' scale='1' />
+                    <PDFPage pageNumber={pageNumber + 1} canvasBackground='rgba(235, 235, 235, 1)' scale='1' />
                 </PageRow>
             </Document>
             <div>

@@ -9,7 +9,6 @@ const RecentWork = () => {
                 최근 공개된 작품
             </RecentTitle>
 
-
         </RecentWorks>
     );
 };

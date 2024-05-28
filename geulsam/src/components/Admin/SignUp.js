@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForms } from '../../hooks/useForms';
 import { useNavigate } from 'react-router-dom';
-import { Wrapper, Title, Form, Input, Inputs, Button, InputTitle, NextButton } from '../../style/StyledComponent';
+import { Wrapper, Form, Input, Inputs, Button, InputTitle } from '../../style/StyledComponent';
 import { SignUpApi } from '../../apis/SignUpApi';
 
 const SignUp = () => {
@@ -42,7 +42,7 @@ const SignUp = () => {
                     </InputTitle>
                     <Input placeholder='예) 2024' type='text' value={joinedAt} onChange={onChangeJoinedAt} />
                 </Inputs>
-                <NextButton onClick={onClick}>다음</NextButton>
+                <Button onClick={onClick}>다음</Button>
             </Form>
         </Wrapper>
     );
