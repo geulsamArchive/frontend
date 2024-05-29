@@ -1,7 +1,6 @@
 import { Page } from "react-pdf";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Calendar from './../pages/main/calendar/Calendar';
 
 
 //Container와 Wrapper의 차이
@@ -44,17 +43,34 @@ margin-bottom: 100px;
 
 export const InputTitle = styled.div`
 margin-top: 10px;
-margin-bottom: 10px;
+margin-bottom: 5px;
 
 `
 export const Input = styled.input`
 border: none;
 border-bottom:1px solid rgba(171, 170, 170 , 1);
-padding: 10px;
+padding: 5px;
 width: 315px;
 font-family: 'MaruBuri-Regular';
 font-size: 18px;
+text-align: center;
+margin-bottom: 20px;
 `;
+
+export const IntroductionTextarea = styled.textarea`
+border: none;
+width: 350px;
+height: 190px;
+font-family: 'MaruBuri-Regular';
+line-height: 200%;
+font-size: 16px;
+resize: none;
+outline: none;
+padding: 25px;
+&::placeholder{
+  line-height: 200%;
+}
+`
 
 export const Buttons = styled.div`
 background-color: rgba(234, 234, 234, 1);
@@ -190,6 +206,7 @@ position: fixed;
 right: 0px;
 bottom: 10%;
 text-align:right;
+z-index: 1;
 `;
 export const SideBox = styled.div`
 margin-bottom: 44px;
@@ -308,19 +325,230 @@ export const Posters = styled.img`
  position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: auto;
   height: 100%;
+  object-fit: cover;
+  cursor: pointer;
 `
 export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px; /* 이미지들 사이의 간격 조정 */
-  padding: 20px; /* 그리드 전체의 패딩 */
+  gap: 30px;
+  padding: 20px;
   margin: 50px;
 `;
 
 export const GridItems = styled.div`
   width: 100%;
-  padding-bottom: 100%; /* 정사각형을 만들기 위해 비율 유지 */
-  position: relative; /* 자식 요소의 절대 위치를 설정하기 위해 필요 */
+  padding-bottom: 135%;
+  position: relative;
 `;
+
+//이미지 모달
+export const ModalOverlay = styled.div`
+position: fixed;
+top:0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.85);
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'MaruBuri-Regular';
+z-index: 2;
+
+`
+
+export const ModalContent = styled.div`
+position: relative;
+background-color:none;
+display: flex;
+flex-direction: column;
+align-items: flex-end; 
+`
+
+export const ModalImg = styled.img`
+max-height:85dvh ;
+`
+
+export const ModalButton = styled.button`
+position: absolute;
+top :30px;
+right:30px;
+cursor: pointer;
+width: 26px;
+height: 26px;
+`
+
+export const ModalButtonImg = styled.img`
+position: absolute;
+top :30px;
+right:30px;
+cursor: pointer;
+width: 26px;
+height: 26px;
+`
+
+export const ModalDesigner = styled.div`
+border: 1px solid rgba(213, 213, 212, 1);
+color: rgba(213, 213, 212, 1);
+border-radius: 0 0 10px 10px;
+width: 90px;
+height: 25px;
+font-size: 11px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+`
+export const ModalYear = styled.div`
+border: 1px solid rgba(255, 96, 88, 1);
+color: rgba(255, 96, 88, 1);
+border-radius: 0 0 10px 10px;
+height: 25px;
+width: 50px;
+font-size: 11px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-left: 10px;
+`
+
+export const ModalInfo = styled.div`
+display: flex;
+justify-content: space-between;
+`
+
+//배경색 관련
+export const PageContainer = styled.div`
+position: relative;
+width: 100%;
+height: 100%;
+background-image: linear-gradient(to bottom, #ffffff 150px,rgba(45, 43, 42, 1)100px);
+
+`
+export const PageTop = styled.div`
+position: absolute;
+top:0;
+left: 0;
+width: 100%;
+height: 325px;
+background-color: none;
+`
+export const PageBottom = styled.div`
+position: absolute;
+top:0;
+left: 0;
+width: 100%;
+height: 325px;
+background-color: none;
+`
+
+
+//글자색 관련
+
+export const Red = styled.span`
+color:rgba(255, 96, 88, 1);
+`
+export const Silver = styled.span`
+color: rgba(171, 170, 170, 1);
+margin-right: 190px;
+`
+//밑줄 관련
+
+export const Highlight = styled.span`
+background: linear-gradient(to bottom, transparent 50%, rgba(255, 239, 155, 1) 50%);;
+`
+//회원가입 폼
+export const Small = styled.div`
+font-size: 12px;
+line-height: 150%;
+`
+export const TitleBold = styled.div`
+font-weight: 700;
+font-size: 20px;
+
+`
+export const Welcome = styled.div`
+font-size: 16px;
+font-weight: 700;
+line-height: 200%;
+`
+export const WhiteButton = styled.button`
+color: rgba(171, 170, 170, 1);
+font-family: 'MaruBuri-Regular';
+cursor: pointer;
+padding: 7px;
+background-color: transparent;
+border-radius: 21px;
+border: 1px solid rgba(171, 170, 170, 1);
+font-size: 12px;
+`
+
+export const LeftAlign = styled.div`
+text-align: left;
+`
+//회원가입시 내 작품 소개 키워드 할때 쓰는 인풋
+export const WordInput = styled.input`
+border: 1px solid rgba(129, 128, 127, 1);
+font-family: 'MaruBuri-Regular';
+text-align: center;
+font-size: 18px;
+width: 180px;
+height: 41px;
+border-radius:0 0 10px 10px ;
+`
+
+//회원가입 폼 상단
+export const FormTop = styled.div`
+width: 408px;
+height: 57px;
+border-radius: 8.6px 8.6px 0 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+box-shadow: 5px 1px 3px rgba(0,0,0, 0.1);
+`
+
+export const BackButton = styled.img`
+margin-left: 24px;
+width: 10px;
+height: auto;
+cursor: pointer;
+`
+export const FormTopGray = styled.div`
+width: 408px;
+height: 57px;
+border-radius: 8.6px 8.6px 0 0;
+background-color:rgba(234, 234, 234, 1) ;
+`
+
+
+//회원가입 폼 하단
+export const WhiteButtons = styled.div`
+background-color: white;
+width: 100%;
+height:75px ;
+display: flex;
+align-items: center;
+justify-content:right;
+border-bottom-left-radius: 8.6px;
+border-bottom-right-radius: 8.6px;
+`
+//글자수 세기
+export const TextCounter = styled.div`
+margin-right: 200px;
+font-size: 18px;
+color: ${props => props.length === 0 ? 'rgba(213, 213, 212, 1)' : 'black'};
+`
+
+export const MarginLeft = styled.div`
+margin-left: 20px;
+`
+
+//
+export const FlexCenter = styled.div`
+display: flex;
+align-items: center;
+`

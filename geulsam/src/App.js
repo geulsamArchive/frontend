@@ -16,8 +16,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/frontend' element={<Hello />} />
         <Route element={<NavLayout />}>
+          <Route path='/frontend' element={<Main />} />
           <Route path='/' element={<Main />} />
           <Route path='/main' element={<Main />} />
           <Route path='/work' element={<Work />} />

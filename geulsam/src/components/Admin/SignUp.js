@@ -1,34 +1,32 @@
 import React, { useEffect } from 'react';
 import { useForms } from '../../hooks/useForms';
-import { useNavigate } from 'react-router-dom';
-import { Wrapper, Form, Input, Inputs, Button, InputTitle } from '../../style/StyledComponent';
-import { SignUpApi } from '../../apis/SignUpApi';
+import { Wrapper, Form, Input, Inputs, Button, InputTitle, FormTop, Silver, BackButton, LeftAlign, WhiteButtons } from '../../style/StyledComponent';
+import Left from '../../assets/images/grayLeft.png'
 
-const SignUp = () => {
-    const [schoolNum, onChangeSchoolNum] = useForms();
-    const [phone, onChangePhone] = useForms();
+const SignUp = ({ prevStep, nextStep }) => {
     const [name, onChangeName] = useForms();
-    const [email, onChangeEmail] = useForms();
-    const [joinedAt, onChangeJoinedAt] = useForms();
+    const [schoolNum, onChangeSchoolNum] = useForms();
     const [birthDay, onChangeBirthDay] = useForms();
-    const redirect = useNavigate();
+    const [joinedAt, onChangeJoinedAt] = useForms();
 
-    const onClick =
-        async () => {
-            const result = await SignUpApi(
-                name, schoolNum, phone, email, joinedAt, birthDay);
-            console.log(result)
-            redirect('/main');
-        }
+    const handleNext = () => {
+        nextStep({ name, schoolNum, birthDay, joinedAt });
+    };
 
     return (
         <Wrapper>
             <Form>
-                <Inputs>
+                <FormTop>
+                    <BackButton src={Left} onClick={prevStep} />
+                    <Silver>
+                        1/4
+                    </Silver>
+                </FormTop>
+                <LeftAlign>
                     <InputTitle>
                         이름
                     </InputTitle>
-                    <Input placeholder='이름' type='text' value={name} onChange={onChangeName} />
+                    <Input type='text' value={name} onChange={onChangeName} />
                     <InputTitle>
                         학번
                     </InputTitle>
@@ -36,13 +34,15 @@ const SignUp = () => {
                     <InputTitle>
                         생년월일
                     </InputTitle>
-                    <Input placeholder='예) 2000.12.31' type='text' value={birthDay} onChange={onChangeBirthDay} />
+                    <Input placeholder='예) 2000.12.31' type='date' value={birthDay} onChange={onChangeBirthDay} />
                     <InputTitle>
                         글샘 가입연도
                     </InputTitle>
                     <Input placeholder='예) 2024' type='text' value={joinedAt} onChange={onChangeJoinedAt} />
-                </Inputs>
-                <Button onClick={onClick}>다음</Button>
+                </LeftAlign>
+                <WhiteButtons>
+                    <Button onClick={handleNext}>다음</Button>
+                </WhiteButtons>
             </Form>
         </Wrapper>
     );
