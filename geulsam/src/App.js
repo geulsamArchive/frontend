@@ -10,7 +10,6 @@ import NavLayout from './components/Layouts/NavLayout';
 import LoginLayout from './components/Layouts/LoginLayout';
 import Book from './pages/archive/book/Book';
 import BookInfo from './pages/archive/book/BookInfo';
-import Hello from './pages/hello/Hello';
 
 function App() {
   return (

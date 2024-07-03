@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { GridContainer, GridItems, Posters } from '../../../style/StyledComponent';
+import { GridContainer, GridItems, PosterGridContainer, Posters, PotserGridItems } from '../../../style/StyledComponent';
 import Modal from '../../../components/Modal/Modal';
 
 
@@ -42,13 +42,13 @@ const Poster = () => {
 
     return (
         <>
-            <GridContainer>
+            <PosterGridContainer>
                 {posterList.map((poster) => (
-                    <GridItems key={poster.id}>
+                    <PotserGridItems key={poster.id}>
                         <Posters src={poster.image} alt={poster.year} onClick={() => handlePosterClick(poster)} />
-                    </GridItems>
+                    </PotserGridItems>
                 ))}
-            </GridContainer>
+            </PosterGridContainer>
             <Modal isOpen={isOpen} poster={selectedPoster} onClose={closeModal} />
             <button onClick={() => handlePageChange(page - 1)}>이전</button>
             <button onClick={() => handlePageChange(page + 1)}>다음</button>

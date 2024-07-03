@@ -1,21 +1,22 @@
 import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Button, ArchiveButtonContainer, PageContainer } from '../../style/StyledComponent';
+import { ArchiveButtonContainer, PageContainer, ArchiveButton } from '../../style/StyledComponent';
 
 const Archive = () => {
     const location = useLocation();
+
     return (
         <PageContainer>
             <ArchiveButtonContainer>
                 <Link to="/archive/book">
-                    <Button disabled={location.pathname === '/archive/book'}>
+                    <ArchiveButton disabled={location.pathname === '/archive/book'}>
                         문집
-                    </Button>
+                    </ArchiveButton>
                 </Link>
                 <Link to="/archive/poster">
-                    <Button disabled={location.pathname === '/archive/poster'}>
+                    <ArchiveButton disabled={location.pathname === '/archive/poster'}>
                         포스터
-                    </Button>
+                    </ArchiveButton>
                 </Link>
             </ArchiveButtonContainer>
             <Outlet />

@@ -67,6 +67,13 @@ font-size: 16px;
 resize: none;
 outline: none;
 padding: 25px;
+&::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+}
+&::-webkit-scrollbar-thumb{
+  background-color: transparent;
+}
 &::placeholder{
   line-height: 200%;
 }
@@ -81,8 +88,21 @@ align-items: center;
 justify-content:right ;
 border-bottom-left-radius: 8.6px;
 border-bottom-right-radius: 8.6px;
-
 `
+export const ArchiveButton = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width:93px;
+height: 36px;
+color:${props => (props.disabled ? 'rgba(249, 249, 246, 1)' : '')};
+background-color: ${props => (props.disabled ? 'rgba(87, 86, 85, 1)' : 'rgba(213, 213, 212, 1)')};
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+`;
+
 export const Button = styled.button`
 font-family: 'MaruBuri-Regular';
 border: none;
@@ -144,7 +164,7 @@ position: relative;
 top: 0;
 left: 0;
 width: 100%;
-height: 85px;
+height: 76px;
 background-color:  rgba(45, 43, 42, 1);
 
 ul{
@@ -161,19 +181,34 @@ justify-content: center;
 width: 96%;
 align-items: flex-start;
 height: 100%;
-padding-top: 50px;
+padding-top: 46px;
 `;
 
 export const NavLink = styled(Link)`
 color:white;
 text-decoration: none;
 border: 1.8px solid white;
-padding: 20px 30px;
+padding: 15px 20px;
+border-radius: 15px 15px 0 0;
+margin-top: 15px;
+font-size: 17px;
+&:hover{
+text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+background-color: white;
+}
+`
+
+export const ActiveNavLink = styled(Link)`
+color:white;
+background-color: white;
+text-decoration: none;
+border: 1.8px solid white;
+text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+padding: 15px 20px;
 border-radius: 15px 15px 0 0;
 margin-top: 15px;
 font-size: 17px;
 `
-
 
 
 
@@ -221,6 +256,9 @@ border-radius: 43px 0 0 43px;
 padding: 20px 30px;
 padding-right: 85px;
 background-color: black;
+&:hover{
+  background-color:  rgba(45, 43, 42, 1);
+}
 `
 
 
@@ -245,7 +283,7 @@ font-weight: 700;
 //최근 공개된 작품 관련 요소
 export const RecentWorks = styled.div`
 width: 100%;
-height: 1400px;
+height: 1200px;
 background-color: rgba(45, 43, 42, 1);
 font-family: 'MaruBuri-Regular';
 color: white;
@@ -258,6 +296,62 @@ padding-bottom: 10px;
 padding-top: 10px;
 font-size: 22px;
 text-shadow: 0 4px 4px black;
+`
+export const Recents = styled.div`
+display: flex;
+flex-wrap: wrap;
+margin-left: 72px;
+`
+
+
+export const RecentWorkText = styled.div`
+width: 90%;
+height: 40%;
+opacity: 1;
+transition: opacity 0.3s ease;
+font-size: 20px;
+line-height: 180%;
+padding-top: 33px;
+padding-bottom: 33px;
+padding-left: 28px;
+padding-right: 28px;
+overflow: hidden;
+`
+export const RecentWorkOverlay = styled.div`
+position: absolute;
+top: 0;
+left: 0;
+opacity: 0;
+width: 100%;
+height: 100%;
+border-radius: inherit;
+transition: opacity 0.3s ease;
+background-color: rgba(234, 233, 227, 1);
+color: black;
+`
+export const RecentWorkOverlayText = styled.div`
+padding-top: 33px;
+padding-bottom: 33px;
+padding-left: 28px;
+padding-right: 28px;
+display: flex;
+justify-content: space-between;
+align-items:center;
+`
+export const RecentWorkContainer = styled.div`
+width: 611px;
+height: 174px;
+margin: 14px;
+border-radius: 11px;
+background-color: rgba(87, 86, 85, 1);
+position: relative;
+cursor: pointer;
+&:hover ${RecentWorkText}{
+  opacity: 0;
+}
+&:hover ${RecentWorkOverlay}{
+  opacity: 1;
+}
 `
 
 
@@ -325,24 +419,70 @@ export const Posters = styled.img`
  position: absolute;
   top: 0;
   left: 0;
-  width: auto;
-  height: 100%;
+  width: inherit;
+  height: inherit;
   object-fit: cover;
   cursor: pointer;
+  border-radius: inherit;
 `
 export const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+ // display: grid;
+  //grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap; /* 그리드 아이템이 줄 바꿈되도록 설정 */
+  justify-content: center; /* 가로 방향 가운데 정렬 */
   gap: 30px;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   margin: 50px;
 `;
 
-export const GridItems = styled.div`
-  width: 100%;
-  padding-bottom: 135%;
-  position: relative;
+export const PosterGridContainer = styled.div`
+ // display: grid;
+  //grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap; /* 그리드 아이템이 줄 바꿈되도록 설정 */
+  justify-content: center; /* 가로 방향 가운데 정렬 */
+  gap: 35px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 50px;
 `;
+export const PotserGridItems = styled.div`
+  width: 401px;
+  height: 568px;
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;   
+`;
+
+export const GridItems = styled.div`
+  width: 380px;
+  height: 380px;
+  background-color: rgba(45, 43, 42, 1);
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;   
+`;
+
+//북커버 관련
+export const Bookcover = styled(Link)`
+ display: flex;
+  justify-content: center;
+  align-items: center;
+`
+export const BookcoverImg = styled.img`
+max-width: 50%;
+height: auto;
+`
 
 //이미지 모달
 export const ModalOverlay = styled.div`
@@ -425,7 +565,7 @@ export const PageContainer = styled.div`
 position: relative;
 width: 100%;
 height: 100%;
-background-image: linear-gradient(to bottom, #ffffff 150px,rgba(45, 43, 42, 1)100px);
+//background-image: linear-gradient(to bottom, #ffffff 150px,rgba(45, 43, 42, 1)100px);
 
 `
 export const PageTop = styled.div`
@@ -444,8 +584,16 @@ width: 100%;
 height: 325px;
 background-color: none;
 `
-
-
+//글자 크기
+export const S = styled.span`
+font-size: 13px;
+`
+export const L = styled.span`
+font-size: 27px;
+`
+export const B = styled.span`
+font-weight: 700;
+`
 //글자색 관련
 
 export const Red = styled.span`

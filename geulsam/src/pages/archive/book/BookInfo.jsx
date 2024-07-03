@@ -31,8 +31,7 @@ const BookInfo = () => {
     return (
         <BookInfoContainer>
             <BookTitle>
-                {/* {bookData.title} ㅆㅂ API 책 제목 넣는거 까먹었다*/}
-                2023 와우 문학
+                {bookData.book}
             </BookTitle>
             <BookInfoAndButton>
                 <BookInfoContents>

@@ -2,12 +2,11 @@ import React from 'react';
 import { Wrapper, Form, Button, Title, FormTopGray, TitleBold, Small, Red, WhiteButtons } from '../../style/StyledComponent';
 import { useNavigate } from 'react-router-dom';
 
-const SignupEnd = (formdata) => {
+const SignupEnd = () => {
 
     const navigate = useNavigate();
     const handleOnClick = () => {
         navigate('/main')
-        console.log(formdata)
     }
     // formdata post~~~
     //     async () => {

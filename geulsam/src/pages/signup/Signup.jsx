@@ -42,9 +42,9 @@ const Signup = () => {
             case 4:
                 return <Signup4 nextStep={nextStep} prevStep={prevStep} />;
             case 5:
-                return <Signup5 nextStep={nextStep} prevStep={prevStep} />;
+                return <Signup5 nextStep={nextStep} prevStep={prevStep} formData={formData} />;
             case 6:
-                return <SignupEnd formData={formData} />;
+                return <SignupEnd />;
             default:
                 return <Signup1 nextStep={nextStep} />;
         }
