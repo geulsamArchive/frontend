@@ -10,11 +10,14 @@ const Logins = () => {
     const redirect = useNavigate();
     const onClick = async () => {
         const result = await LoginApi(id, pw);
-        const { accessToken, refreshToken } = result.data;
+        const { accessToken, refreshToken } = result.data.data;
         localStorage.setItem('access', accessToken);
         localStorage.setItem('refresh', refreshToken);
         console.log(result)
-        redirect('/main');
+
+        const prevpath = localStorage.getItem('prevpath')
+        redirect(prevpath);
+        localStorage.removeItem('prevpath')
     }
     return (
         <Wrapper>

@@ -10,12 +10,15 @@ import NavLayout from './components/Layouts/NavLayout';
 import LoginLayout from './components/Layouts/LoginLayout';
 import Book from './pages/archive/book/Book';
 import BookInfo from './pages/archive/book/BookInfo';
+import PosterUpload from './pages/archive/poster/PosterUpload';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<NavLayout />}>
+          <Route path='/poster/upload' element={<PosterUpload />} />
+
           <Route path='/frontend' element={<Main />} />
           <Route path='/' element={<Main />} />
           <Route path='/main' element={<Main />} />
@@ -26,7 +29,6 @@ function App() {
             <Route path='book' element={<Book />} />
           </Route>
           <Route path='/archive/book/:bookId' element={<BookInfo />} />
-
         </Route>
         <Route element={<LoginLayout />}>
           <Route path='login' element={<Login />} />

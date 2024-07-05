@@ -246,6 +246,20 @@ z-index: 1;
 export const SideBox = styled.div`
 margin-bottom: 44px;
 `
+export const SideButton = styled.button`
+font-family: 'MaruBuri-Regular';
+color: white;
+text-decoration: none;
+border: 1px solid rgba(171, 170, 170, 1);
+border-right: none;
+border-radius: 43px 0 0 43px;
+padding: 20px 30px;
+padding-right: 85px;
+background-color: black;
+&:hover{
+  background-color:  rgba(45, 43, 42, 1);
+}
+`
 export const SideLink = styled(Link)`
 font-family: 'MaruBuri-Regular';
 color: white;

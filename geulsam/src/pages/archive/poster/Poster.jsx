@@ -16,7 +16,8 @@ const Poster = () => {
     const getPosterList = async () => {
         try {
             const res = await axios.get(apiEndPoint)
-            setPosterList(res.data.data)
+            console.log(res.data.data)
+            setPosterList(res.data.data.content)
             setLoading(false)
         } catch (err) {
             console.log('api fetching failed', err)

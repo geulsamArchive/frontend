@@ -19,6 +19,8 @@ const Signup5 = ({ prevStep, nextStep, formData }) => {
     const handleNext = (e) => {
         e.preventDefault();
         const keywords = [keyword1, keyword2, keyword3];
+        formData.keywords = keywords
+        console.log(keywords)
         console.log(formData)
         Post();
         nextStep()

@@ -16,7 +16,7 @@ const Book = () => {
         try {
             const resp = await axios.get(apiEndpoint)
             console.log(resp.data.data)
-            setBookList(resp.data.data);
+            setBookList(resp.data.data.content);
             setLoading(false)
         } catch (err) {
             console.log('api fetching failed', err)
