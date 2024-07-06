@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForms } from '../../../hooks/useForms';
-import { Input, Inputs, Form, InputTitle, Button } from '../../../style/StyledComponent';
+import { Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../style/StyledComponent';
 import axios from 'axios';
 
 const PosterUpload = () => {
@@ -48,22 +48,41 @@ const PosterUpload = () => {
     }
 
     return (
-        <>
-            <Form>
+        <BookInfoContainer>
+            <BookTitle>
 
-                포스터 업로드
-                <Inputs>
-                    <InputTitle>연도</InputTitle>
-                    <Input value={year} onChange={onChangeYear} />
-                    <InputTitle>판형</InputTitle>
-                    <Input value={plate} onChange={onChangePlate} />
-                    <InputTitle>디자이너</InputTitle>
-                    <Input value={designer} onChange={onChangeDesigner} />
-                    <Input type='file' onChange={onFileChange} />
-                </Inputs>
-                <Button onClick={onClickUpload}>업로드</Button>
-            </Form>
-        </>
+                새 포스터 개시하기
+            </BookTitle>
+            <br />
+            <br />
+            <Inputs>
+                <InputUploads>
+                    <div>
+                        <InputTitle>연도</InputTitle>
+                        <Input value={year} onChange={onChangeYear} placeholder='예) 2000' />
+                    </div>
+                    <div>
+                        <InputTitle>판형</InputTitle>
+                        <Input value={plate} onChange={onChangePlate} placeholder='예) A4' />
+                    </div>
+                    <div>
+                        <InputTitle>제작자</InputTitle>
+                        <Input value={designer} onChange={onChangeDesigner} placeholder='예) 정성훈' />
+                    </div>
+                </InputUploads>
+                <Input type='file' onChange={onFileChange} />
+            </Inputs>
+            <hr />
+            <br />
+            <RightSubmit>
+                <Button type='submit' onClick={onClickUpload}>게시하기</Button>
+            </RightSubmit>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </BookInfoContainer>
     );
 };
 

@@ -19,6 +19,15 @@ font-family: 'MaruBuri-Regular';
 `;
 
 //입력 폼 관련 요소
+export const RightSubmit = styled.div`
+display: flex;
+justify-content: right;
+`
+export const InputUploads = styled.div`
+display: flex;
+flex-direction: row;
+gap: 20px;
+`
 export const Title = styled.div`
 font-size: 20px;
 margin: 50px;
