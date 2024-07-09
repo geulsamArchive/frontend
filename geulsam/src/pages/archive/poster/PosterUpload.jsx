@@ -41,6 +41,7 @@ const PosterUpload = () => {
             console.log(res)
         } catch (error) {
             console.error(error);
+            alert("다시 로그인 해주세요.")
             formData.forEach((value, key) => {
                 console.log(`${key}: ${value}`);
             });

@@ -7,7 +7,6 @@ const Main = () => {
         <>
             <Calendar />
             <RecentWork />
-
         </>
     )
 

@@ -11,7 +11,7 @@ import LoginLayout from './components/Layouts/LoginLayout';
 import Book from './pages/archive/book/Book';
 import BookInfo from './pages/archive/book/BookInfo';
 import PosterUpload from './pages/archive/poster/PosterUpload';
-import BookUpload from './pages/admin/upload/book/BookUpload';
+import BookUpload from './pages/admin/upload/book/bookUpload';
 
 function App() {
   return (
