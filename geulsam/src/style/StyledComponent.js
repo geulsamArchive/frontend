@@ -196,22 +196,22 @@ padding-top: 46px;
 export const NavLink = styled(Link)`
 color:white;
 text-decoration: none;
-border: 1.8px solid white;
+border: 1.8px solid rgba(249, 249, 246, 1);
 padding: 15px 20px;
 border-radius: 15px 15px 0 0;
 margin-top: 15px;
 font-size: 17px;
 &:hover{
 text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
-background-color: white;
+background-color: rgba(249, 249, 246, 1);
 }
 `
 
 export const ActiveNavLink = styled(Link)`
 color:white;
-background-color: white;
+background-color: rgba(249, 249, 246, 1);
 text-decoration: none;
-border: 1.8px solid white;
+border: 1.8px solid   rgba(249, 249, 246, 1);
 text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 padding: 15px 20px;
 border-radius: 15px 15px 0 0;
@@ -284,29 +284,39 @@ background-color: black;
 }
 `
 
+//main페이지
+
+export const MainBackground = styled.div`
+background: linear-gradient(to bottom, rgba(249, 249, 246, 1) 12%,  rgba(45, 43, 42, 1) 12%,  rgba(45, 43, 42, 1) 100%);
+`
+
 
 //Calenar 관련 요소
 export const Calendars = styled.div`
 width: 100%;
 background-color: none;
 font-family: 'MaruBuri-Regular';
-height: 838px;
+height: 600px;
 `;
 
 export const CalendarTitle = styled.div`
 color: rgba(87, 86, 85, 1);
-margin: 86px;
+margin-left: 86px;
+margin-right: 86px;
+margin-bottom: 50px;
 border-bottom: 1.5px solid rgba(87, 86, 85, 1);
 padding-bottom:10px ;
-padding-top: 10px;
+padding-top: 50px;
 font-size: 22px;
 font-weight: 700;
+background-color: rgba(249, 249, 246, 1);
+
 `
 
 //최근 공개된 작품 관련 요소
 export const RecentWorks = styled.div`
 width: 100%;
-height: 1200px;
+height: 1300px;
 background-color: rgba(45, 43, 42, 1);
 font-family: 'MaruBuri-Regular';
 color: white;

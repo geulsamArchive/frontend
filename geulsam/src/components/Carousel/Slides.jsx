@@ -1,38 +1,53 @@
-import React, { Component } from "react";
+import React, { useState, useRef } from "react";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Contents, Slide, SliderContainer } from "../../style/Carousel";
+import { TitleBold } from "../../style/StyledComponent";
 
-function CenterMode() {
+function CenterMode({ data }) {
+    const [monthIdx, setMonthIdx] = useState(0);
+    const sliderRef = useRef(null);
+
     const settings = {
         className: "center",
         centerMode: true,
         infinite: true,
-        centerPadding: "60px",
+        centerPadding: "50px",
         slidesToShow: 3,
-        speed: 500
+        slidesToScroll: 1,
+        speed: 300,
+        arrows: false,
+        beforeChange: (current, next) => setMonthIdx(next)
     };
+
+
+    const onClickSlide = (idx) => {
+        setMonthIdx(idx)
+        sliderRef.current.slickGoTo(idx);
+    }
+
     return (
-        <div className="slider-container">
-            <Slider {...settings}>
-                <div>
-                    <h3>1</h3>
-                </div>
-                <div>
-                    <h3>2</h3>
-                </div>
-                <div>
-                    <h3>3</h3>
-                </div>
-                <div>
-                    <h3>4</h3>
-                </div>
-                <div>
-                    <h3>5</h3>
-                </div>
-                <div>
-                    <h3>6</h3>
-                </div>
+        <SliderContainer>
+            <Slider ref={sliderRef} {...settings}>
+                {data.map((monthdata, idx) => (
+                    <div key={idx}>
+                        <Slide className={idx === monthIdx ? "active" : ""} onClick={() => (onClickSlide(idx))}>
+                            <TitleBold>
+                                {monthdata.month}
+                            </TitleBold>
+                            <Contents>
+                                {monthdata.events.map((events, eventIdx) => (
+                                    <div key={eventIdx}>
+                                        {events.title}
+                                    </div>
+                                ))}
+                            </Contents>
+                        </Slide>
+                    </div>
+                ))}
             </Slider>
-        </div>
+        </SliderContainer>
     );
 }
 

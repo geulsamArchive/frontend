@@ -1,13 +1,14 @@
 import React from 'react';
 import Calendar from './calendar/Calendar';
 import RecentWork from './recentwork/RecentWork';
+import { MainBackground } from '../../style/StyledComponent';
 
 const Main = () => {
     return (
-        <>
+        <MainBackground>
             <Calendar />
             <RecentWork />
-        </>
+        </MainBackground>
     )
 
 
