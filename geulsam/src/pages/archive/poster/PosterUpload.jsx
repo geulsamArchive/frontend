@@ -3,22 +3,27 @@ import { useForms } from '../../../hooks/useForms';
 import { Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../style/StyledComponent';
 import axios from 'axios';
 
+const EndPoint = "http://43.200.215.113:8080/poster"
+
 const PosterUpload = () => {
     const [year, onChangeYear] = useForms();
     const [designer, onChangeDesigner] = useForms();
-    const [plate, onChangePlate] = useForms();
     const [file, setFile] = useState(null)
 
     const onFileChange = (e) => {
-
         setFile(e.target.files[0]);
         console.log(file)
     };
 
     const onClickUpload = async (e) => {
+        const suppertedFormats = ["image/jpeg", "image/png", "image/svg+xml"]
         e.preventDefault();
         if (!file) {
             alert("파일을 선택해주세요.");
+            return;
+        }
+        if (!suppertedFormats.includes(file.type)) {
+            alert("지원되지 않은 이미지 형식입니다. JPEG, PNG형식의 이미지를 업로드해주세요.");
             return;
         }
         const formData = new FormData();
@@ -26,32 +31,47 @@ const PosterUpload = () => {
         formData.append('thumbNail', file)
         formData.append('year', year);
         formData.append('designer', designer);
-        formData.append('plate', plate);
+        formData.append('plate', 'null');
 
         const accessToken = localStorage.getItem('access')
 
         try {
+            const refreshToken = localStorage.getItem('refresh');
 
-            const res = await axios.post('http://3.38.162.235:8080/poster', formData, {
+            //처음으로 업로드시
+            const res = await axios.post(EndPoint, formData, {
                 headers: {
+
                     'Content-Type': 'multipart/form-data',
                     'accessToken': accessToken,
                 },
             })
             console.log(res)
         } catch (error) {
+            // 에러 발생
             console.error(error);
-            alert("다시 로그인 해주세요.")
-            formData.forEach((value, key) => {
-                console.log(`${key}: ${value}`);
-            });
+            try {
+                //리프레쉬 토큰 포함해서 다시 전송
+                const refreshToken = localStorage.getItem('refresh');
+
+                const res = await axios.post(EndPoint, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'refreshToken': refreshToken,
+                    },
+                })
+                console.log(res)
+            } catch (err) {
+                //그래도 안되면 재로그인 요청
+                console.log(err)
+                alert('다시 로그인 해주세요.')
+            }
         }
     }
 
     return (
         <BookInfoContainer>
             <BookTitle>
-
                 새 포스터 개시하기
             </BookTitle>
             <br />
@@ -63,15 +83,11 @@ const PosterUpload = () => {
                         <Input value={year} onChange={onChangeYear} placeholder='예) 2000' />
                     </div>
                     <div>
-                        <InputTitle>판형</InputTitle>
-                        <Input value={plate} onChange={onChangePlate} placeholder='예) A4' />
-                    </div>
-                    <div>
                         <InputTitle>제작자</InputTitle>
                         <Input value={designer} onChange={onChangeDesigner} placeholder='예) 정성훈' />
                     </div>
                 </InputUploads>
-                <Input type='file' onChange={onFileChange} />
+                <Input type='file' accept='image/*' onChange={onFileChange} />
             </Inputs>
             <hr />
             <br />

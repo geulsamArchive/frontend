@@ -4,6 +4,7 @@ import { GridContainer, GridItems, PosterGridContainer, Posters, PotserGridItems
 import Modal from '../../../components/Modal/Modal';
 
 
+
 const Poster = () => {
     const [page, setPage] = useState(1);
     const [order, setOrder] = useState('asc')
@@ -11,7 +12,7 @@ const Poster = () => {
     const [loading, setLoading] = useState(true)
     const [isOpen, setIsOpen] = useState(false)
     const [selectedPoster, setSelectedPoster] = useState(null);
-    const apiEndPoint = `http://3.38.162.235:8080/poster?page=${page}&order=${order}`
+    const apiEndPoint = `http://43.200.215.113:8080/poster?page=${page}&order=${order}`
 
     const getPosterList = async () => {
         try {

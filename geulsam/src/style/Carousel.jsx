@@ -1,9 +1,44 @@
 import styled from "styled-components";
 
+export const DisplayNone = styled.span`
+display: ${(props) => (props.past ? 'none' : '')};
+`
+
+export const Left = styled.div`
+  text-align: left;
+`
+export const Right = styled.div`
+  text-align: right;
+`
+export const Gray = styled.span`
+  color: rgba(171, 170, 170, 1);
+`
+export const SpaceBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-left: 10px;
+padding-right: 10px;
+background-color: ${(props) => (props.past ? 'rgba(234, 234, 234, 1)' : 'none')};
+
+margin-bottom: 10px;
+`
+export const Eventlist = styled.div`
+line-height: 170%;
+width: 312px;
+font-size: 12px;
+margin-left: 48px;
+margin-right: 48px;
+font-weight: 500;
+border-bottom: 0.7px solid black;
+color: ${(props) => (props.past ? 'rgba(129, 128, 127, 1)' : 'black')};
+`
 
 export const Contents = styled.div`
-font-size: 50px;
-overflow-x: scroll;
+margin-top: 30px;
+overflow: scroll;
+height: 350px;
+width: 408px;
 &::-webkit-scrollbar{
   width: 0;
   height: 0;
