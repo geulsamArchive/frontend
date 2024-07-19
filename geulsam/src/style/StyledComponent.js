@@ -2,6 +2,17 @@ import { Page } from "react-pdf";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+//메인 페이지 로고 위치 조정
+export const Centering = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`
+export const MarginBottom = styled.div`
+margin-bottom: 75px;
+
+`
+
 
 //Container와 Wrapper의 차이
 //Container는 여러 요소를 감싸는 요소
@@ -190,14 +201,14 @@ justify-content: center;
 width: 96%;
 align-items: flex-start;
 height: 100%;
-padding-top: 46px;
+padding-top: 43px;
 `;
 
 export const NavLink = styled(Link)`
 color:white;
 text-decoration: none;
 border: 1.8px solid rgba(249, 249, 246, 1);
-padding: 15px 20px;
+padding: 15px 21px;
 border-radius: 15px 15px 0 0;
 margin-top: 15px;
 font-size: 17px;
@@ -316,7 +327,7 @@ background-color: rgba(249, 249, 246, 1);
 //최근 공개된 작품 관련 요소
 export const RecentWorks = styled.div`
 width: 100%;
-height: 1300px;
+height: 1150px;
 background-color: rgba(45, 43, 42, 1);
 font-family: 'MaruBuri-Regular';
 color: white;
@@ -505,7 +516,23 @@ export const GridItems = styled.div`
   align-items: center;
   text-align: center;   
 `;
+//포스터 페이징 관련
+export const Paging = styled.div`
+margin-left: 5vw;
+margin-bottom: 50px;
+`
 
+export const PageButton = styled.button`
+cursor: pointer;
+background-color: transparent;
+font-family: 'MaruBuri-Regular';
+font-size: 17px;
+font-weight: 700;
+margin: 5px;
+border: none;
+color:${props => (props.disabled ? 'rgba(87, 86, 85, 1)' : 'rgba(153, 153, 153, 1)')};
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+`
 //북커버 관련
 export const Bookcover = styled(Link)`
  display: flex;

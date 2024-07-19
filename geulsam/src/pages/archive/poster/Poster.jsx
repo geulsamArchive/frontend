@@ -1,24 +1,28 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { GridContainer, GridItems, PosterGridContainer, Posters, PotserGridItems } from '../../../style/StyledComponent';
+import { GridContainer, GridItems, PageButton, Paging, PosterGridContainer, Posters, PotserGridItems } from '../../../style/StyledComponent';
 import Modal from '../../../components/Modal/Modal';
+import Pagination from '../../../components/Paging/Pagination';
 
 
 
 const Poster = () => {
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(1); //시작 페이지 값
+    const [pageTotal, setPageTotal] = useState(1); //전체 페이지 수(백엔드에서 제공)
     const [order, setOrder] = useState('asc')
+    const apiEndPoint = `http://43.200.215.113:8080/poster?page=${page}&order=${order}`
+
     const [posterList, setPosterList] = useState([])
     const [loading, setLoading] = useState(true)
     const [isOpen, setIsOpen] = useState(false)
     const [selectedPoster, setSelectedPoster] = useState(null);
-    const apiEndPoint = `http://43.200.215.113:8080/poster?page=${page}&order=${order}`
 
     const getPosterList = async () => {
         try {
             const res = await axios.get(apiEndPoint)
             console.log(res.data.data)
             setPosterList(res.data.data.content)
+            setPageTotal(res.data.data.pageTotal)
             setLoading(false)
         } catch (err) {
             console.log('api fetching failed', err)
@@ -30,6 +34,7 @@ const Poster = () => {
         setIsOpen(true)
     }
     const handlePageChange = (pageNumber) => {
+        if (pageNumber < 1 || pageNumber > pageTotal) return;
         setPage(pageNumber)
     }
     const closeModal = () => {
@@ -42,18 +47,28 @@ const Poster = () => {
         getPosterList()
     }, [page])
 
+    const renderPageNumbers = () => {
+        const pages = [];
+        for (let i = 1; i <= pageTotal; i++) {
+            pages.push(
+                <PageButton key={i} onClick={() => handlePageChange(i)} disabled={i === page}>
+                    {i}
+                </PageButton>
+            );
+        }
+        return pages;
+    };
     return (
         <>
             <PosterGridContainer>
                 {posterList.map((poster) => (
                     <PotserGridItems key={poster.id}>
-                        <Posters src={poster.image} alt={poster.year} onClick={() => handlePosterClick(poster)} />
+                        <Posters src={poster.thumbnailImage} alt={poster.year} onClick={() => handlePosterClick(poster)} />
                     </PotserGridItems>
                 ))}
             </PosterGridContainer>
             <Modal isOpen={isOpen} poster={selectedPoster} onClose={closeModal} />
-            <button onClick={() => handlePageChange(page - 1)}>이전</button>
-            <button onClick={() => handlePageChange(page + 1)}>다음</button>
+            <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} />
         </>
     );
 };

@@ -1,18 +1,47 @@
 import { useState } from 'react';
 import { useForms } from '../../../hooks/useForms';
-import { Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../style/StyledComponent';
+import { Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../style/StyledComponent';
 import axios from 'axios';
+import Resizer from "react-image-file-resizer";
 
 const EndPoint = "http://43.200.215.113:8080/poster"
+
+const resizeFile = (file) =>
+    new Promise((resolve) => {
+        Resizer.imageFileResizer(
+            file,
+            700,
+            700,
+            "JPEG",
+            80,
+            0,
+            (uri) => {
+                resolve(uri);
+            },
+            "file"
+        );
+    });
 
 const PosterUpload = () => {
     const [year, onChangeYear] = useForms();
     const [designer, onChangeDesigner] = useForms();
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState(null);
+    const [thumbnail, setThumbnail] = useState(null);
 
-    const onFileChange = (e) => {
-        setFile(e.target.files[0]);
-        console.log(file)
+
+    const onFileChange = async (e) => {
+        try {
+            const selectedFile = e.target.files[0]
+            setFile(selectedFile);
+
+            const resized = await resizeFile(selectedFile)
+            setThumbnail(resized)
+            console.log(selectedFile)
+            console.log(resized)
+        } catch (err) {
+            console.log(err)
+        }
+
     };
 
     const onClickUpload = async (e) => {
@@ -26,12 +55,14 @@ const PosterUpload = () => {
             alert("지원되지 않은 이미지 형식입니다. JPEG, PNG형식의 이미지를 업로드해주세요.");
             return;
         }
+
+
+
         const formData = new FormData();
         formData.append('image', file)
-        formData.append('thumbNail', file)
+        formData.append('thumbNail', thumbnail)
         formData.append('year', year);
         formData.append('designer', designer);
-        formData.append('plate', 'null');
 
         const accessToken = localStorage.getItem('access')
 
