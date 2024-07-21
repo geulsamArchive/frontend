@@ -50,6 +50,18 @@ text-align: left;
 margin-bottom: 100px;
 `;
 
+export const InputsBookUpload = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 100px;
+`;
+
+export const InputRow = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
 export const InputTitle = styled.div`
 margin-top: 10px;
 margin-bottom: 5px;

@@ -18,7 +18,11 @@ function App() {
       <Routes>
         <Route element={<NavLayout />}>
           <Route path='/poster/upload' element={<PosterUpload />} />
+<<<<<<< Updated upstream
 
+=======
+          <Route path='/book/upload' element={<BookUpload/>} />
+>>>>>>> Stashed changes
           <Route path='/frontend' element={<Main />} />
           <Route path='/' element={<Main />} />
           <Route path='/main' element={<Main />} />
