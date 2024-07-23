@@ -13,6 +13,7 @@ import BookInfo from './pages/archive/book/BookInfo';
 import PosterUpload from './pages/admin/upload/poster/PosterUpload';
 import BookUpload from './pages/admin/upload/book/bookUpload';
 import UploadWork from './pages/work/upload/uploadWork';
+import Test from './pages/work/test';
 
 
 
@@ -22,6 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path='/test' element={<Test />} />
         <Route element={<NavLayout />}>
           <Route path='/poster/upload' element={<PosterUpload />} />
           <Route path='/work/upload' element={<UploadWork />} />
