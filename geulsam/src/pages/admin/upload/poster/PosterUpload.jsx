@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useForms } from '../../../hooks/useForms';
-import { Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../style/StyledComponent';
+import { useForms } from '../../../../hooks/useForms';
+import { Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../../style/StyledComponent'
 import axios from 'axios';
 import Resizer from "react-image-file-resizer";
 

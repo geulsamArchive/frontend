@@ -10,8 +10,9 @@ import NavLayout from './components/Layouts/NavLayout';
 import LoginLayout from './components/Layouts/LoginLayout';
 import Book from './pages/archive/book/Book';
 import BookInfo from './pages/archive/book/BookInfo';
-import PosterUpload from './pages/archive/poster/PosterUpload';
+import PosterUpload from './pages/admin/upload/poster/PosterUpload';
 import BookUpload from './pages/admin/upload/book/bookUpload';
+import UploadWork from './pages/work/upload/uploadWork';
 
 
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route element={<NavLayout />}>
           <Route path='/poster/upload' element={<PosterUpload />} />
+          <Route path='/work/upload' element={<UploadWork />} />
           <Route path='/book/upload' element={<BookUpload />} />
           <Route path='/frontend' element={<Main />} />
           <Route path='/' element={<Main />} />
