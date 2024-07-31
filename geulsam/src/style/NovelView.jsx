@@ -29,10 +29,10 @@ background-color: white;
 font-size: ${({ fontSize }) => `${fontSize}px`};
 line-height: ${({ lineHeight }) => lineHeight};
 height: 550px;
-width: 455px;
+width: 380px;
 overflow: hidden;
 flex: 1;
-padding: 50px;
+padding: 60px;
 ${({ borderRight }) => borderRight && `border-right: 1px solid black;`}
 `;
 

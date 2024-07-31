@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { ViewerAndLinks, BookInfoContainer, BookTitle, BookInfos, BookInfoContents, BookInfoAndButton, BookButtons } from '../../../style/StyledComponent';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import PDFDownload from '../../../components/Download/PDFDownload';
+import { normalAPI } from '../../../apis/Api';
 
 const BookInfo = () => {
     const [bookData, setBooktData] = useState({})
@@ -14,7 +15,7 @@ const BookInfo = () => {
 
     const getBookData = async () => {
         try {
-            const resp = await axios.get(`http://geulsaem.store:8080/book/${bookId}`)
+            const resp = await normalAPI.get(`/book/${bookId}`)
             console.log(resp.data)
             setBooktData(resp.data.data);
             setLoading(false);

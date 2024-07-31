@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Bookcover, BookcoverImg, GridContainer, GridItems } from '../../../style/StyledComponent';
 import Pagination from '../../../components/Paging/Pagination';
+import { normalAPI } from '../../../apis/Api';
 
 
 
@@ -20,7 +21,7 @@ const Book = () => {
 
     const getBookList = async () => {
         try {
-            const resp = await axios.get(apiEndpoint)
+            const resp = await normalAPI.get(`/book?page=${page}`)
             console.log(resp.data.data)
             setBookList(resp.data.data.content);
             setTotalPage(resp.data.data.pageTotal)

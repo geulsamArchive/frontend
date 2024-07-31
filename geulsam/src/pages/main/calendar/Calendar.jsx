@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Calendars, CalendarTitle } from '../../../style/StyledComponent';
 import CenterMode from '../../../components/Carousel/Slides';
 import axios from 'axios';
+import { normalAPI } from '../../../apis/Api';
 
-const Endpoint = 'http://43.200.215.113:8080/calendar?field=start&search=2024'
 
 
 const Calendar = () => {
@@ -12,7 +12,7 @@ const Calendar = () => {
 
     const getCalendarData = async () => {
         try {
-            const res = await axios.get(Endpoint)
+            const res = await normalAPI.get('/calendar?field=start&search=2024')
             console.log(res)
             setCalendarData(res.data.data)
         } catch (err) {
