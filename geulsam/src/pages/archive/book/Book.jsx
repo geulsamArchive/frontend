@@ -40,7 +40,7 @@ const Book = () => {
                 {bookList.map((book) => (
                     <GridItems key={book.id}>
                         <Bookcover to={`/archive/book/${book.bookId}`}>
-                            <BookcoverImg src={book.thumbNail} alt={book.description} />
+                            <BookcoverImg src={book.bookCover} alt={book.description} />
                         </Bookcover>
                     </GridItems>
                 ))}

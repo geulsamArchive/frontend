@@ -137,3 +137,13 @@ table {
     font-weight: normal;
     font-style: normal;
 }
+
+em,
+i {
+    font-style: italic;
+}
+
+strong,
+b {
+    font-weight: bold;
+}

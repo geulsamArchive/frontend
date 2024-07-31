@@ -14,7 +14,7 @@ const BookInfo = () => {
 
     const getBookData = async () => {
         try {
-            const resp = await axios.get(`http://3.38.162.235:8080/book/${bookId}`)
+            const resp = await axios.get(`http://geulsaem.store:8080/book/${bookId}`)
             console.log(resp.data)
             setBooktData(resp.data.data);
             setLoading(false);
