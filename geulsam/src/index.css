@@ -80,6 +80,8 @@ time,
 mark,
 audio,
 video {
+    font-family: 'MaruBuri-Regular';
+
     margin: 0;
     padding: 0;
     border: 0;
