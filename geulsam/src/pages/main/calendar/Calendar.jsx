@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Calendars, CalendarTitle } from '../../../style/StyledComponent';
 import CenterMode from '../../../components/Carousel/Slides';
-import axios from 'axios';
 import { normalAPI } from '../../../apis/Api';
 
 
