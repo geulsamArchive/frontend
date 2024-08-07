@@ -32,7 +32,7 @@ const BookInfo = () => {
     return (
         <BookInfoContainer>
             <BookTitle>
-                {bookData.book}
+                {bookData.title}
             </BookTitle>
             <BookInfoAndButton>
                 <BookInfoContents>

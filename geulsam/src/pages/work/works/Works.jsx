@@ -5,6 +5,7 @@ import PDFDownload from '../../../components/Download/PDFDownload';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import { Link } from 'react-router-dom';
 import Pagination from '../../../components/Paging/Pagination';
+import { WorkButtons, WorkInfo, WorkLink, WorkTopBorder } from '../../../style/Works';
 
 const Works = () => {
     const [page, setPage] = useState(1)
@@ -28,35 +29,53 @@ const Works = () => {
     useEffect(() => {
         getWorkData()
         console.log(workList)
-    }, [])
+    }, [page])
 
     return (
-        <BookInfoContainer>
-            <BookTitle>
-            </BookTitle>
-            <BookInfoAndButton>
-                <BookInfoContents>
-                    {
-                        workList.map((work) => (
-                            <div key={work.id}>
-                                <BookInfos>
-                                    <Link to={`/work/${work.contentId}`}>
-                                        {work.type} {work.title} {work.author} {work.createdAt}
-                                    </Link>
-                                </BookInfos>
-                            </div>
-                        ))
-                    }
-                    <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
-                </BookInfoContents>
-                <BookButtons>
-                    <br />
-                    <br />
-                    <CopyURL />
-                </BookButtons>
-            </BookInfoAndButton>
-
-        </BookInfoContainer>
+        <div>
+            <BookInfoContainer>
+                <WorkTopBorder />
+                <BookInfoAndButton>
+                    <BookInfoContents>
+                        {
+                            workList?.map((work) => (
+                                <div key={work.id}>
+                                    <WorkLink to={`/work/${work.contentId}`}>
+                                        <WorkInfo>
+                                            <div>
+                                                {work.type}
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                {work.title}
+                                            </div>
+                                            <div>
+                                                {work.author}
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                {work.createdAt}
+                                                &nbsp;
+                                                &nbsp;
+                                                &nbsp;
+                                            </div>
+                                        </WorkInfo>
+                                    </WorkLink>
+                                </div>
+                            ))
+                        }
+                    </BookInfoContents>
+                    <WorkButtons>
+                        <br />
+                        <br />
+                        <CopyURL />
+                    </WorkButtons>
+                </BookInfoAndButton>
+            </BookInfoContainer >
+            <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
+        </div>
     );
 };
 

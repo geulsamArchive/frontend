@@ -8,7 +8,9 @@ const NavLayout = () => {
     return (
         <>
             <Navbar />
-            <Outlet />
+            <div style={{ backgroundColor: 'rgba(249, 249, 246, 1)' }}>
+                <Outlet />
+            </div>
             <Sidebar />
             <Footer />
         </>

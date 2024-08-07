@@ -22,7 +22,7 @@ const Navbar = () => {
 
                         </li>
                         <li>
-                            {path.pathname === '/work' ?
+                            {path.pathname.startsWith('/work') ?
                                 <ActiveNavLink to={'/work'}>
                                     <S>2</S>&nbsp;&nbsp;&nbsp; 작품
                                 </ActiveNavLink>

@@ -402,8 +402,10 @@ cursor: pointer;
 //아카이브 상단 버튼
 export const ArchiveButtonContainer = styled.div`
 display: flex;
-margin-top: 77px;
+padding-top: 77px;
 justify-content: center;
+background-color: rgba(249, 249, 246, 1);
+
 `
 
 
@@ -412,11 +414,14 @@ export const BookInfoContainer = styled.div`
 font-family: 'MaruBuri-Regular';
 width: 90%;
 margin-left: 4%;
-margin-top: 100px;
+padding-top: 100px;
+background-color: rgba(249, 249, 246, 1);
+
 `
 
 export const BookTitle = styled.div`
 font-size: 27px;
+font-weight: 700;
 width: 100%;
 border-bottom:2px solid black;
 padding-bottom: 18px;
@@ -427,6 +432,9 @@ font-size: 14px;
 border-bottom: 1px solid black;
 padding-bottom: 14px;
 padding-top:14px ;
+&:hover{
+  background-color: rgba(255, 239, 155, 1);
+}
 `
 export const BookInfoContents = styled.div`
 display: flex;
@@ -480,6 +488,8 @@ export const GridContainer = styled.div`
   align-items: center;
   padding: 20px;
   margin: 50px;
+background-color: rgba(249, 249, 246, 1);
+  
 `;
 
 export const PosterGridContainer = styled.div`
@@ -493,6 +503,7 @@ export const PosterGridContainer = styled.div`
   align-items: center;
   padding: 20px;
   margin: 50px;
+
 `;
 export const PotserGridItems = styled.div`
   width: 401px;
@@ -519,7 +530,8 @@ export const GridItems = styled.div`
 //포스터 페이징 관련
 export const Paging = styled.div`
 margin-left: 5vw;
-margin-bottom: 50px;
+padding-bottom: 50px;
+background-color: rgba(249, 249, 246, 1);
 `
 
 export const PageButton = styled.button`
@@ -625,6 +637,7 @@ export const PageContainer = styled.div`
 position: relative;
 width: 100%;
 height: 100%;
+
 //background-image: linear-gradient(to bottom, #ffffff 150px,rgba(45, 43, 42, 1)100px);
 
 `

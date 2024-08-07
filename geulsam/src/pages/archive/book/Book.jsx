@@ -32,7 +32,7 @@ const Book = () => {
 
     useEffect(() => {
         getBookList()
-    }, [])
+    }, [page])
 
     return (
         <>
