@@ -1,6 +1,5 @@
 import Main from './pages/main/Main'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Work from './pages/work/Work';
 import Critic from './pages/critic/Critic';
 import Archive from './pages/archive/Archive';
 import Signup from './pages/signup/Signup';
@@ -14,6 +13,8 @@ import PosterUpload from './pages/admin/upload/poster/PosterUpload';
 import BookUpload from './pages/admin/upload/book/bookUpload';
 import UploadWork from './pages/work/upload/uploadWork';
 import Test from './pages/work/test';
+import Works from './pages/work/works/Works';
+import WorkInfo from './pages/work/works/WorkInfo';
 
 
 
@@ -31,12 +32,13 @@ function App() {
           <Route path='/frontend' element={<Main />} />
           <Route path='/' element={<Main />} />
           <Route path='/main' element={<Main />} />
-          <Route path='/work' element={<Work />} />
+          <Route path='/work' element={<Works />} />
           <Route path='/critic' element={<Critic />} />
           <Route path='/archive' element={<Archive />}>
             <Route path='poster' element={<Poster />} />
             <Route path='book' element={<Book />} />
           </Route>
+          <Route path='/work/:workId' element={<WorkInfo />} />
           <Route path='/archive/book/:bookId' element={<BookInfo />} />
         </Route>
         <Route element={<LoginLayout />}>

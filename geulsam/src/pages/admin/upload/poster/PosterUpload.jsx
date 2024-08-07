@@ -41,7 +41,6 @@ const PosterUpload = () => {
         } catch (err) {
             console.log(err)
         }
-
     };
 
     const onClickUpload = async (e) => {
