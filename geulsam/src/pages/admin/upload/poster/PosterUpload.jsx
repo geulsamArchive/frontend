@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { useForms } from '../../../../hooks/useForms';
 import { Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../../style/StyledComponent'
 import axios from 'axios';
-import Resizer from "react-image-file-resizer";
-
+import Resizer from "react-image-file-resizer"
 const EndPoint = "http://43.200.215.113:8080/poster"
 
 const resizeFile = (file) =>
@@ -27,7 +26,7 @@ const PosterUpload = () => {
     const [designer, onChangeDesigner] = useForms();
     const [file, setFile] = useState(null);
     const [thumbnail, setThumbnail] = useState(null);
-
+    const [thumbnailUrl,setThumbnailUrl] = useState(null); 
 
     const onFileChange = async (e) => {
         try {
@@ -36,6 +35,13 @@ const PosterUpload = () => {
 
             const resized = await resizeFile(selectedFile)
             setThumbnail(resized)
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                setThumbnailUrl(reader.result);
+            };
+            reader.readAsDataURL(resized);
+
             console.log(selectedFile)
             console.log(resized)
         } catch (err) {
@@ -119,6 +125,11 @@ const PosterUpload = () => {
                 </InputUploads>
                 <Input type='file' accept='image/*' onChange={onFileChange} />
             </Inputs>
+            {thumbnailUrl && (
+                <div>
+                    <img src={thumbnailUrl} alt="Thumbnail"/>
+                </div>
+            )}
             <hr />
             <br />
             <RightSubmit>
