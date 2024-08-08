@@ -514,8 +514,34 @@ export const PotserGridItems = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;   
+  
 `;
 
+//포스터 수정하는 페이지
+export const PotserModifyGridItems = styled.div`
+  width: 401px;
+  height: 568px;
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;   
+  
+  position: relative;
+  cursor: pointer;
+    
+    &:hover img {
+        opacity: 0.5;
+    }
+
+    &:hover button {
+        display: block;
+    }
+`;
+
+
+// 문집 
 export const GridItems = styled.div`
   width: 380px;
   height: 380px;
@@ -527,6 +553,37 @@ export const GridItems = styled.div`
   align-items: center;
   text-align: center;   
 `;
+
+// 문집 수정
+  export const ModifyGridItems = styled.div`
+  width: 380px;
+  height: 380px;
+  background-color: rgba(45, 43, 42, 1);
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;   
+  position: relative;
+cursor: pointer;
+  
+  &:hover img {
+      opacity: 0.3;
+  }
+
+  &:hover button {
+      display: block;
+  }
+`; 
+export const HiddenButton = styled(Button)`
+  display: none; /* 기본적으로 버튼 숨기기 */
+  position: absolute; /* 버튼의 위치를 부모 요소 기준으로 조정 */
+  top: 50%; /* 부모 요소의 세로 가운데 */
+  left: 50%; /* 부모 요소의 가로 가운데 */
+  transform: translate(-50%, -50%); /* 버튼의 크기를 고려해 정확한 가운데로 이동 */
+`;
+
 //포스터 페이징 관련
 export const Paging = styled.div`
 margin-left: 5vw;

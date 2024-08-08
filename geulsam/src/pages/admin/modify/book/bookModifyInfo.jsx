@@ -1,9 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useState,useEffect } from 'react';
 import { useForms } from '../../../../hooks/useForms';
 import { Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit,Red} from '../../../../style/StyledComponent';
 import Resizer from "react-image-file-resizer"
 import axios from 'axios';
+import { normalAPI } from '../../../../apis/Api';
 const EndPoint = "http://43.200.215.113:8080/book";
 
 const BookUpload = () => {
@@ -20,7 +22,26 @@ const BookUpload = () => {
     const [backCoverThumbnail,setBackCoverThumbnail] = useState();
     const [pdf, setPdf] = useState(null);
     const [year, onChangeYear] = useForms();
-    
+    const { bookId } = useParams()
+    const [bookData, setBooktData] = useState({})
+    const [loading, setLoading] = useState(true)
+
+
+    const getBookData = async () => {
+        try {
+            const resp = await normalAPI.get(`/book/${bookId}`)
+            console.log(resp.data)
+            setBooktData(resp.data.data);
+            setLoading(false);
+        } catch (error) {
+            console.error('api fetching error', error)
+        }
+    }
+
+    useEffect(() => {
+        getBookData()
+    }, []
+    )
 
     // {
     //     "bookCover": "string",
@@ -154,7 +175,7 @@ const BookUpload = () => {
                 //리프레쉬 토큰 포함해서 다시 전송
                 const refreshToken = localStorage.getItem('refresh');
 
-                const res = await axios.post(EndPoint, formData, {
+                const res = await axios.put(EndPoint, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'refreshToken': refreshToken,
@@ -174,28 +195,28 @@ const BookUpload = () => {
     return (
         <BookInfoContainer>
             <BookTitle>
-                새 문집 게시하기
+                문집 수정하기
             </BookTitle>
             <Inputs>
                 <div>
                     <InputTitle>제목</InputTitle>
-                    <Input value={title} onChange={onChangeTitle} placeholder='예)와우문집2024' />
+                    <Input value={title} onChange={onChangeTitle} placeholder={bookData.title}/>
                 </div>
                 <div>
                     <InputTitle>발간일</InputTitle>
-                    <Input value={release} onChange={onChangeRelease} placeholder='예)2024' />
+                    <Input value={release} onChange={onChangeRelease} placeholder={bookData.release} />
                 </div>
                 <div>
                     <InputTitle>디자인</InputTitle>
-                    <Input value={designer} onChange={onChangeDesigner} placeholder='예) 아이묭' />
+                    <Input value={designer} onChange={onChangeDesigner} placeholder={bookData.designer} />
                 </div>
                 <div>
                     <InputTitle>판형</InputTitle>
-                    <Input value={plate} onChange={onChangePlate} placeholder='예)B6' />
+                    <Input value={plate} onChange={onChangePlate} placeholder={bookData.plate}/>
                 </div>
                 <div>
                     <InputTitle>쪽수</InputTitle>
-                    <Input value={pageNumber} onChange={onChangePageNumber} placeholder='예)370' />
+                    <Input value={pageNumber} onChange={onChangePageNumber} placeholder={bookData.page} />
                 </div>
                 <div>
                     <InputTitle>표지 및 내지 게시</InputTitle>
@@ -207,12 +228,12 @@ const BookUpload = () => {
                 </div>
                 {bookCoverUrl && (
                 <div>
-                    <img src={bookCoverUrl} alt="Thumbnail"/>
+                    <img src={bookCoverUrl} alt="Thumbnail" placeholder={bookData.thumbNail}/>
                 </div>)}
                 <div>
                     <br/>
                     <InputTitle>뒷표지</InputTitle>
-                    <Input type='file' onChange={onBackCoverChange} />
+                    <Input type='file' onChange={onBackCoverChange}  />
                 </div>
                 {backCoverUrl && (
                     <div>
@@ -225,7 +246,7 @@ const BookUpload = () => {
                 </div>
             </Inputs>
             <RightSubmit>
-                <Button type='submit' onClick={onClickUpload}>게시하기</Button>
+                <Button type='submit' onClick={onClickUpload}>수정하기</Button>
             </RightSubmit>
         </BookInfoContainer>
     );
