@@ -540,6 +540,24 @@ export const PotserModifyGridItems = styled.div`
     }
 `;
 
+//Poster 링크 처리 하려고
+export const PosterLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    width: 401px;
+  height: 568px;
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;   
+  
+  position: relative;
+  cursor: pointer;
+`;
+
 
 // 문집 
 export const GridItems = styled.div`
@@ -577,11 +595,11 @@ cursor: pointer;
   }
 `; 
 export const HiddenButton = styled(Button)`
-  display: none; /* 기본적으로 버튼 숨기기 */
-  position: absolute; /* 버튼의 위치를 부모 요소 기준으로 조정 */
-  top: 50%; /* 부모 요소의 세로 가운데 */
-  left: 50%; /* 부모 요소의 가로 가운데 */
-  transform: translate(-50%, -50%); /* 버튼의 크기를 고려해 정확한 가운데로 이동 */
+  display: none; 
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
 `;
 
 //포스터 페이징 관련

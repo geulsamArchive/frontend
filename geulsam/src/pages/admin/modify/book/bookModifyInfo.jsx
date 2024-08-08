@@ -96,10 +96,10 @@ const BookUpload = () => {
     const onBackCoverChange = async (e) => {
         try {
             const selectedBackCoverFile = e.target.files[0]
-            setBookCover(selectedBackCoverFile);
+            setBackCover(selectedBackCoverFile);
 
             const resizedBackCover = await resizeFile(selectedBackCoverFile)
-            setBookCoverThumbnail(resizedBackCover)
+            setBackCoverThumbnail(resizedBackCover)
 
             const readerBackCover = new FileReader();
             readerBackCover.onload = () => {
@@ -113,7 +113,16 @@ const BookUpload = () => {
             console.log(err)
         }
     };
-
+    const onChange = async (e)=>{
+        try {
+            const selectedPdf = e.target.files[0]
+            setPdf(selectedPdf);
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+    }
     const onClickUpload = async (e) => {
         const suppertedFormats = ["image/jpeg", "image/png", "image/svg+xml"]
         e.preventDefault();
@@ -160,7 +169,7 @@ const BookUpload = () => {
             const refreshToken = localStorage.getItem('refresh');
 
             //처음으로 업로드시
-            const res = await axios.post(EndPoint, formData, {
+            const res = await axios.put(EndPoint, formData, {
                 headers: {
 
                     'Content-Type': 'multipart/form-data',

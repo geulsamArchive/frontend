@@ -52,6 +52,10 @@ const BookUpload = () => {
             );
         });
 
+    const onPdfChange = (e) => {
+        setPdf(e.target.files[0]);
+    }
+
     const onBookCoverChange = async (e) => {
         try {
             const selectedBookCoverFile = e.target.files[0]
@@ -75,10 +79,10 @@ const BookUpload = () => {
     const onBackCoverChange = async (e) => {
         try {
             const selectedBackCoverFile = e.target.files[0]
-            setBookCover(selectedBackCoverFile);
+            setBackCover(selectedBackCoverFile);
 
             const resizedBackCover = await resizeFile(selectedBackCoverFile)
-            setBookCoverThumbnail(resizedBackCover)
+            setBackCoverThumbnail(resizedBackCover)
 
             const readerBackCover = new FileReader();
             readerBackCover.onload = () => {
@@ -110,7 +114,9 @@ const BookUpload = () => {
         const formData = new FormData();
         formData.append('bookCover', bookCover)
         formData.append('bookCoverThumbNail', bookCoverThumbnail)
-        formData.append('backCover', year);
+        formData.append('backCover', backCover);
+        formData.append('backCoverThumbNail',backCoverThumbnail);
+        formData.append('pdf',pdf);
         formData.append('designer', designer);
         formData.append("plate",plate);
         formData.append("pageNumber",pageNumber);
