@@ -15,8 +15,10 @@ import UploadWork from './pages/work/upload/uploadWork';
 import Test from './pages/work/test';
 import Works from './pages/work/works/Works';
 import WorkInfo from './pages/work/works/WorkInfo';
-
-
+import PosterModify from './pages/admin/modify/poster/posterModify';
+import BookModify from './pages/admin/modify/book/bookModify';
+import BookModifyInfo from './pages/admin/modify/book/bookModifyInfo'
+import PosterModifyInfo from './pages/admin/modify/poster/posterModifyInfo'
 
 
 function App() {
@@ -26,6 +28,10 @@ function App() {
       <Routes>
         <Route path='/test' element={<Test />} />
         <Route element={<NavLayout />}>
+          <Route path='/book/modify' element = {<BookModify />}/>
+          <Route path='/book/modify/:bookId' element={<BookModifyInfo />} />
+          <Route path='/poster/modify' element = {<PosterModify />}/>
+          <Route path='/poster/modify/:posterId' element={<PosterModifyInfo />} />
           <Route path='/poster/upload' element={<PosterUpload />} />
           <Route path='/work/upload' element={<UploadWork />} />
           <Route path='/book/upload' element={<BookUpload />} />

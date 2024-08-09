@@ -514,8 +514,52 @@ export const PotserGridItems = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;   
+  
 `;
 
+//포스터 수정하는 페이지
+export const PotserModifyGridItems = styled.div`
+  width: 401px;
+  height: 568px;
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;   
+  
+  position: relative;
+  cursor: pointer;
+    
+    &:hover img {
+        opacity: 0.5;
+    }
+
+    &:hover button {
+        display: block;
+    }
+`;
+
+//Poster 링크 처리 하려고
+export const PosterLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    width: 401px;
+  height: 568px;
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;   
+  
+  position: relative;
+  cursor: pointer;
+`;
+
+
+// 문집 
 export const GridItems = styled.div`
   width: 380px;
   height: 380px;
@@ -527,6 +571,37 @@ export const GridItems = styled.div`
   align-items: center;
   text-align: center;   
 `;
+
+// 문집 수정
+  export const ModifyGridItems = styled.div`
+  width: 380px;
+  height: 380px;
+  background-color: rgba(45, 43, 42, 1);
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;   
+  position: relative;
+cursor: pointer;
+  
+  &:hover img {
+      opacity: 0.3;
+  }
+
+  &:hover button {
+      display: block;
+  }
+`; 
+export const HiddenButton = styled(Button)`
+  display: none; 
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+`;
+
 //포스터 페이징 관련
 export const Paging = styled.div`
 margin-left: 5vw;
