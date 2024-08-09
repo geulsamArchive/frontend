@@ -5,6 +5,7 @@ import { BookButtons, BookInfos, BookInfoAndButton, BookInfoContainer, BookInfoC
 import PDFDownload from '../../../components/Download/PDFDownload';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import { WorkButtons, WorkLink, WorkReaderLink, WorkSentence, WorkSentenceContainer } from '../../../style/Works';
+import Comments from '../../../components/Comment/Comments';
 
 const WorkInfo = () => {
     const [workData, setWorkData] = useState({})
@@ -84,6 +85,7 @@ const WorkInfo = () => {
                     </WorkButtons>
                 </BookInfoAndButton>
             </BookInfoContainer>
+            <Comments />
         </>
     );
 };

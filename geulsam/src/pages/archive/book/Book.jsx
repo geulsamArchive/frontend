@@ -13,7 +13,6 @@ const Book = () => {
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(1)
 
-
     const [bookList, setBookList] = useState([])
 
     const [loading, setLoading] = useState(true)

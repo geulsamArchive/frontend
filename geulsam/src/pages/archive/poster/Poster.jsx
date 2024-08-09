@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { GridContainer, GridItems, PageButton, Paging, PosterGridContainer, Posters, PotserGridItems } from '../../../style/StyledComponent';
 import Modal from '../../../components/Modal/Modal';
 import Pagination from '../../../components/Paging/Pagination';
+import { normalAPI } from '../../../apis/Api';
 
 
 
@@ -10,7 +11,6 @@ const Poster = () => {
     const [page, setPage] = useState(1); //시작 페이지 값
     const [pageTotal, setPageTotal] = useState(1); //전체 페이지 수(백엔드에서 제공)
     const [order, setOrder] = useState('asc')
-    const apiEndPoint = `http://43.200.215.113:8080/poster?page=${page}&order=${order}`
 
     const [posterList, setPosterList] = useState([])
     const [loading, setLoading] = useState(true)
@@ -19,7 +19,7 @@ const Poster = () => {
 
     const getPosterList = async () => {
         try {
-            const res = await axios.get(apiEndPoint)
+            const res = await normalAPI.get(`/poster?page=${page}&order=${order}`)
             console.log(res.data.data)
             setPosterList(res.data.data.content)
             setPageTotal(res.data.data.pageTotal)
