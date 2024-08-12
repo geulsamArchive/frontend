@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AccordionHeader, AccordionContainer, AccordionContent } from '../../style/Accodion';
+import { authAPI } from '../../apis/Api';
+
+const userCheck = async () => {
+    const userInfo = await authAPI('/user/check')
+    console.log(userInfo)
+    return userInfo
+}
 
 
 export const Accordion = ({ name, content: ContentComponent }) => {
@@ -39,6 +46,11 @@ const Comment = () => {
 }
 
 const Comments = () => {
+    useEffect(() => {
+        userCheck()
+
+    }, [])
+
     return (
         <div>
             <Accordion name="독자 후기" content={Comment} />

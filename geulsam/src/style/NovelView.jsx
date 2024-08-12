@@ -48,12 +48,14 @@ margin-top: 10px;
 `;
 
 export const PageInput = styled.input`
-width: 30px;
-border: none;
+width: 25px;
+height: 20px;
+border-radius: 5px;
+border: 1px solid white;
 margin-right: 5px;
 background-color: inherit;
 font-size: 12px;
-text-align: right;
+text-align: center;
 color: rgba(255, 239, 155, 1);
 `;
 

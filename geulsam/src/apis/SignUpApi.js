@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { normalAPI } from './Api';
 
 export const SignUpApi = async (formdata) => {
     try {
-        const result = await axios.post('http://3.38.162.235:8080/user/signup', {
+        const result = await normalAPI.post('/user/signup', {
             name: formdata.name,
             schoolNum: formdata.schoolNum,
             phone: formdata.phone,
