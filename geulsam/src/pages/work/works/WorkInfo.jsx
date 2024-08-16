@@ -11,11 +11,30 @@ const WorkInfo = () => {
     const [workData, setWorkData] = useState({})
     const { workId } = useParams()
 
+    const translateType = (type) => {
+        switch (type) {
+            case 'NOVEL':
+                return '소설';
+            case 'ESSAY':
+                return '에세이';
+            case 'POEM':
+                return '시';
+            default:
+                return type;
+        }
+    };
+
     const getWorkData = async () => {
         try {
             const response = await normalAPI.get(`/content/${workId}`)
             console.log(response)
-            setWorkData(response.data.data)
+
+            const data = response.data.data;
+            const translatedWork = {
+                ...data,
+                type: translateType(data.type)  // type만 변환
+            };
+            setWorkData(translatedWork)
         } catch (err) {
             console.error(err)
         }

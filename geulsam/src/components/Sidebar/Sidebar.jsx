@@ -23,6 +23,7 @@ const Sidebar = () => {
     useEffect(() => {
         setIsAuthenticated(!!localStorage.getItem('access'));
     }, []);
+
     return (
         <Sidebars>
             {isAuthenticated

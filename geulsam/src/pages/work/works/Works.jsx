@@ -1,27 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { BookButtons, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookInfos, BookTitle } from '../../../style/StyledComponent';
+import { BookButtons, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookInfos, BookTitle, Right } from '../../../style/StyledComponent';
 import { normalAPI } from '../../../apis/Api';
-import PDFDownload from '../../../components/Download/PDFDownload';
 import CopyURL from '../../../components/CopyURL/CopyURL';
-import { Link } from 'react-router-dom';
 import Pagination from '../../../components/Paging/Pagination';
-import { WorkButtons, WorkInfo, WorkLink, WorkTopBorder } from '../../../style/Works';
+import { WorkAwards, WorkButtons, WorkInfo, WorkInfoContainer, WorkLink, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
+import SearchWork from '../../../components/Search/SearchWork';
 
 const Works = () => {
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(1)
-
     const [workList, setWorkList] = useState([])
+    const [keyword, setKeyword] = useState('')
+
+    const translateType = (type) => {
+        switch (type) {
+            case 'NOVEL':
+                return '소설';
+            case 'ESSAY':
+                return '에세이';
+            case 'POEM':
+                return '시';
+            default:
+                return type;
+        }
+    };
 
     const getWorkData = async () => {
         try {
-            const response = await normalAPI.get(`/content?page=${page}`)
+            const response = await normalAPI.get(`/content?page=${page}&keyword=${keyword}`)
             console.log(response)
-            setWorkList(response.data.data.content)
+
+            const updatedWorkList = response.data.data.content.map(work => ({
+                ...work,
+                type: translateType(work.type)
+            }));
+
+            setWorkList(updatedWorkList);
             setTotalPage(response.data.data.pageTotal)
 
         } catch (err) {
-            console.err(err)
+            console.error(err)
         }
 
     }
@@ -29,33 +47,46 @@ const Works = () => {
     useEffect(() => {
         getWorkData()
         console.log(workList)
-    }, [page])
+    }, [page, keyword])
+
+    const handleSearch = (newKeyword) => {
+        setKeyword(newKeyword);
+        setPage(1); // 검색 시 페이지를 1로 초기화
+    };
 
     return (
         <div>
-            <BookInfoContainer>
+            <SearchWork onSearch={handleSearch} />
+            <WorkInfoContainer>
                 <WorkTopBorder />
                 <BookInfoAndButton>
                     <BookInfoContents>
-                        {
-                            workList?.map((work) => (
+                        {workList.length === 0 ? (
+                            <div> 검색결과없음</div>
+                        ) : (
+                            workList.map((work) => (
                                 <div key={work.id}>
                                     <WorkLink to={`/work/${work.contentId}`}>
                                         <WorkInfo>
+                                            <WorkTitleType>
+                                                <WorkType>
+                                                    {work.type}
+                                                </WorkType>
+                                                <div>
+                                                    {work.title}
+                                                </div>
+                                            </WorkTitleType>
+
                                             <div>
-                                                {work.type}
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                {work.title}
-                                            </div>
-                                            <div>
+                                                {work.awards && work.awards.length > 0 && (
+                                                    <WorkAwards>
+                                                        {work.awards.join(', ')}
+                                                    </WorkAwards>
+                                                )}
                                                 {work.author}
                                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
+
                                                 {work.createdAt}
                                                 &nbsp;
                                                 &nbsp;
@@ -65,7 +96,7 @@ const Works = () => {
                                     </WorkLink>
                                 </div>
                             ))
-                        }
+                        )}
                     </BookInfoContents>
                     <WorkButtons>
                         <br />
@@ -73,7 +104,7 @@ const Works = () => {
                         <CopyURL />
                     </WorkButtons>
                 </BookInfoAndButton>
-            </BookInfoContainer >
+            </WorkInfoContainer >
             <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
         </div>
     );

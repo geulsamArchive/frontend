@@ -6,7 +6,7 @@ export const UserCheck = async () => {
     const refresh = localStorage.getItem('refresh')
 
     try {
-        const res = await axios.get('http://43.200.215.113:8080/user/check', {
+        const res = await axios.get('https://geulsaem.store/user/check', {
             headers: {
                 'accessToken': access
             },

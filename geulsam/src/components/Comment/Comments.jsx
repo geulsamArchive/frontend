@@ -46,10 +46,10 @@ const Comment = () => {
 }
 
 const Comments = () => {
-    useEffect(() => {
-        userCheck()
+    // useEffect(() => {
+    //     userCheck()
 
-    }, [])
+    // }, [])
 
     return (
         <div>

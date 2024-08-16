@@ -26,7 +26,25 @@ padding-top:14px ;
 display: flex;
 justify-content: space-between;
 `
+export const WorkTitleType = styled.div`
+    display: flex;
+    justify-content: ;
+    width: 200px;
+    align-items: center;
+    text-align: left;
+`
+export const WorkType = styled.div`
+    width: 100px;
+    color: rgba(171, 170, 170, 1);
+`
 
+export const WorkInfoContainer = styled.div`
+font-family: 'MaruBuri-Regular';
+width: 90%;
+margin-left: 4%;
+padding-top: 20px;
+background-color: rgba(249, 249, 246, 1);
+`
 export const WorkButtons = styled.div`
  height: 100dvh;
 width: auto;
@@ -48,6 +66,19 @@ export const WorkSentenceContainer = styled.div`
     justify-content: space-between;
 
 `
+
+export const WorkAwards = styled.span`
+border: 1px solid rgba(255, 96, 88, 1);
+border-top: none;
+    border-radius:0 0  10px 10px;
+    color: rgba(255, 96, 88, 1);
+    padding: 5px 12px 5px 12px;
+    font-size: 12px;
+    margin-right: 50px;
+position: relative;
+top: -9px;
+`
+
 
 export const WorkSentence = styled.div`
     width: 608px;

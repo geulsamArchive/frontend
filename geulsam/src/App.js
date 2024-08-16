@@ -19,6 +19,7 @@ import PosterModify from './pages/admin/modify/poster/posterModify';
 import BookModify from './pages/admin/modify/book/bookModify';
 import BookModifyInfo from './pages/admin/modify/book/bookModifyInfo'
 import PosterModifyInfo from './pages/admin/modify/poster/posterModifyInfo'
+import NotFound404 from './components/NotFound/404';
 
 
 function App() {
@@ -28,9 +29,9 @@ function App() {
       <Routes>
         <Route path='/test' element={<Test />} />
         <Route element={<NavLayout />}>
-          <Route path='/book/modify' element = {<BookModify />}/>
+          <Route path='/book/modify' element={<BookModify />} />
           <Route path='/book/modify/:bookId' element={<BookModifyInfo />} />
-          <Route path='/poster/modify' element = {<PosterModify />}/>
+          <Route path='/poster/modify' element={<PosterModify />} />
           <Route path='/poster/modify/:posterId' element={<PosterModifyInfo />} />
           <Route path='/poster/upload' element={<PosterUpload />} />
           <Route path='/work/upload' element={<UploadWork />} />
@@ -46,6 +47,7 @@ function App() {
           </Route>
           <Route path='/work/:workId' element={<WorkInfo />} />
           <Route path='/archive/book/:bookId' element={<BookInfo />} />
+          <Route path='*' element={<NotFound404 />} />
         </Route>
         <Route element={<LoginLayout />}>
           <Route path='login' element={<Login />} />
