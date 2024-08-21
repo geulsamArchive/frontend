@@ -3,7 +3,7 @@ import { useForms } from '../../../../hooks/useForms';
 import { Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../../style/StyledComponent'
 import axios from 'axios';
 import Resizer from "react-image-file-resizer"
-const EndPoint = "http://43.200.215.113:8080/poster"
+import { normalAPI } from '../../../../apis/Api';
 
 const resizeFile = (file) =>
     new Promise((resolve) => {
@@ -26,7 +26,7 @@ const PosterUpload = () => {
     const [designer, onChangeDesigner] = useForms();
     const [file, setFile] = useState(null);
     const [thumbnail, setThumbnail] = useState(null);
-    const [thumbnailUrl,setThumbnailUrl] = useState(null); 
+    const [thumbnailUrl, setThumbnailUrl] = useState(null);
 
     const onFileChange = async (e) => {
         try {
@@ -75,7 +75,7 @@ const PosterUpload = () => {
             const refreshToken = localStorage.getItem('refresh');
 
             //처음으로 업로드시
-            const res = await axios.post(EndPoint, formData, {
+            const res = await normalAPI.post('/poster', formData, {
                 headers: {
 
                     'Content-Type': 'multipart/form-data',
@@ -90,7 +90,7 @@ const PosterUpload = () => {
                 //리프레쉬 토큰 포함해서 다시 전송
                 const refreshToken = localStorage.getItem('refresh');
 
-                const res = await axios.post(EndPoint, formData, {
+                const res = await normalAPI.post('/poster', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'refreshToken': refreshToken,
@@ -127,7 +127,7 @@ const PosterUpload = () => {
             </Inputs>
             {thumbnailUrl && (
                 <div>
-                    <img src={thumbnailUrl} alt="Thumbnail"/>
+                    <img src={thumbnailUrl} alt="Thumbnail" />
                 </div>
             )}
             <hr />
