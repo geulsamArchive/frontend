@@ -312,6 +312,7 @@ height: 600px;
 
 export const CalendarTitle = styled.div`
 color: rgba(87, 86, 85, 1);
+font-family: 'MaruBuri-Regular';
 margin-left: 86px;
 margin-right: 86px;
 margin-bottom: 50px;
@@ -416,7 +417,6 @@ width: 90%;
 margin-left: 4%;
 padding-top: 100px;
 background-color: rgba(249, 249, 246, 1);
-
 `
 
 export const BookTitle = styled.div`
@@ -573,7 +573,7 @@ export const GridItems = styled.div`
 `;
 
 // 문집 수정
-  export const ModifyGridItems = styled.div`
+export const ModifyGridItems = styled.div`
   width: 380px;
   height: 380px;
   background-color: rgba(45, 43, 42, 1);
@@ -593,7 +593,7 @@ cursor: pointer;
   &:hover button {
       display: block;
   }
-`; 
+`;
 export const HiddenButton = styled(Button)`
   display: none; 
   position: absolute; 

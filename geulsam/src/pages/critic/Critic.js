@@ -1,12 +1,13 @@
 import React from 'react';
-
+import { CalendarTitle } from '../../style/StyledComponent';
+import { CriticContainer } from '../../style/Critic';
 const Critic = () => {
     return (
-        <div>
-
-            합평회페이지
-
-        </div>
+        <CriticContainer>
+            <CalendarTitle>
+                금학기 합평 신청 및 승인 확인
+            </CalendarTitle>
+        </CriticContainer>
     );
 };
 
