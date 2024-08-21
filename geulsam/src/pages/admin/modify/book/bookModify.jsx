@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { HiddenButton,Buttons,Button,Bookcover, BookcoverImg, GridContainer, GridItems,ModifyGridItems } from '../../../../style/StyledComponent';
+import { HiddenButton, Buttons, Button, Bookcover, BookcoverImg, GridContainer, GridItems, ModifyGridItems } from '../../../../style/StyledComponent';
 import Pagination from '../../../../components/Paging/Pagination';
 import { normalAPI } from '../../../../apis/Api';
 
@@ -25,8 +25,8 @@ const Book = () => {
             setBookList(resp.data.data.content);
             setTotalPage(resp.data.data.pageTotal)
             setLoading(false)
-        } catch (err) {
-            console.log('api fetching failed', err)
+        } catch (error) {
+            console.log('api fetching failed', error)
         }
     }
 

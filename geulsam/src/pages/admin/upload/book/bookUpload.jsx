@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { useForms } from '../../../../hooks/useForms';
-import { Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit,Red} from '../../../../style/StyledComponent';
+import { Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit, Red } from '../../../../style/StyledComponent';
 import Resizer from "react-image-file-resizer"
 import axios from 'axios';
-const EndPoint = "http://43.200.215.113:8080/book";
+import { normalAPI } from '../../../../apis/Api';
 
 const BookUpload = () => {
     const [title, onChangeTitle] = useForms();
@@ -13,14 +13,14 @@ const BookUpload = () => {
     const [plate, onChangePlate] = useForms();
     const [pageNumber, onChangePageNumber] = useForms();
     const [bookCover, setBookCover] = useState(null);
-    const [bookCoverThumbnail,setBookCoverThumbnail] = useState();
-    const [bookCoverUrl,setBookCoverUrl] = useState();
-    const [backCover,setBackCover] = useState(null);
-    const [backCoverUrl,setBackCoverUrl] = useState();
-    const [backCoverThumbnail,setBackCoverThumbnail] = useState();
+    const [bookCoverThumbnail, setBookCoverThumbnail] = useState();
+    const [bookCoverUrl, setBookCoverUrl] = useState();
+    const [backCover, setBackCover] = useState(null);
+    const [backCoverUrl, setBackCoverUrl] = useState();
+    const [backCoverThumbnail, setBackCoverThumbnail] = useState();
     const [pdf, setPdf] = useState(null);
     const [year, onChangeYear] = useForms();
-    
+
 
     // {
     //     "bookCover": "string",
@@ -100,11 +100,11 @@ const BookUpload = () => {
     const onClickUpload = async (e) => {
         const suppertedFormats = ["image/jpeg", "image/png", "image/svg+xml"]
         e.preventDefault();
-        if (!bookCover||!backCover) {
+        if (!bookCover || !backCover) {
             alert("파일을 선택해주세요.");
             return;
         }
-        if (!suppertedFormats.includes(bookCover.type)||!suppertedFormats.includes(backCover.type)) {
+        if (!suppertedFormats.includes(bookCover.type) || !suppertedFormats.includes(backCover.type)) {
             alert("지원되지 않은 이미지 형식입니다. JPEG, PNG형식의 이미지를 업로드해주세요.");
             return;
         }
@@ -115,28 +115,28 @@ const BookUpload = () => {
         formData.append('bookCover', bookCover)
         formData.append('bookCoverThumbNail', bookCoverThumbnail)
         formData.append('backCover', backCover);
-        formData.append('backCoverThumbNail',backCoverThumbnail);
-        formData.append('pdf',pdf);
+        formData.append('backCoverThumbNail', backCoverThumbnail);
+        formData.append('pdf', pdf);
         formData.append('designer', designer);
-        formData.append("plate",plate);
-        formData.append("pageNumber",pageNumber);
-        formData.append("year",year);
-        formData.append("release",release);
-        formData.append("title",title);
+        formData.append("plate", plate);
+        formData.append("pageNumber", pageNumber);
+        formData.append("year", year);
+        formData.append("release", release);
+        formData.append("title", title);
 
-    // {
-    //     "bookCover": "string",
-    //     "bookCoverThumbnail": "string",
-    //     "backCover": "string",
-    //     "backCoverThumbnail": "string",
-    //     "pdf": "string",
-    //     "designer": "string",
-    //     "plate": "string",
-    //     "pageNumber": 0,
-    //     "year": 0,
-    //     "release": "2024-08-08",
-    //     "title": "string"
-    //   }
+        // {
+        //     "bookCover": "string",
+        //     "bookCoverThumbnail": "string",
+        //     "backCover": "string",
+        //     "backCoverThumbnail": "string",
+        //     "pdf": "string",
+        //     "designer": "string",
+        //     "plate": "string",
+        //     "pageNumber": 0,
+        //     "year": 0,
+        //     "release": "2024-08-08",
+        //     "title": "string"
+        //   }
 
 
         const accessToken = localStorage.getItem('access')
@@ -145,7 +145,7 @@ const BookUpload = () => {
             const refreshToken = localStorage.getItem('refresh');
 
             //처음으로 업로드시
-            const res = await axios.post(EndPoint, formData, {
+            const res = await normalAPI.post(`/book`, formData, {
                 headers: {
 
                     'Content-Type': 'multipart/form-data',
@@ -160,16 +160,16 @@ const BookUpload = () => {
                 //리프레쉬 토큰 포함해서 다시 전송
                 const refreshToken = localStorage.getItem('refresh');
 
-                const res = await axios.post(EndPoint, formData, {
+                const res = await normalAPI.post(`/book`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'refreshToken': refreshToken,
                     },
                 })
                 console.log(res)
-            } catch (err) {
+            } catch (erorr) {
                 //그래도 안되면 재로그인 요청
-                console.log(err)
+                console.log(error)
                 alert('다시 로그인 해주세요.')
             }
         }
@@ -207,22 +207,22 @@ const BookUpload = () => {
                     <InputTitle>표지 및 내지 게시</InputTitle>
                     <p>정상적인 문집 게시를 위해 하단의 업로드 가이드라인을 준수해주세요.</p>
                     <Red><p>게시에 성공할 시 하단에 이미지가 표시됩니다. </p></Red>
-                    <br/>
+                    <br />
                     <InputTitle>앞표지</InputTitle>
                     <Input type='file' onChange={onBookCoverChange} />
                 </div>
                 {bookCoverUrl && (
+                    <div>
+                        <img src={bookCoverUrl} alt="Thumbnail" />
+                    </div>)}
                 <div>
-                    <img src={bookCoverUrl} alt="Thumbnail"/>
-                </div>)}
-                <div>
-                    <br/>
+                    <br />
                     <InputTitle>뒷표지</InputTitle>
                     <Input type='file' onChange={onBackCoverChange} />
                 </div>
                 {backCoverUrl && (
                     <div>
-                        <img src={backCoverUrl} alt="Thumbnail"/>
+                        <img src={backCoverUrl} alt="Thumbnail" />
                     </div>
                 )}
                 <div>
