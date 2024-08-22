@@ -14,7 +14,7 @@ const Poster = () => {
 
     const getPosterList = async () => {
         try {
-            const res = normalAPI.get(`/poster`);
+            const res = await normalAPI.get(`/poster`);
             console.log(res.data.data);
             setPosterList(res.data.data.content);
             setPageTotal(res.data.data.pageTotal);

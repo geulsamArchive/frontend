@@ -19,10 +19,11 @@ const BookUpload = () => {
     const [backCoverThumbnail, setBackCoverThumbnail] = useState();
     const [pdf, setPdf] = useState(null);
     const [year, onChangeYear] = useForms();
-    const { bookId } = useParams();
+    const { bookId, field, search } = useParams();
+
     const [bookData, setBooktData] = useState({});
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); // useHistory 대신 useNavigate 사용
+    const navigate = useNavigate();
 
     const getBookData = async () => {
         try {
@@ -131,9 +132,11 @@ const BookUpload = () => {
         formData.append("title", title);
 
         const accessToken = localStorage.getItem('access');
+        //https://geulsaem.store/book?field=id&search=dssda-sdfasdf-dsafdasf-asdfdsa
+        ///book?field=${field}&search=${search}
 
         try {
-            const res = await normalAPI.put(`/book/${bookId}`, formData, {
+            const res = await normalAPI.put(`/book?field=${field}&search=${search}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'accessToken': accessToken,
@@ -144,7 +147,7 @@ const BookUpload = () => {
             console.error(error);
             try {
                 const refreshToken = localStorage.getItem('refresh');
-                const res = await normalAPI.put(`/book/${bookId}`, formData, {
+                const res = await normalAPI.put(`/book?field=${field}&search=${search}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'refreshToken': refreshToken,
@@ -164,7 +167,7 @@ const BookUpload = () => {
             return;
 
         try {
-            await normalAPI.delete(`/book/${bookId}`, {
+            await normalAPI.delete(`/book?field=${field}&search=${search}`, {
                 headers: {
                     'accessToken': accessToken,
                 },

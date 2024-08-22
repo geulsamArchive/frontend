@@ -5,6 +5,7 @@ import { Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputU
 import Resizer from "react-image-file-resizer";
 import { normalAPI } from '../../../../apis/Api';
 
+
 const resizeFile = (file) =>
     new Promise((resolve) => {
         Resizer.imageFileResizer(
@@ -30,11 +31,14 @@ const PosterModify = () => {
     const [posterData, setPosterData] = useState({});
     const [loading, setLoading] = useState(true);
     const { posterId } = useParams();
-    const navigate = useNavigate(); // useHistory 대신 useNavigate 사용
+    const navigate = useNavigate();
+    const [plate, onChangePlate] = useForms();
+    const search = posterId;
 
     const getPosterData = async () => {
         try {
             const resp = await normalAPI.get(`/poster/${posterId}`);
+            //`/poster?search=${search}
             console.log(resp.data);
             setPosterData(resp.data.data);
             setLoading(false);
@@ -69,64 +73,71 @@ const PosterModify = () => {
     };
 
     const onClickUpload = async (e) => {
-        e.preventDefault();
+        if (!window.confirm('정말로 수정하시겠습니까?')) {
+            const supportedFormats = ["image/jpeg", "image/png", "image/svg+xml"];
+            e.preventDefault();
+            if (!file) {
+                alert("파일이 선택되지 않았습니다. 파일을 선택해주세요.");
+                return;
+            }
+            if (!supportedFormats.includes(file.type)) {
+                alert("지원되지 않은 이미지 형식입니다. JPEG, PNG 형식의 이미지를 업로드해주세요.");
+                return;
+            }
 
-        const supportedFormats = ["image/jpeg", "image/png", "image/svg+xml"];
-        if (!file) {
-            alert("파일을 선택해주세요.");
-            return;
-        }
-        if (!supportedFormats.includes(file.type)) {
-            alert("지원되지 않은 이미지 형식입니다. JPEG, PNG 형식의 이미지를 업로드해주세요.");
-            return;
-        }
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('thumbNail', thumbnail);
+            formData.append('year', year);
+            formData.append('designer', designer);
+            formData.append('plate', plate);
 
-        const formData = new FormData();
-        formData.append('image', file);
-        formData.append('thumbNail', thumbnail);
-        formData.append('year', year);
-        formData.append('designer', designer);
+            const accessToken = localStorage.getItem('access');
 
-        const accessToken = localStorage.getItem('access');
-
-        try {
-            // 처음으로 업로드시
-            const res = await normalAPI.put(`/poster/${posterId}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'accessToken': accessToken,
-                },
-            });
-            console.log(res);
-        } catch (error) {
-            // 에러 발생
-            console.error(error);
             try {
-                // 리프레쉬 토큰 포함해서 다시 전송
-                const refreshToken = localStorage.getItem('refresh');
-
-                const res = await normalAPI.put(`/poster/${posterId}`, formData, {
+                // 처음으로 업로드시
+                const res = await normalAPI.put(`/poster?search=${search}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'refreshToken': refreshToken,
+                        'accessToken': accessToken,
+                        'Authorization': `Bearer ${accessToken}`,
                     },
                 });
+                alert("수정에 성공했습니다")
                 console.log(res);
             } catch (error) {
-                // 그래도 안되면 재로그인 요청
-                console.log(error);
-                alert('다시 로그인 해주세요.');
-            }
-        }
-    };
+                // 에러 발생
+                console.error(error);
+                try {
+                    // 리프레쉬 토큰 포함해서 다시 전송
+                    const refreshToken = localStorage.getItem('refresh');
+                    const url = `/poster/${posterId}`
+                    console.log(url);
+                    const res = await normalAPI.put(`/poster?search=${search}`, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'refreshToken': refreshToken,
+                            'Authorization': `Bearer ${res.data.accessToken}`,
+                        },
+                    });
 
+                    alert("수정에 성공했습니다")
+                    console.log(res);
+                } catch (error) {
+                    // 그래도 안되면 재로그인 요청
+                    console.log(error);
+                    alert('다시 로그인 해주세요.');
+                }
+            }
+        };
+    }
     const onClickDelete = async () => {
         const accessToken = localStorage.getItem('access');
         if (!window.confirm('정말로 삭제하시겠습니까?'))
             return;
 
         try {
-            await normalAPI.delete(`/poster/${posterId}`, {
+            await normalAPI.delete(`/poster?search=${search}`, {
                 headers: {
                     'accessToken': accessToken,
                 },
@@ -155,6 +166,10 @@ const PosterModify = () => {
                     <div>
                         <InputTitle>제작자</InputTitle>
                         <Input value={designer} onChange={onChangeDesigner} placeholder={posterData.designer} />
+                    </div>
+                    <div>
+                        <InputTitle>판형</InputTitle>
+                        <Input value={plate} onChange={onChangePlate} placeholder={posterData.plate} />
                     </div>
                 </InputUploads>
                 <Input type='file' accept='image/*' onChange={onFileChange} />

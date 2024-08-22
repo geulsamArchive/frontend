@@ -112,17 +112,49 @@ const BookUpload = () => {
 
 
         const formData = new FormData();
-        formData.append('bookCover', bookCover)
-        formData.append('bookCoverThumbNail', bookCoverThumbnail)
-        formData.append('backCover', backCover);
-        formData.append('backCoverThumbNail', backCoverThumbnail);
-        formData.append('pdf', pdf);
-        formData.append('designer', designer);
-        formData.append("plate", plate);
-        formData.append("pageNumber", pageNumber);
-        formData.append("year", year);
-        formData.append("release", release);
-        formData.append("title", title);
+        if (bookCover !== null) {
+            formData.append('bookCover', bookCover);
+        }
+
+        if (bookCoverThumbnail !== null) {
+            formData.append('bookCoverThumbNail', bookCoverThumbnail);
+        }
+
+        if (backCover !== null) {
+            formData.append('backCover', backCover);
+        }
+
+        if (backCoverThumbnail !== null) {
+            formData.append('backCoverThumbNail', backCoverThumbnail);
+        }
+
+        if (pdf !== null) {
+            formData.append('pdf', pdf);
+        }
+
+        if (designer !== null) {
+            formData.append('designer', designer);
+        }
+
+        if (plate !== null) {
+            formData.append('plate', plate);
+        }
+
+        if (pageNumber !== null) {
+            formData.append('pageNumber', pageNumber);
+        }
+
+        if (year !== null) {
+            formData.append('year', year);
+        }
+
+        if (release !== null) {
+            formData.append('release', release);
+        }
+
+        if (title !== null) {
+            formData.append('title', title);
+        }
 
         // {
         //     "bookCover": "string",
@@ -189,11 +221,15 @@ const BookUpload = () => {
                 </div>
                 <div>
                     <InputTitle>발간일</InputTitle>
-                    <Input value={release} onChange={onChangeRelease} placeholder='예)2024' />
+                    <Input value={release} onChange={onChangeRelease} placeholder='예)0000-00-00' />
                 </div>
                 <div>
                     <InputTitle>디자인</InputTitle>
-                    <Input value={designer} onChange={onChangeDesigner} placeholder='예) 아이묭' />
+                    <Input value={designer} onChange={onChangeDesigner} placeholder='예) 피카소 ' />
+                </div>
+                <div>
+                    <InputTitle>년도</InputTitle>
+                    <Input value={year} onChange={onChangeYear} placeholder='예) 2025 ' />
                 </div>
                 <div>
                     <InputTitle>판형</InputTitle>
@@ -227,7 +263,7 @@ const BookUpload = () => {
                 )}
                 <div>
                     <InputTitle>본문</InputTitle>
-                    <Input type='file' onChange={setPdf} />
+                    <Input type='file' onChange={onPdfChange} />
                 </div>
             </Inputs>
             <RightSubmit>
