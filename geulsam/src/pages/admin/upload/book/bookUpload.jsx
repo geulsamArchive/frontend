@@ -117,7 +117,7 @@ const BookUpload = () => {
         }
 
         if (bookCoverThumbnail !== null) {
-            formData.append('bookCoverThumbNail', bookCoverThumbnail);
+            formData.append('bookCoverThumbnail', bookCoverThumbnail);
         }
 
         if (backCover !== null) {
@@ -125,7 +125,7 @@ const BookUpload = () => {
         }
 
         if (backCoverThumbnail !== null) {
-            formData.append('backCoverThumbNail', backCoverThumbnail);
+            formData.append('backCoverThumbnail', backCoverThumbnail);
         }
 
         if (pdf !== null) {
@@ -262,7 +262,7 @@ const BookUpload = () => {
                     </div>
                 )}
                 <div>
-                    <InputTitle>본문</InputTitle>
+                    <InputTitle>본문(파일명은 영어 혹은 _ 만 가능)</InputTitle>
                     <Input type='file' onChange={onPdfChange} />
                 </div>
             </Inputs>

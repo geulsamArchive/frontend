@@ -98,14 +98,9 @@ const BookUpload = () => {
         }
     };
 
-    const onChangePdf = async (e) => {
-        try {
-            const selectedPdf = e.target.files[0];
-            setPdf(selectedPdf);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    const onChangePdf = (e) => {
+        setPdf(e.target.files[0]);
+    }
 
     const onClickUpload = async (e) => {
         e.preventDefault();
@@ -121,16 +116,49 @@ const BookUpload = () => {
         }
 
         const formData = new FormData();
-        formData.append('bookCover', bookCover);
-        formData.append('bookCoverThumbNail', bookCoverThumbnail);
-        formData.append('backCover', backCover);
-        formData.append('designer', designer);
-        formData.append("plate", plate);
-        formData.append("pageNumber", pageNumber);
-        formData.append("year", year);
-        formData.append("release", release);
-        formData.append("title", title);
+        if (bookCover !== null) {
+            formData.append('bookCover', bookCover);
+        }
 
+        if (bookCoverThumbnail !== null) {
+            formData.append('bookCoverThumbnail', bookCoverThumbnail);
+        }
+
+        if (backCover !== null) {
+            formData.append('backCover', backCover);
+        }
+
+        if (backCoverThumbnail !== null) {
+            formData.append('backCoverThumbnail', backCoverThumbnail);
+        }
+
+        if (pdf !== null) {
+            formData.append('pdf', pdf);
+        }
+
+        if (designer !== null) {
+            formData.append('designer', designer);
+        }
+
+        if (plate !== null) {
+            formData.append('plate', plate);
+        }
+
+        if (pageNumber !== null) {
+            formData.append('pageNumber', pageNumber);
+        }
+
+        if (year !== null) {
+            formData.append('year', year);
+        }
+
+        if (release !== null) {
+            formData.append('release', release);
+        }
+
+        if (title !== null) {
+            formData.append('title', title);
+        }
         const accessToken = localStorage.getItem('access');
         //https://geulsaem.store/book?field=id&search=dssda-sdfasdf-dsafdasf-asdfdsa
         ///book?field=${field}&search=${search}
@@ -173,7 +201,7 @@ const BookUpload = () => {
                 },
             });
             alert('문집이 삭제되었습니다.');
-            navigate('/books'); // 페이지 이동
+            navigate('/book'); // 페이지 이동
         } catch (error) {
             console.error(error);
             alert('문집 삭제에 실패했습니다.');
@@ -199,6 +227,10 @@ const BookUpload = () => {
                     <Input value={designer} onChange={onChangeDesigner} placeholder={bookData.designer} />
                 </div>
                 <div>
+                    <InputTitle>연도</InputTitle>
+                    <Input value={year} onChange={onChangeYear} placeholder={bookData.year} />
+                </div>
+                <div>
                     <InputTitle>판형</InputTitle>
                     <Input value={plate} onChange={onChangePlate} placeholder={bookData.plate} />
                 </div>
@@ -211,7 +243,7 @@ const BookUpload = () => {
                     <p>정상적인 문집 게시를 위해 하단의 업로드 가이드라인을 준수해주세요.</p>
                     <Red><p>게시에 성공할 시 하단에 이미지가 표시됩니다. </p></Red>
                     <br />
-                    <InputTitle>앞표지</InputTitle>
+                    <InputTitle>앞표지(파일명은 영어 혹은 _ 만 가능)</InputTitle>
                     <Input type='file' onChange={onBookCoverChange} />
                 </div>
                 {bookCoverUrl && (
@@ -220,7 +252,7 @@ const BookUpload = () => {
                     </div>)}
                 <div>
                     <br />
-                    <InputTitle>뒷표지</InputTitle>
+                    <InputTitle>뒷표지(파일명은 영어 혹은 _ 만 가능)</InputTitle>
                     <Input type='file' onChange={onBackCoverChange} />
                 </div>
                 {backCoverUrl && (
@@ -229,7 +261,7 @@ const BookUpload = () => {
                     </div>
                 )}
                 <div>
-                    <InputTitle>본문</InputTitle>
+                    <InputTitle>본문(파일명은 영어 혹은 _ 만 가능)</InputTitle>
                     <Input type='file' onChange={onChangePdf} />
                 </div>
             </Inputs>
