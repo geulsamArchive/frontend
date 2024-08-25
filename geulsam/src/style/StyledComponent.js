@@ -417,6 +417,8 @@ width: 90%;
 margin-left: 4%;
 padding-top: 100px;
 background-color: rgba(249, 249, 246, 1);
+box-sizing: border-box;
+
 `
 
 export const BookTitle = styled.div`
@@ -848,3 +850,15 @@ export const FlexCenter = styled.div`
 display: flex;
 align-items: center;
 `
+
+// 문집 등록 페이지 
+export const InputRow = styled.div`
+    display: flex;
+    gap: 20px; // 각 입력 필드 사이의 간격을 설정합니다.;
+`;
+
+export const InputsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`;

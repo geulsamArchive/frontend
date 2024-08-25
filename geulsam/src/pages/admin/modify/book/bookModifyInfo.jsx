@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForms } from '../../../../hooks/useForms';
-import { Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit, Red } from '../../../../style/StyledComponent';
+import { InputsContainer, InputRow, Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit, Red } from '../../../../style/StyledComponent';
 import Resizer from "react-image-file-resizer";
 import { normalAPI } from '../../../../apis/Api';
 
@@ -184,7 +184,8 @@ const BookUpload = () => {
                 console.log(res);
             } catch (error) {
                 console.log(error);
-                alert('다시 로그인 해주세요.');
+                alert('수정에 실패했습니다.');
+                alert('다시 로그인하거나 파일을 확인해주세요.');
             }
         }
     };
@@ -214,30 +215,36 @@ const BookUpload = () => {
                 문집 수정하기
             </BookTitle>
             <Inputs>
-                <div>
-                    <InputTitle>제목</InputTitle>
-                    <Input value={title} onChange={onChangeTitle} placeholder={bookData.title} />
-                </div>
-                <div>
-                    <InputTitle>발간일</InputTitle>
-                    <Input value={release} onChange={onChangeRelease} placeholder={bookData.release} />
-                </div>
-                <div>
-                    <InputTitle>디자인</InputTitle>
-                    <Input value={designer} onChange={onChangeDesigner} placeholder={bookData.designer} />
-                </div>
-                <div>
-                    <InputTitle>연도</InputTitle>
-                    <Input value={year} onChange={onChangeYear} placeholder={bookData.year} />
-                </div>
-                <div>
-                    <InputTitle>판형</InputTitle>
-                    <Input value={plate} onChange={onChangePlate} placeholder={bookData.plate} />
-                </div>
-                <div>
-                    <InputTitle>쪽수</InputTitle>
-                    <Input value={pageNumber} onChange={onChangePageNumber} placeholder={bookData.page} />
-                </div>
+                <InputsContainer>
+                    <InputRow>
+                        <div>
+                            <InputTitle>제목</InputTitle>
+                            <Input value={title} onChange={onChangeTitle} placeholder={bookData.title} />
+                        </div>
+                        <div>
+                            <InputTitle>발간일</InputTitle>
+                            <Input value={release} onChange={onChangeRelease} placeholder={bookData.release} />
+                        </div>
+                        <div>
+                            <InputTitle>디자인</InputTitle>
+                            <Input value={designer} onChange={onChangeDesigner} placeholder={bookData.designer} />
+                        </div>
+                    </InputRow>
+                    <InputRow>
+                        <div>
+                            <InputTitle>연도</InputTitle>
+                            <Input value={year} onChange={onChangeYear} placeholder={bookData.year} />
+                        </div>
+                        <div>
+                            <InputTitle>판형</InputTitle>
+                            <Input value={plate} onChange={onChangePlate} placeholder={bookData.plate} />
+                        </div>
+                        <div>
+                            <InputTitle>쪽수</InputTitle>
+                            <Input value={pageNumber} onChange={onChangePageNumber} placeholder={bookData.page} />
+                        </div>
+                    </InputRow>
+                </InputsContainer>
                 <div>
                     <InputTitle>표지 및 내지 게시</InputTitle>
                     <p>정상적인 문집 게시를 위해 하단의 업로드 가이드라인을 준수해주세요.</p>

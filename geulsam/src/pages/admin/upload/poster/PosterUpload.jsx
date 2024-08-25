@@ -25,6 +25,7 @@ const PosterUpload = () => {
     const [year, onChangeYear] = useForms();
     const [designer, onChangeDesigner] = useForms();
     const [file, setFile] = useState(null);
+    const [plate, onChangePlate] = useForms();
     const [thumbnail, setThumbnail] = useState(null);
     const [thumbnailUrl, setThumbnailUrl] = useState(null);
 
@@ -68,6 +69,7 @@ const PosterUpload = () => {
         formData.append('thumbNail', thumbnail)
         formData.append('year', year);
         formData.append('designer', designer);
+        formData.append('plate', plate);
 
         const accessToken = localStorage.getItem('access')
 
@@ -83,6 +85,7 @@ const PosterUpload = () => {
                 },
             })
             console.log(res)
+            alert('게시에 성공했습니다.')
         } catch (error) {
             // 에러 발생
             console.error(error);
@@ -121,6 +124,10 @@ const PosterUpload = () => {
                     <div>
                         <InputTitle>제작자</InputTitle>
                         <Input value={designer} onChange={onChangeDesigner} placeholder='예) 정성훈' />
+                    </div>
+                    <div>
+                        <InputTitle>판형</InputTitle>
+                        <Input value={plate} onChange={onChangePlate} placeholder='예) B4' />
                     </div>
                 </InputUploads>
                 <Input type='file' accept='image/*' onChange={onFileChange} />

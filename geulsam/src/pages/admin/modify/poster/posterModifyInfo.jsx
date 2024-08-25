@@ -1,26 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForms } from '../../../../hooks/useForms';
-import { Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../../style/StyledComponent';
+import { InputRow, Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../../style/StyledComponent';
 import Resizer from "react-image-file-resizer";
 import { normalAPI } from '../../../../apis/Api';
 
-
-const resizeFile = (file) =>
-    new Promise((resolve) => {
-        Resizer.imageFileResizer(
-            file,
-            700,
-            700,
-            "JPEG",
-            80,
-            0,
-            (uri) => {
-                resolve(uri);
-            },
-            "file"
-        );
-    });
 
 const PosterModify = () => {
     const [year, onChangeYear] = useForms();
@@ -37,7 +21,7 @@ const PosterModify = () => {
 
     const getPosterData = async () => {
         try {
-            const resp = await normalAPI.get(`/poster/${posterId}`);
+            const resp = await normalAPI.get(`/poster?search=${search}`);
             //`/poster?search=${search}
             console.log(resp.data);
             setPosterData(resp.data.data);
@@ -50,6 +34,21 @@ const PosterModify = () => {
     useEffect(() => {
         getPosterData();
     }, []);
+    const resizeFile = (file) =>
+        new Promise((resolve) => {
+            Resizer.imageFileResizer(
+                file,
+                700,
+                700,
+                "JPEG",
+                80,
+                0,
+                (uri) => {
+                    resolve(uri);
+                },
+                "file"
+            );
+        });
 
     const onFileChange = async (e) => {
         try {
@@ -73,11 +72,11 @@ const PosterModify = () => {
     };
 
     const onClickUpload = async (e) => {
+        e.preventDefault();
         if (!window.confirm('정말로 수정하시겠습니까?')) {
             const supportedFormats = ["image/jpeg", "image/png", "image/svg+xml"];
-            e.preventDefault();
             if (!file) {
-                alert("파일이 선택되지 않았습니다. 파일을 선택해주세요.");
+                alert("파일을 선택해주세요.");
                 return;
             }
             if (!supportedFormats.includes(file.type)) {
@@ -100,10 +99,8 @@ const PosterModify = () => {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'accessToken': accessToken,
-                        'Authorization': `Bearer ${accessToken}`,
                     },
                 });
-                alert("수정에 성공했습니다")
                 console.log(res);
             } catch (error) {
                 // 에러 발생
@@ -117,10 +114,8 @@ const PosterModify = () => {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                             'refreshToken': refreshToken,
-                            'Authorization': `Bearer ${res.data.accessToken}`,
                         },
                     });
-
                     alert("수정에 성공했습니다")
                     console.log(res);
                 } catch (error) {
