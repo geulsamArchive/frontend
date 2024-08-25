@@ -19,8 +19,7 @@ const BookUpload = () => {
     const [backCoverThumbnail, setBackCoverThumbnail] = useState();
     const [pdf, setPdf] = useState(null);
     const [year, onChangeYear] = useForms();
-    const { bookId, field, search } = useParams();
-
+    const { bookId, id } = useParams();
     const [bookData, setBooktData] = useState({});
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
@@ -164,7 +163,7 @@ const BookUpload = () => {
         ///book?field=${field}&search=${search}
 
         try {
-            const res = await normalAPI.put(`/book?field=${field}&search=${search}`, formData, {
+            const res = await normalAPI.put(`/book?field=${id}&search=${bookId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'accessToken': accessToken,
@@ -175,7 +174,7 @@ const BookUpload = () => {
             console.error(error);
             try {
                 const refreshToken = localStorage.getItem('refresh');
-                const res = await normalAPI.put(`/book?field=${field}&search=${search}`, formData, {
+                const res = await normalAPI.put(`/book?field=${id}&search=${bookId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'refreshToken': refreshToken,
@@ -196,7 +195,7 @@ const BookUpload = () => {
             return;
 
         try {
-            await normalAPI.delete(`/book?field=${field}&search=${search}`, {
+            await normalAPI.delete(`/book?field=${id}&search=${bookId}`, {
                 headers: {
                     'accessToken': accessToken,
                 },

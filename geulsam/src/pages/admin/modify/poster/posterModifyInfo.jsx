@@ -17,11 +17,10 @@ const PosterModify = () => {
     const { posterId } = useParams();
     const navigate = useNavigate();
     const [plate, onChangePlate] = useForms();
-    const search = posterId;
 
     const getPosterData = async () => {
         try {
-            const resp = await normalAPI.get(`/poster?search=${search}`);
+            const resp = await normalAPI.get(`/poster?search=${posterId}`);
             //`/poster?search=${search}
             console.log(resp.data);
             setPosterData(resp.data.data);
@@ -95,13 +94,14 @@ const PosterModify = () => {
 
             try {
                 // 처음으로 업로드시
-                const res = await normalAPI.put(`/poster?search=${search}`, formData, {
+                const res = await normalAPI.put(`/poster?search=${posterId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'accessToken': accessToken,
                     },
                 });
                 console.log(res);
+                alert('성공했습니다');
             } catch (error) {
                 // 에러 발생
                 console.error(error);
@@ -110,7 +110,7 @@ const PosterModify = () => {
                     const refreshToken = localStorage.getItem('refresh');
                     const url = `/poster/${posterId}`
                     console.log(url);
-                    const res = await normalAPI.put(`/poster?search=${search}`, formData, {
+                    const res = await normalAPI.put(`/poster?search=${posterId}`, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                             'refreshToken': refreshToken,
@@ -132,7 +132,7 @@ const PosterModify = () => {
             return;
 
         try {
-            await normalAPI.delete(`/poster?search=${search}`, {
+            await normalAPI.delete(`/poster?search=${posterId}`, {
                 headers: {
                     'accessToken': accessToken,
                 },
