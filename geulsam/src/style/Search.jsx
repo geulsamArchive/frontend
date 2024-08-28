@@ -27,4 +27,5 @@ height: 55px;
 width: 80dvw;
 font-size: 18px;
 font-family: 'MaruBuri-Regular';
+outline: none;
 `

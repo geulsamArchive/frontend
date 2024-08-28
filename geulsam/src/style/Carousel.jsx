@@ -58,15 +58,17 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-transform: scale(0.9);
+transform: scale(0.7);
 cursor: pointer;
 transition: transform 300ms, box-shadow 300ms;
 filter: blur(5px);  
+z-index: 10;
 
 &.active{
-transform: scale(1);
+transform: scale(0.9);
 filter: none;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+z-index: 1;
 }
 `
 
@@ -76,3 +78,22 @@ export const SliderContainer = styled.div`
     height: auto;
     
 `
+
+export const criticEvent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+`
+
+export const Button = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 14px;
+border-radius: 21px;
+width: 75px;
+height: 25px;
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+`;

@@ -39,7 +39,7 @@ function CenterMode({ data }) {
         centerMode: true,
         infinite: true,
         centerPadding: "50px",
-        slidesToShow: 3,
+        slidesToShow: 4.45,
         slidesToScroll: 1,
         speed: 300,
         arrows: false,
@@ -73,9 +73,7 @@ function CenterMode({ data }) {
                                                         {events.locate}
                                                     </Gray>
                                                 </DisplayNone>
-
                                             </Left>
-
                                             <Right>
                                                 {events.title}
                                                 <DisplayNone past={isPastEvent(events.endTime)}>
@@ -84,7 +82,6 @@ function CenterMode({ data }) {
                                                 </DisplayNone>
                                             </Right>
                                         </SpaceBetween>
-
                                     </Eventlist>
                                 ))}
                             </Contents>

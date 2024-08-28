@@ -98,7 +98,23 @@ display: flex;
 align-items: center;
 justify-content: center;
 padding: 5px;
-padding-left: 20px;
-padding-right: 20px;
-    
+font-size: 22px;
+`
+
+export const RecentWorkLink = styled(Link)`
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    padding-right:30px;
+    padding-left: 30px;
+    align-items: center;
+    width: 180px;
+    height: 63px;
+    border-radius: 50px;
+    border: 2px solid black;
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 50px;
 `

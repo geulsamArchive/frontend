@@ -103,6 +103,8 @@ const PosterUpload = () => {
             } catch (err) {
                 //그래도 안되면 재로그인 요청
                 console.log(err)
+                localStorage.removeItem('access')
+                localStorage.removeItem('refresh')
                 alert('다시 로그인 해주세요.')
             }
         }

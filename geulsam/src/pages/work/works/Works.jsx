@@ -11,6 +11,7 @@ const Works = () => {
     const [totalPage, setTotalPage] = useState(1)
     const [workList, setWorkList] = useState([])
     const [keyword, setKeyword] = useState('')
+    const [genre, setGenre] = useState('');
 
     const translateType = (type) => {
         switch (type) {
@@ -27,7 +28,13 @@ const Works = () => {
 
     const getWorkData = async () => {
         try {
-            const response = await normalAPI.get(`/content?page=${page}&keyword=${keyword}`)
+            let url = `/content?page=${page}&genre=${genre}`;
+
+            // keyword가 존재하면 URL에 추가
+            if (keyword) {
+                url += `&keyword=${keyword}`;
+            }
+            const response = await normalAPI.get(url)
             console.log(response)
 
             const updatedWorkList = response.data.data.content.map(work => ({
@@ -47,12 +54,17 @@ const Works = () => {
     useEffect(() => {
         getWorkData()
         console.log(workList)
-    }, [page, keyword])
+    }, [page, keyword, genre])
 
     const handleSearch = (newKeyword) => {
         setKeyword(newKeyword);
         setPage(1); // 검색 시 페이지를 1로 초기화
     };
+
+    const handleGenreClick = (genre) => {
+        setGenre(genre)
+        setPage(1)
+    }
 
     return (
         <div>
@@ -101,7 +113,10 @@ const Works = () => {
                     <WorkButtons>
                         <br />
                         <br />
-                        <CopyURL />
+                        <button onClick={() => handleGenreClick('')}>전체</button>
+                        <button onClick={() => handleGenreClick('NOVEL')}>소설</button>
+                        <button onClick={() => handleGenreClick('POEM')}>시</button>
+                        <button onClick={() => handleGenreClick('ESSAY')}>에세이</button>
                     </WorkButtons>
                 </BookInfoAndButton>
             </WorkInfoContainer >

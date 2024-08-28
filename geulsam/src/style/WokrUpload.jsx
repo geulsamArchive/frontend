@@ -72,14 +72,21 @@ font-size: 14px;
 line-height: 200%;
 resize: none;
 outline: none;
-overflow: hidden;
+height: 100px;
+overflow: visible;
+&::-webkit-scrollbar{
+    display: none;
+}
+&::-webkit-scrollbar-thumb{
+    display: none;
+}
 `
 
 export const EditorContainer = styled.div`
      width: 80%;
     background-color: white;
     border-radius: 11px;
-    height: 650px;
+    height: 850px;
     display: flex;
     justify-content: center;
     align-items: center;
