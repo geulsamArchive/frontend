@@ -862,3 +862,10 @@ export const InputsContainer = styled.div`
     flex-direction: column;
     gap: 20px;
 `;
+
+// 회원가입 에러 메시지
+export const ErrorMessage = styled.p`
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+`;

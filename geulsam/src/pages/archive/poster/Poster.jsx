@@ -24,8 +24,8 @@ const Poster = () => {
             setPosterList(res.data.data.content)
             setPageTotal(res.data.data.pageTotal)
             setLoading(false)
-        } catch (err) {
-            console.log('api fetching failed', err)
+        } catch (error) {
+            console.log('api fetching failed', error)
         }
     }
 

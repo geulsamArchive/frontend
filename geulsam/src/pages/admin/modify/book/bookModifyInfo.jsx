@@ -170,6 +170,9 @@ const BookUpload = () => {
                 },
             });
             console.log(res);
+            if (res.status == 200) {
+                alert('문집 수정에 성공했습니다.');
+            }
         } catch (error) {
             console.error(error);
             try {

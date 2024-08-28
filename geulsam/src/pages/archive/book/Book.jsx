@@ -24,8 +24,8 @@ const Book = () => {
             setBookList(resp.data.data.content);
             setTotalPage(resp.data.data.pageTotal)
             setLoading(false)
-        } catch (err) {
-            console.log('api fetching failed', err)
+        } catch (error) {
+            console.log('api fetching failed', error)
         }
     }
 

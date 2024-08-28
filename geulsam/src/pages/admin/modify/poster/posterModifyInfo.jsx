@@ -94,6 +94,7 @@ const PosterModify = () => {
 
             try {
                 // 처음으로 업로드시
+                //https://geulsaem.store/poster?search=aaa-bbb-ccc-ddd
                 const res = await normalAPI.put(`/poster?search=${posterId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
@@ -101,11 +102,20 @@ const PosterModify = () => {
                     },
                 });
                 console.log(res);
-                alert('성공했습니다');
+                if (res.status == 200) {
+                    alert('성공했습니다');
+                }
+                else {
+                    console.log(res.status);
+                }
             } catch (error) {
                 // 에러 발생
+                console.log('첫번째 catch 블럭');
                 console.error(error);
+                console.log(error);
                 try {
+                    console.error(error);
+                    console.log(error);
                     // 리프레쉬 토큰 포함해서 다시 전송
                     const refreshToken = localStorage.getItem('refresh');
                     const url = `/poster/${posterId}`
@@ -120,8 +130,9 @@ const PosterModify = () => {
                     console.log(res);
                 } catch (error) {
                     // 그래도 안되면 재로그인 요청
+                    console.log('두번째 catch 블럭');
                     console.log(error);
-                    alert('다시 로그인 해주세요.');
+                    alert('에러가 발생했습니다. 다시 로그인 해주세요.');
                 }
             }
         };
