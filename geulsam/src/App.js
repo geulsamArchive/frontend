@@ -20,6 +20,7 @@ import BookModify from './pages/admin/modify/book/bookModify';
 import BookModifyInfo from './pages/admin/modify/book/bookModifyInfo'
 import PosterModifyInfo from './pages/admin/modify/poster/posterModifyInfo'
 import NotFound404 from './components/NotFound/404';
+import Mypage from './pages/user/Mypage';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           </Route>
           <Route path='/work/:workId' element={<WorkInfo />} />
           <Route path='/archive/book/:bookId' element={<BookInfo />} />
+          <Route path='/user/mypage' element={<Mypage />} />
           <Route path='*' element={<NotFound404 />} />
         </Route>
         <Route element={<LoginLayout />}>

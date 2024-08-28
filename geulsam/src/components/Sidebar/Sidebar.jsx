@@ -35,7 +35,7 @@ const Sidebar = () => {
                         </SideLink>
                     </SideBox>
                     <SideBox>
-                        <SideLink to=''>
+                        <SideLink to='/user/mypage'>
                             마이페이지
                         </SideLink>
                     </SideBox>
