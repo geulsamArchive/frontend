@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+
+export const Close = styled.div`
+    position: absolute;
+    top:2%;
+    right:4%;
+    cursor: pointer;
+`
+
 export const Button = styled.button`
 background-color: inherit;
 border: none;
