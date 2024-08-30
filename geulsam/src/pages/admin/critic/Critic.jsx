@@ -124,6 +124,63 @@ const AdminCritic = () => {
         }
     }
 
+    const handleDelete = async (criticismAuthorId) => {
+        const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
+
+        if (confirmDelete) {
+
+
+            const accessToken = localStorage.getItem('access');
+            const refreshToken = localStorage.getItem('refresh');
+
+            try {
+                let response = await normalAPI.delete(
+                    `/criticismAuthor?search=${criticismAuthorId}`,
+                    {
+                        headers: {
+                            'accessToken': accessToken
+                        }
+                    }
+                );
+                console.log(response)
+                alert('삭제가 완료되었습니다!');
+                await getCriticData()
+            } catch (error) {
+                if (error.response && error.response.status === 403) {
+                    console.log('토큰 재전송');
+
+                    // Access Token이 만료되었으므로, Refresh Token으로 새로운 Access Token을 발급받는다.
+                    try {
+                        const tokenResponse = await normalAPI.delete(
+                            `/criticismAuthor?search=${criticismAuthorId}`,
+                            {
+                                headers: {
+                                    'refreshToken': refreshToken,
+                                }
+                            }
+                        );
+                        console.log(tokenResponse);
+                        if (tokenResponse.status === 200) {
+                            const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                            localStorage.setItem('access', accessToken)
+                            const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '')
+                            localStorage.setItem('refresh', refreshToken)
+                            alert('삭제가 완료되었습니다!');
+                            await getCriticData()
+                        }
+                    } catch (err) {
+                        console.error('Refresh Token Error:', err);
+                        alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    }
+                } else {
+                    console.error('Error:', error);
+                    alert('신청 중 문제가 발생했습니다.');
+                }
+            }
+        }
+    }
+
+
     useEffect(() => {
         getCriticData()
     }, [])
@@ -160,7 +217,7 @@ const AdminCritic = () => {
                                                                 {author.condition !== "FIXED" && (
                                                                     <button onClick={() => handleApply(author.criticismAuthorId)}>승인하기</button>
                                                                 )}
-                                                                <button>삭제하기</button>
+                                                                <button onClick={() => handleDelete(author.criticismAuthorId)}>삭제하기</button>
 
                                                             </div>
                                                         </>

@@ -13,6 +13,7 @@ const Sidebar = () => {
         window.localStorage.removeItem('access');
         window.localStorage.removeItem('refresh');
         setIsAuthenticated(false);
+        window.location.reload()
     };
 
     const onClickLogin = () => {

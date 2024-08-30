@@ -23,6 +23,8 @@ import NotFound404 from './components/NotFound/404';
 import Mypage from './pages/user/Mypage';
 import AdminCritic from './pages/admin/critic/Critic';
 import AdminCalendar from './pages/admin/calendar/Calendar';
+import Admin from './pages/admin/Admin';
+import AdminLinks from './pages/admin/AdminLinks';
 
 
 function App() {
@@ -32,9 +34,10 @@ function App() {
       <Routes>
         <Route path='/test' element={<Test />} />
         <Route element={<NavLayout />}>
-          <Route path='/admin'>
+          <Route path='/admin' element={<Admin />}>
             <Route path='critic' element={<AdminCritic />} />
             <Route path='calendar' element={<AdminCalendar />} />
+            <Route path='manage' element={<AdminLinks />} />
           </Route>
           <Route path='/book/modify' element={<BookModify />} />
           <Route path='/book/modify/:bookId' element={<BookModifyInfo />} />
