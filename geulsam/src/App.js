@@ -21,7 +21,7 @@ import BookModifyInfo from './pages/admin/modify/book/bookModifyInfo'
 import PosterModifyInfo from './pages/admin/modify/poster/posterModifyInfo'
 import NotFound404 from './components/NotFound/404';
 import Mypage from './pages/user/Mypage';
-
+import MyInfoModify from './pages/user/MyInfoModify';
 
 function App() {
 
@@ -49,6 +49,7 @@ function App() {
           <Route path='/work/:workId' element={<WorkInfo />} />
           <Route path='/archive/book/:bookId' element={<BookInfo />} />
           <Route path='/user/mypage' element={<Mypage />} />
+          <Route path='user/myInfoModify' element={<MyInfoModify />} />
           <Route path='*' element={<NotFound404 />} />
         </Route>
         <Route element={<LoginLayout />}>

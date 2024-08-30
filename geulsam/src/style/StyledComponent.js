@@ -869,3 +869,18 @@ export const ErrorMessage = styled.p`
     font-size: 12px;
     margin-top: 5px;
 `;
+
+// 학번 중복 확인용 작은 버튼
+export const ButtonSmall = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 10px;
+border-radius: 30px;
+width:50px;
+height: 20px;
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+`;

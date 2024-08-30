@@ -12,7 +12,7 @@ const Logins = () => {
     const [pwError, setPwError] = useState('');
 
     const idRegex = /^[a-zA-Z]\d{6}$/;
-    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$/;
     //8자리 이상 문자 알파벳, 숫자 하나씩 포함.
 
     const redirect = useNavigate();

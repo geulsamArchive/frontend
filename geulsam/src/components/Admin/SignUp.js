@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useForms } from '../../hooks/useForms';
-import { Wrapper, Form, Input, Inputs, Button, InputTitle, FormTop, Silver, BackButton, LeftAlign, WhiteButtons, ErrorMessage } from '../../style/StyledComponent';
+import axios from 'axios';
+import { ButtonSmall, Wrapper, Form, Input, Inputs, Button, InputTitle, FormTop, Silver, BackButton, LeftAlign, WhiteButtons, ErrorMessage } from '../../style/StyledComponent';
 import Left from '../../assets/images/grayLeft.png'
+import { normalAPI } from '../../apis/Api';
 
 const SignUp = ({ prevStep, nextStep }) => {
     const [name, onChangeName] = useForms();
@@ -13,6 +15,8 @@ const SignUp = ({ prevStep, nextStep }) => {
     const [schoolNumError, setSchoolNumError] = useState('');
     const [birthDayError, setBirthDayError] = useState('');
     const [joinedAtError, setJoinedAtError] = useState('');
+
+    const [isSchoolNumChecked, setIsSchoolNumChecked] = useState('');
 
     //정규표현식
     const nameRegax = /^[가-힣]{1,6}$/;
@@ -32,14 +36,21 @@ const SignUp = ({ prevStep, nextStep }) => {
             setNameError('');
         }
 
-        //학번 유효성 검사
+        //학번 유효성 검사 및 중복 확인 여부
         if (!schoolNumRegax.test(schoolNum)) {
             setSchoolNumError('올바른 학번 형식을 입력하세요. (예: A111111)');
             valid = false;
         }
+        else if (!isSchoolNumChecked) {
+            setSchoolNumError('학번 중복 검사를 해주세요.');
+        }
         else {
             setSchoolNumError('');
         }
+
+
+
+
 
         //생년 월일 유효성 검사
         // if (!birthDayRegax.test(birthDay)) {
@@ -63,6 +74,25 @@ const SignUp = ({ prevStep, nextStep }) => {
         }
     };
 
+    const checkSchoolNum = async () => {
+        try {
+            const resp = await normalAPI.post(`/user/checkSchoolNum`, { schoolNum });
+            if (resp.data.exists) {
+                setSchoolNumError('이미 존재하는 학번입니다.');
+                setIsSchoolNumChecked(false);
+            } else {
+                setSchoolNumError('');
+                setIsSchoolNumChecked(true);
+                alert('사용 가능한 학번입니다.');
+            }
+
+        } catch (error) {
+            console.error('학번 중복 확인 중 오류가 발생했습니다.', error);
+            setSchoolNumError('학번 중복 확인에 실패했습니다.');
+            setIsSchoolNumChecked(false);
+        }
+
+    }
     return (
         <Wrapper>
             <Form>
@@ -83,6 +113,7 @@ const SignUp = ({ prevStep, nextStep }) => {
                     </InputTitle>
                     <Input placeholder='예) C012345' type='text' value={schoolNum} onChange={onChangeSchoolNum} />
                     {schoolNumError && <ErrorMessage>{schoolNumError}</ErrorMessage>}
+                    <ButtonSmall type='button' onClick={checkSchoolNum}>중복확인</ButtonSmall>
                     <InputTitle>
                         생년월일
                     </InputTitle>

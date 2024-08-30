@@ -104,60 +104,60 @@ const BookUpload = () => {
     const onClickUpload = async (e) => {
         e.preventDefault();
 
-        const supportedFormats = ["image/jpeg", "image/png", "image/svg+xml"];
-        if (!bookCover || !backCover) {
-            alert("파일을 선택해주세요.");
-            return;
-        }
-        if (!supportedFormats.includes(bookCover.type) || !supportedFormats.includes(backCover.type)) {
-            alert("지원되지 않은 이미지 형식입니다. JPEG, PNG형식의 이미지를 업로드해주세요.");
-            return;
-        }
+        // const supportedFormats = ["image/jpeg", "image/png", "image/svg+xml"];
+        // if (!bookCover || !backCover) {
+        //     alert("파일을 선택해주세요.");
+        //     return;
+        // }
+        // if (!supportedFormats.includes(bookCover.type) || !supportedFormats.includes(backCover.type)) {
+        //     alert("지원되지 않은 이미지 형식입니다. JPEG, PNG형식의 이미지를 업로드해주세요.");
+        //     return;
+        // }
 
         const formData = new FormData();
-        if (bookCover !== null) {
-            formData.append('bookCover', bookCover);
-        }
+        // if (bookCover !== null) {
+        formData.append('bookCover', bookCover);
+        // }
 
-        if (bookCoverThumbnail !== null) {
-            formData.append('bookCoverThumbnail', bookCoverThumbnail);
-        }
+        // if (bookCoverThumbnail !== null) {
+        formData.append('bookCoverThumbnail', bookCoverThumbnail);
+        // }
 
-        if (backCover !== null) {
-            formData.append('backCover', backCover);
-        }
+        // if (backCover !== null) {
+        formData.append('backCover', backCover);
+        // }
 
-        if (backCoverThumbnail !== null) {
-            formData.append('backCoverThumbnail', backCoverThumbnail);
-        }
+        // if (backCoverThumbnail !== null) {
+        formData.append('backCoverThumbnail', backCoverThumbnail);
+        // }
 
-        if (pdf !== null) {
-            formData.append('pdf', pdf);
-        }
+        // if (pdf !== null) {
+        formData.append('pdf', pdf);
+        // }
 
-        if (designer !== null) {
-            formData.append('designer', designer);
-        }
+        // if (designer !== null) {
+        formData.append('designer', designer);
+        // }
 
-        if (plate !== null) {
-            formData.append('plate', plate);
-        }
+        // if (plate !== null) {
+        formData.append('plate', plate);
+        // }
 
-        if (pageNumber !== null) {
-            formData.append('pageNumber', pageNumber);
-        }
+        // if (pageNumber !== null) {
+        formData.append('pageNumber', pageNumber);
+        // }
 
-        if (year !== null) {
-            formData.append('year', year);
-        }
+        // if (year !== null) {
+        formData.append('year', year);
+        // }
 
-        if (release !== null) {
-            formData.append('release', release);
-        }
+        // if (release !== null) {
+        formData.append('release', release);
+        // }
 
-        if (title !== null) {
-            formData.append('title', title);
-        }
+        // if (title !== null) {
+        formData.append('title', title);
+        // }
         const accessToken = localStorage.getItem('access');
         //https://geulsaem.store/book?field=id&search=dssda-sdfasdf-dsafdasf-asdfdsa
         ///book?field=${field}&search=${search}

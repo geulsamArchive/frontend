@@ -10,7 +10,7 @@ const PosterModify = () => {
     const [year, onChangeYear] = useForms();
     const [designer, onChangeDesigner] = useForms();
     const [file, setFile] = useState(null);
-    const [thumbnail, setThumbnail] = useState(null);
+    const [thumbNail, setThumbnail] = useState(null);
     const [thumbnailUrl, setThumbnailUrl] = useState(null);
     const [posterData, setPosterData] = useState({});
     const [loading, setLoading] = useState(true);
@@ -72,28 +72,36 @@ const PosterModify = () => {
 
     const onClickUpload = async (e) => {
         e.preventDefault();
-        if (!window.confirm('정말로 수정하시겠습니까?')) {
-            const supportedFormats = ["image/jpeg", "image/png", "image/svg+xml"];
-            if (!file) {
-                alert("파일을 선택해주세요.");
-                return;
-            }
-            if (!supportedFormats.includes(file.type)) {
-                alert("지원되지 않은 이미지 형식입니다. JPEG, PNG 형식의 이미지를 업로드해주세요.");
-                return;
-            }
+        if (window.confirm('정말로 수정하시겠습니까?')) {
+            console.log(posterId);
+            // const supportedFormats = ["image/jpeg", "image/png", "image/svg+xml"];
+            // if (!file) {
+            //     alert("파일을 선택해주세요.");
+            //     return;
+            // }
+            // if (!supportedFormats.includes(file.type)) {
+            //     alert("지원되지 않은 이미지 형식입니다. JPEG, PNG 형식의 이미지를 업로드해주세요.");
+            //     return;
+            // }
 
             const formData = new FormData();
             formData.append('image', file);
-            formData.append('thumbNail', thumbnail);
+            formData.append('thumbNail', thumbNail);
             formData.append('year', year);
             formData.append('designer', designer);
             formData.append('plate', plate);
 
-            const accessToken = localStorage.getItem('access');
+            // "image": "string",
+            // "thumbNail": "string",
+            // "year": 2024,
+            // "designer": "김철수",
+            // "plate": "A4"
 
+            const accessToken = localStorage.getItem('access');
             try {
-                // 처음으로 업로드시
+                console.log(posterId);
+
+                // 수정하여 업로드시
                 //https://geulsaem.store/poster?search=aaa-bbb-ccc-ddd
                 const res = await normalAPI.put(`/poster?search=${posterId}`, formData, {
                     headers: {
@@ -102,16 +110,16 @@ const PosterModify = () => {
                     },
                 });
                 console.log(res);
-                if (res.status == 200) {
-                    alert('성공했습니다');
+                if (res.data.status == 200) {
+                    alert('포스터 수정에 성공했습니다');
                 }
                 else {
-                    console.log(res.status);
+                    console.log(res.data.status);
                 }
             } catch (error) {
                 // 에러 발생
                 console.log('첫번째 catch 블럭');
-                console.error(error);
+                console.error('API Error:', error.response ? error.response.data : error.message);
                 console.log(error);
                 try {
                     console.error(error);
@@ -120,13 +128,13 @@ const PosterModify = () => {
                     const refreshToken = localStorage.getItem('refresh');
                     const url = `/poster/${posterId}`
                     console.log(url);
+                    console.log(posterId);
                     const res = await normalAPI.put(`/poster?search=${posterId}`, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                             'refreshToken': refreshToken,
                         },
                     });
-                    alert("수정에 성공했습니다")
                     console.log(res);
                 } catch (error) {
                     // 그래도 안되면 재로그인 요청
