@@ -18,7 +18,7 @@ const Works = () => {
             case 'NOVEL':
                 return '소설';
             case 'ESSAY':
-                return '에세이';
+                return '수필';
             case 'POEM':
                 return '시';
             default:
@@ -116,7 +116,7 @@ const Works = () => {
                         <button onClick={() => handleGenreClick('')}>전체</button>
                         <button onClick={() => handleGenreClick('NOVEL')}>소설</button>
                         <button onClick={() => handleGenreClick('POEM')}>시</button>
-                        <button onClick={() => handleGenreClick('ESSAY')}>에세이</button>
+                        <button onClick={() => handleGenreClick('ESSAY')}>수필</button>
                     </WorkButtons>
                 </BookInfoAndButton>
             </WorkInfoContainer >

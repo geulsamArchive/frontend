@@ -17,7 +17,7 @@ const WorkInfo = () => {
             case 'NOVEL':
                 return '소설';
             case 'ESSAY':
-                return '에세이';
+                return '수필';
             case 'POEM':
                 return '시';
             default:

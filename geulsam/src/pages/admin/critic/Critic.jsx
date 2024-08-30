@@ -17,6 +17,31 @@ const AdminCritic = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedOrder, setSelectedOrder] = useState(0);
 
+    const translateType = (type) => {
+        switch (type) {
+            case 'NOVEL':
+                return '소설';
+            case 'ESSAY':
+                return '수필';
+            case 'POEM':
+                return '시';
+            default:
+                return type;
+        }
+    };
+
+
+    const translateCondition = (type) => {
+        switch (type) {
+            case 'FIXED':
+                return '승인';
+            case 'UNFIXED':
+                return '미승인';
+            default:
+                return type;
+        }
+    };
+
     const settings = {
         className: "center",
         centerMode: true,
@@ -212,8 +237,8 @@ const AdminCritic = () => {
                                                         <>
                                                             <div>
                                                                 {author.userName}
-                                                                {author.genre}
-                                                                {author.condition}
+                                                                {translateType(author.genre)}
+                                                                {translateCondition(author.condition)}
                                                                 {author.condition !== "FIXED" && (
                                                                     <button onClick={() => handleApply(author.criticismAuthorId)}>승인하기</button>
                                                                 )}
