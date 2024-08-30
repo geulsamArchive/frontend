@@ -14,6 +14,24 @@ const UploadWork = () => {
     const [htmlContent, setHtmlContent] = useState(''); // CKEditor의 HTML 내용을 저장할 상태
     const inputRef = useRef(null);
 
+    const handleEditorChange = (data) => {
+        // HTML 문자열에 <meta charset="UTF-8"> 추가하기
+        const htmlContentWithMeta = `
+            <!DOCTYPE html>
+            <html lang="ko">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Document</title>
+            </head>
+            <body>
+                ${data}
+            </body>
+            </html>
+        `;
+        setHtmlContent(htmlContentWithMeta);
+    };
+
     const handleSentenceContainerClick = () => {
         if (inputRef.current) {
             inputRef.current.focus();
@@ -42,11 +60,18 @@ const UploadWork = () => {
             return;
         }
 
-        // HTML 문자열을 Blob 객체로 변환
-        const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
+        const htmlBlob = new Blob([new TextEncoder().encode(htmlContent)], { type: 'text/html; charset=UTF-8' });
 
         // Blob 객체를 File 객체로 변환
-        const htmlFile = new File([htmlBlob], 'content.html', { type: 'text/html' });
+        const htmlFile = new File([htmlBlob], 'content.html', { type: 'text/html; charset=UTF-8' });
+
+        const url = URL.createObjectURL(htmlFile);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'content.html';
+        document.body.appendChild(a);
+        a.click();
+        URL.revokeObjectURL(url);
 
         const formData = new FormData();
         formData.append('name', title);
@@ -113,7 +138,7 @@ const UploadWork = () => {
                     />
                 </SentenceContainer>
                 <EditorContainer>
-                    <Editor onChange={setHtmlContent} /> {/* Editor의 onChange 핸들러에 상태 업데이트 함수 연결 */}
+                    <Editor onChange={handleEditorChange} /> {/* Editor의 onChange 핸들러에 상태 업데이트 함수 연결 */}
                 </EditorContainer>
                 <Button onClick={handleSubmit}>게시하기</Button>
             </Container>

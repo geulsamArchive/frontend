@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -39,3 +40,7 @@ color: rgba(249, 249, 246, 1);
 background-color: 'rgba(87, 86, 85, 1)';
 cursor: pointer;
 `;
+
+export const MainLink = styled(Link)`
+    
+`

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Calendars, CalendarTitle } from '../../../style/StyledComponent';
+import { Calendars, CalendarTitle, Centering } from '../../../style/StyledComponent';
 import CenterMode from '../../../components/Carousel/Slides';
 import { normalAPI } from '../../../apis/Api';
 
@@ -29,7 +29,9 @@ const Calendar = () => {
             <CalendarTitle>
                 금학기 활동 일정
             </CalendarTitle>
-            <CenterMode data={calendarData} />
+            <Centering>
+                <CenterMode data={calendarData} />
+            </Centering>
         </Calendars>
     );
 };

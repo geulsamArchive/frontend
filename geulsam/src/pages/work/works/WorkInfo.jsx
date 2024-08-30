@@ -6,6 +6,7 @@ import PDFDownload from '../../../components/Download/PDFDownload';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import { WorkButtons, WorkLink, WorkReaderLink, WorkSentence, WorkSentenceContainer } from '../../../style/Works';
 import Comments from '../../../components/Comment/Comments';
+import NovelViewer from '../viewer/NovelViewer';
 
 const WorkInfo = () => {
     const [workData, setWorkData] = useState({})
@@ -105,6 +106,7 @@ const WorkInfo = () => {
                 </BookInfoAndButton>
             </BookInfoContainer>
             <Comments />
+            {/* <NovelViewer novelHTML={workData.html} title={workData.title} /> */}
         </>
     );
 };

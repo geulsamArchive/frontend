@@ -3,7 +3,7 @@ import { BookButtons, BookInfoAndButton, BookInfoContainer, BookInfoContents, Bo
 import { normalAPI } from '../../../apis/Api';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import Pagination from '../../../components/Paging/Pagination';
-import { WorkAwards, WorkButtons, WorkInfo, WorkInfoContainer, WorkLink, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
+import { WorkAwards, WorkButtons, WorkInfo, WorkInfoContainer, WorkLink, WorkTitle, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
 import SearchWork from '../../../components/Search/SearchWork';
 
 const Works = () => {
@@ -84,9 +84,9 @@ const Works = () => {
                                                 <WorkType>
                                                     {work.type}
                                                 </WorkType>
-                                                <div>
+                                                <WorkTitle>
                                                     {work.title}
-                                                </div>
+                                                </WorkTitle>
                                             </WorkTitleType>
 
                                             <div>

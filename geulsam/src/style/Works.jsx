@@ -34,8 +34,14 @@ export const WorkTitleType = styled.div`
     text-align: left;
 `
 export const WorkType = styled.div`
-    width: 100px;
+    width: 150px;
     color: rgba(171, 170, 170, 1);
+    margin-left: 10px;
+
+`
+export const WorkTitle = styled.div`
+    margin-left: 30px;
+    width: 650px;
 `
 
 export const WorkInfoContainer = styled.div`
@@ -46,7 +52,7 @@ padding-top: 20px;
 background-color: rgba(249, 249, 246, 1);
 `
 export const WorkButtons = styled.div`
- height: 100dvh;
+ height: 75dvh;
 width: auto;
 border-left: 1px solid black;   
 `
