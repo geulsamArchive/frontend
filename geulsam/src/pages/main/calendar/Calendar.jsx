@@ -6,12 +6,12 @@ import { normalAPI } from '../../../apis/Api';
 
 
 const Calendar = () => {
-
+    const [year, setYear] = useState(2024)
     const [calendarData, setCalendarData] = useState([])
 
     const getCalendarData = async () => {
         try {
-            const res = await normalAPI.get('/calendar?field=start&search=2024')
+            const res = await normalAPI.get(`/calendar?field=start&search=${year}`)
             console.log(res)
             setCalendarData(res.data.data)
         } catch (err) {
@@ -27,7 +27,7 @@ const Calendar = () => {
     return (
         <Calendars>
             <CalendarTitle>
-                금학기 활동 일정
+                {year}년 활동 일정
             </CalendarTitle>
             <Centering>
                 <CenterMode data={calendarData} />

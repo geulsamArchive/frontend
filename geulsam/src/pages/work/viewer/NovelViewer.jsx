@@ -53,6 +53,7 @@ const NovelViewer = ({ novelHTML, title, closeModal }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+
     useEffect(() => {
         setInputValue((currentPage + 1).toString());
     }, [currentPage]);

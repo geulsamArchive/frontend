@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CalendarTitle } from '../../style/StyledComponent';
+import { CalendarTitle, Centering } from '../../style/StyledComponent';
 import { CriticContainer } from '../../style/Critic';
 import { normalAPI } from '../../apis/Api';
 import CriticSlide from '../../components/Carousel/CriticSlide';
@@ -31,7 +31,9 @@ const Critic = () => {
             <CalendarTitle>
                 금학기 합평 신청 및 승인 확인
             </CalendarTitle>
-            <CriticSlide criticData={criticData} year={year} onDataUpdate={handleDataUpdate} />
+            <Centering>
+                <CriticSlide criticData={criticData} year={year} onDataUpdate={handleDataUpdate} />
+            </Centering>
         </CriticContainer>
     );
 };

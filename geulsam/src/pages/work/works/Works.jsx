@@ -3,7 +3,7 @@ import { BookButtons, BookInfoAndButton, BookInfoContainer, BookInfoContents, Bo
 import { normalAPI } from '../../../apis/Api';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import Pagination from '../../../components/Paging/Pagination';
-import { WorkAwards, WorkButtons, WorkInfo, WorkInfoContainer, WorkLink, WorkTitle, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
+import { GenreButton, Space, WorkAwards, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoContainer, WorkInfoRight, WorkLink, WorkTitle, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
 import SearchWork from '../../../components/Search/SearchWork';
 
 const Works = () => {
@@ -88,22 +88,18 @@ const Works = () => {
                                                     {work.title}
                                                 </WorkTitle>
                                             </WorkTitleType>
-
-                                            <div>
-                                                {work.awards && work.awards.length > 0 && (
-                                                    <WorkAwards>
-                                                        {work.awards.join(', ')}
-                                                    </WorkAwards>
-                                                )}
-                                                {work.author}
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                {work.createdAt}
-                                                &nbsp;
-                                                &nbsp;
-                                                &nbsp;
-                                            </div>
+                                            <WorkInfoRight>
+                                                <WorkCreatedAt>
+                                                    {work.awards && work.awards.length > 0 && (
+                                                        <WorkAwards>
+                                                            {work.awards.join(', ')}
+                                                        </WorkAwards>
+                                                    )}
+                                                    {work.author}
+                                                    <Space />
+                                                    {work.createdAt}
+                                                </WorkCreatedAt>
+                                            </WorkInfoRight>
                                         </WorkInfo>
                                     </WorkLink>
                                 </div>
@@ -111,12 +107,10 @@ const Works = () => {
                         )}
                     </BookInfoContents>
                     <WorkButtons>
-                        <br />
-                        <br />
-                        <button onClick={() => handleGenreClick('')}>전체</button>
-                        <button onClick={() => handleGenreClick('NOVEL')}>소설</button>
-                        <button onClick={() => handleGenreClick('POEM')}>시</button>
-                        <button onClick={() => handleGenreClick('ESSAY')}>수필</button>
+                        <GenreButton disabled={genre === ''} onClick={() => handleGenreClick('')}>전체</GenreButton>
+                        <GenreButton disabled={genre === 'NOVEL'} onClick={() => handleGenreClick('NOVEL')}>소설</GenreButton>
+                        <GenreButton disabled={genre === 'ESSAY'} onClick={() => handleGenreClick('ESSAY')}>수필</GenreButton>
+                        <GenreButton disabled={genre === 'POEM'} onClick={() => handleGenreClick('POEM')}>시</GenreButton>
                     </WorkButtons>
                 </BookInfoAndButton>
             </WorkInfoContainer >

@@ -241,6 +241,12 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 font-size: 20px;
+color: rgba(87, 86, 85, 1)  ;
+a{
+  text-decoration: none;
+color: rgba(87, 86, 85, 1)  ;
+  margin-right:45px;
+}
 `;
 
 export const Left = styled.div`
@@ -261,8 +267,8 @@ position: fixed;
 right: 0px;
 bottom: 10%;
 text-align:right;
-z-index: 1;
 `;
+
 export const SideBox = styled.div`
 margin-bottom: 44px;
 `
@@ -345,7 +351,8 @@ text-shadow: 0 4px 4px black;
 export const Recents = styled.div`
 display: flex;
 flex-wrap: wrap;
-margin-left: 72px;
+width: 1300px;
+margin-left: 25px;
 `
 
 
@@ -398,6 +405,7 @@ cursor: pointer;
   opacity: 1;
 }
 `
+
 
 
 //아카이브 상단 버튼

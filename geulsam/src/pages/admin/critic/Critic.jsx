@@ -4,6 +4,7 @@ import { normalAPI } from '../../../apis/Api';
 import { Content, CriticContainer, Slide, SliderContainer } from '../../../style/admin/critic';
 import Slider from 'react-slick';
 import { TitleBold } from '../../../style/StyledComponent';
+import { translateCondition, translateType } from '../../../components/Translate';
 
 const AdminCritic = () => {
     const [criticData, setCriticData] = useState([])
@@ -17,30 +18,6 @@ const AdminCritic = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedOrder, setSelectedOrder] = useState(0);
 
-    const translateType = (type) => {
-        switch (type) {
-            case 'NOVEL':
-                return '소설';
-            case 'ESSAY':
-                return '수필';
-            case 'POEM':
-                return '시';
-            default:
-                return type;
-        }
-    };
-
-
-    const translateCondition = (type) => {
-        switch (type) {
-            case 'FIXED':
-                return '승인';
-            case 'UNFIXED':
-                return '미승인';
-            default:
-                return type;
-        }
-    };
 
     const settings = {
         className: "center",

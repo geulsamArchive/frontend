@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import Modal from 'react-modal';
 import "slick-carousel/slick/slick-theme.css";
 import axios from 'axios';
+import { translateCondition, translateType } from './../Translate';
 
 const CriticSlide = ({ criticData, year, onDataUpdate }) => {
     const [monthIdx, setMonthIdx] = useState(0);
@@ -14,6 +15,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
     const [selectedCriticism, setSelectedCriticism] = useState(null);
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedOrder, setSelectedOrder] = useState(0);
+
 
     const settings = {
         className: "center",
@@ -147,8 +149,9 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
                                                     <>
                                                         <div>
                                                             {author.userName}
-                                                            {author.genre}
-                                                            {author.condition}</div>
+                                                            {translateType(author.genre)}
+                                                            {translateCondition(author.condition)}
+                                                        </div>
                                                     </>
                                                 ) : (
                                                     <Button onClick={() => openModal(critic.criticismId, author.order, formatDate(critic.start))}>신청하기</Button>

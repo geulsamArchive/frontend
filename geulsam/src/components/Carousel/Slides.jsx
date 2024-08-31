@@ -7,6 +7,29 @@ import { TitleBold } from "../../style/StyledComponent";
 
 const now = new Date()
 
+const genreMapping = {
+    NOVEL: '소설',
+    ESSAY: '수필',
+    POEM: '시',
+};
+
+const formatGenre = (text) => {
+    // 텍스트를 공백 기준으로 분리합니다
+    const parts = text.split(' ');
+
+    // 첫 번째 부분은 숫자와 문자로 나누고, 두 번째 부분은 괄호를 기준으로 나눕니다
+    const numberPart = parts[0]; // '1'
+    const genrePart = parts[1];   // 'w(NOVEL)'
+
+    const genreCode = genrePart.match(/\(([^)]+)\)/)[1]; // 'NOVEL'
+
+    // 장르 코드를 한국어 이름으로 변환합니다
+    const genreName = genreMapping[genreCode] || genreCode; // 기본값으로 원본 코드 반환
+
+    // 최종 포맷을 구성합니다
+    return `${numberPart}부 w(${genreName})`;
+};
+
 const isPastEvent = (endTime) => {
     const eventEndDate = new Date(endTime);
     return eventEndDate < now;
@@ -79,6 +102,13 @@ function CenterMode({ data }) {
                                                 <DisplayNone past={isPastEvent(events.endTime)}>
                                                     <br />
                                                     {events.introduce}
+                                                    {events.userAndGenre && events.userAndGenre.length > 0 && (
+                                                        events.userAndGenre.map((critic, criticIdx) => (
+                                                            <div key={criticIdx}>
+                                                                {formatGenre(critic)}
+                                                            </div>
+                                                        ))
+                                                    )}
                                                 </DisplayNone>
                                             </Right>
                                         </SpaceBetween>
