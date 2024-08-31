@@ -38,15 +38,15 @@ function App() {
             <Route path='critic' element={<AdminCritic />} />
             <Route path='calendar' element={<AdminCalendar />} />
             <Route path='manage' element={<AdminLinks />} />
+            <Route path='book/modify' element={<BookModify />} />
+            <Route path='book/modify/:bookId' element={<BookModifyInfo />} />
+            <Route path='poster/modify' element={<PosterModify />} />
+            <Route path='poster/modify/:posterId' element={<PosterModifyInfo />} />
+            <Route path='poster/upload' element={<PosterUpload />} />
+            <Route path='book/upload' element={<BookUpload />} />
           </Route>
-          <Route path='/book/modify' element={<BookModify />} />
-          <Route path='/book/modify/:bookId' element={<BookModifyInfo />} />
-          <Route path='/poster/modify' element={<PosterModify />} />
-          <Route path='/poster/modify/:posterId' element={<PosterModifyInfo />} />
-          <Route path='/poster/upload' element={<PosterUpload />} />
-          <Route path='/work/upload' element={<UploadWork />} />
-          <Route path='/book/upload' element={<BookUpload />} />
           <Route path='/frontend' element={<Main />} />
+          <Route path='/work/upload' element={<UploadWork />} />
           <Route path='/' element={<Main />} />
           <Route path='/main' element={<Main />} />
           <Route path='/work' element={<Works />} />

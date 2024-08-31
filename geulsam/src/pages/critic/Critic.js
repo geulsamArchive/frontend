@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CalendarTitle, Centering } from '../../style/StyledComponent';
-import { CriticContainer } from '../../style/Critic';
+import { CriticContainer, Notice } from '../../style/Critic';
 import { normalAPI } from '../../apis/Api';
 import CriticSlide from '../../components/Carousel/CriticSlide';
 const Critic = () => {
@@ -33,6 +33,11 @@ const Critic = () => {
             </CalendarTitle>
             <Centering>
                 <CriticSlide criticData={criticData} year={year} onDataUpdate={handleDataUpdate} />
+            </Centering>
+            <Centering>
+                <Notice>
+                    신청을 삭제하려면 해당하는 칸을 클릭해주세요.
+                </Notice>
             </Centering>
         </CriticContainer>
     );

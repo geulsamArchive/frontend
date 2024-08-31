@@ -1,12 +1,14 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { Contents, Eventlist, Slide, SliderContainer, Button } from '../../style/Carousel';
 import Slider from 'react-slick';
-import { TitleBold } from '../../style/StyledComponent';
+import { B, Centering, Red, TitleBold } from '../../style/StyledComponent';
 import "slick-carousel/slick/slick.css";
 import Modal from 'react-modal';
 import "slick-carousel/slick/slick-theme.css";
 import axios from 'axios';
+import { normalAPI } from '../../apis/Api';
 import { translateCondition, translateType } from './../Translate';
+import { CloseButton, Conditions, CriticButton, CriticDay, CriticInfos, Critics, Dates, GenreButton, ModalBottom, Modalcontent, ModalTop, NameGenre, OrderAndTime, Right } from '../../style/Critic';
 
 const CriticSlide = ({ criticData, year, onDataUpdate }) => {
     const [monthIdx, setMonthIdx] = useState(0);
@@ -15,6 +17,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
     const [selectedCriticism, setSelectedCriticism] = useState(null);
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedOrder, setSelectedOrder] = useState(0);
+    const [selectedTime, setSelectedTime] = useState('')
 
 
     const settings = {
@@ -47,10 +50,11 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
         return `${start.getMonth() + 1}월 ${start.getDate()}일`;
     };
 
-    const openModal = (criticismId, order, date) => {
+    const openModal = (criticismId, order, date, time) => {
         setSelectedCriticism(criticismId);
         setSelectedOrder(order);
         setSelectedDate(date);
+        setSelectedTime(time)
         setIsModalOpen(true);
     };
 
@@ -58,8 +62,64 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
         setIsModalOpen(false);
         setSelectedCriticism(null);
         setSelectedOrder(0);
+        setSelectedTime('')
         setSelectedDate('');
     };
+
+    const handleDelete = async (criticismAuthorId) => {
+        const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
+
+        if (confirmDelete) {
+            const accessToken = localStorage.getItem('access');
+            const refreshToken = localStorage.getItem('refresh');
+
+            try {
+                let response = await normalAPI.delete(
+                    `/criticismAuthor?search=${criticismAuthorId}`,
+                    {
+                        headers: {
+                            'accessToken': accessToken
+                        }
+                    }
+                );
+                console.log(response)
+                alert('삭제가 완료되었습니다!');
+                onDataUpdate();
+            } catch (error) {
+                if (error.response && error.response.status === 403) {
+                    console.log('토큰 재전송');
+                    // Access Token이 만료되었으므로, Refresh Token으로 새로운 Access Token을 발급받는다.
+                    try {
+                        const tokenResponse = await normalAPI.delete(
+                            `/criticismAuthor?search=${criticismAuthorId}`,
+                            {
+                                headers: {
+                                    'refreshToken': refreshToken,
+                                }
+                            }
+                        );
+                        console.log(tokenResponse);
+                        if (tokenResponse.status === 200) {
+                            const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                            localStorage.setItem('access', accessToken)
+                            const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '')
+                            localStorage.setItem('refresh', refreshToken)
+                            alert('삭제가 완료되었습니다!');
+                            onDataUpdate();
+                        }
+                    } catch (err) {
+                        console.error('Refresh Token Error:', err);
+                        alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    }
+                } else {
+                    console.error('Error:', error);
+                    alert('신청 중 문제가 발생했습니다.');
+                }
+            }
+        }
+
+
+    }
 
     const handleApply = async (genre) => {
         const accessToken = localStorage.getItem('access');
@@ -126,6 +186,23 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
         }
     };
 
+    const modalStyles = {
+        overlay: {
+            backgroundColor: 'inherit',
+        },
+        content: {
+            background: 'white',
+            padding: 0,
+            borderRadius: '8px',
+            border: 'none',
+            width: '350px',
+            height: '200px',
+            margin: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+        }
+    };
+
     return (
         <SliderContainer>
             <Slider ref={sliderRef} {...settings}>
@@ -137,28 +214,38 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
                             </TitleBold>
                             <Contents>
                                 {monthdata.criticismRes?.map((critic, criticIdx) => (
-                                    <div key={criticIdx}>
-                                        {critic.criticismAuthorResList.map((author, authorIdx) => (
-                                            <Eventlist key={authorIdx}>
-                                                {authorIdx === 0 && (
-                                                    <div>{formatDate(critic.start)}</div>
-                                                )}
-                                                {author.order}부 (
-                                                {formatTime(critic.start, author.order)})
-                                                {author.userName ? (
-                                                    <>
-                                                        <div>
-                                                            {author.userName}
-                                                            {translateType(author.genre)}
-                                                            {translateCondition(author.condition)}
-                                                        </div>
-                                                    </>
-                                                ) : (
-                                                    <Button onClick={() => openModal(critic.criticismId, author.order, formatDate(critic.start))}>신청하기</Button>
-                                                )}
-                                            </Eventlist>
-                                        ))}
-                                    </div>
+                                    <Critics key={criticIdx}>
+                                        <Dates><B>{formatDate(critic.start)}</B></Dates>
+                                        <Right>
+                                            {critic.criticismAuthorResList.map((author, authorIdx) => (
+                                                <CriticDay key={authorIdx} >
+                                                    {author.userName ? (
+                                                        <CriticInfos condition={author.condition} onClick={() => handleDelete(author.criticismAuthorId)}>
+                                                            <NameGenre>
+                                                                {author.userName}
+                                                                ({translateType(author.genre)})
+                                                            </NameGenre>
+                                                            <OrderAndTime>
+                                                                {author.order}부 ({formatTime(critic.start, author.order)})
+                                                            </OrderAndTime>
+                                                            <Conditions>
+                                                                {translateCondition(author.condition)}
+                                                            </Conditions>
+                                                        </CriticInfos>
+                                                    ) : (
+                                                        <CriticInfos>
+                                                            <OrderAndTime>
+                                                                <Red>
+                                                                    {author.order}부 ({formatTime(critic.start, author.order)})
+                                                                </Red>
+                                                            </OrderAndTime>
+                                                            <CriticButton onClick={() => openModal(critic.criticismId, author.order, formatDate(critic.start), formatTime(critic.start, author.order))}>신청하기</CriticButton>
+                                                        </CriticInfos>
+                                                    )}
+                                                </CriticDay>
+                                            ))}
+                                        </Right>
+                                    </Critics>
                                 ))}
                             </Contents>
                         </Slide>
@@ -169,15 +256,30 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
                 contentLabel="신청하기"
+                style={modalStyles}
             >
-                {selectedDate}
-                {selectedOrder}부
-                <div>
-                    <button onClick={() => handleApply('NOVEL')}>소설</button>
-                    <button onClick={() => handleApply('POEM')}>시</button>
-                    <button onClick={() => handleApply('ESSAY')}>수필</button>
-                </div>
-                <button onClick={closeModal}>닫기</button>
+                <ModalTop>
+                    <div>
+                        <Red>
+                            {selectedDate}&nbsp;{selectedOrder}부 ({selectedTime})
+                        </Red>
+                        <br />
+                        <br />
+                        <br />
+                        <GenreButton onClick={() => handleApply('NOVEL')}>소설</GenreButton>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <GenreButton onClick={() => handleApply('POEM')}>시</GenreButton>
+                        &nbsp;
+                        &nbsp;
+                        &nbsp;
+                        <GenreButton onClick={() => handleApply('ESSAY')}>수필</GenreButton>
+                    </div>
+                </ModalTop>
+                <ModalBottom>
+                    <CloseButton onClick={closeModal}>닫기</CloseButton>
+                </ModalBottom>
             </Modal>
         </SliderContainer>
     );

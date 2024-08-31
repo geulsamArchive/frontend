@@ -61,7 +61,7 @@ padding-top: 20px;
 background-color: rgba(249, 249, 246, 1);
 `
 export const WorkButtons = styled.div`
- height: 75dvh;
+ height: 90dvh;
 width: auto;
 border-left: 1px solid black;   
 `
