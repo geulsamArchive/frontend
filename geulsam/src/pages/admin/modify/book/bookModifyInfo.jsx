@@ -12,11 +12,11 @@ const BookUpload = () => {
     const [plate, onChangePlate] = useForms();
     const [pageNumber, onChangePageNumber] = useForms();
     const [bookCover, setBookCover] = useState(null);
-    const [bookCoverThumbnail, setBookCoverThumbnail] = useState();
-    const [bookCoverUrl, setBookCoverUrl] = useState();
+    const [bookCoverThumbnail, setBookCoverThumbnail] = useState(null);
+    const [bookCoverUrl, setBookCoverUrl] = useState(null);
     const [backCover, setBackCover] = useState(null);
-    const [backCoverUrl, setBackCoverUrl] = useState();
-    const [backCoverThumbnail, setBackCoverThumbnail] = useState();
+    const [backCoverUrl, setBackCoverUrl] = useState(null);
+    const [backCoverThumbnail, setBackCoverThumbnail] = useState(null);
     const [pdf, setPdf] = useState(null);
     const [year, onChangeYear] = useForms();
     const { bookId, id } = useParams();
@@ -115,49 +115,49 @@ const BookUpload = () => {
         // }
 
         const formData = new FormData();
-        // if (bookCover !== null) {
-        formData.append('bookCover', bookCover);
-        // }
+        if (bookCover !== null) {
+            formData.append('bookCover', bookCover);
+        }
 
-        // if (bookCoverThumbnail !== null) {
-        formData.append('bookCoverThumbnail', bookCoverThumbnail);
-        // }
+        if (bookCoverThumbnail !== null) {
+            formData.append('bookCoverThumbnail', bookCoverThumbnail);
+        }
 
-        // if (backCover !== null) {
-        formData.append('backCover', backCover);
-        // }
+        if (backCover !== null) {
+            formData.append('backCover', backCover);
+        }
 
-        // if (backCoverThumbnail !== null) {
-        formData.append('backCoverThumbnail', backCoverThumbnail);
-        // }
+        if (backCoverThumbnail !== null) {
+            formData.append('backCoverThumbnail', backCoverThumbnail);
+        }
 
-        // if (pdf !== null) {
-        formData.append('pdf', pdf);
-        // }
+        if (pdf !== null) {
+            formData.append('pdf', pdf);
+        }
 
-        // if (designer !== null) {
-        formData.append('designer', designer);
-        // }
+        if (designer !== null) {
+            formData.append('designer', designer);
+        }
 
-        // if (plate !== null) {
-        formData.append('plate', plate);
-        // }
+        if (plate !== null) {
+            formData.append('plate', plate);
+        }
 
-        // if (pageNumber !== null) {
-        formData.append('pageNumber', pageNumber);
-        // }
+        if (pageNumber !== null) {
+            formData.append('pageNumber', pageNumber);
+        }
 
-        // if (year !== null) {
-        formData.append('year', year);
-        // }
+        if (year !== null) {
+            formData.append('year', year);
+        }
 
-        // if (release !== null) {
-        formData.append('release', release);
-        // }
+        if (release !== null) {
+            formData.append('release', release);
+        }
 
-        // if (title !== null) {
-        formData.append('title', title);
-        // }
+        if (title !== null) {
+            formData.append('title', title);
+        }
         const accessToken = localStorage.getItem('access');
         //https://geulsaem.store/book?field=id&search=dssda-sdfasdf-dsafdasf-asdfdsa
         ///book?field=${field}&search=${search}

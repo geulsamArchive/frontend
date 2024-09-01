@@ -22,6 +22,7 @@ import PosterModifyInfo from './pages/admin/modify/poster/posterModifyInfo'
 import NotFound404 from './components/NotFound/404';
 import Mypage from './pages/user/Mypage';
 import MyInfoModify from './pages/user/MyInfoModify';
+import PasswordChangeModal from './pages/user/PasswordChangeModal';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
           <Route path='/archive/book/:bookId' element={<BookInfo />} />
           <Route path='/user/mypage' element={<Mypage />} />
           <Route path='user/myInfoModify' element={<MyInfoModify />} />
+          <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
           <Route path='*' element={<NotFound404 />} />
         </Route>
         <Route element={<LoginLayout />}>

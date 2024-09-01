@@ -808,13 +808,6 @@ justify-content: space-between;
 align-items: center;
 box-shadow: 5px 1px 3px rgba(0,0,0, 0.1);
 `
-
-export const BackButton = styled.img`
-margin-left: 24px;
-width: 10px;
-height: auto;
-cursor: pointer;
-`
 export const FormTopGray = styled.div`
 width: 408px;
 height: 57px;
@@ -882,5 +875,47 @@ color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
 background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
 pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
 cursor: pointer;
-margin-right: 23px;
+`;
+
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+`;
+
+// const BackButton = styled(Button)`
+//     background-color: #f0f0f0;
+//     color: #333;
+// `;
+
+export const EditButton = styled(Button)`
+    color: white;
+    margin-right:10px;
+`;
+
+export const SaveButton = styled(Button)`
+    color: white;
+    margin-right : 500%;
+`;
+
+//뒤로가기
+export const BackButton = styled(Button)`
+  color:white;
+`
+
+//회원 정보 수정 에러메시지
+export const ErrorMessageInfo = styled.p`
+    color: red;
+    font-size: 12px;
+    margin-left: 10px; // 메시지와 입력 필드 사이의 간격 조정
+    display: inline-block; // 메시지를 입력 필드와 같은 라인에 배치
+    vertical-align: middle; // 메시지와 입력 필드가 수직으로 정렬되도록 설정
+`;
+
+export const PassWordStyle = styled.p`
+  color : black;
+  margin-right:700%;
+  margin-top : 50px;
+  font-size:20px;
 `;

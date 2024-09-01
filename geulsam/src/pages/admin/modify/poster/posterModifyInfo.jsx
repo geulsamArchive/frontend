@@ -85,11 +85,21 @@ const PosterModify = () => {
             // }
 
             const formData = new FormData();
-            formData.append('image', file);
-            formData.append('thumbNail', thumbNail);
-            formData.append('year', year);
-            formData.append('designer', designer);
-            formData.append('plate', plate);
+            if (file != null) {
+                formData.append('image', file);
+            }
+            if (thumbNail != null) {
+                formData.append('thumbNail', thumbNail);
+            }
+            if (year != null) {
+                formData.append('year', year);
+            }
+            if (designer != null) {
+                formData.append('designer', designer);
+            }
+            if (plate != null) {
+                formData.append('plate', plate);
+            }
 
             // "image": "string",
             // "thumbNail": "string",

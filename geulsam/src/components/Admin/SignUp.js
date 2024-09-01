@@ -113,7 +113,7 @@ const SignUp = ({ prevStep, nextStep }) => {
                     </InputTitle>
                     <Input placeholder='예) C012345' type='text' value={schoolNum} onChange={onChangeSchoolNum} />
                     {schoolNumError && <ErrorMessage>{schoolNumError}</ErrorMessage>}
-                    <ButtonSmall type='button' onClick={checkSchoolNum}>중복확인</ButtonSmall>
+                    <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>
                     <InputTitle>
                         생년월일
                     </InputTitle>
