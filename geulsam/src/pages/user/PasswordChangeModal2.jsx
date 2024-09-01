@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForms } from '../../hooks/useForms';
 import { useNavigate } from 'react-router-dom';
 import { LoginApi } from '../../apis/LoginApi';
+import { normalAPI } from '../../apis/Api';
 import { ErrorMessage, Wrapper, Title, Form, Input, Inputs, Button, InputTitle, Buttons } from '../../style/StyledComponent';
 
 const Logins = () => {
