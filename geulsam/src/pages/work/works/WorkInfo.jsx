@@ -6,17 +6,25 @@ import PDFDownload from '../../../components/Download/PDFDownload';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import { WorkButtons, WorkLink, WorkReaderLink, WorkSentence, WorkSentenceContainer } from '../../../style/Works';
 import Comments from '../../../components/Comment/Comments';
+import NovelViewer from '../viewer/NovelViewer';
+import axios from 'axios';
+import Modal from 'react-modal';
 
 const WorkInfo = () => {
     const [workData, setWorkData] = useState({})
     const { workId } = useParams()
+    const [novel, setNovel] = useState('')
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => setModalIsOpen(true);
+    const closeModal = () => setModalIsOpen(false);
 
     const translateType = (type) => {
         switch (type) {
             case 'NOVEL':
                 return '소설';
             case 'ESSAY':
-                return '에세이';
+                return '수필';
             case 'POEM':
                 return '시';
             default:
@@ -40,10 +48,26 @@ const WorkInfo = () => {
         }
     }
 
-    useEffect(() => {
-        getWorkData()
-    }, [])
+    const getHTMLdata = async () => {
+        try {
+            const res = await axios.get(workData.html)
+            console.log(res)
+            setNovel(res.data)
 
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getWorkData();
+    }, [workId]);
+
+    useEffect(() => {
+        if (workData.html) {
+            getHTMLdata();
+        }
+    }, [workData]);
     return (
         <>
             <BookInfoContainer>
@@ -81,7 +105,7 @@ const WorkInfo = () => {
                             <WorkSentence>
                                 {workData.sentence}
                             </WorkSentence>
-                            <WorkReaderLink>
+                            <WorkReaderLink onClick={openModal}>
                                 작품 바로 읽기 &nbsp;
                                 <svg width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.043 4.74854V20.958" stroke="#2D2B2A" stroke-width="2.04367" stroke-linecap="round" />
@@ -104,6 +128,27 @@ const WorkInfo = () => {
                     </WorkButtons>
                 </BookInfoAndButton>
             </BookInfoContainer>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Novel Viewer"
+                style={{
+
+                    content: {
+                        top: '0',
+                        left: '0',
+                        right: '0',
+                        bottom: '0',
+                        margin: '0',
+                        padding: '0',
+                        border: 'none',
+                        background: 'white',
+                        overflow: 'auto', // 모달 안의 콘텐츠가 넘칠 때 스크롤이 생기도록
+                    }
+                }}
+            >
+                <NovelViewer novelHTML={novel} title={workData.title} closeModal={closeModal} />
+            </Modal>
             <Comments />
         </>
     );

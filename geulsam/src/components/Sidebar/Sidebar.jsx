@@ -13,6 +13,7 @@ const Sidebar = () => {
         window.localStorage.removeItem('access');
         window.localStorage.removeItem('refresh');
         setIsAuthenticated(false);
+        window.location.reload()
     };
 
     const onClickLogin = () => {
@@ -29,6 +30,11 @@ const Sidebar = () => {
             {isAuthenticated
                 ?
                 <>
+                    <SideBox>
+                        <SideLink to='/work/upload'>
+                            작품올리기
+                        </SideLink>
+                    </SideBox>
                     <SideBox>
                         <SideLink onClick={onClickLogout}>
                             로그아웃

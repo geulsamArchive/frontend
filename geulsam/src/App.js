@@ -21,8 +21,16 @@ import BookModifyInfo from './pages/admin/modify/book/bookModifyInfo'
 import PosterModifyInfo from './pages/admin/modify/poster/posterModifyInfo'
 import NotFound404 from './components/NotFound/404';
 import Mypage from './pages/user/Mypage';
+<<<<<<< HEAD
 import MyInfoModify from './pages/user/MyInfoModify';
 import PasswordChangeModal from './pages/user/PasswordChangeModal';
+=======
+import AdminCritic from './pages/admin/critic/Critic';
+import AdminCalendar from './pages/admin/calendar/Calendar';
+import Admin from './pages/admin/Admin';
+import AdminLinks from './pages/admin/AdminLinks';
+
+>>>>>>> 33c5d764aac51050ad9cd12d72204a40bd94eda0
 
 function App() {
 
@@ -31,14 +39,19 @@ function App() {
       <Routes>
         <Route path='/test' element={<Test />} />
         <Route element={<NavLayout />}>
-          <Route path='/book/modify' element={<BookModify />} />
-          <Route path='/book/modify/:bookId' element={<BookModifyInfo />} />
-          <Route path='/poster/modify' element={<PosterModify />} />
-          <Route path='/poster/modify/:posterId' element={<PosterModifyInfo />} />
-          <Route path='/poster/upload' element={<PosterUpload />} />
-          <Route path='/work/upload' element={<UploadWork />} />
-          <Route path='/book/upload' element={<BookUpload />} />
+          <Route path='/admin' element={<Admin />}>
+            <Route path='critic' element={<AdminCritic />} />
+            <Route path='calendar' element={<AdminCalendar />} />
+            <Route path='manage' element={<AdminLinks />} />
+            <Route path='book/modify' element={<BookModify />} />
+            <Route path='book/modify/:bookId' element={<BookModifyInfo />} />
+            <Route path='poster/modify' element={<PosterModify />} />
+            <Route path='poster/modify/:posterId' element={<PosterModifyInfo />} />
+            <Route path='poster/upload' element={<PosterUpload />} />
+            <Route path='book/upload' element={<BookUpload />} />
+          </Route>
           <Route path='/frontend' element={<Main />} />
+          <Route path='/work/upload' element={<UploadWork />} />
           <Route path='/' element={<Main />} />
           <Route path='/main' element={<Main />} />
           <Route path='/work' element={<Works />} />

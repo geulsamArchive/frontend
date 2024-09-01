@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Button, Background, ViewerContainer, Page, ControlPanel, ControlPanelRight, PageInput, ScrollBar, PageButtons, RoundBorder, PannelIcon } from '../../../style/NovelView';
+import { Button, Background, ViewerContainer, Page, ControlPanel, ControlPanelRight, PageInput, ScrollBar, PageButtons, RoundBorder, PannelIcon, Close } from '../../../style/NovelView';
 
 
-const NovelViewer = ({ novelHTML, title }) => {
+const NovelViewer = ({ novelHTML, title, closeModal }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [fontSize, setFontSize] = useState(16);
     const [lineHeight, setLineHeight] = useState(1.5);
@@ -52,6 +52,7 @@ const NovelViewer = ({ novelHTML, title }) => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
 
     useEffect(() => {
         setInputValue((currentPage + 1).toString());
@@ -181,11 +182,15 @@ const NovelViewer = ({ novelHTML, title }) => {
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M8.51971 17.8824C13.2239 17.8824 17.0375 14.0689 17.0375 9.36468C17.0375 4.66045 13.2239 0.846924 8.51971 0.846924C3.81548 0.846924 0.00195313 4.66045 0.00195313 9.36468C0.00195313 14.0689 3.81548 17.8824 8.51971 17.8824ZM3.78768 8.29534C3.1971 8.29534 2.71833 8.77411 2.71833 9.36469C2.71833 9.95528 3.1971 10.434 3.78768 10.434L13.2519 10.434C13.8424 10.434 14.3212 9.95528 14.3212 9.36469C14.3212 8.77411 13.8424 8.29534 13.2519 8.29534L3.78768 8.29534Z" fill="white" />
                         </svg>
                     </Button>
-
-
                 </RoundBorder>
-
             </ControlPanelRight>
+            <Close onClick={closeModal}>
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.9996 25.9786C12.4265 25.9786 10.8689 25.6688 9.41557 25.0668C7.96226 24.4648 6.64175 23.5825 5.52944 22.4702C4.41712 21.3579 3.53479 20.0374 2.93281 18.5841C2.33083 17.1307 2.021 15.5731 2.021 14.0001C2.021 12.427 2.33083 10.8694 2.93281 9.41605C3.53479 7.96275 4.41713 6.64224 5.52944 5.52993C6.64175 4.41761 7.96226 3.53528 9.41557 2.9333C10.8689 2.33132 12.4265 2.02148 13.9996 2.02148C15.5726 2.02148 17.1303 2.33132 18.5836 2.9333C20.0369 3.53528 21.3574 4.41762 22.4697 5.52993C23.582 6.64224 24.4643 7.96275 25.0663 9.41606C25.6683 10.8694 25.9781 12.427 25.9781 14.0001C25.9781 15.5731 25.6683 17.1308 25.0663 18.5841C24.4643 20.0374 23.582 21.3579 22.4697 22.4702C21.3574 23.5825 20.0369 24.4648 18.5836 25.0668C17.1303 25.6688 15.5726 25.9786 13.9996 25.9786L13.9996 25.9786Z" stroke="#F9F9F6" stroke-width="3.69065" stroke-linecap="round" />
+                    <path d="M10.0073 10.0078L17.993 17.9935" stroke="#F9F9F6" stroke-width="3.81367" stroke-linecap="round" />
+                    <path d="M17.9932 10.0078L10.0074 17.9935" stroke="#F9F9F6" stroke-width="3.81367" stroke-linecap="round" />
+                </svg>
+            </Close>
         </Background>
     );
 };

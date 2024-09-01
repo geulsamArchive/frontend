@@ -1,10 +1,11 @@
 import { B, CalendarTitle } from '../../../style/StyledComponent';
 import { Container, EditorContainer, FileInput, GenreButton, GenreContainer, SentenceContainer, SentenceInput, TitleInput } from '../../../style/WokrUpload';
 import { useForms } from '../../../hooks/useForms';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Editor from '../../../components/Editor/CKEditor';
 import { Button } from '../../../style/Carousel';
 import { normalAPI } from '../../../apis/Api';
+import { useNavigate } from 'react-router-dom';
 
 const UploadWork = () => {
     const [title, onChangeTitle] = useForms();
@@ -13,6 +14,35 @@ const UploadWork = () => {
     const [sentence, onChangeSentence] = useForms();
     const [htmlContent, setHtmlContent] = useState(''); // CKEditor의 HTML 내용을 저장할 상태
     const inputRef = useRef(null);
+
+    const navigate = useNavigate();
+
+    //업로드 성공 시 workId를 저장해 해당 페이지로 리다이렉트
+    const [workId, setWorkId] = useState('')
+
+    useEffect(() => {
+        if (workId) {
+            navigate(`/work/${workId}`);
+        }
+    }, [workId, navigate]);
+
+    const handleEditorChange = (data) => {
+        // HTML 문자열에 <meta charset="UTF-8"> 추가하기
+        const htmlContentWithMeta = `
+            <!DOCTYPE html>
+            <html lang="ko">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Document</title>
+            </head>
+            <body>
+                ${data}
+            </body>
+            </html>
+        `;
+        setHtmlContent(htmlContentWithMeta);
+    };
 
     const handleSentenceContainerClick = () => {
         if (inputRef.current) {
@@ -37,16 +67,17 @@ const UploadWork = () => {
 
     const handleSubmit = async () => {
         const accesstoken = localStorage.getItem('access')
+        const refreshToken = localStorage.getItem('refresh')
+
         if (!file) {
             alert('PDF 파일을 선택해주세요.');
             return;
         }
 
-        // HTML 문자열을 Blob 객체로 변환
-        const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
+        const htmlBlob = new Blob([new TextEncoder().encode(htmlContent)], { type: 'text/html; charset=UTF-8' });
 
         // Blob 객체를 File 객체로 변환
-        const htmlFile = new File([htmlBlob], 'content.html', { type: 'text/html' });
+        const htmlFile = new File([htmlBlob], 'content.html', { type: 'text/html; charset=UTF-8' });
 
         const formData = new FormData();
         formData.append('name', title);
@@ -65,8 +96,43 @@ const UploadWork = () => {
                 },
             });
             console.log('서버 응답:', response.data);
+            if (response.data.status === 201) {
+                setWorkId(response.data.data)
+                alert('글을 성공적으로 게시했습니다.')
+            }
+
         } catch (error) {
-            console.error('업로드 실패:', error);
+            if (error.response && error.response.status === 403) {
+                console.log('토큰 재전송');
+                // Access Token이 만료되었으므로, Refresh Token으로 새로운 Access Token을 발급받는다.
+                try {
+                    const tokenResponse = await normalAPI.post(
+                        '/content',
+                        formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                                'refreshToken': refreshToken,
+                            }
+                        }
+                    );
+                    console.log(tokenResponse);
+                    if (tokenResponse.status === 200) {
+                        const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                        localStorage.setItem('access', accessToken)
+                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '')
+                        localStorage.setItem('refresh', refreshToken)
+                        setWorkId(tokenResponse.data.data)
+                        alert('글을 성공적으로 게시했습니다.')
+                    }
+                } catch (err) {
+                    console.error('Refresh Token Error:', err);
+                    alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                }
+            } else {
+                console.error('Error:', error);
+                alert('게시 중 문제가 발생했습니다.');
+            }
         }
     };
 
@@ -113,7 +179,7 @@ const UploadWork = () => {
                     />
                 </SentenceContainer>
                 <EditorContainer>
-                    <Editor onChange={setHtmlContent} /> {/* Editor의 onChange 핸들러에 상태 업데이트 함수 연결 */}
+                    <Editor onChange={handleEditorChange} /> {/* Editor의 onChange 핸들러에 상태 업데이트 함수 연결 */}
                 </EditorContainer>
                 <Button onClick={handleSubmit}>게시하기</Button>
             </Container>

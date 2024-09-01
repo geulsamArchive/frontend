@@ -28,14 +28,29 @@ justify-content: space-between;
 `
 export const WorkTitleType = styled.div`
     display: flex;
-    justify-content: ;
-    width: 200px;
+    width: 500px;
     align-items: center;
     text-align: left;
 `
 export const WorkType = styled.div`
     width: 100px;
     color: rgba(171, 170, 170, 1);
+    margin-left: 10px;
+`
+
+export const WorkInfoRight = styled.div`
+    text-align: right;
+    margin-right: 20px;
+`
+export const WorkCreatedAt = styled.div`
+    width: 600px;
+`
+
+export const Space = styled.span`
+margin-left: 30px;
+`
+
+export const WorkTitle = styled.div`
 `
 
 export const WorkInfoContainer = styled.div`
@@ -46,7 +61,7 @@ padding-top: 20px;
 background-color: rgba(249, 249, 246, 1);
 `
 export const WorkButtons = styled.div`
- height: 100dvh;
+ height: 90dvh;
 width: auto;
 border-left: 1px solid black;   
 `
@@ -117,4 +132,24 @@ export const RecentWorkLink = styled(Link)`
     font-size: 22px;
     font-weight: 700;
     margin-top: 50px;
+`
+
+export const GenreButton = styled.button`
+border-top-right-radius:30px;
+border-bottom-right-radius:30px;
+border: 1px solid rgba(129, 128, 127, 1);
+border-left: none;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+width: 76px;
+font-size: 14px;
+height: 34px;
+font-family: 'MaruBuri-Regular';
+margin-top: 11px;
+
+background-color: ${(props) => (props.disabled ? 'rgba(129, 128, 127, 1)' : 'transparent')};
+  color: ${(props) => (props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(129, 128, 127, 1)')};
+  cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
 `

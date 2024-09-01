@@ -62,20 +62,17 @@ transform: scale(0.7);
 cursor: pointer;
 transition: transform 300ms, box-shadow 300ms;
 filter: blur(5px);  
-z-index: 10;
 
 &.active{
-transform: scale(0.9);
+transform: scale(0.85);
 filter: none;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-z-index: 1;
 }
 `
 
 export const SliderContainer = styled.div`
-    width: 100%;
+    width: 1400px;
     overflow:hidden;
-    height: auto;
     
 `
 
