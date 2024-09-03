@@ -114,7 +114,9 @@ const Works = () => {
                     </WorkButtons>
                 </BookInfoAndButton>
             </WorkInfoContainer >
-            <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
+            <Margin>
+                <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
+            </Margin>
         </div>
     );
 };

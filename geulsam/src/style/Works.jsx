@@ -13,8 +13,6 @@ export const WorkLink = styled(Link)`
 
 export const Margin = styled.div`
     margin-top: 50px;
-    display: flex;
-    justify-content: space-between;
 `
 export const WorkTopBorder = styled.div`
 width: 100%;
@@ -66,7 +64,7 @@ padding-top: 20px;
 background-color: rgba(249, 249, 246, 1);
 `
 export const WorkButtons = styled.div`
- height: 90dvh;
+ height: auto;
 width: auto;
 border-left: 1px solid black;   
 `
