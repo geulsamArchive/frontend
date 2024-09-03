@@ -11,6 +11,11 @@ export const WorkLink = styled(Link)`
     }
 `
 
+export const Margin = styled.div`
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+`
 export const WorkTopBorder = styled.div`
 width: 100%;
 border-bottom:1px solid black;
