@@ -37,19 +37,25 @@ const MyInfoModify = () => {
     const phoneRegex = /^01[0-9]-\d{3,4}-\d{4}$/;
 
     // 컴포넌트가 마운트될 때 사용자 정보를 불러오는 useEffect
+    const fetchUserInfo = async () => {
+        try {
+            const accessToken = localStorage.getItem('access');
+            const response = await normalAPI.get(
+                `/user/one`,
+                {
+                    headers: {
+                        'accessToken': accessToken,
+                    }
+                }); // 사용자 정보 GET 요청
+            console.log(response)
+            setUserInfo(response.data);
+        } catch (error) {
+            console.error('사용자 정보를 불러오는 중 오류가 발생했습니다.', error);
+        }
+    };
     useEffect(() => {
-        const fetchUserInfo = async () => {
-            try {
-                const accessToken = localStorage.getItem('accessToken');
-                const response = await normalAPI.get(`/user/one?search=${id}`); // 사용자 정보 GET 요청
-                setUserInfo(response.data);
-            } catch (error) {
-                console.error('사용자 정보를 불러오는 중 오류가 발생했습니다.', error);
-            }
-        };
-
         fetchUserInfo();
-    }, [id]);
+    }, []);
 
     const handleEditClick = () => {
         setIsEditing(true); // 수정 모드로 전환

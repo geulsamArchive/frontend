@@ -21,11 +21,12 @@ import BookModifyInfo from './pages/admin/modify/book/bookModifyInfo'
 import PosterModifyInfo from './pages/admin/modify/poster/posterModifyInfo'
 import NotFound404 from './components/NotFound/404';
 import Mypage from './pages/user/Mypage';
+import MyInfoModify from './pages/user/MyInfoModify';
+import PasswordChangeModal from './pages/user/PasswordChangeModal';
 import AdminCritic from './pages/admin/critic/Critic';
 import AdminCalendar from './pages/admin/calendar/Calendar';
 import Admin from './pages/admin/Admin';
 import AdminLinks from './pages/admin/AdminLinks';
-import MyInfoModify from './pages/user/MyInfoModify';
 
 
 function App() {
@@ -60,6 +61,9 @@ function App() {
           <Route path='/archive/book/:bookId' element={<BookInfo />} />
           <Route path='/user/mypage' element={<Mypage />} />
           <Route path='user/myInfoModify' element={<MyInfoModify />} />
+          <Route path='/user/myInfoModify' element={<MyInfoModify />} />
+          <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
+          <Route path='*' element={<NotFound404 />} />
         </Route>
         <Route element={<LoginLayout />}>
           <Route path='login' element={<Login />} />
