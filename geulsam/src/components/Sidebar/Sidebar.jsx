@@ -1,29 +1,12 @@
 import React from 'react';
 import { SideBox, SideLink, Sidebars } from '../../style/StyledComponent';
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-
+import { useAuth } from '../../store/Auth';
 const Sidebar = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('access'));
-    const prevpath = useLocation();
-
-
+    const { isAuthenticated, logout } = useAuth();
 
     const onClickLogout = () => {
-        window.localStorage.removeItem('access');
-        window.localStorage.removeItem('refresh');
-        setIsAuthenticated(false);
-        window.location.reload()
+        logout();
     };
-
-    const onClickLogin = () => {
-        localStorage.setItem('prevpath', prevpath.pathname);
-        console.log(prevpath);
-    }
-
-    useEffect(() => {
-        setIsAuthenticated(!!localStorage.getItem('access'));
-    }, []);
 
     return (
         <Sidebars>
@@ -49,7 +32,7 @@ const Sidebar = () => {
                 :
                 <>
                     <SideBox>
-                        <SideLink to="/login" onClick={onClickLogin}>
+                        <SideLink to="/login">
                             로그인
                         </SideLink>
                     </SideBox>
@@ -60,7 +43,6 @@ const Sidebar = () => {
                     </SideBox>
                 </>
             }
-
         </Sidebars>
     )
 };

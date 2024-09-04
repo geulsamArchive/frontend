@@ -27,48 +27,51 @@ import AdminCritic from './pages/admin/critic/Critic';
 import AdminCalendar from './pages/admin/calendar/Calendar';
 import Admin from './pages/admin/Admin';
 import AdminLinks from './pages/admin/AdminLinks';
+import { AuthProvider } from './store/Auth';
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/test' element={<Test />} />
-        <Route element={<NavLayout />}>
-          <Route path='/admin' element={<Admin />}>
-            <Route path='critic' element={<AdminCritic />} />
-            <Route path='calendar' element={<AdminCalendar />} />
-            <Route path='manage' element={<AdminLinks />} />
-            <Route path='book/modify' element={<BookModify />} />
-            <Route path='book/modify/:bookId' element={<BookModifyInfo />} />
-            <Route path='poster/modify' element={<PosterModify />} />
-            <Route path='poster/modify/:posterId' element={<PosterModifyInfo />} />
-            <Route path='poster/upload' element={<PosterUpload />} />
-            <Route path='book/upload' element={<BookUpload />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/test' element={<Test />} />
+          <Route element={<NavLayout />}>
+            <Route path='/admin' element={<Admin />}>
+              <Route path='critic' element={<AdminCritic />} />
+              <Route path='calendar' element={<AdminCalendar />} />
+              <Route path='manage' element={<AdminLinks />} />
+              <Route path='book/modify' element={<BookModify />} />
+              <Route path='book/modify/:bookId' element={<BookModifyInfo />} />
+              <Route path='poster/modify' element={<PosterModify />} />
+              <Route path='poster/modify/:posterId' element={<PosterModifyInfo />} />
+              <Route path='poster/upload' element={<PosterUpload />} />
+              <Route path='book/upload' element={<BookUpload />} />
+            </Route>
+            <Route path='/frontend' element={<Main />} />
+            <Route path='/work/upload' element={<UploadWork />} />
+            <Route path='/' element={<Main />} />
+            <Route path='/main' element={<Main />} />
+            <Route path='/work' element={<Works />} />
+            <Route path='/critic' element={<Critic />} />
+            <Route path='/archive' element={<Archive />}>
+              <Route path='poster' element={<Poster />} />
+              <Route path='book' element={<Book />} />
+            </Route>
+            <Route path='/work/:workId' element={<WorkInfo />} />
+            <Route path='/archive/book/:bookId' element={<BookInfo />} />
+            <Route path='/user/mypage' element={<Mypage />} />
+            <Route path='/user/myInfoModify' element={<MyInfoModify />} />
+            <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
+            <Route path='*' element={<NotFound404 />} />
           </Route>
-          <Route path='/frontend' element={<Main />} />
-          <Route path='/work/upload' element={<UploadWork />} />
-          <Route path='/' element={<Main />} />
-          <Route path='/main' element={<Main />} />
-          <Route path='/work' element={<Works />} />
-          <Route path='/critic' element={<Critic />} />
-          <Route path='/archive' element={<Archive />}>
-            <Route path='poster' element={<Poster />} />
-            <Route path='book' element={<Book />} />
+          <Route element={<LoginLayout />}>
+            <Route path='login' element={<Login />} />
+            <Route path='signup' element={<Signup />} />
           </Route>
-          <Route path='/work/:workId' element={<WorkInfo />} />
-          <Route path='/archive/book/:bookId' element={<BookInfo />} />
-          <Route path='/user/mypage' element={<Mypage />} />
-          <Route path='/user/myInfoModify' element={<MyInfoModify />} />
-          <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
-          <Route path='*' element={<NotFound404 />} />
-        </Route>
-        <Route element={<LoginLayout />}>
-          <Route path='login' element={<Login />} />
-          <Route path='signup' element={<Signup />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
