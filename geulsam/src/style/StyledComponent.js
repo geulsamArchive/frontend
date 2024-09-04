@@ -389,6 +389,11 @@ padding-right: 28px;
 display: flex;
 justify-content: space-between;
 align-items:center;
+overflow: hidden;
+`
+
+export const TextOverflow = styled.span`
+overflow: hidden;
 `
 export const RecentWorkContainer = styled.div`
 width: 611px;

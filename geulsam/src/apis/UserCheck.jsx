@@ -1,8 +1,13 @@
 import { normalAPI } from "./Api";
+import React from "react";
+import { useAuth } from "../store/Auth";
 
 export const UserCheck = async (navigate) => {
     const accessToken = localStorage.getItem('access');
     const refreshToken = localStorage.getItem('refresh');
+
+    // const { logout } = useAuth();
+
 
     try {
         let response = await normalAPI.get(
@@ -55,6 +60,7 @@ export const UserCheck = async (navigate) => {
             } catch (err) {
                 console.error('Refresh Token Error:', err);
                 alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                //   logout();
                 navigate('/main'); // 로그인 페이지로 리다이렉트
             }
         } else {

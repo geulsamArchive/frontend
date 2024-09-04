@@ -93,3 +93,19 @@ export const EditorContainer = styled.div`
     font-family: 'RIDIBatang';
     margin-top: 50px;
 `
+
+export const UploadButton = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+font-weight: 700;
+border-radius: 21px;
+width: 106px;
+height: 36px;
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+cursor: pointer;  
+margin-left: 72%;
+margin-top: 30px;
+margin-bottom: 50px;
+`

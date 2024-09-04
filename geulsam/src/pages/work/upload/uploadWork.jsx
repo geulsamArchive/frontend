@@ -1,11 +1,11 @@
 import { B, CalendarTitle } from '../../../style/StyledComponent';
-import { Container, EditorContainer, FileInput, GenreButton, GenreContainer, SentenceContainer, SentenceInput, TitleInput } from '../../../style/WokrUpload';
+import { Container, EditorContainer, FileInput, GenreButton, GenreContainer, SentenceContainer, SentenceInput, TitleInput, UploadButton } from '../../../style/WokrUpload';
 import { useForms } from '../../../hooks/useForms';
 import { useRef, useState, useEffect } from 'react';
 import Editor from '../../../components/Editor/CKEditor';
-import { Button } from '../../../style/Carousel';
 import { normalAPI } from '../../../apis/Api';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../store/Auth';
 
 const UploadWork = () => {
     const [title, onChangeTitle] = useForms();
@@ -14,6 +14,8 @@ const UploadWork = () => {
     const [sentence, onChangeSentence] = useForms();
     const [htmlContent, setHtmlContent] = useState(''); // CKEditor의 HTML 내용을 저장할 상태
     const inputRef = useRef(null);
+
+    const { logout } = useAuth();
 
     const navigate = useNavigate();
 
@@ -128,6 +130,7 @@ const UploadWork = () => {
                 } catch (err) {
                     console.error('Refresh Token Error:', err);
                     alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    logout();
                 }
             } else {
                 console.error('Error:', error);
@@ -181,7 +184,7 @@ const UploadWork = () => {
                 <EditorContainer>
                     <Editor onChange={handleEditorChange} /> {/* Editor의 onChange 핸들러에 상태 업데이트 함수 연결 */}
                 </EditorContainer>
-                <Button onClick={handleSubmit}>게시하기</Button>
+                <UploadButton onClick={handleSubmit}>게시하기</UploadButton>
             </Container>
         </>
     );

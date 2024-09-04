@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { RecentTitle, RecentWorks, RecentWorkContainer, RecentWorkOverlay, RecentWorkText, L, RecentWorkOverlayText, B, Recents, Centering } from '../../../style/StyledComponent';
+import { RecentTitle, RecentWorks, RecentWorkContainer, RecentWorkOverlay, RecentWorkText, L, RecentWorkOverlayText, B, Recents, Centering, TextOverflow } from '../../../style/StyledComponent';
 import { Link } from 'react-router-dom';
 import { normalAPI } from '../../../apis/Api';
 import { RecentWorkLink } from '../../../style/Works';
@@ -47,8 +47,10 @@ const RecentWork = () => {
                             <RecentWorkOverlay>
                                 <RecentWorkOverlayText>
                                     <div>
-                                        <L><B>
+                                        <L><B><TextOverflow>
+
                                             {work.title}
+                                        </TextOverflow>
                                         </B></L>
                                         <br />
                                         <br />

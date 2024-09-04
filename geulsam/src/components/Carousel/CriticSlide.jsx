@@ -9,6 +9,7 @@ import axios from 'axios';
 import { normalAPI } from '../../apis/Api';
 import { translateCondition, translateType } from './../Translate';
 import { CloseButton, Conditions, CriticButton, CriticDay, CriticInfos, Critics, Dates, GenreButton, ModalBottom, Modalcontent, ModalTop, NameGenre, OrderAndTime, Right } from '../../style/Critic';
+import { useAuth } from '../../store/Auth';
 
 const CriticSlide = ({ criticData, year, onDataUpdate }) => {
     const [monthIdx, setMonthIdx] = useState(0);
@@ -19,6 +20,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
     const [selectedOrder, setSelectedOrder] = useState(0);
     const [selectedTime, setSelectedTime] = useState('')
 
+    const { logout } = useAuth();
 
     const settings = {
         className: "center",
@@ -110,6 +112,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
                     } catch (err) {
                         console.error('Refresh Token Error:', err);
                         alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                        logout();
                     }
                 } else {
                     console.error('Error:', error);
