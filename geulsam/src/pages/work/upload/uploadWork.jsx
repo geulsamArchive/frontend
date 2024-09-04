@@ -96,7 +96,7 @@ const UploadWork = () => {
                 },
             });
             console.log('서버 응답:', response.data);
-            if (response.data.status === 201) {
+            if (response.data.status === 200) {
                 setWorkId(response.data.data)
                 alert('글을 성공적으로 게시했습니다.')
             }

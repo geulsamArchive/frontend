@@ -113,7 +113,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
                     }
                 } else {
                     console.error('Error:', error);
-                    alert('신청 중 문제가 발생했습니다.');
+                    alert('본인의 신청만 삭제 가능합니다.');
                 }
             }
         }

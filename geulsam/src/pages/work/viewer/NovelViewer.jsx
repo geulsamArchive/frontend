@@ -4,8 +4,8 @@ import { Button, Background, ViewerContainer, Page, ControlPanel, ControlPanelRi
 
 const NovelViewer = ({ novelHTML, title, closeModal }) => {
     const [currentPage, setCurrentPage] = useState(0);
-    const [fontSize, setFontSize] = useState(16);
-    const [lineHeight, setLineHeight] = useState(1.5);
+    const [fontSize, setFontSize] = useState(14);
+    const [lineHeight, setLineHeight] = useState(2.0);
     const [pages, setPages] = useState([]);
     const [inputValue, setInputValue] = useState(1);
     const viewerRef = useRef(null);

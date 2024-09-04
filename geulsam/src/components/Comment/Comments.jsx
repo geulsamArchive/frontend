@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AccordionHeader, AccordionContainer, AccordionContent } from '../../style/Accodion';
 import { authAPI } from '../../apis/Api';
-
-const userCheck = async () => {
-    const userInfo = await authAPI('/user/check')
-    console.log(userInfo)
-    return userInfo
-}
-
+import { useForms } from '../../hooks/useForms';
 
 export const Accordion = ({ name, content: ContentComponent }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -38,18 +32,24 @@ export const Accordion = ({ name, content: ContentComponent }) => {
 }
 
 const Comment = () => {
+    const [writing, onChangeWriting] = useForms();
+
     return (
         <div>
-            댓글창
+            <div>
+                <div>
+                    <input value={writing} onChange={onChangeWriting} />
+                    <button>게시하기</button>
+                </div>
+            </div>
+            <div>
+                댓글들
+            </div>
         </div>
     )
 }
 
 const Comments = () => {
-    // useEffect(() => {
-    //     userCheck()
-
-    // }, [])
 
     return (
         <div>
