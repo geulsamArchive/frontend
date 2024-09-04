@@ -189,15 +189,22 @@ const BookUpload = () => {
             // 에러 발생
             console.error(error);
             try {
-                //리프레쉬 토큰 포함해서 다시 전송
-                const refreshToken = localStorage.getItem('refresh');
+                    // 리프레쉬 토큰 포함해서 다시 전송
+                    const refreshToken = localStorage.getItem('refresh');
+                    const refreshResponse = await normalAPI.post('/auth/refresh', { token: refreshToken });
 
-                const res = await normalAPI.post(`/book`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'refreshToken': refreshToken,
-                    },
-                })
+                    // Bearer 키워드 제거하고 accessToken 받기
+                    let newAccessToken = refreshResponse.data.accessToken;
+                    newAccessToken = newAccessToken.replace('Bearer ', '');
+
+                    localStorage.setItem('access', newAccessToken);
+
+                    const res = await normalAPI.post(`/book`, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization': `Bearer ${newAccessToken}`,
+                    }});
+
                 console.log(res)
             } catch (erorr) {
                 //그래도 안되면 재로그인 요청

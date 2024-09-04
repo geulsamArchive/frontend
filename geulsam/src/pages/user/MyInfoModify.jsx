@@ -9,7 +9,7 @@ import { normalAPI } from '../../apis/Api';
 
 const MyInfoModify = () => {
     const [isEditing, setIsEditing] = useState(false);
-    const { id } = useParams(); // Route에서 id를 가져옴
+    //const { id } = useParams(); // Route에서 id를 가져옴
     const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
     const [userInfo, setUserInfo] = useState({
         name: '',
@@ -31,31 +31,67 @@ const MyInfoModify = () => {
     // 정규 표현식
     const nameRegax = /^[가-힣]{1,6}$/;
     const schoolNumRegax = /^[a-zA-Z]\d{6}$/;
-    const birthDayRegax = /^\d{6}$/;
+   // const birthDayRegax = /^\d{10}$/;
     const joinedAtRegax = /^\d{4}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net)$/;
     const phoneRegex = /^01[0-9]-\d{3,4}-\d{4}$/;
 
     // 컴포넌트가 마운트될 때 사용자 정보를 불러오는 useEffect
-    const fetchUserInfo = async () => {
-        try {
-            const accessToken = localStorage.getItem('access');
-            const response = await normalAPI.get(
-                `/user/one`,
-                {
-                    headers: {
-                        'accessToken': accessToken,
-                    }
-                }); // 사용자 정보 GET 요청
-            console.log(response)
-            setUserInfo(response.data);
-        } catch (error) {
-            console.error('사용자 정보를 불러오는 중 오류가 발생했습니다.', error);
-        }
-    };
+
     useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                let accessToken = localStorage.getItem('access');
+                const refreshToken = localStorage.getItem('refresh');
+
+                try {
+                    // ID를 이용해 사용자 정보 가져오기
+                    const response = await normalAPI.get(`/user/one`, {
+                        headers: {
+                            'accessToken': accessToken,
+                        }
+                    });
+                    console.log(response)
+                    setUserInfo(response.data.data);
+                } catch (error) {
+                    if (error.response && error.response.status === 401) {
+                        // Access token이 만료된 경우, refresh token을 사용해 새로운 access token을 요청
+                        try {
+                            const refreshResponse = await normalAPI.post('/auth/refresh', { token: refreshToken });
+                            accessToken = refreshResponse.data.accessToken;
+                            localStorage.setItem('access', accessToken);
+
+                            // 새로 받은 access token으로 다시 사용자 ID를 가져옴
+                            const idResponse = await normalAPI.get(`/user/check`, {
+                                headers: {
+                                    'Authorization': `Bearer ${accessToken}`
+                                }
+                            });
+                            const id = idResponse.data.id;
+
+                            // ID를 이용해 사용자 정보 가져오기
+                            const response = await normalAPI.get(`/user/one?search=${id}`, {
+                                headers: {
+                                    'Authorization': `Bearer ${accessToken}`
+                                }
+                            });
+                            setUserInfo(response.data);
+                        } catch (refreshError) {
+                            console.error('토큰 갱신 중 오류가 발생했습니다.', refreshError);
+                            alert('로그인이 필요합니다.');
+                            navigate('/login'); // 로그인 페이지로 이동
+                        }
+                    } else {
+                        console.error('사용자 정보를 불러오는 중 오류가 발생했습니다.', error);
+                    }
+                }
+            } catch (error) {
+                console.error('사용자 정보를 불러오는 중 오류가 발생했습니다.', error);
+            }
+        };
+
         fetchUserInfo();
-    }, []);
+    }, [navigate]);
 
     const handleEditClick = () => {
         setIsEditing(true); // 수정 모드로 전환
@@ -82,12 +118,12 @@ const MyInfoModify = () => {
             setSchoolNumError('');
         }
 
-        if (!birthDayRegax.test(userInfo.birthDay)) {
-            setBirthDayError('올바른 생년월일을 입력하세요. (예: 1111년11월11일)');
-            valid = false;
-        } else {
-            setBirthDayError('');
-        }
+        //if (!birthDayRegax.test(userInfo.birthDay)) {
+          //  setBirthDayError('올바른 생년월일을 입력하세요. (예: 1111년11월11일)');
+            //valid = false;
+        //} else {
+          //  setBirthDayError('');
+        //}
 
         if (!joinedAtRegax.test(userInfo.joinedAt)) {
             setJoinedAtError('올바른 가입 연도를 입력하세요. (예: 2000)');
@@ -113,11 +149,18 @@ const MyInfoModify = () => {
         if (!valid) return;
 
         // 데이터 전송
-        const accessToken = localStorage.getItem('accessToken');
+        const accessToken = localStorage.getItem('access');
         try {
+            // 사용자 ID 가져오기
+            const idResponse = await normalAPI.get(`/user/one`, {
+                headers: {
+                'accessToken': accessToken
+                    }
+                });
+            const id = idResponse.data.id;
             await normalAPI.put(`/user`, userInfo, {
                 headers: {
-                    'Authorization': `Bearer ${accessToken}`,
+                    'accessToken': accessToken,
                 }
             });
             setIsEditing(false); // 수정 모드 종료
@@ -125,13 +168,13 @@ const MyInfoModify = () => {
         } catch (error) {
             console.error('정보 수정 중 오류가 발생했습니다.', error);
             if (error.response && error.response.status === 401) {
-                const refreshToken = localStorage.getItem('refreshToken');
+                const refreshToken = localStorage.getItem('refresh');
                 try {
-                    const refreshResponse = await normalAPI.post('/auth/refresh', {
+                    const refreshResponse = await normalAPI.put(`/user`,userInfo, {
                         token: refreshToken
                     });
                     const newAccessToken = refreshResponse.data.accessToken;
-                    localStorage.setItem('accessToken', newAccessToken);
+                    localStorage.setItem('access', newAccessToken);
 
                     await normalAPI.put(`/user`, userInfo, {
                         headers: {
@@ -213,7 +256,7 @@ const MyInfoModify = () => {
                 <div>
                     <InputTitle>생년월일</InputTitle>
                     <Input
-                        type='text'
+                        type='date'
                         name='birthDay'
                         value={userInfo.birthDay}
                         onChange={handleChange}

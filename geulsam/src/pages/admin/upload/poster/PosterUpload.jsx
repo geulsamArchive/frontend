@@ -75,13 +75,17 @@ const PosterUpload = () => {
 
         try {
             const refreshToken = localStorage.getItem('refresh');
-
+            const refreshResponse = await normalAPI.post('/auth/refresh',{token: refreshToken});
             //처음으로 업로드시
+            let newAccessToken = refreshResponse.data.accessToken;
+            newAccessToken = newAccessToken.replace('Bearer','');
+
+            localStorage.setItem('access',newAccessToken);
             const res = await normalAPI.post('/poster', formData, {
                 headers: {
 
                     'Content-Type': 'multipart/form-data',
-                    'accessToken': accessToken,
+                    'accessToken': `Bearer ${newAccessToken}`,
                 },
             })
             console.log(res)
@@ -90,16 +94,20 @@ const PosterUpload = () => {
             // 에러 발생
             console.error(error);
             try {
-                //리프레쉬 토큰 포함해서 다시 전송
                 const refreshToken = localStorage.getItem('refresh');
-
-                const res = await normalAPI.post('/poster', formData, {
+                const refreshResponse = await normalAPI.post('/auth/refresh', { token: refreshToken });
+    
+                const newAccessToken = refreshResponse.data.accessToken;
+                localStorage.setItem('access', newAccessToken);
+    
+                // 새로 받은 accessToken을 사용해 원래 요청을 다시 시도합니다.
+                const retryRes = await normalAPI.post('/poster', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'refreshToken': refreshToken,
+                        'Authorization': `Bearer ${newAccessToken}`,
                     },
-                })
-                console.log(res)
+                });
+                
             } catch (err) {
                 //그래도 안되면 재로그인 요청
                 console.log(err)

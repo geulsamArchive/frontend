@@ -7,7 +7,7 @@ import {
     Button, InputTitle, Buttons
 } from '../../style/StyledComponent';
 
-const Logins = () => {
+const PasswordChangeModal = () => {
     const [pw, onChangePw] = useForms(); // 비밀번호 입력값을 관리하는 커스텀 훅
     const [pwError, setPwError] = useState(''); // 비밀번호 오류 메시지 관리
     const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$|^[A-Za-z]\d{6,}$/; // 비밀번호 유효성 검사 정규식
@@ -27,8 +27,8 @@ const Logins = () => {
         if (valid) {
             try {
                 // accessToken과 refreshToken을 localStorage에서 가져오기
-                const accessToken = localStorage.getItem('accessToken');
-                const refreshToken = localStorage.getItem('refreshToken');
+                const accessToken = localStorage.getItem('access');
+                const refreshToken = localStorage.getItem('refresh');
 
                 // 서버에 비밀번호 확인 요청
                 const result = await normalAPI.post(
@@ -72,4 +72,4 @@ const Logins = () => {
     );
 };
 
-export default Logins;
+export default PasswordChangeModal;
