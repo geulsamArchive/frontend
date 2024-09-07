@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
         setIsAuthenticated(false);
+        console.log('로그아웃완료')
     };
 
     const login = (accessToken, refreshToken) => {
