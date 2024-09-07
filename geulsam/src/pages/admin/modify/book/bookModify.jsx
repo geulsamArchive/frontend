@@ -39,7 +39,7 @@ const Book = () => {
             <GridContainer>
                 {bookList.map((book) => (
                     <ModifyGridItems key={book.id}>
-                        <Bookcover to={`admin//book/modify/${book.bookId}`}>
+                        <Bookcover to={`${book.bookId}`}>
                             <HiddenButton>수정하기</HiddenButton>
                             <BookcoverImg src={book.bookCover} alt={book.description} />
                         </Bookcover>
