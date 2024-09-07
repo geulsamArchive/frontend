@@ -61,8 +61,7 @@ function App() {
             </Route>
             <Route path='/work/:workId' element={<WorkInfo />} />
             <Route path='/archive/book/:bookId' element={<BookInfo />} />
-            <Route path='/user/mypage' element={<Mypage />} />
-            <Route path='/user/myInfoModify' element={<MyInfoModify />} />
+            <Route path='/user/mypage' element={<MyInfoModify />} />
             <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
             <Route path='*' element={<NotFound404 />} />
           </Route>
@@ -70,19 +69,7 @@ function App() {
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
           </Route>
-          <Route>
-            <Route path='/work/:workId' element={<WorkInfo />} />
-            <Route path='/archive/book/:bookId' element={<BookInfo />} />
-            <Route path='/user/mypage' element={<Mypage />} />
-            <Route path='user/myInfoModify' element={<MyInfoModify />} />
-            <Route path='/user/myInfoModify' element={<MyInfoModify />} />
-            <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
-            <Route path='*' element={<NotFound404 />} />
-          </Route>
-          <Route element={<LoginLayout />}>
-            <Route path='login' element={<Login />} />
-            <Route path='signup' element={<Signup />} />
-          </Route>
+
         </Routes>
       </BrowserRouter>
     </AuthProvider>

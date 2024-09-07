@@ -167,7 +167,7 @@ const PosterModify = () => {
                 },
             });
             alert('포스터가 삭제되었습니다.');
-            navigate('/poster'); // 페이지 이동
+            navigate('/admin/poster/modify'); // 페이지 이동
         } catch (error) {
             console.error(error);
             alert('포스터 삭제에 실패했습니다.');

@@ -5,6 +5,7 @@ import CopyURL from '../../../components/CopyURL/CopyURL';
 import Pagination from '../../../components/Paging/Pagination';
 import { GenreButton, Margin, Space, WorkAwards, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoContainer, WorkInfoRight, WorkLink, WorkTitle, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
 import SearchWork from '../../../components/Search/SearchWork';
+import { CheckTitleLength } from './../../../components/CheckLength';
 
 const Works = () => {
     const [page, setPage] = useState(1)
@@ -85,7 +86,7 @@ const Works = () => {
                                                     {work.type}
                                                 </WorkType>
                                                 <WorkTitle>
-                                                    {work.title}
+                                                    {CheckTitleLength(work.title, 25)}
                                                 </WorkTitle>
                                             </WorkTitleType>
                                             <WorkInfoRight>

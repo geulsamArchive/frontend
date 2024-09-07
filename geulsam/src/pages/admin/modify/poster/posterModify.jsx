@@ -50,7 +50,7 @@ const Poster = () => {
             <PosterGridContainer>
                 {posterList.map((poster) => (
                     <PotserModifyGridItems key={poster.id} >
-                        <PosterLink to={`/poster/modify/${poster.posterId}`}>
+                        <PosterLink to={`/admin/poster/modify/${poster.posterId}`}>
                             <HiddenButton>수정하기</HiddenButton>
                             <Posters src={poster.thumbnailImage} alt={poster.year} />
                         </PosterLink>
