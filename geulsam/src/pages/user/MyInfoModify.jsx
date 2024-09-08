@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
+import {PasswordText, Text,
     PassWordStyle, ErrorMessageInfo, ButtonSmall, SaveButton, EditButton,
     ButtonContainer, BackButton, BookTitle, BookInfoContainer, Inputs, InputTitle, Input,
     B
@@ -201,18 +201,31 @@ const MyInfoModify = (logout) => {
             <Inputs>
                 <div>
                     <B>이름</B>
-                    <Input
-                        type='text'
-                        name='name'
-                        value={userInfo.name}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                    />
-                    {nameError && <ErrorMessageInfo>{nameError}</ErrorMessageInfo>}
+                    {
+                        isEditing ? (
+                        <>
+                            <Input
+                                type='text'
+                                name='name'
+                                value={userInfo.name}
+                                onChange={handleChange}
+                                disabled={!isEditing}
+                            />
+                            {nameError && <ErrorMessageInfo>{nameError}</ErrorMessageInfo>}
+                        </>
+                    ) :  ( 
+                        <Text>
+                        {userInfo.name}
+                        </Text>
+                    )
+                    }        
                 </div>
                 <div>
                     <B>학번</B>
-                    <Input
+                    {
+                    isEditing ? (
+                        <>     
+                        <Input
                         type='text'
                         name='schoolNum'
                         value={userInfo.schoolNum}
@@ -221,6 +234,14 @@ const MyInfoModify = (logout) => {
                     />
                     {schoolNumError && <ErrorMessageInfo>{schoolNumError}</ErrorMessageInfo>}
                     {isEditing && <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>}
+                        </>
+                    )
+                    :   (
+                        <Text>
+                        {userInfo.schoolNum}
+                        </Text>
+                        )
+                    }
                 </div>
                 <div>
                     <B>생년월일</B>
@@ -238,42 +259,74 @@ const MyInfoModify = (logout) => {
                             </>
 
                         ) : (
-                            userInfo.birthDay
+                            <Text>
+                            {userInfo.birthDay}
+                            </Text>
                         )
                     }
                 </div>
                 <div>
                     <B>전자우편</B>
-                    <Input
-                        type='email'
-                        name='email'
-                        value={userInfo.email}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                    />
-                    {emailError && <ErrorMessageInfo>{emailError}</ErrorMessageInfo>}
+                    {
+                        isEditing ? (
+                            <>
+                                <Input
+                                    type='email'
+                                    name='email'
+                                    value={userInfo.email}
+                                    onChange={handleChange}
+                                    disabled={!isEditing}
+                                />
+                                {emailError && <ErrorMessageInfo>{emailError}</ErrorMessageInfo>}
+                            </>
+                        ) : (
+                            <Text>
+                            {userInfo.email}
+                            </Text>
+                        )
+                    }
                 </div>
                 <div>
                     <B>전화번호</B>
-                    <Input
-                        type='text'
-                        name='phone'
-                        value={userInfo.phone}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                    />
-                    {phoneError && <ErrorMessageInfo>{phoneError}</ErrorMessageInfo>}
+                    {
+                        isEditing ? (
+                        <>
+                            <Input
+                                type='text'
+                                name='phone'
+                                value={userInfo.phone}
+                                onChange={handleChange}
+                                disabled={!isEditing}
+                            />
+                            {phoneError && <ErrorMessageInfo>{phoneError}</ErrorMessageInfo>}
+                        </>
+                    ) : (
+                        <Text>
+                        {userInfo.phone}
+                        </Text>
+                    )
+                    }
                 </div>
                 <div>
                     <B>글샘 가입년도</B>
-                    <Input
-                        type='text'
-                        name='joinedAt'
-                        value={userInfo.joinedAt}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                    />
-                    {joinedAtError && <ErrorMessageInfo>{joinedAtError}</ErrorMessageInfo>}
+                    {
+                        isEditing ? (
+                            <>
+                                <Input
+                                    type='text'
+                                    name='joinedAt'
+                                    value={userInfo.joinedAt}
+                                    onChange={handleChange}
+                                    disabled={!isEditing}
+                                />
+                                {joinedAtError && <ErrorMessageInfo>{joinedAtError}</ErrorMessageInfo>}
+                            </>
+                        ) : (
+                            <Text>
+                            {userInfo.joinedAt}
+                            </Text>
+                        )
+                    }
                 </div>
             </Inputs>
             <ButtonContainer>
@@ -284,7 +337,7 @@ const MyInfoModify = (logout) => {
                     <>
                         <EditButton onClick={handleEditClick}>수정하기</EditButton>
                         {/* 비밀번호 변경 링크를 수정하기 버튼 바로 아래에 배치 */}
-                        <PassWordStyle onClick={openPasswordChangeModal}>비밀번호 변경</PassWordStyle>
+                        <PasswordText onClick={openPasswordChangeModal}>비밀번호 변경</PasswordText>
                     </>
                 )}
             </ButtonContainer>

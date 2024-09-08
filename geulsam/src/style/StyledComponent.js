@@ -932,3 +932,28 @@ export const PassWordStyle = styled.p`
   margin-top : 50px;
   font-size:20px;
 `;
+
+
+//회원 정보 수정 조건부 수정 할 때 css 값들
+export const Text = styled.p`
+border: none;
+padding: 5px;
+width: 315px;
+font-family: 'MaruBuri-Regular';
+font-size: 18px;
+text-align: center;
+margin-bottom: 20px;
+`;
+export const PasswordText = styled.p`
+border: none;
+padding: 5px;
+width: 315px;
+font-family: 'MaruBuri-Regular';
+font-size: 18px;
+text-align: left;
+margin-bottom: 20px;
+margin-left : 0px;
+margin-right : auto;
+left : -20px;
+margin-top:5px;
+`;
