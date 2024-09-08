@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import {
     PassWordStyle, ErrorMessageInfo, ButtonSmall, SaveButton, EditButton,
-    ButtonContainer, BackButton, BookTitle, BookInfoContainer, Inputs, InputTitle, Input
+    ButtonContainer, BackButton, BookTitle, BookInfoContainer, Inputs, InputTitle, Input,
+    B
 } from '../../style/StyledComponent';
 import { normalAPI } from '../../apis/Api';
 
-const MyInfoModify = () => {
+const MyInfoModify = (logout) => {
     const [isEditing, setIsEditing] = useState(false);
-    //const { id } = useParams(); // Route에서 id를 가져옴
     const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
     const [userInfo, setUserInfo] = useState({
         name: '',
@@ -31,66 +30,51 @@ const MyInfoModify = () => {
     // 정규 표현식
     const nameRegax = /^[가-힣]{1,6}$/;
     const schoolNumRegax = /^[a-zA-Z]\d{6}$/;
-   // const birthDayRegax = /^\d{10}$/;
     const joinedAtRegax = /^\d{4}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net)$/;
     const phoneRegex = /^01[0-9]-\d{3,4}-\d{4}$/;
 
     // 컴포넌트가 마운트될 때 사용자 정보를 불러오는 useEffect
 
-    useEffect(() => {
-        const fetchUserInfo = async () => {
-            try {
-                let accessToken = localStorage.getItem('access');
-                const refreshToken = localStorage.getItem('refresh');
-
+    const fetchUserInfo = async (navigate, logout) => {
+        const accessToken = localStorage.getItem('access');
+        const refreshToken = localStorage.getItem('refresh');
+        try {
+            // ID를 이용해 사용자 정보 가져오기
+            const response = await normalAPI.get(`/user/one`, {
+                headers: {
+                    'accessToken': accessToken,
+                }
+            });
+            console.log(response)
+            setUserInfo(response.data.data);
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // Access token이 만료된 경우, refresh token을 사용해 새로운 access token을 요청
                 try {
-                    // ID를 이용해 사용자 정보 가져오기
-                    const response = await normalAPI.get(`/user/one`, {
+                    const response = await normalAPI.get('/user/one', {
                         headers: {
-                            'accessToken': accessToken,
+                            'refreshToken': refreshToken
                         }
                     });
-                    console.log(response)
+                    const newAccessToken = response.headers.accesstoken.replace('Bearer ', '');
+                    localStorage.setItem('access', newAccessToken);
+                    const newRefreshToken = response.headers.refreshtoken.replace('Bearer ', '');
+                    localStorage.setItem('refresh', newRefreshToken);
                     setUserInfo(response.data.data);
-                } catch (error) {
-                    if (error.response && error.response.status === 401) {
-                        // Access token이 만료된 경우, refresh token을 사용해 새로운 access token을 요청
-                        try {
-                            const refreshResponse = await normalAPI.post('/auth/refresh', { token: refreshToken });
-                            accessToken = refreshResponse.data.accessToken;
-                            localStorage.setItem('access', accessToken);
-
-                            // 새로 받은 access token으로 다시 사용자 ID를 가져옴
-                            const idResponse = await normalAPI.get(`/user/check`, {
-                                headers: {
-                                    'Authorization': `Bearer ${accessToken}`
-                                }
-                            });
-                            const id = idResponse.data.id;
-
-                            // ID를 이용해 사용자 정보 가져오기
-                            const response = await normalAPI.get(`/user/one?search=${id}`, {
-                                headers: {
-                                    'Authorization': `Bearer ${accessToken}`
-                                }
-                            });
-                            setUserInfo(response.data);
-                        } catch (refreshError) {
-                            console.error('토큰 갱신 중 오류가 발생했습니다.', refreshError);
-                            alert('로그인이 필요합니다.');
-                            navigate('/login'); // 로그인 페이지로 이동
-                        }
-                    } else {
-                        console.error('사용자 정보를 불러오는 중 오류가 발생했습니다.', error);
-                    }
+                } catch (refreshError) {
+                    console.error('토큰 갱신 중 오류가 발생했습니다.', refreshError);
+                    alert('로그인이 필요합니다.');
+                    navigate('/main'); // 로그인 페이지로 이동
                 }
-            } catch (error) {
+            } else {
                 console.error('사용자 정보를 불러오는 중 오류가 발생했습니다.', error);
             }
-        };
+        }
+    };
 
-        fetchUserInfo();
+    useEffect(() => {
+        fetchUserInfo(navigate);
     }, [navigate]);
 
     const handleEditClick = () => {
@@ -118,13 +102,6 @@ const MyInfoModify = () => {
             setSchoolNumError('');
         }
 
-        //if (!birthDayRegax.test(userInfo.birthDay)) {
-          //  setBirthDayError('올바른 생년월일을 입력하세요. (예: 1111년11월11일)');
-            //valid = false;
-        //} else {
-          //  setBirthDayError('');
-        //}
-
         if (!joinedAtRegax.test(userInfo.joinedAt)) {
             setJoinedAtError('올바른 가입 연도를 입력하세요. (예: 2000)');
             valid = false;
@@ -150,14 +127,8 @@ const MyInfoModify = () => {
 
         // 데이터 전송
         const accessToken = localStorage.getItem('access');
+        const refreshToken = localStorage.getItem('refresh')
         try {
-            // 사용자 ID 가져오기
-            const idResponse = await normalAPI.get(`/user/one`, {
-                headers: {
-                'accessToken': accessToken
-                    }
-                });
-            const id = idResponse.data.id;
             await normalAPI.put(`/user`, userInfo, {
                 headers: {
                     'accessToken': accessToken,
@@ -167,20 +138,18 @@ const MyInfoModify = () => {
             alert('정보가 성공적으로 수정되었습니다.');
         } catch (error) {
             console.error('정보 수정 중 오류가 발생했습니다.', error);
-            if (error.response && error.response.status === 401) {
-                const refreshToken = localStorage.getItem('refresh');
+            if (error.response && error.response.status === 403) {
                 try {
-                    const refreshResponse = await normalAPI.put(`/user`,userInfo, {
-                        token: refreshToken
-                    });
-                    const newAccessToken = refreshResponse.data.accessToken;
-                    localStorage.setItem('access', newAccessToken);
-
-                    await normalAPI.put(`/user`, userInfo, {
+                    const response = await normalAPI.put(`/user`, userInfo, {
                         headers: {
-                            'Authorization': `Bearer ${newAccessToken}`,
+                            'refreshToken': refreshToken,
                         }
                     });
+                    const newAccessToken = response.headers.accesstoken.replace('Bearer ', '');
+                    localStorage.setItem('access', newAccessToken);
+                    const newRefreshToken = response.headers.refreshtoken.replace('Bearer ', '');
+                    localStorage.setItem('refresh', newRefreshToken);
+
                     setIsEditing(false);
                     alert('정보가 성공적으로 수정되었습니다.');
                 } catch (refreshError) {
@@ -231,7 +200,7 @@ const MyInfoModify = () => {
             <br />
             <Inputs>
                 <div>
-                    <InputTitle>이름</InputTitle>
+                    <B>이름</B>
                     <Input
                         type='text'
                         name='name'
@@ -242,7 +211,7 @@ const MyInfoModify = () => {
                     {nameError && <ErrorMessageInfo>{nameError}</ErrorMessageInfo>}
                 </div>
                 <div>
-                    <InputTitle>학번</InputTitle>
+                    <B>학번</B>
                     <Input
                         type='text'
                         name='schoolNum'
@@ -254,18 +223,27 @@ const MyInfoModify = () => {
                     {isEditing && <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>}
                 </div>
                 <div>
-                    <InputTitle>생년월일</InputTitle>
-                    <Input
-                        type='date'
-                        name='birthDay'
-                        value={userInfo.birthDay}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                    />
-                    {birthDayError && <ErrorMessageInfo>{birthDayError}</ErrorMessageInfo>}
+                    <B>생년월일</B>
+                    {
+                        isEditing ? (
+                            <>
+                                <Input
+                                    type='date'
+                                    name='birthDay'
+                                    value={userInfo.birthDay}
+                                    onChange={handleChange}
+                                    disabled={!isEditing}
+                                />
+                                {birthDayError && <ErrorMessageInfo>{birthDayError}</ErrorMessageInfo>}
+                            </>
+
+                        ) : (
+                            userInfo.birthDay
+                        )
+                    }
                 </div>
                 <div>
-                    <InputTitle>이메일</InputTitle>
+                    <B>전자우편</B>
                     <Input
                         type='email'
                         name='email'
@@ -276,7 +254,7 @@ const MyInfoModify = () => {
                     {emailError && <ErrorMessageInfo>{emailError}</ErrorMessageInfo>}
                 </div>
                 <div>
-                    <InputTitle>전화번호</InputTitle>
+                    <B>전화번호</B>
                     <Input
                         type='text'
                         name='phone'
@@ -287,7 +265,7 @@ const MyInfoModify = () => {
                     {phoneError && <ErrorMessageInfo>{phoneError}</ErrorMessageInfo>}
                 </div>
                 <div>
-                    <InputTitle>글샘 가입연도</InputTitle>
+                    <B>글샘 가입년도</B>
                     <Input
                         type='text'
                         name='joinedAt'

@@ -26,18 +26,20 @@ const PasswordChangeModal = () => {
 
         if (valid) {
             try {
+                console.log(pw)
                 // accessToken과 refreshToken을 localStorage에서 가져오기
                 const accessToken = localStorage.getItem('access');
                 const refreshToken = localStorage.getItem('refresh');
 
                 // 서버에 비밀번호 확인 요청
                 const result = await normalAPI.post(
-                    `/user/checkPassword`,
-                    { pw },
+                    `/user/checkPassword`, {
+                    password: pw,
+                }
+                    ,
                     {
                         headers: {
-                            'Authorization': `Bearer ${accessToken}`,
-                            'x-refresh-token': refreshToken
+                            'accessToken': accessToken,
                         }
                     }
                 );

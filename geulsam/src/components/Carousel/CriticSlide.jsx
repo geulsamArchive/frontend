@@ -181,6 +181,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
                 } catch (err) {
                     console.error('Refresh Token Error:', err);
                     alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    logout();
                 }
             } else {
                 console.error('Error:', error);

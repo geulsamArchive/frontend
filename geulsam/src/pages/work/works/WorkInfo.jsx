@@ -9,6 +9,7 @@ import Comments from '../../../components/Comment/Comments';
 import NovelViewer from '../viewer/NovelViewer';
 import axios from 'axios';
 import Modal from 'react-modal';
+import { CheckTitleLength } from './../../../components/CheckLength';
 
 const WorkInfo = () => {
     const [workData, setWorkData] = useState({})
@@ -72,7 +73,7 @@ const WorkInfo = () => {
         <>
             <BookInfoContainer>
                 <BookTitle>
-                    {workData.title}
+                    {CheckTitleLength(workData.title, 40)}
                 </BookTitle>
                 <BookInfoAndButton>
                     <BookInfoContents>

@@ -204,7 +204,7 @@ const BookUpload = () => {
                 },
             });
             alert('문집이 삭제되었습니다.');
-            navigate('/book'); // 페이지 이동
+            navigate('/admin/book/modify'); // 페이지 이동
         } catch (error) {
             console.error(error);
             alert('문집 삭제에 실패했습니다.');
