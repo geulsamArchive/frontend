@@ -51,7 +51,7 @@ const Signup5 = ({ prevStep, nextStep, formData }) => {
         Post();
         if (valid) {
             const keywords = [keyword1, keyword2, keyword3];
-            formData.keywords = keywords
+            formData.keyword = keywords
             console.log(keywords)
             console.log(formData)
             nextStep({ keyword1, keyword2, keyword3 });

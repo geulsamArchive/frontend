@@ -270,7 +270,7 @@ text-align:right;
 `;
 
 export const SideBox = styled.div`
-margin-bottom: 44px;
+margin-bottom: 40px;
 `
 export const SideButton = styled.button`
 font-family: 'MaruBuri-Regular';
@@ -281,9 +281,9 @@ border-right: none;
 border-radius: 43px 0 0 43px;
 padding: 20px 30px;
 padding-right: 85px;
-background-color: black;
+background-color: rgba(45, 43, 42, 1);
 &:hover{
-  background-color:  rgba(45, 43, 42, 1);
+  background-color: rgba(171, 170, 170, 1);
 }
 `
 export const SideLink = styled(Link)`
@@ -293,11 +293,11 @@ text-decoration: none;
 border: 1px solid rgba(171, 170, 170, 1);
 border-right: none;
 border-radius: 43px 0 0 43px;
-padding: 20px 30px;
-padding-right: 85px;
-background-color: black;
+padding: 18px 25px;
+padding-right: 70px;
+background-color: rgba(45, 43, 42, 1);
 &:hover{
-  background-color:  rgba(45, 43, 42, 1);
+  background-color:  rgba(171, 170, 170, 1);
 }
 `
 
@@ -351,8 +351,8 @@ text-shadow: 0 4px 4px black;
 export const Recents = styled.div`
 display: flex;
 flex-wrap: wrap;
-width: 1300px;
-margin-left: 25px;
+width: 100%;
+margin-left: 7.5dvw;
 `
 
 
@@ -396,7 +396,7 @@ export const TextOverflow = styled.span`
 overflow: hidden;
 `
 export const RecentWorkContainer = styled.div`
-width: 611px;
+width: 40dvw;
 height: 174px;
 margin: 14px;
 border-radius: 11px;
@@ -913,8 +913,11 @@ export const SaveButton = styled(Button)`
 `;
 
 //뒤로가기
-export const BackButton = styled(Button)`
-  color:white;
+export const BackButton = styled.img`
+margin-left: 24px;
+width: 10px;
+height: auto;
+cursor: pointer;
 `
 
 //회원 정보 수정 에러메시지

@@ -15,7 +15,7 @@ const Signup = () => {
         joinedAt: '',
         email: '',
         phone: '',
-        keywords: [],
+        keyword: [],
 
     })
 
