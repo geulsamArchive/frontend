@@ -913,8 +913,11 @@ export const SaveButton = styled(Button)`
 `;
 
 //뒤로가기
-export const BackButton = styled(Button)`
-  color:white;
+export const BackButton = styled.img`
+margin-left: 24px;
+width: 10px;
+height: auto;
+cursor: pointer;
 `
 
 //회원 정보 수정 에러메시지
