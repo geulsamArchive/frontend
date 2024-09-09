@@ -277,7 +277,7 @@ const MyInfoModify = (logout) => {
                 </div>
             </Inputs>
             <ButtonContainer>
-                {isEditing && <BackButton onClick={() => setIsEditing(false)}>뒤로가기</BackButton>}
+                {isEditing && <button onClick={() => setIsEditing(false)}>뒤로가기</button>}
                 {isEditing ? (
                     <SaveButton onClick={handleSaveClick}>저장하기</SaveButton>
                 ) : (
