@@ -897,10 +897,10 @@ export const ButtonContainer = styled.div`
     margin-top: 20px;
 `;
 
-// const BackButton = styled(Button)`
-//     background-color: #f0f0f0;
-//     color: #333;
-// `;
+export const BackButtonAtMyInfoModify = styled(Button)`
+    background-color: #f0f0f0;
+    color: #333;
+`;
 
 export const EditButton = styled(Button)`
     color: white;

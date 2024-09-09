@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {PasswordText, Text,
     PassWordStyle, ErrorMessageInfo, ButtonSmall, SaveButton, EditButton,
-    ButtonContainer, BackButton, BookTitle, BookInfoContainer, Inputs, InputTitle, Input,
+    ButtonContainer, BackButtonAtMyInfoModify, BookTitle, BookInfoContainer, Inputs, InputTitle, Input,
     B
 } from '../../style/StyledComponent';
 import { normalAPI } from '../../apis/Api';
@@ -330,7 +330,7 @@ const MyInfoModify = (logout) => {
                 </div>
             </Inputs>
             <ButtonContainer>
-                {isEditing && <button onClick={() => setIsEditing(false)}>뒤로가기</button>}
+                {isEditing && <BackButtonAtMyInfoModify onClick={() => setIsEditing(false)}>뒤로가기</BackButtonAtMyInfoModify>}
                 {isEditing ? (
                     <SaveButton onClick={handleSaveClick}>저장하기</SaveButton>
                 ) : (

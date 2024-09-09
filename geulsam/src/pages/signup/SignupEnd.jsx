@@ -9,15 +9,16 @@ const SignupEnd = () => {
         navigate('/main')
     }
     // formdata post~~~
-    //     async () => {
-    //         const result = await SignUpApi(
-    //             name, schoolNum, phone, email, joinedAt, birthDay);
-    //         console.log(result)
-    //         redirect('/main');
-    //     <div>
-    //     {formdata.formData.name}
-    //     {formdata.formData.info}
-    //     </div>
+        // async () => {
+        //     const result = await SignUpApi(
+        //         name, schoolNum, phone, email, joinedAt, birthDay);
+        //     console.log(result)
+        //     redirect('/main');
+        // <div>
+        // {formdata.formData.name}
+        // {formdata.formData.info}
+        // </div>
+        // }
     return (
         <Wrapper>
             <Form>
@@ -38,6 +39,7 @@ const SignupEnd = () => {
             </Form>
         </Wrapper>
     );
-};
+}
+
 
 export default SignupEnd;
