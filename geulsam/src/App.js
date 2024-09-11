@@ -28,6 +28,8 @@ import AdminCalendar from './pages/admin/calendar/Calendar';
 import Admin from './pages/admin/Admin';
 import AdminLinks from './pages/admin/AdminLinks';
 import { AuthProvider } from './store/Auth';
+import CriticLogUpload from './pages/admin/upload/critic/CriticLogUpload';
+import AuthorInfo from './pages/work/Author/AuthorInfo';
 
 
 function App() {
@@ -50,7 +52,9 @@ function App() {
               <Route path='book/upload' element={<BookUpload />} />
             </Route>
             <Route path='/frontend' element={<Main />} />
+            <Route path='critic/log/upload' element={<CriticLogUpload />} />
             <Route path='/work/upload' element={<UploadWork />} />
+            <Route path='/author/:id' element={<AuthorInfo />} />
             <Route path='/' element={<Main />} />
             <Route path='/main' element={<Main />} />
             <Route path='/work' element={<Works />} />

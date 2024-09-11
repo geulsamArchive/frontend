@@ -74,8 +74,20 @@ width: 315px;
 font-family: 'MaruBuri-Regular';
 font-size: 18px;
 text-align: center;
-margin-bottom: 20px;
+margin-bottom: 10px;
 `;
+export const InputShort = styled.input`
+border: none;
+border-bottom:1px solid rgba(171, 170, 170 , 1);
+padding: 5px;
+width: 250px;
+font-family: 'MaruBuri-Regular';
+font-size: 18px;
+text-align: center;
+margin-bottom: 10px;
+margin-right: 20px;
+`;
+
 
 export const IntroductionTextarea = styled.textarea`
 border: none;
@@ -295,11 +307,31 @@ border-right: none;
 border-radius: 43px 0 0 43px;
 padding: 18px 25px;
 padding-right: 70px;
+font-size: 18px;
+
 background-color: rgba(45, 43, 42, 1);
 &:hover{
   background-color:  rgba(171, 170, 170, 1);
 }
 `
+
+export const SideLink2 = styled(Link)`
+font-family: 'MaruBuri-Regular';
+color: rgba(87, 86, 85, 1);
+text-decoration: none;
+border: 1px solid rgba(171, 170, 170, 1);
+border-right: none;
+border-radius: 43px 0 0 43px;
+padding: 18px 25px;
+padding-right: 70px;
+font-size: 18px;
+background-color: rgba(234, 233, 227, 1);
+&:hover{
+  background-color:  rgba(171, 170, 170, 1);
+}
+`
+
+
 
 //main페이지
 
@@ -872,8 +904,7 @@ export const InputsContainer = styled.div`
 // 회원가입 에러 메시지
 export const ErrorMessage = styled.p`
     color: red;
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: 10px;
 `;
 
 // 학번 중복 확인용 작은 버튼
@@ -892,9 +923,7 @@ cursor: pointer;
 
 
 export const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+padding-bottom: 100px;
 `;
 
 export const BackButtonAtMyInfoModify = styled(Button)`
@@ -905,6 +934,8 @@ export const BackButtonAtMyInfoModify = styled(Button)`
 export const EditButton = styled(Button)`
     color: white;
     margin-right:10px;
+    font-weight: 700;
+    font-size: 11.5px;
 `;
 
 export const SaveButton = styled(Button)`
@@ -947,16 +978,14 @@ font-size: 18px;
 text-align: center;
 margin-bottom: 20px;
 `;
-export const PasswordText = styled.p`
+export const PasswordText = styled.button`
 border: none;
-padding: 5px;
-width: 315px;
 font-family: 'MaruBuri-Regular';
-font-size: 18px;
+font-size: 14px;
 text-align: left;
-margin-bottom: 20px;
-margin-left : 0px;
-margin-right : auto;
-left : -20px;
-margin-top:5px;
+color: rgba(129, 128, 127, 1);
+background-color: inherit;
+text-decoration : underline;
+text-underline-offset : 8px;
+cursor: pointer;
 `;

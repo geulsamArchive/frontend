@@ -3,6 +3,8 @@ import { CalendarTitle, Centering } from '../../style/StyledComponent';
 import { CriticContainer, Notice } from '../../style/Critic';
 import { normalAPI } from '../../apis/Api';
 import CriticSlide from '../../components/Carousel/CriticSlide';
+import { Accordion } from '../../components/Comment/Comments';
+import CriticLog from './CriticLog';
 const Critic = () => {
     const [criticData, setCriticData] = useState([])
     const [startMonth, setStartMonth] = useState(9)
@@ -39,6 +41,7 @@ const Critic = () => {
                     신청을 삭제하려면 해당하는 칸을 클릭해주세요.
                 </Notice>
             </Centering>
+            <Accordion name='지난 합평회' content={CriticLog} />
         </CriticContainer>
     );
 };

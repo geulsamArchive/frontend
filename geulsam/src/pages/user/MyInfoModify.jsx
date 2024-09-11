@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {PasswordText, Text,
-    PassWordStyle, ErrorMessageInfo, ButtonSmall, SaveButton, EditButton,
-    ButtonContainer, BackButtonAtMyInfoModify, BookTitle, BookInfoContainer, Inputs, InputTitle, Input,
-    B
+import {
+    PasswordText, Text,
+    PassWordStyle, ButtonSmall, SaveButton, EditButton,
+    ButtonContainer, BackButtonAtMyInfoModify, BookTitle, BookInfoContainer, Inputs, InputTitle, B
 } from '../../style/StyledComponent';
 import { normalAPI } from '../../apis/Api';
+import { Left, Right, UserInfos, Input, ErrorMessageInfo } from '../../style/UserInfo';
 
 const MyInfoModify = (logout) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -199,52 +200,48 @@ const MyInfoModify = (logout) => {
             <br />
             <br />
             <Inputs>
-                <div>
-                    <B>이름</B>
+                <UserInfos>
+                    <Left>이름</Left>
                     {
                         isEditing ? (
-                        <>
-                            <Input
-                                type='text'
-                                name='name'
-                                value={userInfo.name}
-                                onChange={handleChange}
-                                disabled={!isEditing}
-                            />
-                            {nameError && <ErrorMessageInfo>{nameError}</ErrorMessageInfo>}
-                        </>
-                    ) :  ( 
-                        <Text>
-                        {userInfo.name}
-                        </Text>
-                    )
-                    }        
-                </div>
-                <div>
-                    <B>학번</B>
-                    {
-                    isEditing ? (
-                        <>     
-                        <Input
-                        type='text'
-                        name='schoolNum'
-                        value={userInfo.schoolNum}
-                        onChange={handleChange}
-                        disabled={!isEditing}
-                    />
-                    {schoolNumError && <ErrorMessageInfo>{schoolNumError}</ErrorMessageInfo>}
-                    {isEditing && <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>}
-                        </>
-                    )
-                    :   (
-                        <Text>
-                        {userInfo.schoolNum}
-                        </Text>
+                            <>
+                                <Input
+                                    type='text'
+                                    name='name'
+                                    value={userInfo.name}
+                                    onChange={handleChange}
+                                    disabled={!isEditing}
+                                />
+                                {nameError && <ErrorMessageInfo>{nameError}</ErrorMessageInfo>}
+                            </>
+                        ) : (
+                            <Right>
+                                {userInfo.name}
+                            </Right>
                         )
                     }
-                </div>
-                <div>
-                    <B>생년월일</B>
+                </UserInfos>
+                <UserInfos>
+                    <Left>학번</Left>  {
+                        isEditing ? (
+                            <>
+                                <Input
+                                    type='text'
+                                    name='schoolNum'
+                                    value={userInfo.schoolNum}
+                                    onChange={handleChange}
+                                    disabled={!isEditing}
+                                />
+                                {schoolNumError && <ErrorMessageInfo>{schoolNumError}</ErrorMessageInfo>}
+                                {isEditing && <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>}
+                            </>
+                        )
+                            : (<Right>
+                                {userInfo.schoolNum}
+                            </Right>)
+                    }
+                </UserInfos>   <UserInfos>
+                    <Left>생일</Left>
                     {
                         isEditing ? (
                             <>
@@ -258,15 +255,12 @@ const MyInfoModify = (logout) => {
                                 {birthDayError && <ErrorMessageInfo>{birthDayError}</ErrorMessageInfo>}
                             </>
 
-                        ) : (
-                            <Text>
+                        ) : (<Right>
                             {userInfo.birthDay}
-                            </Text>
-                        )
+                        </Right>)
                     }
-                </div>
-                <div>
-                    <B>전자우편</B>
+                </UserInfos>   <UserInfos>
+                    <Left>전자우편</Left>
                     {
                         isEditing ? (
                             <>
@@ -279,36 +273,30 @@ const MyInfoModify = (logout) => {
                                 />
                                 {emailError && <ErrorMessageInfo>{emailError}</ErrorMessageInfo>}
                             </>
-                        ) : (
-                            <Text>
+                        ) : (<Right>
                             {userInfo.email}
-                            </Text>
-                        )
+                        </Right>)
                     }
-                </div>
-                <div>
-                    <B>전화번호</B>
+                </UserInfos>  <UserInfos>
+                    <Left>전화번호</Left>
                     {
                         isEditing ? (
-                        <>
-                            <Input
-                                type='text'
-                                name='phone'
-                                value={userInfo.phone}
-                                onChange={handleChange}
-                                disabled={!isEditing}
-                            />
-                            {phoneError && <ErrorMessageInfo>{phoneError}</ErrorMessageInfo>}
-                        </>
-                    ) : (
-                        <Text>
-                        {userInfo.phone}
-                        </Text>
-                    )
+                            <>
+                                <Input
+                                    type='text'
+                                    name='phone'
+                                    value={userInfo.phone}
+                                    onChange={handleChange}
+                                    disabled={!isEditing}
+                                />
+                                {phoneError && <ErrorMessageInfo>{phoneError}</ErrorMessageInfo>}
+                            </>
+                        ) : (<Right>
+                            {userInfo.phone}
+                        </Right>)
                     }
-                </div>
-                <div>
-                    <B>글샘 가입년도</B>
+                </UserInfos>   <UserInfos>
+                    <Left>가입년도</Left>
                     {
                         isEditing ? (
                             <>
@@ -321,22 +309,20 @@ const MyInfoModify = (logout) => {
                                 />
                                 {joinedAtError && <ErrorMessageInfo>{joinedAtError}</ErrorMessageInfo>}
                             </>
-                        ) : (
-                            <Text>
+                        ) : (<Right>
                             {userInfo.joinedAt}
-                            </Text>
-                        )
+                        </Right>)
                     }
-                </div>
+                </UserInfos>
             </Inputs>
             <ButtonContainer>
-                {isEditing && <BackButtonAtMyInfoModify onClick={() => setIsEditing(false)}>뒤로가기</BackButtonAtMyInfoModify>}
-                {isEditing ? (
-                    <SaveButton onClick={handleSaveClick}>저장하기</SaveButton>
+                {isEditing ? (<>
+                    <BackButtonAtMyInfoModify onClick={() => setIsEditing(false)}>뒤로가기</BackButtonAtMyInfoModify>
+                    <EditButton onClick={handleSaveClick}>저장하기</EditButton>
+                </>
                 ) : (
                     <>
                         <EditButton onClick={handleEditClick}>수정하기</EditButton>
-                        {/* 비밀번호 변경 링크를 수정하기 버튼 바로 아래에 배치 */}
                         <PasswordText onClick={openPasswordChangeModal}>비밀번호 변경</PasswordText>
                     </>
                 )}

@@ -11,7 +11,7 @@ export const SignUpApi = async (formdata) => {
             joinedAt: formdata.joinedAt,
             birthDay: formdata.birthDay,
             introduce: formdata.info,
-            keyword: formdata.keywords,
+            keyword: formdata.keyword,
         })
         return result
     } catch (error) {

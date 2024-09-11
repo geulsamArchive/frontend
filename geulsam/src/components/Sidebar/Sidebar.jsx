@@ -1,5 +1,5 @@
 import React from 'react';
-import { SideBox, SideLink, Sidebars } from '../../style/StyledComponent';
+import { SideBox, SideLink, SideLink2, Sidebars } from '../../style/StyledComponent';
 import { useAuth } from '../../store/Auth';
 const Sidebar = () => {
     const { isAuthenticated, logout } = useAuth();
@@ -14,9 +14,9 @@ const Sidebar = () => {
                 ?
                 <>
                     <SideBox>
-                        <SideLink to='/work/upload'>
+                        <SideLink2 to='/work/upload'>
                             작품올리기
-                        </SideLink>
+                        </SideLink2>
                     </SideBox>
                     <SideBox>
                         <SideLink to='/user/mypage'>

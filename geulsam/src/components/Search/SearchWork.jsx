@@ -2,7 +2,7 @@ import React from 'react';
 import { useForms } from '../../hooks/useForms';
 import { SearchBox, SearchButton, SearchInput } from '../../style/Search';
 
-const SearchWork = ({ onSearch }) => {
+const SearchWork = ({ onSearch, placeholder }) => {
     const [inputValue, onChangeValue] = useForms()
 
     const handleSearchClick = (event) => {
@@ -25,7 +25,7 @@ const SearchWork = ({ onSearch }) => {
             <br />
 
             <SearchBox>
-                <SearchInput type='text' value={inputValue} onKeyDown={handleKeyDown} onChange={onChangeValue} placeholder='찾으시는 작품의 제목이나 작가명을 적어주세요.' />
+                <SearchInput type='text' value={inputValue} onKeyDown={handleKeyDown} onChange={onChangeValue} placeholder={placeholder} />
                 <SearchButton type='button' onClick={handleSearchClick}>
                     <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="11.5108" cy="11.5112" r="9.82426" stroke="#575655" stroke-width="2.7" />

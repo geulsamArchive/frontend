@@ -58,7 +58,7 @@ const Signup3 = ({ prevStep, nextStep }) => {
                         value={email}
                         onChange={onChangeEmail}
                     />
-                    {emailError && <ErrorMessage>{emailError}</ErrorMessage>}
+                    {emailError ? <ErrorMessage>{emailError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
 
                     <InputTitle>
                         전화번호
@@ -69,7 +69,7 @@ const Signup3 = ({ prevStep, nextStep }) => {
                         value={phone}
                         onChange={onChangePhone}
                     />
-                    {phoneError && <ErrorMessage>{phoneError}</ErrorMessage>}
+                    {phoneError ? <ErrorMessage>{phoneError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
                 </LeftAlign>
                 <WhiteButtons>
                     <Button onClick={handleNext}>다음</Button>

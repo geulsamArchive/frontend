@@ -69,7 +69,7 @@ const Works = () => {
 
     return (
         <div>
-            <SearchWork onSearch={handleSearch} />
+            <SearchWork onSearch={handleSearch} placeholder='찾으시는 작품의 제목이나 작가명을 적어주세요.' />
             <WorkInfoContainer>
                 <WorkTopBorder />
                 <BookInfoAndButton>

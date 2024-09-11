@@ -48,15 +48,14 @@ const Signup5 = ({ prevStep, nextStep, formData }) => {
         }
         e.preventDefault();
 
-        Post();
         if (valid) {
             const keywords = [keyword1, keyword2, keyword3];
             formData.keyword = keywords
             console.log(keywords)
             console.log(formData)
             nextStep({ keyword1, keyword2, keyword3 });
+            Post();
         }
-
     }
 
     return (
@@ -71,7 +70,7 @@ const Signup5 = ({ prevStep, nextStep, formData }) => {
                 <MarginLeft>
                     <LeftAlign>
                         <Welcome>
-                            내 작품 스타일을 소개할 <Red>키워드</Red>를 세 개 작성해주세요. (띄어쓰기 불가, 최대 6자)
+                            내 작품 스타일을 소개할 <Red>한글 키워드</Red>를 세 개 작성해주세요. (띄어쓰기 불가, 최대 6자)
                         </Welcome>
                     </LeftAlign>
                 </MarginLeft>

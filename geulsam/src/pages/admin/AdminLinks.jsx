@@ -17,6 +17,8 @@ const AdminLinks = () => {
                 <br />
                 <Link to='/admin/critic'>합평회 승인</Link>
                 <br />
+                <Link to='/admin/critic/log/upload'>합평회 기록 등록</Link>
+                <br />
                 <Link to='/admin/calendar'>일정 추가</Link>
                 <br />
                 <Link to='/admin/book/upload'>문집 업로드</Link>

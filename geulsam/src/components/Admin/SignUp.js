@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForms } from '../../hooks/useForms';
 import axios from 'axios';
-import { ButtonSmall, Wrapper, Form, Input, Inputs, Button, InputTitle, FormTop, Silver, BackButton, LeftAlign, WhiteButtons, ErrorMessage } from '../../style/StyledComponent';
+import { ButtonSmall, Wrapper, Form, Input, Inputs, Button, InputTitle, FormTop, Silver, BackButton, LeftAlign, WhiteButtons, ErrorMessage, InputShort } from '../../style/StyledComponent';
 import Left from '../../assets/images/grayLeft.png'
 import { normalAPI } from '../../apis/Api';
 
@@ -64,7 +64,7 @@ const SignUp = ({ prevStep, nextStep }) => {
         //가입연도 유효성 검사
         if (!joinedAtRegax.test(joinedAt)) {
             valid = false;
-            setJoinedAtError('올바른 가입 연도를 입력하세요. (예: 2000년 ');
+            setJoinedAtError('올바른 가입 연도를 입력하세요. (예: 2000)');
         }
         else {
             setJoinedAtError('');
@@ -107,13 +107,13 @@ const SignUp = ({ prevStep, nextStep }) => {
                         이름
                     </InputTitle>
                     <Input type='text' value={name} onChange={onChangeName} />
-                    {nameError && <ErrorMessage>{nameError}</ErrorMessage>}
+                    {nameError ? <ErrorMessage>{nameError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
                     <InputTitle>
                         학번
                     </InputTitle>
-                    <Input placeholder='예) C012345' type='text' value={schoolNum} onChange={onChangeSchoolNum} />
-                    {schoolNumError && <ErrorMessage>{schoolNumError}</ErrorMessage>}
+                    <InputShort placeholder='예) C012345' type='text' value={schoolNum} onChange={onChangeSchoolNum} />
                     <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>
+                    {schoolNumError ? <ErrorMessage>{schoolNumError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
                     <InputTitle>
                         생년월일
                     </InputTitle>
@@ -123,7 +123,7 @@ const SignUp = ({ prevStep, nextStep }) => {
                         글샘 가입연도
                     </InputTitle>
                     <Input placeholder='예) 2024' type='text' value={joinedAt} onChange={onChangeJoinedAt} />
-                    {joinedAtError && <ErrorMessage>{joinedAtError}</ErrorMessage>}
+                    {joinedAtError ? <ErrorMessage>{joinedAtError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
                 </LeftAlign>
                 <WhiteButtons>
                     <Button onClick={handleNext}>다음</Button>

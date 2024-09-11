@@ -23,13 +23,13 @@ const PasswordChangeModal = () => {
         } else {
             setPwError('');
         }
-
+        const accessToken = localStorage.getItem('access');
+        const refreshToken = localStorage.getItem('refresh');
         if (valid) {
             try {
                 console.log(pw)
                 // accessToken과 refreshToken을 localStorage에서 가져오기
-                const accessToken = localStorage.getItem('access');
-                const refreshToken = localStorage.getItem('refresh');
+
 
                 // 서버에 비밀번호 확인 요청
                 const result = await normalAPI.post(
@@ -43,8 +43,8 @@ const PasswordChangeModal = () => {
                         }
                     }
                 );
-
-                if (result.data.success) {
+                console.log(result)
+                if (result.data.status === 200) {
                     // 비밀번호가 일치하면 다음 화면으로 이동
                     navigate('./PasswordChangeModal2');
                 } else {
@@ -52,7 +52,31 @@ const PasswordChangeModal = () => {
                 }
             } catch (error) {
                 console.error('비밀번호 확인 중 오류가 발생했습니다.', error);
-                setPwError('오류가 발생했습니다. 다시 시도해주세요.');
+                try {
+                    const res = await normalAPI.post(`/user/checkPassword`, {
+                        password: pw,
+                    },
+                        {
+                            headers: {
+                                'refreshToken': refreshToken,
+                            }
+                        })
+                    console.log(res)
+                    if (res.data.status === 200) {
+                        const accessToken = res.headers.accesstoken.replace('Bearer ', '')
+                        localStorage.setItem('access', accessToken)
+                        const refreshToken = res.headers.refreshtoken.replace('Bearer ', '')
+                        localStorage.setItem('refresh', refreshToken)
+                        // 비밀번호가 일치하면 다음 화면으로 이동
+                        navigate('./PasswordChangeModal2');
+                    } else {
+                        setPwError('비밀번호가 일치하지 않습니다.');
+                    }
+                } catch (error) {
+                    setPwError('오류가 발생했습니다. 다시 시도해주세요.');
+                    console.log('재로그인 필요함', error)
+                }
+
             }
         }
     };

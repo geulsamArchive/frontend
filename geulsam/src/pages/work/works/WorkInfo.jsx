@@ -78,7 +78,7 @@ const WorkInfo = () => {
                 <BookInfoAndButton>
                     <BookInfoContents>
                         <BookInfos>
-                            <WorkLink>
+                            <WorkLink to={`/author/${workData.authorId}`}>
                                 작가
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;

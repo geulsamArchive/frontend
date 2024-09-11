@@ -130,3 +130,11 @@ export const CloseButton = styled.button`
     margin-right: 10px;
     cursor: pointer;
 `
+
+export const CriticLogContainer = styled.div`
+    
+`
+
+export const MarginRight = styled.div`
+    margin-right: 5dvw;
+`
