@@ -5,8 +5,10 @@ import { InputRow, Input, Inputs, Form, InputTitle, Button, BookInfoContainer, B
 import Resizer from "react-image-file-resizer"
 import axios from 'axios';
 import { normalAPI } from '../../../../apis/Api';
+import { useAuth } from '../../../../store/Auth';
 
 const BookUpload = () => {
+    const { logout } = useAuth();
     const [title, onChangeTitle] = useForms();
     const [release, onChangeRelease] = useForms();
     const [designer, onChangeDesigner] = useForms();
@@ -172,44 +174,50 @@ const BookUpload = () => {
 
 
         const accessToken = localStorage.getItem('access')
+        const refreshToken = localStorage.getItem('refresh');
 
         try {
-            const refreshToken = localStorage.getItem('refresh');
-
-            //처음으로 업로드시
-            const res = await normalAPI.post(`/book`, formData, {
+            const res = await normalAPI.post('/book', formData, {
                 headers: {
-
                     'Content-Type': 'multipart/form-data',
-                    'accessToken': accessToken,
-                },
-            })
+                    'accessToken': accessToken
+                }
+            });
+            //처음으로 업로드시
+
             console.log(res)
+            alert('게시에 성공했습니다.')
         } catch (error) {
-            // 에러 발생
-            console.error(error);
-            try {
-                    // 리프레쉬 토큰 포함해서 다시 전송
-                    const refreshToken = localStorage.getItem('refresh');
-                    const refreshResponse = await normalAPI.post('/auth/refresh', { token: refreshToken });
-
-                    // Bearer 키워드 제거하고 accessToken 받기
-                    let newAccessToken = refreshResponse.data.accessToken;
-                    newAccessToken = newAccessToken.replace('Bearer ', '');
-
-                    localStorage.setItem('access', newAccessToken);
-
-                    const res = await normalAPI.post(`/book`, formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                            'Authorization': `Bearer ${newAccessToken}`,
-                    }});
-
-                console.log(res)
-            } catch (erorr) {
-                //그래도 안되면 재로그인 요청
-                console.log(error)
-                alert('다시 로그인 해주세요.')
+            if (error.response && error.response.status === 403) {
+                console.log('토큰 재전송');
+                // Access Token이 만료되었으므로, Refresh Token으로 새로운 Access Token을 발급받는다.
+                try {
+                    const tokenResponse = await normalAPI.post(
+                        '/book',
+                        formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                                'refreshToken': refreshToken,
+                            }
+                        }
+                    );
+                    console.log(tokenResponse);
+                    if (tokenResponse.status === 200) {
+                        const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                        localStorage.setItem('access', accessToken)
+                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '')
+                        localStorage.setItem('refresh', refreshToken)
+                        alert('포스터를 성공적으로 게시했습니다.')
+                    }
+                } catch (err) {
+                    console.error('Refresh Token Error:', err);
+                    alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    logout();
+                }
+            } else {
+                console.error('Error:', error);
+                alert('게시 중 문제가 발생했습니다.');
             }
         }
     }
@@ -230,7 +238,7 @@ const BookUpload = () => {
                         </div>
                         <div>
                             <InputTitle>발간일</InputTitle>
-                            <Input value={release} onChange={onChangeRelease} placeholder='예)0000-00-00' />
+                            <Input value={release} onChange={onChangeRelease} type='date' />
                         </div>
                         <div>
                             <InputTitle>디자인</InputTitle>
@@ -258,7 +266,7 @@ const BookUpload = () => {
                     <Red><p>게시에 성공할 시 하단에 이미지가 표시됩니다. </p></Red>
                     <br />
                     <InputTitle>앞표지</InputTitle>
-                    <Input type='file' onChange={onBookCoverChange} />
+                    <Input type='file' accept='image/*' onChange={onBookCoverChange} />
                 </div>
                 {bookCoverUrl && (
                     <div>
@@ -267,7 +275,7 @@ const BookUpload = () => {
                 <div>
                     <br />
                     <InputTitle>뒷표지</InputTitle>
-                    <Input type='file' onChange={onBackCoverChange} />
+                    <Input type='file' accept='image/*' onChange={onBackCoverChange} />
                 </div>
                 {backCoverUrl && (
                     <div>
@@ -276,7 +284,7 @@ const BookUpload = () => {
                 )}
                 <div>
                     <InputTitle>본문(파일명은 영어 혹은 _ 만 가능)</InputTitle>
-                    <Input type='file' onChange={onPdfChange} />
+                    <Input type='file' accept='.pdf' onChange={onPdfChange} />
                 </div>
             </Inputs>
             <RightSubmit>

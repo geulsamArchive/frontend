@@ -14,6 +14,7 @@ const CriticLogUpload = () => {
     const onClickUpload = async () => {
         const accessToken = localStorage.getItem('access')
         const refreshToken = localStorage.getItem('refresh')
+        console.log(genre)
 
         try {
             const res = await normalAPI.post(
@@ -22,7 +23,7 @@ const CriticLogUpload = () => {
                     "contentTitle": title,
                     "localDate": date,
                     "userName": name,
-                    "genre": genre,
+                    "genre": "NOVEL",
                     "cloverNoteUrl": url,
                     "cloverNotePassword": pw
                 }, {
@@ -30,6 +31,7 @@ const CriticLogUpload = () => {
                     'accessToken': accessToken
                 }
             })
+            console.log(genre)
             console.log(res)
         } catch (err) {
             console.log(err)

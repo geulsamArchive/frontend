@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SearchWork from '../../components/Search/SearchWork';
-import { CriticLogContainer, MarginRight } from '../../style/Critic';
+import { CriticLogContainer, MarginRight, ModalBottom, ModalTop } from '../../style/Critic';
 import { Centering } from '../../style/StyledComponent';
 
 const CriticLog = () => {

@@ -46,7 +46,7 @@ export const WorkInfoRight = styled.div`
     margin-right: 20px;
 `
 export const WorkCreatedAt = styled.div`
-    width: 600px;
+    width: 200px;
 `
 
 export const Space = styled.span`
@@ -54,6 +54,8 @@ margin-left: 30px;
 `
 
 export const WorkTitle = styled.div`
+word-break: normal;
+width: 500px;
 `
 
 export const WorkInfoContainer = styled.div`

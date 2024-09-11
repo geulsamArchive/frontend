@@ -4,6 +4,7 @@ import { Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputU
 import axios from 'axios';
 import Resizer from "react-image-file-resizer"
 import { normalAPI } from '../../../../apis/Api';
+import { useAuth } from '../../../../store/Auth';
 
 const resizeFile = (file) =>
     new Promise((resolve) => {
@@ -22,6 +23,7 @@ const resizeFile = (file) =>
     });
 
 const PosterUpload = () => {
+    const { logout } = useAuth();
     const [year, onChangeYear] = useForms();
     const [designer, onChangeDesigner] = useForms();
     const [file, setFile] = useState(null);
@@ -72,48 +74,50 @@ const PosterUpload = () => {
         formData.append('plate', plate);
 
         const accessToken = localStorage.getItem('access')
+        const refreshToken = localStorage.getItem('refresh');
 
         try {
-            const refreshToken = localStorage.getItem('refresh');
-            const refreshResponse = await normalAPI.post('/auth/refresh',{token: refreshToken});
-            //처음으로 업로드시
-            let newAccessToken = refreshResponse.data.accessToken;
-            newAccessToken = newAccessToken.replace('Bearer','');
-
-            localStorage.setItem('access',newAccessToken);
             const res = await normalAPI.post('/poster', formData, {
                 headers: {
-
                     'Content-Type': 'multipart/form-data',
-                    'accessToken': `Bearer ${newAccessToken}`,
-                },
-            })
+                    'accessToken': accessToken
+                }
+            });
+            //처음으로 업로드시
+
             console.log(res)
             alert('게시에 성공했습니다.')
         } catch (error) {
-            // 에러 발생
-            console.error(error);
-            try {
-                const refreshToken = localStorage.getItem('refresh');
-                const refreshResponse = await normalAPI.post('/auth/refresh', { token: refreshToken });
-    
-                const newAccessToken = refreshResponse.data.accessToken;
-                localStorage.setItem('access', newAccessToken);
-    
-                // 새로 받은 accessToken을 사용해 원래 요청을 다시 시도합니다.
-                const retryRes = await normalAPI.post('/poster', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Authorization': `Bearer ${newAccessToken}`,
-                    },
-                });
-                
-            } catch (err) {
-                //그래도 안되면 재로그인 요청
-                console.log(err)
-                localStorage.removeItem('access')
-                localStorage.removeItem('refresh')
-                alert('다시 로그인 해주세요.')
+            if (error.response && error.response.status === 403) {
+                console.log('토큰 재전송');
+                // Access Token이 만료되었으므로, Refresh Token으로 새로운 Access Token을 발급받는다.
+                try {
+                    const tokenResponse = await normalAPI.post(
+                        '/poster',
+                        formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                                'refreshToken': refreshToken,
+                            }
+                        }
+                    );
+                    console.log(tokenResponse);
+                    if (tokenResponse.status === 200) {
+                        const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                        localStorage.setItem('access', accessToken)
+                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '')
+                        localStorage.setItem('refresh', refreshToken)
+                        alert('포스터를 성공적으로 게시했습니다.')
+                    }
+                } catch (err) {
+                    console.error('Refresh Token Error:', err);
+                    alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    logout();
+                }
+            } else {
+                console.error('Error:', error);
+                alert('게시 중 문제가 발생했습니다.');
             }
         }
     }
