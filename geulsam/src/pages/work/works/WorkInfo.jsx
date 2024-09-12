@@ -150,7 +150,7 @@ const WorkInfo = () => {
             >
                 <NovelViewer novelHTML={novel} title={workData.title} closeModal={closeModal} />
             </Modal>
-            <Comments />
+            <Comments id={workData.id} />
         </>
     );
 };
