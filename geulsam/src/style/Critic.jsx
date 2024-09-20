@@ -140,5 +140,75 @@ export const MarginRight = styled.div`
 `
 
 export const CriticLogsContainer = styled.div`
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+`
+
+export const LogType = styled.div`
+    width: 100px;
+        color: rgba(171, 170, 170, 1);
+        font-size: 14px;
+`
+export const LogTitle = styled.div`
+    color: rgba(249, 249, 246, 1);
+        font-size: 14px;
+        width: 500px;
+`
+
+export const Logs = styled.div`
+&:first-child{
+    border-top: 1px solid rgba(249, 249, 246, 1);
+}
+    display: flex;
+    font-size: 14px;
+    padding-bottom: 12px;
+padding-top:12px ;
+justify-content: space-between;
+    border-bottom: 1px solid rgba(249, 249, 246, 1);
+`
+
+export const LogSearchFailed = styled.div`
+   &:first-child{
+    border-top: 1px solid rgba(249, 249, 246, 1);
+} display: flex;
+    font-size: 14px;
+    padding-bottom: 12px;
+padding-top:12px ;
+    border-bottom: 1px solid rgba(249, 249, 246, 1);
+ 
+`
+
+export const LogName = styled.div`
+    color: rgba(249, 249, 246, 1);
+    width: 90px;
+
+`
+
+export const LogDate = styled.div`
+    color: rgba(249, 249, 246, 1);
+    width: 125px;
+`
+
+export const LogPassword = styled.div`
+    width: 75px;
+`
+
+export const LogURL = styled.a`
+    width: 114px;
+    font-size: 11px;
+    background-color: rgba(87, 86, 85, 1);
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: rgba(249, 249, 246, 1);
+    
+`
+
+export const LogLeft = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+export const LogRight = styled.div`
+    display: flex;
 `

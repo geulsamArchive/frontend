@@ -47,9 +47,10 @@ export const UserCheck = async (navigate, logout) => {
                 if (tokenResponse.status === 200) {
                     const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '');
                     localStorage.setItem('access', newAccessToken);
-                    const newRefreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
-                    localStorage.setItem('refresh', newRefreshToken);
-
+                    if (tokenResponse.headers.refreshtoken) {
+                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                        localStorage.setItem('refresh', refreshToken);
+                    }
                     // 토큰 재발급 후 다시 유저 체크
                     await UserCheck(navigate, logout);
 

@@ -206,8 +206,10 @@ const BookUpload = () => {
                     if (tokenResponse.status === 200) {
                         const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
                         localStorage.setItem('access', accessToken)
-                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '')
-                        localStorage.setItem('refresh', refreshToken)
+                        if (tokenResponse.headers.refreshtoken) {
+                            const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                            localStorage.setItem('refresh', refreshToken);
+                        }
                         alert('포스터를 성공적으로 게시했습니다.')
                     }
                 } catch (err) {

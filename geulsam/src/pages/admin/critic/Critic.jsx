@@ -110,8 +110,10 @@ const AdminCritic = () => {
                     if (tokenResponse.status === 200) {
                         const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
                         localStorage.setItem('access', accessToken)
-                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '')
-                        localStorage.setItem('refresh', refreshToken)
+                        if (tokenResponse.headers.refreshtoken) {
+                            const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                            localStorage.setItem('refresh', refreshToken);
+                        }
                         alert('승인이 완료되었습니다!');
                         await getCriticData()
                     }

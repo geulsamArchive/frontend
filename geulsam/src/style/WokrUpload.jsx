@@ -61,6 +61,7 @@ export const SentenceContainer = styled.div`
     align-items: center;
     font-family: 'RIDIBatang';
     margin-top: 50px;
+    filter: drop-shadow(0 2px 24px rgba(182, 182, 182, 0.15));
 
 `
 export const SentenceInput = styled.textarea`
@@ -90,6 +91,7 @@ export const EditorContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    filter: drop-shadow(0 2px 24px rgba(182, 182, 182, 0.15));
     font-family: 'RIDIBatang';
     margin-top: 50px;
 `

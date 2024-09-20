@@ -9,7 +9,8 @@ import { normalAPI } from '../../apis/Api';
 import { Left, Right, UserInfos, Input, ErrorMessageInfo } from '../../style/UserInfo';
 import PasswordChangeModal from './PasswordChangeModal';
 import PasswordChangeModal2 from './PasswordChangeModal2';
-const MyInfoModify = (logout) => {
+import { useAuth } from '../../store/Auth';
+const MyInfoModify = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
@@ -21,6 +22,8 @@ const MyInfoModify = (logout) => {
         phone: '',
         joinedAt: ''
     });
+
+    const { logout } = useAuth();
 
     // 유효성 검사 상태
     const [nameError, setNameError] = useState('');
@@ -39,7 +42,7 @@ const MyInfoModify = (logout) => {
 
     // 컴포넌트가 마운트될 때 사용자 정보를 불러오는 useEffect
 
-    const fetchUserInfo = async (navigate, logout) => {
+    const fetchUserInfo = async (navigate) => {
         const accessToken = localStorage.getItem('access');
         const refreshToken = localStorage.getItem('refresh');
         try {
@@ -62,12 +65,15 @@ const MyInfoModify = (logout) => {
                     });
                     const newAccessToken = response.headers.accesstoken.replace('Bearer ', '');
                     localStorage.setItem('access', newAccessToken);
-                    const newRefreshToken = response.headers.refreshtoken.replace('Bearer ', '');
-                    localStorage.setItem('refresh', newRefreshToken);
+                    if (response.headers.refreshtoken) {
+                        const newRefreshToken = response.headers.refreshtoken.replace('Bearer ', '');
+                        localStorage.setItem('refresh', newRefreshToken);
+                    }
                     setUserInfo(response.data.data);
                 } catch (refreshError) {
                     console.error('토큰 갱신 중 오류가 발생했습니다.', refreshError);
                     alert('로그인이 필요합니다.');
+                    logout();
                     navigate('/main'); // 로그인 페이지로 이동
                 }
             } else {
@@ -150,9 +156,10 @@ const MyInfoModify = (logout) => {
                     });
                     const newAccessToken = response.headers.accesstoken.replace('Bearer ', '');
                     localStorage.setItem('access', newAccessToken);
-                    const newRefreshToken = response.headers.refreshtoken.replace('Bearer ', '');
-                    localStorage.setItem('refresh', newRefreshToken);
-
+                    if (response.headers.refreshtoken) {
+                        const newRefreshToken = response.headers.refreshtoken.replace('Bearer ', '');
+                        localStorage.setItem('refresh', newRefreshToken);
+                    }
                     setIsEditing(false);
                     alert('정보가 성공적으로 수정되었습니다.');
                 } catch (refreshError) {

@@ -29,6 +29,14 @@ padding-top:14px ;
 display: flex;
 justify-content: space-between;
 `
+export const Searchfailed = styled.div`
+    width: 78dvw;
+    font-size: 14px;
+    border-bottom: 1px solid black;
+padding-bottom: 14px;
+padding-top:14px ;
+color: rgba(129, 128, 127, 1);
+`
 export const WorkTitleType = styled.div`
     display: flex;
     width: 500px;
