@@ -19,6 +19,7 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
             padding: '0',
             margin: 'auto',
             fontFamily: 'MaruBuri-Regular',
+            filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))',
             //transform: 'scale(0.4)',
         }
     };

@@ -204,6 +204,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
             margin: 'auto',
             display: 'flex',
             flexDirection: 'column',
+            filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))',
         }
     };
 
