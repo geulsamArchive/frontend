@@ -23,7 +23,7 @@ const CriticLogUpload = () => {
                     "contentTitle": title,
                     "localDate": date,
                     "userName": name,
-                    "genre": "NOVEL",
+                    "genre": genre,
                     "cloverNoteUrl": url,
                     "cloverNotePassword": pw
                 }, {

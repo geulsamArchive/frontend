@@ -6,28 +6,55 @@ import { normalAPI } from '../../../apis/Api';
 
 
 const Calendar = () => {
-    const [year, setYear] = useState(2024)
+    const date = new Date();
+    const yearNow = date.getFullYear();
+    const monthNow = date.getMonth();
+
+
+
+    console.log(yearNow, monthNow)
+
+
+    const [year, setYear] = useState()
+    const [semester, setSemester] = useState()
     const [calendarData, setCalendarData] = useState([])
+
+
+    const translateSemester = (years, monthes) => {
+        if (monthes <= 1) {
+            setYear(years - 1)
+            setSemester(2)
+        } else if (monthes <= 7) {
+            setYear(years)
+            setSemester(1)
+        } else {
+            setYear(years)
+            setSemester(2)
+        }
+    }
 
     const getCalendarData = async () => {
         try {
-            const res = await normalAPI.get(`/calendar?field=start&search=${year}`)
+            const res = await normalAPI.get(`/calendar?year=${year}&semester=${semester}`)
             console.log(res)
             setCalendarData(res.data.data)
         } catch (err) {
             console.log(err)
         }
     }
-    useEffect(() => {
-        getCalendarData()
-        console.log(calendarData)
-    }, [])
 
+    useEffect(() => {
+        translateSemester(yearNow, monthNow);
+    }, [yearNow, monthNow]);
+
+    useEffect(() => {
+        getCalendarData();
+    }, [year, semester]);
 
     return (
         <Calendars>
             <CalendarTitle>
-                {year}년 활동 일정
+                {year}년 {semester}학기 활동 일정
             </CalendarTitle>
             <Centering>
                 <CenterMode data={calendarData} />

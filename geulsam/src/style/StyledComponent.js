@@ -383,8 +383,8 @@ text-shadow: 0 4px 4px black;
 export const Recents = styled.div`
 display: flex;
 flex-wrap: wrap;
-width: 100%;
-margin-left: 7.5dvw;
+width: 1400px;
+margin-left: 80px;
 `
 
 
@@ -428,7 +428,7 @@ export const TextOverflow = styled.span`
 overflow: hidden;
 `
 export const RecentWorkContainer = styled.div`
-width: 40dvw;
+width: 623px;
 height: 174px;
 margin: 14px;
 border-radius: 11px;
@@ -651,9 +651,9 @@ export const HiddenButton = styled(Button)`
 
 //포스터 페이징 관련
 export const Paging = styled.div`
-margin-left: 5vw;
+margin-left: ${({ isDark }) => (isDark ? '-1vw' : '5vw')};
 padding-bottom: 50px;
-background-color: rgba(249, 249, 246, 1);
+background-color:${({ isDark }) => (isDark ? 'inherit' : ' rgba(249, 249, 246, 1)')};;
 `
 
 export const PageButton = styled.button`

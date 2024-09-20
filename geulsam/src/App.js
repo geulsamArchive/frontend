@@ -50,9 +50,9 @@ function App() {
               <Route path='poster/modify/:posterId' element={<PosterModifyInfo />} />
               <Route path='poster/upload' element={<PosterUpload />} />
               <Route path='book/upload' element={<BookUpload />} />
+              <Route path='critic/log/upload' element={<CriticLogUpload />} />
             </Route>
             <Route path='/frontend' element={<Main />} />
-            <Route path='critic/log/upload' element={<CriticLogUpload />} />
             <Route path='/work/upload' element={<UploadWork />} />
             <Route path='/author/:id' element={<AuthorInfo />} />
             <Route path='/' element={<Main />} />

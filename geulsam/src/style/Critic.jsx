@@ -132,9 +132,13 @@ export const CloseButton = styled.button`
 `
 
 export const CriticLogContainer = styled.div`
-    
+    width: 90dvw;
 `
 
 export const MarginRight = styled.div`
     margin-right: 5dvw;
+`
+
+export const CriticLogsContainer = styled.div`
+    margin-top: 50px;
 `
