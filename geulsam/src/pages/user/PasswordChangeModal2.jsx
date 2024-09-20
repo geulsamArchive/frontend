@@ -2,9 +2,26 @@ import React, { useState } from 'react';
 import { useForms } from '../../hooks/useForms';
 import Modal from 'react-modal';
 import { normalAPI } from '../../apis/Api';
-import { ErrorMessage, Wrapper, Title, Form, Input, Inputs, Button, InputTitle, Buttons } from '../../style/StyledComponent';
+import { ErrorMessage, Wrapper, Title, Form, Input, Inputs, Button, InputTitle, Buttons, TextalignLeft } from '../../style/StyledComponent';
 
 const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
+    const modalStyles = {
+        overlay: {
+            backgroundColor: 'inherit',
+        },
+        content: {
+            width: '408px',
+            height: '486px',
+            border: 'none',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '0',
+            margin: 'auto',
+            fontFamily: 'MaruBuri-Regular',
+            //transform: 'scale(0.4)',
+        }
+    };
     const [pw, onChangePw] = useForms();
     const [pwError, setPwError] = useState('');
     const [confirmPw, setConfirmPw] = useState('');
@@ -86,15 +103,15 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
             isOpen={isModalOpen}
             onRequestClose={closeModal}
             contentLabel="비밀번호 변경"
-        >
-            <Wrapper>
+            style={modalStyles}   >
+            <div>
                 <Form>
                     <Title>비밀번호 변경</Title>
-                    <Inputs>
+                    <TextalignLeft>
                         <InputTitle>새 비밀번호</InputTitle>
                         <Input type='password' value={pw} onChange={onChangePw} />
                         {pwError && <ErrorMessage>{pwError}</ErrorMessage>}
-                    </Inputs>
+                    </TextalignLeft>
                     <Inputs>
                         <InputTitle>비밀번호 확인</InputTitle>
                         <Input type='password' value={confirmPw} onChange={onChangeConfirmPw} />
@@ -104,7 +121,7 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
                         <Button onClick={onClick}>변경하기</Button>
                     </Buttons>
                 </Form>
-            </Wrapper>
+            </div>
         </Modal>
     );
 };

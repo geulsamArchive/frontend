@@ -22,13 +22,14 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
             backgroundColor: 'inherit',
         },
         content: {
-            width: '100vw',
-            height: '100vh',
+            width: '408px',
+            height: '486px',
+            border: 'none',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             padding: '0',
-            margin: '0',
+            margin: 'auto',
             fontFamily: 'MaruBuri-Regular',
             //transform: 'scale(0.4)',
         }
@@ -111,7 +112,7 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
                 contentLabel="비밀번호 변경"
                 style={modalStyles}
             >
-                <Wrapper>
+                <div>
                     <Form>
                         <Title>비밀번호 변경</Title>
                         <Inputs>
@@ -124,7 +125,7 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
                             <Button onClick={closeModal}>닫기</Button>
                         </Buttons>
                     </Form>
-                </Wrapper>
+                </div>
             </Modal>
             <PasswordChangeModal2
                 isModalOpen={isModal2Open}

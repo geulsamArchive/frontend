@@ -907,6 +907,10 @@ export const ErrorMessage = styled.p`
     font-size: 10px;
 `;
 
+export const TextalignLeft = styled.div`
+text-align: left;
+`
+
 // 학번 중복 확인용 작은 버튼
 export const ButtonSmall = styled.button`
 font-family: 'MaruBuri-Regular';
