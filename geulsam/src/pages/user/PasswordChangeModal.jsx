@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
 import { useForms } from '../../hooks/useForms';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 import { normalAPI } from '../../apis/Api';
+import { ModalTop } from '../../style/Critic';
+import PasswordChangeModal2 from './PasswordChangeModal2';
+
 import {
     ErrorMessage, Wrapper, Title, Form, Input, Inputs,
     Button, InputTitle, Buttons
 } from '../../style/StyledComponent';
 
-const PasswordChangeModal = () => {
+const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2 }) => {
     const [pw, onChangePw] = useForms(); // 비밀번호 입력값을 관리하는 커스텀 훅
     const [pwError, setPwError] = useState(''); // 비밀번호 오류 메시지 관리
+    const [isModal2Open, setIsModal2Open] = useState(false);
     const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$|^[A-Za-z]\d{6,}$/; // 비밀번호 유효성 검사 정규식
-    const navigate = useNavigate(); // 페이지 이동을 위한 훅
 
+    const modalStyles = {
+        overlay: {
+            backgroundColor: 'inherit',
+        },
+        content: {
+            width: '100vw',
+            height: '100vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '0',
+            margin: '0',
+            fontFamily: 'MaruBuri-Regular',
+            //transform: 'scale(0.4)',
+        }
+    };
     const onClick = async () => {
         let valid = true;
 
@@ -45,8 +65,8 @@ const PasswordChangeModal = () => {
                 );
                 console.log(result)
                 if (result.data.status === 200) {
-                    // 비밀번호가 일치하면 다음 화면으로 이동
-                    navigate('./PasswordChangeModal2');
+                    closeModal();  // 첫 번째 모달 닫기
+                    setIsModal2Open(true);
                 } else {
                     setPwError('비밀번호가 일치하지 않습니다.');
                 }
@@ -68,7 +88,6 @@ const PasswordChangeModal = () => {
                         const refreshToken = res.headers.refreshtoken.replace('Bearer ', '')
                         localStorage.setItem('refresh', refreshToken)
                         // 비밀번호가 일치하면 다음 화면으로 이동
-                        navigate('./PasswordChangeModal2');
                     } else {
                         setPwError('비밀번호가 일치하지 않습니다.');
                     }
@@ -80,21 +99,39 @@ const PasswordChangeModal = () => {
             }
         }
     };
+    const closePasswordChangeModal2 = () => {
+        setIsModal2Open(false);
+    };
 
     return (
-        <Wrapper>
-            <Form>
-                <Title>비밀번호 변경</Title>
-                <Inputs>
-                    <InputTitle>기존 비밀번호</InputTitle>
-                    <Input type='password' value={pw} onChange={onChangePw} />
-                    {pwError && <ErrorMessage>{pwError}</ErrorMessage>}
-                </Inputs>
-                <Buttons>
-                    <Button onClick={onClick}>변경하기</Button>
-                </Buttons>
-            </Form>
-        </Wrapper>
+        <>
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                contentLabel="비밀번호 변경"
+                style={modalStyles}
+            >
+                <Wrapper>
+                    <Form>
+                        <Title>비밀번호 변경</Title>
+                        <Inputs>
+                            <InputTitle>기존 비밀번호</InputTitle>
+                            <Input type='password' value={pw} onChange={onChangePw} />
+                            {pwError && <ErrorMessage>{pwError}</ErrorMessage>}
+                        </Inputs>
+                        <Buttons>
+                            <Button onClick={onClick}>변경하기</Button>
+                            <Button onClick={closeModal}>닫기</Button>
+                        </Buttons>
+                    </Form>
+                </Wrapper>
+            </Modal>
+            <PasswordChangeModal2
+                isModalOpen={isModal2Open}
+                closeModal={closePasswordChangeModal2}
+                beforePw={pw}
+            />
+        </>
     );
 };
 
