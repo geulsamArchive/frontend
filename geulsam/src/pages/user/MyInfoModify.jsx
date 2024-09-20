@@ -7,8 +7,10 @@ import {
 } from '../../style/StyledComponent';
 import { normalAPI } from '../../apis/Api';
 import { Left, Right, UserInfos, Input, ErrorMessageInfo } from '../../style/UserInfo';
-
+import PasswordChangeModal from './PasswordChangeModal';
+import PasswordChangeModal2 from './PasswordChangeModal2';
 const MyInfoModify = (logout) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
     const [userInfo, setUserInfo] = useState({
@@ -191,8 +193,13 @@ const MyInfoModify = (logout) => {
 
     // 비밀번호 변경 모달로 이동하는 함수
     const openPasswordChangeModal = () => {
-        navigate('/PasswordChangeModal'); // PasswordChangeModal로 네비게이트
+        setIsModalOpen(true);
     };
+    const closePasswordChangeModal = () => {
+        setIsModalOpen(false);
+    };
+
+
 
     return (
         <BookInfoContainer>
@@ -324,6 +331,8 @@ const MyInfoModify = (logout) => {
                     <>
                         <EditButton onClick={handleEditClick}>수정하기</EditButton>
                         <PasswordText onClick={openPasswordChangeModal}>비밀번호 변경</PasswordText>
+                        {{ isModalOpen } && (<PasswordChangeModal isModalOpen={isModalOpen} closeModal={closePasswordChangeModal}
+                        />)}
                     </>
                 )}
             </ButtonContainer>
