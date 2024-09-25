@@ -1,11 +1,19 @@
 import React, { createContext, useState, useContext } from 'react';
+import { normalAPI } from '../apis/Api';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('access'));
 
-    const logout = () => {
+    const refresh = localStorage.getItem('refresh')
+
+    const logout = async () => {
+        try {
+            const res = await normalAPI.post(`/user/logout?refresh=${refresh}`)
+        } catch (err) {
+
+        }
         localStorage.removeItem('access');
         localStorage.removeItem('refresh');
         setIsAuthenticated(false);

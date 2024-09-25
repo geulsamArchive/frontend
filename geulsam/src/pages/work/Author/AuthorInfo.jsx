@@ -4,7 +4,7 @@ import { normalAPI } from '../../../apis/Api';
 import { B, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookInfos, BookTitle } from '../../../style/StyledComponent';
 import { WorkButtons } from '../../../style/Works';
 import CopyURL from '../../../components/CopyURL/CopyURL';
-import { Accordion } from '../../../components/Comment/Comments';
+import { Accordion, GuestBook } from '../../../components/Comment/Comments';
 
 const AuthorInfo = () => {
     const { id } = useParams();
@@ -63,7 +63,7 @@ const AuthorInfo = () => {
                     </WorkButtons>
                 </BookInfoAndButton>
             </BookInfoContainer>
-            <Accordion name='방명록' />
+            <Accordion name='방명록' content={GuestBook} contentId={id} />
         </>
     );
 };

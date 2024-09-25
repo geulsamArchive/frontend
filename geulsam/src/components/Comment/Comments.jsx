@@ -33,6 +33,145 @@ export const Accordion = ({ name, content: ContentComponent, contentId }) => {
     )
 }
 
+export const GuestBook = ({ contentId }) => {
+    const [writing, onChangeWriting] = useForms();
+    const [GuestBookList, setGuestBookList] = useState([])
+    const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(1)
+
+    const { logout } = useAuth();
+
+    const getGuestBookList = async () => {
+        try {
+            const response = await normalAPI.get(`/guestBook?page=${page}&ownerId=${contentId}`);
+            console.log('서버 응답:', response.data);
+            setGuestBookList(response.data.data.content)
+            setTotalPage(response.data.data.pageTotal)
+        } catch (error) {
+            console.log('에러 발생', error)
+        }
+    }
+
+    const onClickUpload = async () => {
+        const accesstoken = localStorage.getItem('access')
+        const refreshToken = localStorage.getItem('refresh')
+
+        try {
+            const response = await normalAPI.post('/guestBook', {
+                "ownerId": contentId,
+                "writing": writing,
+            }, {
+                headers: {
+                    'accessToken': accesstoken,
+                },
+            });
+            console.log('서버 응답:', response.data);
+            alert('독자 후기를 성공적으로 게시했습니다.')
+            getGuestBookList();
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                console.log('토큰 재전송');
+                try {
+                    const tokenResponse = await normalAPI.post('/guestBook', {
+                        "ownerId": contentId,
+                        "writing": writing,
+                    }, {
+                        headers: {
+                            'refreshToken': refreshToken,
+                        },
+                    });
+                    console.log(tokenResponse);
+                    const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                    localStorage.setItem('access', newAccessToken)
+                    if (tokenResponse.headers.refreshtoken) {
+                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                        localStorage.setItem('refresh', refreshToken);
+                    }
+                    alert('독자 후기를 성공적으로 게시했습니다.')
+                    getGuestBookList();
+                } catch (err) {
+                    console.error('Refresh Token Error:', err);
+                    alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    logout();
+                }
+            } else {
+                console.error('Error:', error);
+                alert('게시 중 문제가 발생했습니다.');
+            }
+        }
+    }
+
+    const deleteComment = async (id) => {
+        const accesstoken = localStorage.getItem('access')
+        const refreshToken = localStorage.getItem('refresh')
+
+        try {
+            const response = await normalAPI.delete(`/guestBook?id=${id}`, {
+                headers: {
+                    'accessToken': accesstoken,
+                },
+            });
+            console.log('서버 응답:', response.data);
+            alert('독자 후기를 성공적으로 삭제했습니다.')
+            getGuestBookList();
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                console.log('토큰 재전송');
+                try {
+                    const tokenResponse = await normalAPI.delete(`/guestBook?id=${id}`,
+                        {
+                            headers: {
+                                'refreshToken': refreshToken,
+                            },
+                        });
+                    console.log(tokenResponse);
+                    const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                    localStorage.setItem('access', newAccessToken)
+                    if (tokenResponse.headers.refreshtoken) {
+                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                        localStorage.setItem('refresh', refreshToken);
+                    }
+                    alert('독자 후기를 성공적으로 삭제했습니다.')
+                    getGuestBookList();
+                } catch (err) {
+                    console.error('Refresh Token Error:', err);
+                    alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    logout();
+                }
+            } else {
+                console.error('Error:', error);
+                alert('삭제 중 문제가 발생했습니다.');
+            }
+        }
+    }
+
+    useEffect(() => {
+        getGuestBookList()
+    }, [page])
+
+    return (
+        <div>
+            <div>
+                <input value={writing} onChange={onChangeWriting} />
+                <button onClick={onClickUpload}>게시하기</button>
+            </div>
+            <div>
+                {GuestBookList?.map((comment) => (
+                    <>
+                        <div>
+                            {comment.writerName}
+                            {comment.writing}
+                            {comment.createdAt}
+                            <button onClick={() => (deleteComment(comment.guestBookId))}>삭제하기</button>
+                        </div>
+                    </>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+
 const Comment = ({ contentId }) => {
     const [writing, onChangeWriting] = useForms();
     const [content, setContents] = useState(contentId);
@@ -70,10 +209,12 @@ const Comment = ({ contentId }) => {
                         },
                     });
                     console.log(tokenResponse);
-                    const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
-                    localStorage.setItem('access', accessToken)
-                    const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '')
-                    localStorage.setItem('refresh', refreshToken)
+                    const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                    localStorage.setItem('access', newAccessToken)
+                    if (tokenResponse.headers.refreshtoken) {
+                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                        localStorage.setItem('refresh', refreshToken);
+                    }
                     alert('독자 후기를 성공적으로 게시했습니다.')
                     getCommentList();
                 } catch (err) {
@@ -122,10 +263,12 @@ const Comment = ({ contentId }) => {
                             },
                         });
                     console.log(tokenResponse);
-                    const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
-                    localStorage.setItem('access', accessToken)
-                    const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '')
-                    localStorage.setItem('refresh', refreshToken)
+                    const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                    localStorage.setItem('access', newAccessToken)
+                    if (tokenResponse.headers.refreshtoken) {
+                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                        localStorage.setItem('refresh', refreshToken);
+                    }
                     alert('독자 후기를 성공적으로 삭제했습니다.')
                     getCommentList();
                 } catch (err) {

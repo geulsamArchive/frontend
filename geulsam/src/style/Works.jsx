@@ -92,6 +92,7 @@ export const WorkSentenceContainer = styled.div`
     padding: 30px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 100px;
 
 `
 

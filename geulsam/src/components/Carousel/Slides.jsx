@@ -50,7 +50,7 @@ const formatEventTime = (startTime, endTime) => {
     const formattedStart = `${start.getDate()}일 (${start.toLocaleDateString('ko-KR', { weekday: 'short' })}) ${start.getHours()}:${String(start.getMinutes()).padStart(2, '0')}`;
     const formattedEnd = `${end.getHours()}:${String(end.getMinutes()).padStart(2, '0')}`;
 
-    return sameDay ? `${formattedStart} ~ ${formattedEnd}` : `${formattedStart} ~ ${formattedEnd} (${end.toLocaleDateString('ko-KR', options)})`;
+    return sameDay ? `${formattedStart} ~ ${formattedEnd}` : `${formattedStart} ~ ${formattedEnd} ${end.toLocaleDateString('ko-KR', options)}`;
 };
 
 function CenterMode({ data }) {
