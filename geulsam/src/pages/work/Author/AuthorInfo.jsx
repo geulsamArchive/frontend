@@ -9,6 +9,8 @@ import { Accordion, GuestBook } from '../../../components/Comment/Comments';
 const AuthorInfo = () => {
     const { id } = useParams();
     const [author, setAuthor] = useState([])
+    const [work, setWork] = useState([])
+    const [page, setPage] = useState(1)
 
     const getAuthorInfoData = async (authorId) => {
         try {
@@ -22,8 +24,20 @@ const AuthorInfo = () => {
 
     }
 
+    const getAuthorWorks = async (authorId) => {
+        try {
+            let url = `/content/author?page=${page}&authorId=${authorId}`
+            const res = await normalAPI.get(url)
+            setWork(res.data.data.content)
+            console.log(res)
+        } catch (error) {
+
+        }
+    }
+
     useEffect(() => {
         getAuthorInfoData(id);
+        getAuthorWorks(id)
     }, [])
 
     return (
@@ -41,7 +55,7 @@ const AuthorInfo = () => {
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;
+
                             {author.introduce}
                         </BookInfos>
                         <BookInfos>
@@ -63,6 +77,8 @@ const AuthorInfo = () => {
                     </WorkButtons>
                 </BookInfoAndButton>
             </BookInfoContainer>
+
+
             <Accordion name='방명록' content={GuestBook} contentId={id} />
         </>
     );

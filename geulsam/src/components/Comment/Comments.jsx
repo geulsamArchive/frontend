@@ -4,6 +4,9 @@ import { authAPI } from '../../apis/Api';
 import { useForms } from '../../hooks/useForms';
 import { useAuth } from '../../store/Auth';
 import { normalAPI } from '../../apis/Api';
+import Pagination from '../Paging/Pagination';
+import { CommentInput, TextCounter, CommentInputBottom, CommentInputContainer, CommentContainer, CommentWriter, CommentWriting, CommentTop, CommentCreatedAt, CommentDelete } from '../../style/Comment';
+import { Button } from '../../style/StyledComponent';
 
 export const Accordion = ({ name, content: ContentComponent, contentId }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +37,7 @@ export const Accordion = ({ name, content: ContentComponent, contentId }) => {
 }
 
 export const GuestBook = ({ contentId }) => {
-    const [writing, onChangeWriting] = useForms();
+    const [writing, onChangeWriting, reset] = useForms();
     const [GuestBookList, setGuestBookList] = useState([])
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(1)
@@ -67,7 +70,9 @@ export const GuestBook = ({ contentId }) => {
             });
             console.log('서버 응답:', response.data);
             alert('독자 후기를 성공적으로 게시했습니다.')
+            reset()
             getGuestBookList();
+
         } catch (error) {
             if (error.response && error.response.status === 403) {
                 console.log('토큰 재전송');
@@ -151,31 +156,57 @@ export const GuestBook = ({ contentId }) => {
 
     return (
         <div>
-            <div>
-                <input value={writing} onChange={onChangeWriting} />
-                <button onClick={onClickUpload}>게시하기</button>
-            </div>
+            <CommentInputContainer>
+                <CommentInput value={writing} maxLength="250" onChange={onChangeWriting} />
+                <CommentInputBottom>
+                    <TextCounter length={writing.length}>
+                        {writing.length}/250
+                    </TextCounter>
+                    <Button onClick={onClickUpload}>게시하기</Button>
+                </CommentInputBottom>
+            </CommentInputContainer>
             <div>
                 {GuestBookList?.map((comment) => (
                     <>
-                        <div>
-                            {comment.writerName}
-                            {comment.writing}
-                            {comment.createdAt}
-                            <button onClick={() => (deleteComment(comment.guestBookId))}>삭제하기</button>
-                        </div>
+                        <CommentContainer>
+                            <CommentTop>
+                                <CommentWriter>
+                                    {comment.writerName}
+                                </CommentWriter>
+                                <CommentDelete onClick={() => (deleteComment(comment.guestBookId))}>
+                                    <svg width="22" height="25" viewBox="0 0 22 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.88477 16.8828L8.88477 12.7742" stroke="#FF6058" stroke-width="1.77419" stroke-linecap="round" />
+                                        <path d="M13.6982 16.8828L13.6982 12.7742" stroke="#FF6058" stroke-width="1.77419" stroke-linecap="round" />
+                                        <path d="M3.67165 6.20064V18.7483C3.67165 20.968 3.67165 22.0779 4.36121 22.7674C5.05078 23.457 6.16062 23.457 8.3803 23.457H13.402C15.6217 23.457 16.7315 23.457 17.4211 22.7674C18.1107 22.0779 18.1107 20.968 18.1107 18.7484V6.20064M0.994141 5.67773H20.9361" stroke="#FF6058" stroke-width="1.77419" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.96724 1.57406C9.10435 1.48669 9.40648 1.4095 9.82676 1.35444C10.247 1.29938 10.762 1.26953 11.2917 1.26953C11.8215 1.26953 12.3364 1.29938 12.7567 1.35444C13.177 1.4095 13.4791 1.48669 13.6162 1.57406" stroke="#FF6058" stroke-width="1.77419" stroke-linecap="round" />
+                                    </svg>
+                                </CommentDelete>
+                            </CommentTop>
+                            <br />
+                            <CommentWriting>
+                                {comment.writing}
+                            </CommentWriting>
+                            <br />
+                            <CommentCreatedAt>
+                                {comment.createdAt} 작성
+                            </CommentCreatedAt>
+                        </CommentContainer>
                     </>
                 ))}
             </div>
+            <Pagination isDark='true' page={page} totalPage={totalPage} onChangePage={setPage} />
+
         </div>
     )
 }
 
 
 const Comment = ({ contentId }) => {
-    const [writing, onChangeWriting] = useForms();
+    const [writing, onChangeWriting, reset] = useForms();
     const [content, setContents] = useState(contentId);
     const [commentList, setCommentList] = useState([])
+    const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(1)
 
     const { logout } = useAuth();
 
@@ -194,6 +225,7 @@ const Comment = ({ contentId }) => {
             });
             console.log('서버 응답:', response.data);
             alert('독자 후기를 성공적으로 게시했습니다.')
+            reset()
             getCommentList()
         } catch (error) {
             if (error.response && error.response.status === 403) {
@@ -289,23 +321,47 @@ const Comment = ({ contentId }) => {
     return (
 
         <div>
-            <div>
-                <div>
-                    <input value={writing} onChange={onChangeWriting} />
-                    <button onClick={onClickUpload}>게시하기</button>
-                </div>
-            </div>
+            <CommentInputContainer>
+                <CommentInput value={writing} maxLength="250" onChange={onChangeWriting} />
+                <CommentInputBottom>
+                    <TextCounter length={writing.length}>
+                        {writing.length}/250
+                    </TextCounter>
+                    <Button onClick={onClickUpload}>게시하기</Button>
+                </CommentInputBottom>
+            </CommentInputContainer>
             <div>
                 {commentList?.map((comment) => (
+
                     <>
-                        {comment.commenter} <br />
-                        {comment.writing} <br />
-                        {comment.createdAt}&nbsp;작성<br />
-                        <button onClick={() => (deleteComment(comment.id))}>삭제</button>
-                        <hr />
+                        <CommentContainer>
+                            <CommentTop>
+                                <CommentWriter>
+                                    {comment.commenter}
+                                </CommentWriter>
+                                <CommentDelete onClick={() => (deleteComment(comment.id))}>
+                                    <svg width="22" height="25" viewBox="0 0 22 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.88477 16.8828L8.88477 12.7742" stroke="#FF6058" stroke-width="1.77419" stroke-linecap="round" />
+                                        <path d="M13.6982 16.8828L13.6982 12.7742" stroke="#FF6058" stroke-width="1.77419" stroke-linecap="round" />
+                                        <path d="M3.67165 6.20064V18.7483C3.67165 20.968 3.67165 22.0779 4.36121 22.7674C5.05078 23.457 6.16062 23.457 8.3803 23.457H13.402C15.6217 23.457 16.7315 23.457 17.4211 22.7674C18.1107 22.0779 18.1107 20.968 18.1107 18.7484V6.20064M0.994141 5.67773H20.9361" stroke="#FF6058" stroke-width="1.77419" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8.96724 1.57406C9.10435 1.48669 9.40648 1.4095 9.82676 1.35444C10.247 1.29938 10.762 1.26953 11.2917 1.26953C11.8215 1.26953 12.3364 1.29938 12.7567 1.35444C13.177 1.4095 13.4791 1.48669 13.6162 1.57406" stroke="#FF6058" stroke-width="1.77419" stroke-linecap="round" />
+                                    </svg>
+                                </CommentDelete>
+                            </CommentTop>
+                            <br />
+                            <CommentWriting>
+                                {comment.writing}
+                            </CommentWriting>
+                            <br />
+                            <CommentCreatedAt>
+                                {comment.createdAt} 작성
+                            </CommentCreatedAt>
+                        </CommentContainer>
                     </>
                 ))}
             </div>
+            <Pagination isDark='true' page={page} totalPage={totalPage} onChangePage={setPage} />
+
         </div>
     )
 }

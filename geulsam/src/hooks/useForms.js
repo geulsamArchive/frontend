@@ -5,5 +5,10 @@ export const useForms = () => {
     const onChange = (e) => {
         setValue(e.target.value);
     }
-    return [value, onChange];
+
+    const resetValue = () => {
+        setValue('');
+    };
+
+    return [value, onChange, resetValue];
 }

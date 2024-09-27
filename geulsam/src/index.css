@@ -147,6 +147,13 @@ table {
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Grandpa_sharing';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Grandpa_sharing.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 em,
 i {
     font-style: italic;
