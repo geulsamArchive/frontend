@@ -263,9 +263,9 @@ const Comment = ({ contentId }) => {
 
     const getCommentList = async () => {
         try {
-            const response = await normalAPI.get(`/comment?contentId=${content}`);
+            const response = await normalAPI.get(`/comment?page=${page}&contentId=${content}`);
             console.log('서버 응답:', response.data);
-            setCommentList(response.data.data)
+            setCommentList(response.data.data.content)
         } catch (error) {
             console.log('에러 발생', error)
         }

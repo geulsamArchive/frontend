@@ -66,6 +66,7 @@ export const CommentWriter = styled.div`
 
 export const CommentWriting = styled.div`
     font-size: 16px;
+    word-break: break-all;
 `
 
 export const CommentCreatedAt = styled.div`

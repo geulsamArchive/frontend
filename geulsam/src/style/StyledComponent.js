@@ -54,7 +54,7 @@ display: flex;
 flex-direction: column;
 justify-content: space-between;
 align-items: center;
-filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))', //transform: 'scale(0.4)',
+filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))';
 `;
 
 export const Inputs = styled.div`
@@ -280,6 +280,11 @@ position: fixed;
 right: 0px;
 bottom: 10%;
 text-align:right;
+
+@media only screen and (max-width: 1024px) {
+  display: none;
+  
+}
 `;
 
 export const SideBox = styled.div`

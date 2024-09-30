@@ -6,6 +6,7 @@ import Pagination from '../../../components/Paging/Pagination';
 import { GenreButton, Margin, Searchfailed, Space, WorkAwards, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoContainer, WorkInfoRight, WorkLink, WorkTitle, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
 import SearchWork from '../../../components/Search/SearchWork';
 import { CheckTitleLength } from './../../../components/CheckLength';
+import { useAuth } from '../../../store/Auth';
 
 const Works = () => {
     const [page, setPage] = useState(1)
@@ -13,6 +14,9 @@ const Works = () => {
     const [workList, setWorkList] = useState([])
     const [keyword, setKeyword] = useState('')
     const [genre, setGenre] = useState('');
+
+
+    const { logout } = useAuth();
 
     const translateType = (type) => {
         switch (type) {
@@ -28,6 +32,8 @@ const Works = () => {
     };
 
     const getWorkData = async () => {
+        const accesstoken = localStorage.getItem('access')
+        const refreshToken = localStorage.getItem('refresh')
         try {
             let url = `/content?page=${page}&genre=${genre}`;
 
@@ -35,7 +41,11 @@ const Works = () => {
             if (keyword) {
                 url += `&keyword=${keyword}`;
             }
-            const response = await normalAPI.get(url)
+            const response = await normalAPI.get(url, {
+                headers: {
+                    'accessToken': accesstoken
+                }
+            })
             console.log(response)
 
             const updatedWorkList = response.data.data.content.map(work => ({
@@ -48,6 +58,37 @@ const Works = () => {
 
         } catch (err) {
             console.error(err)
+            try {
+                let url = `/content?page=${page}&genre=${genre}`;
+
+                // keyword가 존재하면 URL에 추가
+                if (keyword) {
+                    url += `&keyword=${keyword}`;
+                }
+
+                const newResult = await normalAPI.get(url, {
+                    headers: {
+                        'refreshToken': refreshToken
+                    }
+                })
+
+                const newAccessToken = newResult.headers.accesstoken.replace('Bearer ', '')
+                localStorage.setItem('access', newAccessToken)
+                if (newResult.headers.refreshtoken) {
+                    const newRefreshToken = newResult.headers.refreshtoken.replace('Bearer ', '')
+                    localStorage.setItem('refresh', newRefreshToken)
+                }
+                const updatedWorkList = newResult.data.data.content.map(work => ({
+                    ...work,
+                    type: translateType(work.type)
+                }));
+
+                setWorkList(updatedWorkList);
+                setTotalPage(newResult.data.data.pageTotal)
+            } catch (error) {
+                alert('로그인이 만료되었습니다. 다시 로그인해주세요.')
+                logout();
+            }
         }
 
     }
