@@ -3,7 +3,7 @@ import { BookButtons, BookInfoAndButton, BookInfoContainer, BookInfoContents, Bo
 import { normalAPI } from '../../../apis/Api';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import Pagination from '../../../components/Paging/Pagination';
-import { GenreButton, Margin, Searchfailed, Space, WorkAwards, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoContainer, WorkInfoRight, WorkLink, WorksContainer, WorkTitle, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
+import { GenreButton, Margin, MobileWorkBottom, MobileWorkContainer, MobileWorkTop, MobileWorkTopLeft, MobileWorkTopRight, Searchfailed, Space, WorkAwards, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoContainer, WorkInfoRight, WorkLink, WorksContainer, WorkTitle, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
 import SearchWork from '../../../components/Search/SearchWork';
 import { CheckTitleLength } from './../../../components/CheckLength';
 import { useAuth } from '../../../store/Auth';
@@ -141,51 +141,72 @@ const Works = () => {
                 <BookInfoAndButton>
                     <BookInfoContents>
                         {workList.length === 0 ? (
-                            <div>
-                                <Searchfailed><Red>'{keyword}'</Red>에 해당하는 검색결과를 찾을 수 없습니다.</Searchfailed>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                                <WorkInfo>&nbsp;</WorkInfo>
-                            </div>
+                            <Desktop>
+                                <div>
+                                    <Searchfailed><Red>'{keyword}'</Red>에 해당하는 검색결과를 찾을 수 없습니다.</Searchfailed>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                    <WorkInfo>&nbsp;</WorkInfo>
+                                </div>
+                            </Desktop>
                         ) : (
                             <>
                                 {workList.map((work) => (
                                     <div key={work.id}>
                                         <WorkLink to={`/work/${work.contentId}`}>
-                                            <WorkInfo>
-                                                <WorkTitleType>
-                                                    <WorkType>
-                                                        {work.type}
-                                                    </WorkType>
-                                                    <WorkTitle>
-                                                        {CheckTitleLength(work.title, 25)}
-                                                    </WorkTitle>
-                                                </WorkTitleType>
-                                                <WorkInfoRight>
-                                                    <WorkCreatedAt>
-                                                        {work.awards && work.awards.length > 0 && (
-                                                            <WorkAwards>
-                                                                {work.awards.join(', ')}
-                                                            </WorkAwards>
-                                                        )}
-                                                        {work.author}
-                                                        <Space />
+                                            <Desktop>
+                                                <WorkInfo>
+                                                    <WorkTitleType>
+                                                        <WorkType>
+                                                            {work.type}
+                                                        </WorkType>
+                                                        <WorkTitle>
+                                                            {CheckTitleLength(work.title, 25)}
+                                                        </WorkTitle>
+                                                    </WorkTitleType>
+                                                    <WorkInfoRight>
+                                                        <WorkCreatedAt>
+                                                            {work.awards && work.awards.length > 0 && (
+                                                                <WorkAwards>
+                                                                    {work.awards.join(', ')}
+                                                                </WorkAwards>
+                                                            )}
+                                                            {work.author}
+                                                            <Space />
+                                                            {work.createdAt}
+                                                        </WorkCreatedAt>
+                                                    </WorkInfoRight>
+                                                </WorkInfo>
+                                            </Desktop>
+                                            <Mobile>
+                                                <MobileWorkContainer>
+                                                    <MobileWorkTop>
+                                                        <MobileWorkTopLeft>
+                                                            {work.author}
+                                                        </MobileWorkTopLeft>
+                                                        <MobileWorkTopRight>
+                                                            {CheckTitleLength(work.title, 25)}
+                                                        </MobileWorkTopRight>
+                                                    </MobileWorkTop>
+                                                    <MobileWorkBottom>
                                                         {work.createdAt}
-                                                    </WorkCreatedAt>
-                                                </WorkInfoRight>
-                                            </WorkInfo>
+                                                    </MobileWorkBottom>
+                                                </MobileWorkContainer>
+                                            </Mobile>
                                         </WorkLink>
                                     </div>
                                 ))}
-                                {workList.length < 12 && renderEmptyLogs(12 - workList.length)}
+                                <Desktop>
+                                    {workList.length < 12 && renderEmptyLogs(12 - workList.length)}
+                                </Desktop>
                             </>
                         )}
                     </BookInfoContents>

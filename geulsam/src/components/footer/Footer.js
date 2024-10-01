@@ -21,7 +21,9 @@ const Footer = () => {
             </Desktop>
             <Mobile>
                 <div>
-                    <Footborder />
+                    <br />
+                    <br />
+                    <br />
                     <br />
                     <br />
                     <br />

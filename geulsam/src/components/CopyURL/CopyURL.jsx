@@ -2,9 +2,10 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { URLButton } from '../../style/StyledComponent';
 import Logo from '../../assets/images/URL.png'
+import { Desktop, Mobile } from '../../hooks/useMediaQuery';
 
 const CopyURL = () => {
-    const baseURL = "localhost:3000/"
+    const baseURL = "geulsaem.pages.dev"
     const location = useLocation();
     const handleCopyClipBoard = async (text) => {
         try {
@@ -17,7 +18,13 @@ const CopyURL = () => {
     return (
         <>
             <URLButton onClick={() => handleCopyClipBoard(`${baseURL}${location.pathname}`)}>
-                <img src={Logo} alt='현재 URL 복사' />
+                <Desktop>
+                    <img src={Logo} alt='현재 URL 복사' />
+
+                </Desktop>
+                <Mobile>
+                    공유하기
+                </Mobile>
             </URLButton>
         </>
     );

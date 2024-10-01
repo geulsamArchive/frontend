@@ -173,6 +173,17 @@ export const Checkbox = styled.input`
 
 //URL복사, 다운로드 관련 버튼
 export const URLButton = styled.button`
+@media only screen and (max-width:1023px) {
+  border: 1px solid rgba(87, 86, 85, 1);
+  border-radius: 30px;
+  height: 40px;
+  color: rgba(87, 86, 85, 1);
+  width: 90dvw;
+font-family: 'MaruBuri-Regular';
+font-weight: 700;
+margin-bottom: 16px;
+font-size: 16px;
+}
 border-top-right-radius:30px;
 border-bottom-right-radius:30px;
 border: 1px solid black;
@@ -478,6 +489,12 @@ background-color: rgba(249, 249, 246, 1);
 
 //문집 페이지
 export const BookInfoContainer = styled.div`
+@media only screen and (max-width:1023px) {
+width: 100%;
+margin-left: 0;
+padding: 5dvw;
+padding-top: 30px;
+}
 font-family: 'MaruBuri-Regular';
 width: 90%;
 margin-left: 4%;
@@ -488,6 +505,11 @@ box-sizing: border-box;
 `
 
 export const BookTitle = styled.div`
+@media only screen and (max-width:1023px) {
+    font-size: 18px;
+    padding-bottom: 15px;
+}
+   
 font-size: 27px;
 font-weight: 700;
 width: 100%;
@@ -495,6 +517,11 @@ border-bottom:2px solid black;
 padding-bottom: 18px;
 `
 export const BookInfos = styled.div`
+@media only screen and (max-width:1023px) {
+    width: 90dvw;
+border-bottom: 1px solid rgba(87, 86, 85, 1);
+color: rgba(87, 86, 85, 1);
+}
 width: 75dvw;
 font-size: 14px;
 border-bottom: 1px solid black;
@@ -672,6 +699,13 @@ export const HiddenButton = styled(Button)`
 
 //포스터 페이징 관련
 export const Paging = styled.div`
+@media only screen and (max-width:1023px) {
+    margin-left:0px;
+    display: flex;
+    border-radius: 0 0 16px 16px;
+    justify-content: center;
+    padding-bottom: 30px;
+}
 margin-left: ${({ isDark }) => (isDark ? '-1vw' : '5vw')};
 padding-bottom: 50px;
 background-color:${({ isDark }) => (isDark ? 'inherit' : ' rgba(249, 249, 246, 1)')};;

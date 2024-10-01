@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 
 export const WorksContainer = styled.div`
-
+border-radius:0 0 16px 16px;
+    background-color:rgba(249, 249, 246, 1)  ;
 `
 export const WorkLink = styled(Link)`
     color:black;
@@ -16,8 +17,10 @@ export const WorkLink = styled(Link)`
 `
 
 export const Margin = styled.div`
+
     margin-top: 50px;
 `
+
 export const WorkTopBorder = styled.div`
 width: 100%;
 border-bottom:1px solid black;
@@ -84,6 +87,14 @@ border-left: 1px solid black;
 `
 
 export const WorkSentenceContainer = styled.div`
+@media only screen and (max-width:1023px) {
+    width: 90dvw;
+    height: 311px;
+    font-size: 20px;
+    font-weight:700;
+    padding: 0px;
+    margin-bottom: 30px;
+}
     width: 956px;
     height: 352px;
     background-color: white;
@@ -97,7 +108,7 @@ export const WorkSentenceContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 100px;
-
+filter: drop-shadow(0 4px 12px rgba(38, 38, 38, 0.04));
 `
 
 export const WorkAwards = styled.span`
@@ -114,6 +125,11 @@ top: -9px;
 
 
 export const WorkSentence = styled.div`
+@media only screen and (max-width:1023px) {
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+}
     width: 608px;
     height: 268px;
 `
@@ -183,4 +199,40 @@ margin-top: 11px;
 background-color: ${(props) => (props.disabled ? 'rgba(129, 128, 127, 1)' : 'transparent')};
   color: ${(props) => (props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(129, 128, 127, 1)')};
   cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
+`
+
+export const MobileWorkContainer = styled.div`
+    border-bottom: 1px solid black;
+    width: 90dvw;
+`
+
+export const MobileWorkTop = styled.div`
+display: flex;
+justify-content: left;
+margin-top: 14px;
+line-height: 1.7;
+font-weight: 700;
+margin-bottom: 30px;
+
+`
+
+export const MobileWorkTopLeft = styled.div`
+font-size: 14px;
+width: 100px;
+color: rgba(171, 170, 170, 1);
+`
+export const MobileWorkTopRight = styled.div`
+font-size: 16px;
+word-break: break-all;
+width: 65dvw;
+color: rgba(29, 28, 28, 1);
+
+`
+
+
+export const MobileWorkBottom = styled.div`
+float: right;
+margin-bottom: 14px;
+font-size: 11px;
+color: rgba(171, 170, 170, 1);
 `
