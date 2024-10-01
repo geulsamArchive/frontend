@@ -8,13 +8,12 @@ export const SmallNavContainer = styled.div`
     align-items: center;
     height: 42px;
     color: white;
-    gap: 10px;
 `
 
 export const NavMenu = styled.div`
-    
+    margin-left: 10px;
 `
 
 export const NavMyPage = styled.div`
-    
+    margin-right: 10px;
 `

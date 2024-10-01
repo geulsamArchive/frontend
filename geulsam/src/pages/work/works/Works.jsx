@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { BookButtons, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookInfos, BookTitle, Button, Red, Right } from '../../../style/StyledComponent';
+import { BookButtons, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookInfos, BookTitle, Button, Centering, Red, Right } from '../../../style/StyledComponent';
 import { normalAPI } from '../../../apis/Api';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import Pagination from '../../../components/Paging/Pagination';
-import { GenreButton, Margin, Searchfailed, Space, WorkAwards, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoContainer, WorkInfoRight, WorkLink, WorkTitle, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
+import { GenreButton, Margin, Searchfailed, Space, WorkAwards, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoContainer, WorkInfoRight, WorkLink, WorksContainer, WorkTitle, WorkTitleType, WorkTopBorder, WorkType } from '../../../style/Works';
 import SearchWork from '../../../components/Search/SearchWork';
 import { CheckTitleLength } from './../../../components/CheckLength';
 import { useAuth } from '../../../store/Auth';
+import { Desktop, Mobile } from '../../../hooks/useMediaQuery';
 
 const Works = () => {
     const [page, setPage] = useState(1)
@@ -124,8 +125,16 @@ const Works = () => {
 
 
     return (
-        <div>
+        <WorksContainer>
             <SearchWork onSearch={handleSearch} placeholder='찾으시는 작품의 제목이나 작가명을 적어주세요.' />
+            <Mobile>
+                <Centering>
+                    <GenreButton disabled={genre === ''} onClick={() => handleGenreClick('')}>전체</GenreButton>
+                    <GenreButton disabled={genre === 'NOVEL'} onClick={() => handleGenreClick('NOVEL')}>소설</GenreButton>
+                    <GenreButton disabled={genre === 'ESSAY'} onClick={() => handleGenreClick('ESSAY')}>수필</GenreButton>
+                    <GenreButton disabled={genre === 'POEM'} onClick={() => handleGenreClick('POEM')}>시</GenreButton>
+                </Centering>
+            </Mobile>
             <button onClick={handleSearchClear}> 검색결과 초기화</button>
             <WorkInfoContainer>
                 <WorkTopBorder />
@@ -180,18 +189,20 @@ const Works = () => {
                             </>
                         )}
                     </BookInfoContents>
-                    <WorkButtons>
-                        <GenreButton disabled={genre === ''} onClick={() => handleGenreClick('')}>전체</GenreButton>
-                        <GenreButton disabled={genre === 'NOVEL'} onClick={() => handleGenreClick('NOVEL')}>소설</GenreButton>
-                        <GenreButton disabled={genre === 'ESSAY'} onClick={() => handleGenreClick('ESSAY')}>수필</GenreButton>
-                        <GenreButton disabled={genre === 'POEM'} onClick={() => handleGenreClick('POEM')}>시</GenreButton>
-                    </WorkButtons>
+                    <Desktop>
+                        <WorkButtons>
+                            <GenreButton disabled={genre === ''} onClick={() => handleGenreClick('')}>전체</GenreButton>
+                            <GenreButton disabled={genre === 'NOVEL'} onClick={() => handleGenreClick('NOVEL')}>소설</GenreButton>
+                            <GenreButton disabled={genre === 'ESSAY'} onClick={() => handleGenreClick('ESSAY')}>수필</GenreButton>
+                            <GenreButton disabled={genre === 'POEM'} onClick={() => handleGenreClick('POEM')}>시</GenreButton>
+                        </WorkButtons>
+                    </Desktop>
                 </BookInfoAndButton>
             </WorkInfoContainer >
             <Margin>
                 <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
             </Margin>
-        </div>
+        </WorksContainer>
     );
 };
 

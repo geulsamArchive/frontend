@@ -244,9 +244,24 @@ font-size: 17px;
 `
 
 
-
+export const Footborder = styled.div`
+border-radius:0 0 16px 16px;
+background-color: rgba(249, 249, 246, 1);
+height: 34px;
+width: 100dvw;
+border: none;
+`
 
 export const Footers = styled.footer`
+@media only screen and (max-width:1023px){
+background-color: rgba(29, 28, 28, 1);
+width: 100dvw;
+font-size: 11px;
+color: rgba(129, 128, 127, 1);
+height: 150px;
+text-align: center;
+display: block;
+}
 font-family: 'MaruBuri-Regular';
 background-color: rgba(234, 233, 227, 1);
 height: 57px;

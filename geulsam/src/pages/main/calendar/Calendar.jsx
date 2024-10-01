@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Calendars, CalendarTitle, Centering } from '../../../style/StyledComponent';
 import CenterMode from '../../../components/Carousel/Slides';
 import { normalAPI } from '../../../apis/Api';
+import { Desktop, Mobile } from './../../../hooks/useMediaQuery';
 
 
 
@@ -52,14 +53,23 @@ const Calendar = () => {
     }, [year, semester]);
 
     return (
-        <Calendars>
-            <CalendarTitle>
+
+        <>
+            <Mobile>
                 {year}년 {semester}학기 활동 일정
-            </CalendarTitle>
-            <Centering>
-                <CenterMode data={calendarData} />
-            </Centering>
-        </Calendars>
+            </Mobile>
+            <Desktop>
+                <Calendars>
+                    <CalendarTitle>
+                        {year}년 {semester}학기 활동 일정
+                    </CalendarTitle>
+                    <Centering>
+                        <CenterMode data={calendarData} />
+                    </Centering>
+                </Calendars>
+            </Desktop>
+        </>
+
     );
 };
 
