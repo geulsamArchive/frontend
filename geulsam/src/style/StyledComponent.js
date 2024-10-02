@@ -123,13 +123,20 @@ border-bottom-left-radius: 8.6px;
 border-bottom-right-radius: 8.6px;
 `
 export const ArchiveButton = styled.button`
+ @media only screen and (max-width:1023px) {
+ height: 31px;
+ font-size: 14px;
+ font-weight: 700;
+ width: 106px;
+
+}
 font-family: 'MaruBuri-Regular';
 border: none;
 font-size: 17px;
 border-radius: 30px;
 width:93px;
 height: 36px;
-color:${props => (props.disabled ? 'rgba(249, 249, 246, 1)' : '')};
+color:${props => (props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(249, 249, 246, 1)')};
 background-color: ${props => (props.disabled ? 'rgba(87, 86, 85, 1)' : 'rgba(213, 213, 212, 1)')};
 pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
 cursor: pointer;
@@ -479,7 +486,10 @@ cursor: pointer;
 
 //아카이브 상단 버튼
 export const ArchiveButtonContainer = styled.div`
-display: flex;
+ @media only screen and (max-width:1023px) {
+padding-top: 30px;
+}
+   display: flex;
 padding-top: 77px;
 justify-content: center;
 background-color: rgba(249, 249, 246, 1);
@@ -575,6 +585,9 @@ export const Posters = styled.img`
 export const GridContainer = styled.div`
  // display: grid;
   //grid-template-columns: repeat(3, 1fr);
+ @media only screen and (max-width:1023px) {
+  margin: 0;
+ }
   display: flex;
   flex-wrap: wrap; /* 그리드 아이템이 줄 바꿈되도록 설정 */
   justify-content: center; /* 가로 방향 가운데 정렬 */
@@ -588,6 +601,13 @@ background-color: rgba(249, 249, 246, 1);
 `;
 
 export const PosterGridContainer = styled.div`
+@media only screen and (max-width:1023px) {
+  
+  padding: 0;
+  margin: 0;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
  // display: grid;
   //grid-template-columns: repeat(3, 1fr);
   display: flex;
@@ -601,6 +621,10 @@ export const PosterGridContainer = styled.div`
 
 `;
 export const PotserGridItems = styled.div`
+  @media only screen and (max-width:1023px) {
+  width: 90dvw;
+  
+}
   width: 401px;
   height: 568px;
   position: relative;
@@ -656,6 +680,7 @@ export const PosterLink = styled(Link)`
 
 // 문집 
 export const GridItems = styled.div`
+
   width: 380px;
   height: 380px;
   background-color: rgba(45, 43, 42, 1);
@@ -667,11 +692,31 @@ export const GridItems = styled.div`
   text-align: center;   
 `;
 
+export const BigBold = styled.span`
+font-weight: 700;
+font-size: 20px;
+`
+
+export const HideBookInfo = styled.div`
+ display: none; 
+  position: absolute; 
+  top: 50%;
+  font-size: 14px;
+font-family: 'MaruBuri-Regular';
+  color: white;
+  left: 50%; 
+  line-height: 1.7;
+  transform: translate(-50%, -50%); 
+`
+
 // 문집 수정
 export const ModifyGridItems = styled.div`
-  width: 380px;
+ @media only screen and (max-width:1023px) {
+  width: 90dvw;
+  height: 90dvw;
+} width: 380px;
   height: 380px;
-  background-color: rgba(45, 43, 42, 1);
+  background-color: rgba(29, 28, 28, 1);
   position: relative;
   border-radius: 15px;
   display: flex;
@@ -686,6 +731,10 @@ cursor: pointer;
   }
 
   &:hover button {
+      display: block;
+  }
+
+  &:hover div {
       display: block;
   }
 `;
@@ -745,7 +794,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 font-family: 'MaruBuri-Regular';
-z-index: 2;
+z-index: 5;
 
 `
 
@@ -754,10 +803,13 @@ position: relative;
 background-color:none;
 display: flex;
 flex-direction: column;
-align-items: flex-end; 
+align-items: flex-start; 
 `
 
 export const ModalImg = styled.img`
+ @media only screen and (max-width:1023px) {
+max-width : 90dvw;
+}
 max-height:85dvh ;
 `
 
@@ -806,7 +858,7 @@ margin-left: 10px;
 
 export const ModalInfo = styled.div`
 display: flex;
-justify-content: space-between;
+justify-content: space-between\;
 `
 
 //배경색 관련
@@ -814,6 +866,9 @@ export const PageContainer = styled.div`
 position: relative;
 width: 100%;
 height: 100%;
+background-color:rgba(249, 249, 246, 1);
+border-radius: 0 0 16px 16px;
+
 
 //background-image: linear-gradient(to bottom, #ffffff 150px,rgba(45, 43, 42, 1)100px);
 

@@ -20,7 +20,6 @@ const Archive = () => {
                 </Link>
             </ArchiveButtonContainer>
             <Outlet />
-
         </PageContainer>
     );
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Bookcover, BookcoverImg, GridContainer, GridItems } from '../../../style/StyledComponent';
+import { BigBold, Bookcover, BookcoverImg, GridContainer, GridItems, HideBookInfo, ModifyGridItems } from '../../../style/StyledComponent';
 import Pagination from '../../../components/Paging/Pagination';
 import { normalAPI } from '../../../apis/Api';
 
@@ -37,11 +37,18 @@ const Book = () => {
         <>
             <GridContainer>
                 {bookList.map((book) => (
-                    <GridItems key={book.id}>
+                    <ModifyGridItems key={book.id}>
                         <Bookcover to={`/archive/book/${book.bookId}`}>
+                            <HideBookInfo>
+                                <BigBold>
+                                    {book.title}
+                                </BigBold>
+                                <br />
+                                발간일 {book.createdAt}
+                            </HideBookInfo>
                             <BookcoverImg src={book.bookCover} alt={book.description} />
                         </Bookcover>
-                    </GridItems>
+                    </ModifyGridItems>
                 ))}
             </GridContainer>
             <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
