@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import PDFView from '../../../components/pdf/PDFView';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { ViewerAndLinks, BookInfoContainer, BookTitle, BookInfos, BookInfoContents, BookInfoAndButton, BookButtons } from '../../../style/StyledComponent';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ViewerAndLinks, BookInfoContainer, BookTitle, BookInfos, BookInfoContents, BookInfoAndButton, BookButtons, URLButton } from '../../../style/StyledComponent';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import PDFDownload from '../../../components/Download/PDFDownload';
 import { normalAPI } from '../../../apis/Api';
+import { Desktop, Mobile } from '../../../hooks/useMediaQuery';
 
 const BookInfo = () => {
     const [bookData, setBooktData] = useState({})
     const [loading, setLoading] = useState(true)
     const { bookId } = useParams()
 
+
+    const navigate = useNavigate();
+    const onClickList = () => {
+        navigate('/archive/book')
+    }
 
     const getBookData = async () => {
         try {
@@ -63,13 +68,22 @@ const BookInfo = () => {
                         <PDFView PDF={bookData.url} />
                     </ViewerAndLinks>
                 </BookInfoContents>
-                <BookButtons>
-                    <br />
-                    <br />
-                    <PDFDownload PDFLink={bookData.url} />
-                    <CopyURL />
-                </BookButtons>
+                <Desktop>
+                    <BookButtons>
+                        <br />
+                        <br />
+                        <PDFDownload PDFLink={bookData.url} />
+                        <CopyURL />
+                    </BookButtons>
+                </Desktop>
             </BookInfoAndButton>
+            <Mobile>
+                <PDFDownload PDFLink={bookData.url} />
+                <CopyURL />
+                <URLButton onClick={onClickList}>
+                    목록
+                </URLButton>
+            </Mobile>
         </BookInfoContainer>
 
     );

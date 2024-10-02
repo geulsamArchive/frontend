@@ -9,9 +9,11 @@ const SmallNavMenu = ({ isOpen, closeMenu }) => {
 
     return (
         <SmallNavMenuContainer>
-            <Color60>
-                글샘문학회
-            </Color60>
+            <SmallNavLink to='/' onClick={closeMenu}>
+                <Color60>
+                    글샘문학회
+                </Color60>
+            </SmallNavLink>
             <SmallNavLink to='/work' onClick={closeMenu}>
                 작품
             </SmallNavLink>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Calendars, CalendarTitle, Centering } from '../../../style/StyledComponent';
+import { BookTitle, Calendars, CalendarTitle, Centering } from '../../../style/StyledComponent';
 import CenterMode from '../../../components/Carousel/Slides';
 import { normalAPI } from '../../../apis/Api';
 import { Desktop, Mobile } from './../../../hooks/useMediaQuery';
+import { MobileCalendarContainer } from '../../../style/MobileCalendar';
 
 
 
@@ -56,7 +57,11 @@ const Calendar = () => {
 
         <>
             <Mobile>
-                {year}년 {semester}학기 활동 일정
+                <MobileCalendarContainer>
+                    <BookTitle>
+                        {year}년 {semester}학기 활동 일정
+                    </BookTitle>
+                </MobileCalendarContainer>
             </Mobile>
             <Desktop>
                 <Calendars>

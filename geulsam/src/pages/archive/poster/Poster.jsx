@@ -4,6 +4,7 @@ import { GridContainer, GridItems, PageButton, Paging, PosterGridContainer, Post
 import Modal from '../../../components/Modal/Modal';
 import Pagination from '../../../components/Paging/Pagination';
 import { normalAPI } from '../../../apis/Api';
+import Loading from '../../../components/Loading';
 
 
 
@@ -18,14 +19,16 @@ const Poster = () => {
     const [selectedPoster, setSelectedPoster] = useState(null);
 
     const getPosterList = async () => {
+        setLoading(true)
         try {
             const res = await normalAPI.get(`/poster?page=${page}&order=${order}`)
             console.log(res.data.data)
             setPosterList(res.data.data.content)
             setPageTotal(res.data.data.pageTotal)
-            setLoading(false)
         } catch (error) {
             console.log('api fetching failed', error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -60,15 +63,24 @@ const Poster = () => {
     };
     return (
         <>
-            <PosterGridContainer>
-                {posterList.map((poster) => (
-                    <PotserGridItems key={poster.id}>
-                        <Posters src={poster.thumbnailImage} alt={poster.year} onClick={() => handlePosterClick(poster)} />
-                    </PotserGridItems>
-                ))}
-            </PosterGridContainer>
-            <Modal isOpen={isOpen} poster={selectedPoster} onClose={closeModal} />
-            <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} />
+            {
+                loading ? (
+                    <Loading loading={loading} />
+                ) : (
+                    <>
+                        <PosterGridContainer>
+                            {posterList.map((poster) => (
+                                <PotserGridItems key={poster.id}>
+                                    <Posters src={poster.thumbnailImage} alt={poster.year} onClick={() => handlePosterClick(poster)} />
+                                </PotserGridItems>
+                            ))}
+                        </PosterGridContainer>
+                        <Modal isOpen={isOpen} poster={selectedPoster} onClose={closeModal} />
+                        <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} />
+                    </>
+                )
+            }
+
         </>
     );
 };

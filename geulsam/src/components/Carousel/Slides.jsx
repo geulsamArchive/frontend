@@ -53,6 +53,19 @@ const formatEventTime = (startTime, endTime) => {
     return sameDay ? `${formattedStart} ~ ${formattedEnd}` : `${formattedStart} ~ ${formattedEnd} ${end.toLocaleDateString('ko-KR', options)}`;
 };
 
+
+export const MobileCalendar = ({ data }) => {
+    const [selectedMonthIdx, setSelectedMonthIdx] = useState(0);
+
+
+
+
+    return (
+        <>
+        </>
+    )
+}
+
 function CenterMode({ data }) {
     const [monthIdx, setMonthIdx] = useState(0);
     const sliderRef = useRef(null);
