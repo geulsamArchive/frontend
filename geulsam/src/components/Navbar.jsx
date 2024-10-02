@@ -11,7 +11,7 @@ const Navbar = () => {
 
         <>
             <Mobile>
-                <SmallNavbar />
+                <SmallNavbar path={path} />
             </Mobile>
             <Desktop>
                 <Navs>

@@ -20,7 +20,6 @@ const CopyURL = () => {
             <URLButton onClick={() => handleCopyClipBoard(`${baseURL}${location.pathname}`)}>
                 <Desktop>
                     <img src={Logo} alt='현재 URL 복사' />
-
                 </Desktop>
                 <Mobile>
                     공유하기
