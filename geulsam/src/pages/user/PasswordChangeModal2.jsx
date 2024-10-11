@@ -27,7 +27,7 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
     const [pwError, setPwError] = useState('');
     const [confirmPw, setConfirmPw] = useState('');
     const [confirmPwError, setConfirmPwError] = useState('');
-    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // 비밀번호 유효성 검사 정규식
+    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~`!@#$%^&*()\-_=+]{8,}$/; // 비밀번호 유효성 검사 정규식
 
     const onChangeConfirmPw = (e) => {
         setConfirmPw(e.target.value);
@@ -38,7 +38,7 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
 
         // 비밀번호 유효성 검사
         if (!pwRegex.test(pw)) {
-            setPwError('올바른 비밀번호를 입력해주세요');
+            setPwError('형식에 맞는 올바른 비밀번호를 입력해주세요');
             valid = false;
         } else {
             setPwError('');
@@ -108,6 +108,8 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
             <div>
                 <Form>
                     <Title>비밀번호 변경</Title>
+                    <ErrorMessage>영문자와 숫자가 포함된 8자리 이상으로 설정해주세요.</ErrorMessage>
+                    <ErrorMessage>특수문자는  ~`!@#$%^&*()-_+= 만 가능합니다. </ErrorMessage>
                     <TextalignLeft>
                         <InputTitle>새 비밀번호</InputTitle>
                         <Input type='password' value={pw} onChange={onChangePw} />

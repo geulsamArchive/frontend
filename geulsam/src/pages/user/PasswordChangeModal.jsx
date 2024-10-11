@@ -15,7 +15,7 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
     const [pw, onChangePw] = useForms(); // 비밀번호 입력값을 관리하는 커스텀 훅
     const [pwError, setPwError] = useState(''); // 비밀번호 오류 메시지 관리
     const [isModal2Open, setIsModal2Open] = useState(false);
-    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$|^[A-Za-z]\d{6,}$/; // 비밀번호 유효성 검사 정규식
+    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~`!@#$%^&*()\-_=+]{8,}$/; // 비밀번호 유효성 검사 정규식
 
     const modalStyles = {
         overlay: {

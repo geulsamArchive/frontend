@@ -31,6 +31,7 @@ import AdminLinks from './pages/admin/AdminLinks';
 import { AuthProvider } from './store/Auth';
 import CriticLogUpload from './pages/admin/upload/critic/CriticLogUpload';
 import AuthorInfo from './pages/work/Author/AuthorInfo';
+import MemberModify from './pages/admin/modify/member/memberModify';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
               <Route path='book/modify' element={<BookModify />} />
               <Route path='book/modify/:bookId' element={<BookModifyInfo />} />
               <Route path='poster/modify' element={<PosterModify />} />
+              <Route path='member/modify' element={<MemberModify />} />
               <Route path='poster/modify/:posterId' element={<PosterModifyInfo />} />
               <Route path='poster/upload' element={<PosterUpload />} />
               <Route path='book/upload' element={<BookUpload />} />
