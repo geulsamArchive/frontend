@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { normalAPI } from '../../../apis/Api';
-import { B, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookInfos, BookTitle } from '../../../style/StyledComponent';
-import { WorkButtons } from '../../../style/Works';
+import { B, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookInfos, BookTitle, NoneLinkBookInfos } from '../../../style/StyledComponent';
+import { AuthorWorkContainer, AuthorWorkInfo, Margin, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoRight, WorkLink, WorkTitle, WorkTitleType, WorkType } from '../../../style/Works';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import { Accordion, GuestBook } from '../../../components/Comment/Comments';
+import { CheckTitleLength } from '../../../components/CheckLength';
+import { Desktop } from '../../../hooks/useMediaQuery';
+import Pagination from '../../../components/Paging/Pagination';
 
 const AuthorInfo = () => {
     const { id } = useParams();
     const [author, setAuthor] = useState([])
     const [work, setWork] = useState([])
     const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(1)
+
+    const renderEmptyLogs = (count) => {
+        const emptyLogs = [];
+        for (let i = 0; i < count; i++) {
+            emptyLogs.push(<AuthorWorkInfo key={`empty-${i}`}>&nbsp;</AuthorWorkInfo>);
+        }
+        return emptyLogs;
+    };
 
     const getAuthorInfoData = async (authorId) => {
         try {
@@ -30,15 +42,16 @@ const AuthorInfo = () => {
             const res = await normalAPI.get(url)
             setWork(res.data.data.content)
             console.log(res)
+            setTotalPage(res.data.data.pageTotal)
         } catch (error) {
-
+            console.log('작가 작품 로딩 오류', error)
         }
     }
 
     useEffect(() => {
         getAuthorInfoData(id);
         getAuthorWorks(id)
-    }, [])
+    }, [page])
 
     return (
         <>
@@ -48,17 +61,7 @@ const AuthorInfo = () => {
                 </BookTitle>
                 <BookInfoAndButton>
                     <BookInfoContents>
-                        <BookInfos>
-                            <B>
-                                자기소개
-                            </B>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-
-                            {author.introduce}
-                        </BookInfos>
-                        <BookInfos>
+                        <NoneLinkBookInfos>
                             <B>
                                 키워드
                             </B>
@@ -68,7 +71,40 @@ const AuthorInfo = () => {
                             &nbsp;&nbsp;  {author.keywords?.map((word) => (
                                 <span>{word}</span>
                             ))}
-                        </BookInfos>
+                        </NoneLinkBookInfos>
+                        <NoneLinkBookInfos>
+                            <B>
+                                자기소개
+                            </B>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            {author.introduce}
+                        </NoneLinkBookInfos>
+                        <AuthorWorkContainer>
+                            {work.map((w) => (
+                                <WorkLink to={`/work/${w.contentId}`}>
+                                    <WorkInfo>
+                                        <WorkTitleType>
+                                            <WorkType>
+                                                {w.type}
+                                            </WorkType>
+                                            <WorkTitle>
+                                                {CheckTitleLength(w.title, 25)}
+                                            </WorkTitle>
+                                        </WorkTitleType>
+                                        <WorkInfoRight>
+                                            <WorkCreatedAt>
+                                                {w.createdAt}
+                                            </WorkCreatedAt>
+                                        </WorkInfoRight>
+                                    </WorkInfo>
+                                </WorkLink>
+                            ))}
+                            <Desktop>
+                                {work.length < 8 && renderEmptyLogs(8 - work.length)}
+                            </Desktop>
+                        </AuthorWorkContainer>
                     </BookInfoContents>
                     <WorkButtons>
                         <br />
@@ -77,8 +113,9 @@ const AuthorInfo = () => {
                     </WorkButtons>
                 </BookInfoAndButton>
             </BookInfoContainer>
-
-
+            <Margin>
+                <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
+            </Margin>
             <Accordion name='방명록' content={GuestBook} contentId={id} />
         </>
     );

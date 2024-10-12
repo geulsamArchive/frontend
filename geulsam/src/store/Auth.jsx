@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         try {
-            const res = await normalAPI.post(`/user/logout?refresh=${refresh}`)
+            const res = await normalAPI.post(`/user/logout?refreshToken=${refresh}`)
         } catch (err) {
 
         }

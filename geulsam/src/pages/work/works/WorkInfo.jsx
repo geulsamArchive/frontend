@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { normalAPI } from '../../../apis/Api';
-import { BookButtons, BookInfos, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookTitle, URLButton } from '../../../style/StyledComponent';
+import { BookButtons, BookInfos, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookTitle, URLButton, NoneLinkBookInfos } from '../../../style/StyledComponent';
 import PDFDownload from '../../../components/Download/PDFDownload';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import { WorkButtons, WorkLink, WorkReaderLink, WorkSentence, WorkSentenceContainer } from '../../../style/Works';
@@ -93,21 +93,21 @@ const WorkInfo = () => {
                                 {workData.author}
                             </WorkLink>
                         </BookInfos>
-                        <BookInfos>
+                        <NoneLinkBookInfos>
                             게시일
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             {workData.createdAt}
-                        </BookInfos>
-                        <BookInfos>
+                        </NoneLinkBookInfos>
+                        <NoneLinkBookInfos>
                             분류
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;
                             {workData.type}
-                        </BookInfos>
+                        </NoneLinkBookInfos>
                         <WorkSentenceContainer>
                             <WorkSentence>
                                 {workData.sentence}

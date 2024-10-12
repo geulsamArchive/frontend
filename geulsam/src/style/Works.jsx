@@ -12,7 +12,7 @@ export const WorkLink = styled(Link)`
     display: flex;
     justify-content: space-between;
     &:hover{
-        background-color: rgba(255, 239, 155, 1);
+        background-color: rgba(255, 239, 155    , 1);
     }
 `
 
@@ -35,6 +35,7 @@ padding-bottom: 14px;
 padding-top:14px ;
 display: flex;
 justify-content: space-between;
+
 `
 export const Searchfailed = styled.div`
     width: 78dvw;
@@ -235,4 +236,19 @@ float: right;
 margin-bottom: 14px;
 font-size: 11px;
 color: rgba(171, 170, 170, 1);
+`
+
+export const AuthorWorkContainer = styled.div`
+    width: 75dvw;
+    margin-top: 100px;
+    border-top: 1px solid black;
+`
+export const AuthorWorkInfo = styled.div`
+    width: 75dvw;
+    font-size: 14px;
+    border-bottom: 1px solid black;
+padding-bottom: 14px;
+padding-top:14px ;
+display: flex;
+justify-content: space-between;
 `

@@ -6,10 +6,30 @@ import Slider from 'react-slick';
 import { TitleBold } from '../../../style/StyledComponent';
 import Modal from 'react-modal';
 import { useForms } from '../../../hooks/useForms';
+import { useAuth } from '../../../store/Auth';
 
 const AdminCalendar = () => {
+    const date = new Date();
+    const yearNow = date.getFullYear();
+    const monthNow = date.getMonth();
+
+    const { logout } = useAuth()
+
+    const translateSemester = (years, monthes) => {
+        if (monthes <= 1) {
+            setYear(years - 1)
+            setSemester(2)
+        } else if (monthes <= 7) {
+            setYear(years)
+            setSemester(1)
+        } else {
+            setYear(years)
+            setSemester(2)
+        }
+    }
     //수정할 연도
-    const [calendarYear, setCalendarYear] = useState(2024)
+    const [year, setYear] = useState()
+    const [semester, setSemester] = useState()
     const [calendarData, setCalendarData] = useState([])
 
 
@@ -28,7 +48,7 @@ const AdminCalendar = () => {
 
     const getCalendarData = async () => {
         try {
-            const res = await normalAPI.get(`/calendar?field=start&search=${calendarYear}`)
+            const res = await normalAPI.get(`/calendar?year=${year}&semester=${semester}`)
             console.log(res)
             setCalendarData(res.data.data)
         } catch (err) {
@@ -36,9 +56,12 @@ const AdminCalendar = () => {
         }
     }
     useEffect(() => {
-        getCalendarData()
-        console.log(calendarData)
-    }, [])
+        translateSemester(yearNow, monthNow);
+    }, [yearNow, monthNow]);
+
+    useEffect(() => {
+        getCalendarData();
+    }, [year, semester]);
 
     const formatEventTime = (startTime, endTime) => {
         const start = new Date(startTime);
@@ -152,10 +175,55 @@ const AdminCalendar = () => {
         setIsModalOpen(false)
     }
 
+    const deleteCalendar = async (id) => {
+        const accesstoken = localStorage.getItem('access')
+        const refreshToken = localStorage.getItem('refresh')
+        try {
+            const res = await normalAPI.delete(`/calendar?id=${id}`,
+                {
+                    headers: {
+                        'accessToken': accesstoken,
+                    }
+                }
+            )
+            console.log(res.data);
+            alert('독자 후기를 성공적으로 삭제했습니다.')
+            getCalendarData()
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                console.log('토큰 재전송');
+                try {
+                    const tokenResponse = await normalAPI.delete(`/calendar?id=${id}`,
+                        {
+                            headers: {
+                                'refreshToken': refreshToken,
+                            },
+                        });
+                    console.log(tokenResponse);
+                    const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                    localStorage.setItem('access', newAccessToken)
+                    if (tokenResponse.headers.refreshtoken) {
+                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                        localStorage.setItem('refresh', refreshToken);
+                    }
+                    alert('독자 후기를 성공적으로 삭제했습니다.')
+                    getCalendarData();
+                } catch (err) {
+                    console.error('Refresh Token Error:', err);
+                    alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    logout();
+                }
+            } else {
+                console.error('Error:', error);
+                alert('삭제 중 문제가 발생했습니다.');
+            }
+        }
+    }
+
     return (
         <CriticContainer>
             <WorkTopBorder />
-            <div>{calendarYear} 활동 일정</div>
+            <div>{year}년 {semester} 학기 활동 일정</div>
             <div>각각의 활동을 클릭하여 수정할 수 있습니다.</div>
             <SliderContainer>
                 <Slider ref={sliderRef} {...settings}>
@@ -172,6 +240,7 @@ const AdminCalendar = () => {
                                             {events.locate}
                                             {events.title}
                                             {events.introduce}
+                                            <button onClick={() => (deleteCalendar(events.eventId))}>삭제하기</button>
                                         </div>
                                     ))}
                                     <button onClick={() => openModal()}>특별 활동 추가하기</button>

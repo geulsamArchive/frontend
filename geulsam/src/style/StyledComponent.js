@@ -416,13 +416,14 @@ margin:86px ;
 border-bottom: 1.5px solid white;
 padding-bottom: 10px;
 padding-top: 10px;
+font-weight: 700;
 font-size: 22px;
 text-shadow: 0 4px 4px black;
 `
 export const Recents = styled.div`
 display: flex;
 flex-wrap: wrap;
-width: 1400px;
+width: 100%;
 margin-left: 80px;
 `
 
@@ -438,6 +439,7 @@ padding-top: 33px;
 padding-bottom: 33px;
 padding-left: 28px;
 padding-right: 28px;
+word-break: break-all;
 overflow: hidden;
 `
 export const RecentWorkOverlay = styled.div`
@@ -467,7 +469,7 @@ export const TextOverflow = styled.span`
 overflow: hidden;
 `
 export const RecentWorkContainer = styled.div`
-width: 623px;
+width: 700px;
 height: 174px;
 margin: 14px;
 border-radius: 11px;
@@ -540,6 +542,18 @@ padding-top:14px ;
 &:hover{
   background-color: rgba(255, 239, 155, 1);
 }
+`
+export const NoneLinkBookInfos = styled.div`
+@media only screen and (max-width:1023px) {
+    width: 90dvw;
+border-bottom: 1px solid rgba(87, 86, 85, 1);
+color: rgba(87, 86, 85, 1);
+}
+width: 75dvw;
+font-size: 14px;
+border-bottom: 1px solid black;
+padding-bottom: 14px;
+padding-top:14px ;
 `
 export const BookInfoContents = styled.div`
 display: flex;
