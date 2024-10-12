@@ -157,6 +157,20 @@ cursor: pointer;
 margin-right: 23px;
 `;
 
+export const ButtonForMember = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width:93px;
+height: 36px;
+color:${props => (props.isActive ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.isActive ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.isActive ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+`;
+
 export const Back = styled.div`
 background-color: gray;
 min-height: 100vh;
