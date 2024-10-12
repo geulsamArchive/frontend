@@ -24,6 +24,13 @@ background-color: ${(props) => (props.past ? 'rgba(234, 234, 234, 1)' : 'none')}
 margin-bottom: 10px;
 `
 export const Eventlist = styled.div`
+@media only screen and (max-width:1500px ){
+  font-size: 10px;
+  margin-left: 0px;
+margin-right: 0px;
+width: 250px;
+
+}
 line-height: 170%;
 width: 312px;
 font-size: 12px;
@@ -35,6 +42,12 @@ color: ${(props) => (props.past ? 'rgba(129, 128, 127, 1)' : 'black')};
 `
 
 export const Contents = styled.div`
+@media only screen and (max-width:1500px ){
+  height: 250px;
+width: 250px;
+margin-top: 10px;
+
+}
 margin-top: 30px;
 overflow: scroll;
 height: 350px;
@@ -49,29 +62,39 @@ width: 408px;
 `
 
 export const Slide = styled.div`
+@media only screen and (max-width:2200px ){
+  width:470px;
+height: 560px;
+}
+@media only screen and (max-width:1900px ){
+  width:408px;
+height: 486px;
+}
+@media only screen and (max-width:1500px ){
+  width:300px;
+height: 357px;
+}
+filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25)) blur(5px);
 background-color: white;
 border-radius: 8.6px;
 text-align: center;
-width:408px;
-height: 486px;
+width:548px;
+height: 652px;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-transform: scale(0.7);
+transform: scale(0.8);
 cursor: pointer;
 transition: transform 300ms, box-shadow 300ms;
-filter: blur(5px);  
-
 &.active{
-transform: scale(0.85);
-filter: none;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+transform: scale(1);
+filter: drop-shadow(10px 10px 30px rgba(152, 147, 142, 0.25)) blur(0);
 }
 `
 
 export const SliderContainer = styled.div`
-    width: 1400px;
+    width: 100dvw;
     overflow:hidden;
     
 `

@@ -16,6 +16,19 @@ const AuthorInfo = () => {
     const [page, setPage] = useState(1)
     const [totalPage, setTotalPage] = useState(1)
 
+    const translateType = (type) => {
+        switch (type) {
+            case 'NOVEL':
+                return '소설';
+            case 'ESSAY':
+                return '수필';
+            case 'POEM':
+                return '시';
+            default:
+                return type;
+        }
+    };
+
     const renderEmptyLogs = (count) => {
         const emptyLogs = [];
         for (let i = 0; i < count; i++) {
@@ -87,7 +100,7 @@ const AuthorInfo = () => {
                                     <WorkInfo>
                                         <WorkTitleType>
                                             <WorkType>
-                                                {w.type}
+                                                {translateType(w.type)}
                                             </WorkType>
                                             <WorkTitle>
                                                 {CheckTitleLength(w.title, 25)}

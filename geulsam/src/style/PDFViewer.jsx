@@ -13,7 +13,7 @@ border: none;
 border-bottom: 1px solid  rgba(255, 96, 88, 1);
 margin-right: 5px;
 background-color: inherit;
-font-size: 12px;
+font-size: 15px;
 text-align: center;
 color: rgba(255, 96, 88, 1);
 `;

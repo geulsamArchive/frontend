@@ -6,6 +6,11 @@ font-family: 'MaruBuri-Regular';
 
 `
 export const Critics = styled.div`
+@media only screen and (max-width:1500px ){
+width: 250px;
+margin-left: 0px;
+font-size: 10px;
+}
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,6 +23,11 @@ export const Critics = styled.div`
     margin-left: 25px;
 `
 export const CriticDay = styled.div`
+@media only screen and (max-width:1500px ){
+width: 200px;
+padding-top: 8px;
+
+}
     border-top: 0.68px solid rgba(171, 170, 170, 1);
     height:25px;
     width: 270px;
@@ -32,19 +42,35 @@ export const Right = styled.div`
 `
 
 export const Conditions = styled.div`
+ @media only screen and (max-width:1500px ){
+width: 50px;
+}
     width: 75px;
     text-align: right;
 `
 
 export const OrderAndTime = styled.span`
-    width: 113px;
+ @media only screen and (max-width:1500px ){
+width: 80px;
+}
+ width: 113px;
+    
 `
 export const Dates = styled.div`
+@media only screen and (max-width:1500px ){
+width: 50px;
+height: 40px;
+padding-top: 8px;
+
+}
     width: 80px;
     height: 64px;
     padding-top: 12px;
 `
 export const NameGenre = styled.div`
+@media only screen and (max-width:1500px ){
+width: 50px;
+}
 text-align: left;
 width: 70px;
 `
@@ -132,7 +158,7 @@ export const CloseButton = styled.button`
 `
 
 export const CriticLogContainer = styled.div`
-    width: 90dvw;
+    width: 88dvw;
 `
 
 export const MarginRight = styled.div`

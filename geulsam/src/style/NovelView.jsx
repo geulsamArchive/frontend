@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { screen } from '@testing-library/react';
 
 
 export const Close = styled.div`
     position: absolute;
-    top:2%;
-    right:4%;
+    top:64px;
+    right:60px;
     cursor: pointer;
 `
 
@@ -16,7 +17,7 @@ margin: 10px;
 
 export const Background = styled.div`
 background-color: rgba(45, 43, 42, 1);
-height: 94.6vh;
+height: 96vh;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -32,11 +33,14 @@ background-color: rgba(45, 43, 42, 1);
 `;
 
 export const Page = styled.div`
+@media only screen and (max-width:200px ){
+
+}
 cursor: pointer;
 background-color: white;
 font-size: ${({ fontSize }) => `${fontSize}px`};
 line-height: ${({ lineHeight }) => lineHeight};
-height: 540px;
+height: 700px;
 width: 430px;
 overflow: hidden;
 flex: 1;
@@ -68,9 +72,9 @@ color: rgba(255, 239, 155, 1);
 `;
 
 export const ScrollBar = styled.input`
-width: 410px;
+width: 380px;
 margin: 10px;
-margin-left: 230px;
+margin-left: 480px;
 `;
 
 export const PageButtons = styled.div`
@@ -84,7 +88,7 @@ align-items: center;
 export const ControlPanelRight = styled.div`
 position: absolute;
 right: 50px;
-bottom: 100px;
+bottom: 127px;
 display: flex;
 flex-direction: column;
 justify-content: center;

@@ -151,6 +151,18 @@ padding: 5px;
 font-size: 22px;
 `
 
+export const RecentWorkLinkContainer = styled.div`
+    text-align: right;
+    margin-top: 40px;
+    font-weight: 700;
+    font-size: 16px;
+`
+export const RecentLink = styled(Link)`
+    cursor: pointer;
+    text-decoration: none;
+    color: rgba(129, 128, 127, 1);
+`
+
 export const RecentWorkLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
