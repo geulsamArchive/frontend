@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PDFView from '../../../components/pdf/PDFView';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ViewerAndLinks, BookInfoContainer, BookTitle, BookInfos, BookInfoContents, BookInfoAndButton, BookButtons, URLButton } from '../../../style/StyledComponent';
+import { ViewerAndLinks, BookInfoContainer, BookTitle, BookInfos, BookInfoContents, BookInfoAndButton, BookButtons, URLButton, NoneLinkBookInfos } from '../../../style/StyledComponent';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import PDFDownload from '../../../components/Download/PDFDownload';
 import { normalAPI } from '../../../apis/Api';
@@ -41,29 +41,29 @@ const BookInfo = () => {
             </BookTitle>
             <BookInfoAndButton>
                 <BookInfoContents>
-                    <BookInfos>
+                    <NoneLinkBookInfos>
                         발간일
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         {bookData.release}
-                    </BookInfos>
-                    <BookInfos>
+                    </NoneLinkBookInfos>
+                    <NoneLinkBookInfos>
                         디자인
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         {bookData.designer}
-                    </BookInfos>
-                    <BookInfos>
+                    </NoneLinkBookInfos>
+                    <NoneLinkBookInfos>
                         판형 / 쪽수
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         &nbsp;
                         {bookData.plate} / {bookData.page}
-                    </BookInfos>
+                    </NoneLinkBookInfos>
                     <ViewerAndLinks>
                         <PDFView PDF={bookData.url} />
                     </ViewerAndLinks>

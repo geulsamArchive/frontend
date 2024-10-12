@@ -384,7 +384,7 @@ export const Calendars = styled.div`
 width: 100%;
 background-color: none;
 font-family: 'MaruBuri-Regular';
-height: 600px;
+height: 800px;
 `;
 
 export const CalendarTitle = styled.div`
@@ -440,6 +440,7 @@ padding-bottom: 33px;
 padding-left: 28px;
 padding-right: 28px;
 word-break: break-all;
+color: rgba(171, 170, 170, 1);
 overflow: hidden;
 `
 export const RecentWorkOverlay = styled.div`
@@ -461,8 +462,8 @@ padding-left: 28px;
 padding-right: 28px;
 display: flex;
 justify-content: space-between;
-align-items:center;
 overflow: hidden;
+flex-direction: column;
 `
 
 export const TextOverflow = styled.span`
@@ -476,11 +477,9 @@ border-radius: 11px;
 background-color: rgba(87, 86, 85, 1);
 position: relative;
 cursor: pointer;
-&:hover ${RecentWorkText}{
-  opacity: 0;
-}
+
 &:hover ${RecentWorkOverlay}{
-  opacity: 1;
+  opacity: 0.92;
 }
 `
 
@@ -769,7 +768,7 @@ export const Paging = styled.div`
     justify-content: center;
     padding-bottom: 30px;
 }
-margin-left: ${({ isDark }) => (isDark ? '-1vw' : '5vw')};
+margin-left: ${({ isDark }) => (isDark ? '-0.5vw' : '5vw')};
 padding-bottom: 50px;
 background-color:${({ isDark }) => (isDark ? 'inherit' : ' rgba(249, 249, 246, 1)')};;
 `
@@ -933,6 +932,9 @@ font-size: 12px;
 line-height: 150%;
 `
 export const TitleBold = styled.div`
+@media only screen and (max-width:1500px ){
+  font-size: 18px;
+}
 font-weight: 700;
 font-size: 20px;
 

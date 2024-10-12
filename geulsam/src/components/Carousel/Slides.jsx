@@ -72,10 +72,10 @@ function CenterMode({ data }) {
 
     const settings = {
         className: "center",
-        centerMode: true,
         infinite: true,
-        centerPadding: "50px",
-        slidesToShow: 4.45,
+        centerMode: true,
+        slidesToShow: 3,
+        centerPadding: "200px",
         slidesToScroll: 1,
         speed: 300,
         arrows: false,

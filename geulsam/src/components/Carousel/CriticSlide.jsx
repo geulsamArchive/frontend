@@ -26,7 +26,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
         className: "center",
         centerMode: true,
         infinite: true,
-        centerPadding: "50px",
+        centerPadding: "280px",
         slidesToShow: 3,
         slidesToScroll: 1,
         speed: 300,
