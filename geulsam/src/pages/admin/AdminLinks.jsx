@@ -29,6 +29,7 @@ const AdminLinks = () => {
                 <br />
                 <Link to='/admin/poster/modify'>포스터 수정</Link>
                 <br />
+                <Link to='/admin/member/modify'>회원 관리</Link>
             </div>
 
         </>

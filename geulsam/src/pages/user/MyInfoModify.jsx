@@ -237,19 +237,23 @@ const MyInfoModify = () => {
                 </UserInfos>
                 <UserInfos>
                     <Left>학번</Left>  {
-                        isEditing ? (
-                            <>
-                                <Input
-                                    type='text'
-                                    name='schoolNum'
-                                    value={userInfo.schoolNum}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                />
-                                {schoolNumError && <ErrorMessageInfo>{schoolNumError}</ErrorMessageInfo>}
-                                {isEditing && <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>}
-                            </>
-                        )
+                        isEditing ?
+                            (<Right>
+                                {userInfo.schoolNum}
+                            </Right>)
+                            //  (
+                            //     <>
+                            //         <Input
+                            //             type='text'
+                            //             name='schoolNum'
+                            //             value={userInfo.schoolNum}
+                            //             onChange={handleChange}
+                            //             disabled={!isEditing}
+                            //         />
+                            //         {schoolNumError && <ErrorMessageInfo>{schoolNumError}</ErrorMessageInfo>}
+                            //         {isEditing && <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>}
+                            //     </>
+                            // )
                             : (<Right>
                                 {userInfo.schoolNum}
                             </Right>)

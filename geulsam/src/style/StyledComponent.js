@@ -1117,3 +1117,50 @@ text-decoration : underline;
 text-underline-offset : 8px;
 cursor: pointer;
 `;
+
+
+// memberModiify에서 테이블 style
+export const MemberTitle = styled.div`
+@media only screen and (max-width:1023px) {
+    font-size: 18px;
+    padding-bottom: 15px;
+}
+   
+font-size: 27px;
+font-weight: 700;
+margin-right : 20px;
+width: 100%;
+border-bottom:2px solid black;
+padding-bottom: 18px;
+`
+export const StyledTable = styled.table`
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-weight:bold;
+`;
+
+export const TableHeader = styled.th`
+    background-color: #f2f2f2;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    font-weight : bold;
+`;
+
+export const TableRow = styled.tr`
+    &:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+`;
+
+export const TableCell = styled.td`
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+        border-right: 2px solid #ddd;  /* 오른쪽 경계 추가 */
+
+    /* 마지막 셀에 오른쪽 경계 제거 */
+    &:last-child {
+        border-right: none;
+    }
+`;
