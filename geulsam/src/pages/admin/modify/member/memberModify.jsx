@@ -10,6 +10,7 @@ import {
     TableHeader,
     TableRow,
     TableCell,
+    BackButtonAtMyInfoModify,
 } from '../../../../style/StyledComponent';
 import Pagination from '../../../../components/Paging/Pagination'; // 페이지네이션 컴포넌트 불러오기
 import SearchWorkForMember from '../../../../components/Search/SearchWorkForMember';
@@ -142,8 +143,8 @@ const MemberModify = () => {
                                 <TableCell>{member.phone}</TableCell>
                                 <TableCell>{member.email}</TableCell>
                                 <TableCell>
+                                    <BackButtonAtMyInfoModify onClick={() => rejectMember(member.schoolNum)}>가입 거부</BackButtonAtMyInfoModify>
                                     <Button onClick={() => approveMember(member.id)}>가입 승인</Button>
-                                    <Button onClick={() => rejectMember(member.schoolNum)}>가입 거부</Button>
                                 </TableCell>
                             </TableRow>
                         ))
