@@ -79,22 +79,24 @@ const MemberModify = () => {
     };
 
     // 권한 업데이트 함수
-    const updateMemberRole = async (id, newRole) => {
+    const updateMemberRole = async (member, newRole) => {
         const accessToken = localStorage.getItem('access');
         try {
+            // PUT 요청을 보냅니다.
             await normalAPI.put(`/user/level`, {
-                userId: id,
-                level: "ADMIN",
-                // "level": "ADMIN",
-                // "userId": 0
+                level: newRole, // newRole에 따라 NORMAL 또는 ADMIN 권한으로 변경
+                userId: member.userId,
             }, {
                 headers: {
                     'accessToken': accessToken,
                 }
             });
+
             alert('회원 권한이 변경되었습니다!');
-            setMembers(members.map(member =>
-                member.id === id ? { ...member, role: newRole } : member
+
+            // 상태 업데이트: 변경된 멤버의 role을 업데이트
+            setMembers(members.map(existingMember =>
+                existingMember.userId === member.userId ? { ...existingMember, role: newRole } : existingMember
             ));
         } catch (error) {
             console.error("회원 권한 변경 중 오류 발생:", error);
@@ -106,7 +108,7 @@ const MemberModify = () => {
         const accessToken = localStorage.getItem('access');
         try {
             await normalAPI.put(`/user/level`, {
-                userId: member.id,
+                userId: member.userId,
                 level: 'NORMAL'  // 예시로 정상 회원으로 승인하는 경우
             }, {
                 headers: {
@@ -115,13 +117,12 @@ const MemberModify = () => {
             });
             alert('회원이 승인되었습니다!');
             setMembers(members.map(approvedMember =>
-                approvedMember.id === member.id ? { ...approvedMember, level: 'NORMAL' } : approvedMember
+                approvedMember.userId === member.userId ? { ...approvedMember, level: 'NORMAL' } : approvedMember
             ));
         } catch (error) {
             console.error("회원 승인 중 오류 발생:", error);
         }
     };
-
 
     // 회원 거부 함수 (DELETE 요청)
     const rejectMember = async (schoolNum) => {
@@ -138,7 +139,6 @@ const MemberModify = () => {
             console.error("회원 거부 중 오류 발생:", error);
         }
     };
-
 
     // 회원 탈퇴 함수 (DELETE 요청)
     const deleteMember = async (schoolNum) => {
@@ -160,8 +160,7 @@ const MemberModify = () => {
     const resetMemberPassword = async (member) => {
         const accessToken = localStorage.getItem('access');
         try {
-            // 'https://geulsaem.store/user/resetPassword?id=0' 
-            await normalAPI.get(`/user/resetPassword?id=${member.id}`, {
+            await normalAPI.get(`/user/resetPassword?id=${member.userId}`, {
                 headers: {
                     'accessToken': accessToken,
                 }
@@ -197,13 +196,13 @@ const MemberModify = () => {
                 <tbody>
                     {members.length > 0 ? (
                         members.map((member) => (
-                            <TableRow key={member.id}>
+                            <TableRow key={member.userId}>
                                 {currentLevel === 'NORMAL' && (
                                     <TableCell>
                                         {/* 권한 드롭다운 */}
                                         <select
                                             value={member.role}
-                                            onChange={(e) => updateMemberRole(member.id, e.target.value)}
+                                            onChange={(e) => updateMemberRole(member, e.target.value)}
                                         >
                                             <Option value="NORMAL">일반</Option>
                                             <Option value="ADMIN">관리자</Option>
@@ -220,12 +219,12 @@ const MemberModify = () => {
                                     {currentLevel === 'NORMAL' ? (
                                         <>
                                             <BackButtonAtMyInfoModify onClick={() => deleteMember(member.schoolNum)}>회원 탈퇴</BackButtonAtMyInfoModify>
-                                            <ButtonForPassword onClick={() => resetMemberPassword(member.id)}>비밀번호 초기화</ButtonForPassword>
+                                            <ButtonForPassword onClick={() => resetMemberPassword(member)}>비밀번호 초기화</ButtonForPassword>
                                         </>
                                     ) : (
                                         <>
                                             <BackButtonAtMyInfoModify onClick={() => rejectMember(member.schoolNum)}>가입 거부</BackButtonAtMyInfoModify>
-                                            <Button onClick={() => approveMember(member.id)}>가입 승인</Button>
+                                            <Button onClick={() => approveMember(member)}>가입 승인</Button>
                                         </>
                                     )}
                                 </TableCell>
