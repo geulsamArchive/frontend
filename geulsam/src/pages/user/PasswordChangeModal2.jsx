@@ -75,6 +75,8 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
                 if (result.data.status === 200) {
                     closeModal();
                     alert('비밀번호가 성공적으로 변경되었습니다.');
+                    localStorage.removeItem('access');
+                    localStorage.removeItem('refresh');
                 } else {
                     setPwError('비밀번호 변경에 실패했습니다.');
                 }
