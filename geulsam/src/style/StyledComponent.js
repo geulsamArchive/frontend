@@ -128,7 +128,8 @@ export const ArchiveButton = styled.button`
  font-size: 14px;
  font-weight: 700;
  width: 106px;
-
+margin-right: 0px;
+margin: 5px;
 }
 font-family: 'MaruBuri-Regular';
 border: none;
@@ -437,8 +438,8 @@ text-shadow: 0 4px 4px black;
 export const Recents = styled.div`
 display: flex;
 flex-wrap: wrap;
+justify-content: center;
 width: 100%;
-margin-left: 80px;
 `
 
 
@@ -484,6 +485,15 @@ export const TextOverflow = styled.span`
 overflow: hidden;
 `
 export const RecentWorkContainer = styled.div`
+
+ @media only screen and (max-width:1500px) {
+  width: 600px;
+  height: 174px;
+}
+@media only screen and (max-width:1300px) {
+  width: 500px;
+  height: 174px;
+}
 width: 700px;
 height: 174px;
 margin: 14px;

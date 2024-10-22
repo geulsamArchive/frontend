@@ -24,6 +24,17 @@ background-color: ${(props) => (props.past ? 'rgba(234, 234, 234, 1)' : 'none')}
 margin-bottom: 10px;
 `
 export const Eventlist = styled.div`
+@media only screen and (max-width:2200px ){
+  width: 380px;
+font-size: 12px;
+margin-left: 60px;
+}
+@media only screen and (max-width:1900px ){
+  width: 312px;
+font-size: 12px;
+margin-left: 48px;
+margin-right: 48px;
+}
 @media only screen and (max-width:1500px ){
   font-size: 10px;
   margin-left: 0px;
@@ -32,16 +43,23 @@ width: 250px;
 
 }
 line-height: 170%;
-width: 312px;
+width: 400px;
 font-size: 12px;
-margin-left: 48px;
-margin-right: 48px;
+margin-left: 10px;
 font-weight: 500;
 border-bottom: 0.7px solid black;
 color: ${(props) => (props.past ? 'rgba(129, 128, 127, 1)' : 'black')};
 `
 
 export const Contents = styled.div`
+@media only screen and (max-width:2200px ){
+  height: 400px;
+  width: 500px;
+}
+@media only screen and (max-width:1900px ){
+  height: 350px;
+  width: 408px;
+}
 @media only screen and (max-width:1500px ){
   height: 250px;
 width: 250px;
@@ -50,7 +68,7 @@ margin-top: 10px;
 }
 margin-top: 30px;
 overflow: scroll;
-height: 350px;
+height: 500px;
 width: 408px;
 &::-webkit-scrollbar{
   width: 0;
