@@ -158,6 +158,34 @@ cursor: pointer;
 margin-right: 23px;
 `;
 
+export const ButtonForPassword = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width:180px;
+height: 36px;
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+`;
+
+export const Option = styled.option`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width:180px;
+height: 36px;
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+`;
+
 export const ButtonForMember = styled.button`
 font-family: 'MaruBuri-Regular';
 border: none;

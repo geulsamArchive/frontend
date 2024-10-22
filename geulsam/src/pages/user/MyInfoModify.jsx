@@ -138,11 +138,12 @@ const MyInfoModify = () => {
         const accessToken = localStorage.getItem('access');
         const refreshToken = localStorage.getItem('refresh')
         try {
-            await normalAPI.put(`/user`, userInfo, {
+            const res = await normalAPI.put(`/user`, userInfo, {
                 headers: {
                     'accessToken': accessToken,
                 }
             });
+            console.log(res);
             setIsEditing(false); // 수정 모드 종료
             alert('정보가 성공적으로 수정되었습니다.');
         } catch (error) {
