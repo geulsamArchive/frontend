@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Button, Background, ViewerContainer, Page, ControlPanel, ControlPanelRight, PageInput, ScrollBar, PageButtons, RoundBorder, PannelIcon, Close } from '../../../style/NovelView';
+import { Button, Background, ViewerContainer, Page, ControlPanel, ControlPanelRight, PageInput, ScrollBar, PageButtons, RoundBorder, PannelIcon, Close, NovelTitle } from '../../../style/NovelView';
 import { CheckTitleLength } from '../../../components/CheckLength';
 
 
@@ -107,9 +107,9 @@ const NovelViewer = ({ novelHTML, title, closeModal }) => {
                 />
             </ViewerContainer>
             <ControlPanel>
-                <div>
+                <NovelTitle>
                     {CheckTitleLength(title, 23)}
-                </div>
+                </NovelTitle>
                 <ScrollBar
                     type="range"
                     min="1"

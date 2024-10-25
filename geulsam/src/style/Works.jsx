@@ -37,6 +37,16 @@ display: flex;
 justify-content: space-between;
 
 `
+export const WorkInfoModify = styled.div`
+    width: 78dvw;
+    font-size: 14px;
+    border-bottom: 1px solid black;
+padding-bottom: 10px;
+padding-top:10px ;
+display: flex;
+justify-content: space-between;
+
+`
 export const Searchfailed = styled.div`
     width: 78dvw;
     font-size: 14px;
@@ -58,7 +68,9 @@ export const WorkType = styled.div`
 `
 
 export const WorkInfoRight = styled.div`
-    text-align: right;
+display: flex;
+align-items: center;
+text-align: right;
     margin-right: 20px;
 `
 export const WorkCreatedAt = styled.div`
@@ -72,6 +84,11 @@ margin-left: 30px;
 export const WorkTitle = styled.div`
 word-break: normal;
 width: 500px;
+`
+
+export const ModifyButtons = styled.div`
+    width: 100px;
+    float: right;
 `
 
 export const WorkInfoContainer = styled.div`
@@ -123,7 +140,11 @@ border-top: none;
 position: relative;
 top: -9px;
 `
-
+export const Trash = styled.img`
+    width: 15px;
+    height: 17  px;
+    padding-top: 2px;
+`
 
 export const WorkSentence = styled.div`
 @media only screen and (max-width:1023px) {

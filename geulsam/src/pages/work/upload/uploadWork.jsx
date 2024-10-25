@@ -1,5 +1,5 @@
 import { B, CalendarTitle } from '../../../style/StyledComponent';
-import { Container, EditorContainer, FileInput, GenreButton, GenreContainer, SentenceContainer, SentenceInput, TitleInput, UploadButton } from '../../../style/WokrUpload';
+import { Container, EditorContainer, FileInput, GenreButton, GenreContainer, SentenceContainer, SentenceInput, TitleContainer, TitleInput, UploadButton, VisibleSelect } from '../../../style/WokrUpload';
 import { useForms } from '../../../hooks/useForms';
 import { useRef, useState, useEffect } from 'react';
 import Editor from '../../../components/Editor/CKEditor';
@@ -11,6 +11,7 @@ const UploadWork = () => {
     const [title, onChangeTitle] = useForms();
     const [genre, setGenre] = useState('');
     const [file, setFile] = useState(null);
+    const [isVisible, onChangeIsVisible] = useForms();
     const [sentence, onChangeSentence] = useForms();
     const [htmlContent, setHtmlContent] = useState(''); // CKEditor의 HTML 내용을 저장할 상태
     const inputRef = useRef(null);
@@ -86,7 +87,7 @@ const UploadWork = () => {
         formData.append('pdf', file);
         formData.append('html', htmlFile); // .html 파일로 변환된 HTML 내용 추가
         formData.append('genre', genre);
-        formData.append('isVisible', 'EVERY'); // 예시로 'EVERY' 값을 사용
+        formData.append('isVisible', isVisible); // 예시로 'EVERY' 값을 사용
         formData.append('bookPage', 1); // 예시로 1페이지로 설정
         formData.append('sentence', sentence);
 
@@ -145,7 +146,14 @@ const UploadWork = () => {
         <>
             <CalendarTitle>작품 게시하기</CalendarTitle>
             <Container>
-                <TitleInput value={title} onChange={onChangeTitle} placeholder="제목" />
+                <TitleContainer>
+                    <TitleInput value={title} onChange={onChangeTitle} placeholder="제목" />
+                    <VisibleSelect value={isVisible} onChange={onChangeIsVisible}>
+                        <option value="EVERY">전체 공개</option>
+                        <option value="LOGGEDIN">회원 공개</option>
+                        <option value="PRIVATE">비공개</option>
+                    </VisibleSelect>
+                </TitleContainer>
                 <GenreContainer>
                     작품의 장르와 키워드를 선택합니다.
                     <br />

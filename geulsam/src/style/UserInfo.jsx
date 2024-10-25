@@ -37,3 +37,55 @@ export const ErrorMessageInfo = styled.p`
     vertical-align: middle; // 메시지와 입력 필드가 수직으로 정렬되도록 설정
     padding-top: 5px;
 `;
+export const AuthorIntroduceInputContainer = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: end;
+    width: 1056px;
+    height: 114px;
+    background-color: rgba(249, 249, 246, 1);
+    filter: drop-shadow(0 2px 24px rgba(182, 182, 182, 0.15));
+    border-radius: 11px;
+`
+export const AuthorIntroduceInput = styled.textarea`
+background-color: inherit;
+border: none;
+font-family: 'MaruBuri-Regular';
+border-radius: 11px;
+outline: none;
+height: 74px;
+font-size: 14px;
+padding: 20px;
+width: 1000px;
+    
+`
+export const TextCounter = styled.div`
+font-size: 18px;
+color: ${props => props.length === 0 ? 'rgba(213, 213, 212, 1)' : 'black'};
+`
+export const TextCounterContainer = styled.div`
+    padding: 20px;
+`
+export const AuthorKewordInput = styled.input`
+border-radius: 0 0 10px 10px ;
+width: 90px;
+height: 32px;
+text-align: center;
+font-family: 'MaruBuri-Regular';
+font-size: 14px;
+border:1.5px solid rgba(129, 128, 127, 1);
+    margin-right: 10px;
+`
+
+export const AuthorContainer = styled.div`
+    display: flex;
+    margin-top: 30px;
+`
+export const AuthorKewordContainer = styled.div`
+    margin-top: 10px;
+`
+export const LeftWord = styled.div`
+    width: 120px;
+    font-size: 14px;
+    margin-top: 20px;
+`

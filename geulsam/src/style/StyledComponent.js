@@ -499,6 +499,12 @@ background-color: rgba(234, 233, 227, 1);
 color: black;
 `
 export const RecentWorkOverlayText = styled.div`
+@media only screen and (max-width:1023px) {
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ padding-top: 70px;
+}
 padding-top: 33px;
 padding-bottom: 33px;
 padding-left: 28px;
@@ -513,8 +519,7 @@ export const TextOverflow = styled.span`
 overflow: hidden;
 `
 export const RecentWorkContainer = styled.div`
-
- @media only screen and (max-width:1500px) {
+@media only screen and (max-width:1500px) {
   width: 600px;
   height: 174px;
 }
@@ -522,6 +527,13 @@ export const RecentWorkContainer = styled.div`
   width: 500px;
   height: 174px;
 }
+@media only screen and (max-width:1023px) {
+  width: 90dvw;
+  height: 51dvw;
+  
+  line-height: 1.6;
+}
+font-family: 'MaruBuri-Regular';
 width: 700px;
 height: 174px;
 margin: 14px;

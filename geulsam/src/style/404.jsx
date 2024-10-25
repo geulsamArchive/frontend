@@ -37,7 +37,7 @@ border-radius: 30px;
 width:93px;
 height: 36px;
 color: rgba(249, 249, 246, 1);
-background-color: 'rgba(87, 86, 85, 1)';
+background-color: black;
 cursor: pointer;
 `;
 

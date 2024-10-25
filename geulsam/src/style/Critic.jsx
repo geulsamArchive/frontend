@@ -108,6 +108,7 @@ export const Notice = styled.div`
     font-size: 14px;
     color: rgba(129, 128, 127, 1);
     margin-bottom: 50px;
+    margin-top: 100px;
 `
 
 export const ModalBottom = styled.div`

@@ -32,6 +32,7 @@ import { AuthProvider } from './store/Auth';
 import CriticLogUpload from './pages/admin/upload/critic/CriticLogUpload';
 import AuthorInfo from './pages/work/Author/AuthorInfo';
 import MemberModify from './pages/admin/modify/member/memberModify';
+import AuthorInfoModify from './pages/user/AuthorInfoModify';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
             <Route path='/frontend' element={<Main />} />
             <Route path='/work/upload' element={<UploadWork />} />
             <Route path='/author/:id' element={<AuthorInfo />} />
+            <Route path='/author/modify' element={<AuthorInfoModify />} />
             <Route path='/' element={<Main />} />
             <Route path='/main' element={<Main />} />
             <Route path='/work' element={<Works />} />
@@ -83,9 +85,8 @@ function App() {
             <Route path='user/myInfoModify' element={<MyInfoModify />} />
             <Route path='/user/myInfoModify' element={<MyInfoModify />} />
             <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
-
-            <Route path='*' element={<NotFound404 />} />
           </Route>
+          <Route path='*' element={<NotFound404 />} />
           <Route element={<LoginLayout />}>
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />

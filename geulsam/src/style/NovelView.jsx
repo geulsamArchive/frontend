@@ -33,8 +33,9 @@ background-color: rgba(45, 43, 42, 1);
 `;
 
 export const Page = styled.div`
-@media only screen and (max-width:200px ){
-
+@media only screen and (max-width:1700px ){
+    height: 500px;
+    width: 400px;
 }
 cursor: pointer;
 background-color: white;
@@ -59,6 +60,10 @@ width: 1100px;
 margin-top: 10px;
 `;
 
+export const NovelTitle = styled.div`
+width: 500px;
+`
+
 export const PageInput = styled.input`
 width: 25px;
 height: 20px;
@@ -74,7 +79,7 @@ color: rgba(255, 239, 155, 1);
 export const ScrollBar = styled.input`
 width: 380px;
 margin: 10px;
-margin-left: 480px;
+margin-left: 30px;
 `;
 
 export const PageButtons = styled.div`

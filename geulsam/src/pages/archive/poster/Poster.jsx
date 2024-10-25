@@ -63,24 +63,15 @@ const Poster = () => {
     };
     return (
         <>
-            {
-                loading ? (
-                    <Loading loading={loading} />
-                ) : (
-                    <>
-                        <PosterGridContainer>
-                            {posterList.map((poster) => (
-                                <PotserGridItems key={poster.id}>
-                                    <Posters src={poster.thumbnailImage} alt={poster.year} onClick={() => handlePosterClick(poster)} />
-                                </PotserGridItems>
-                            ))}
-                        </PosterGridContainer>
-                        <Modal isOpen={isOpen} poster={selectedPoster} onClose={closeModal} />
-                        <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} />
-                    </>
-                )
-            }
-
+            <PosterGridContainer>
+                {posterList.map((poster) => (
+                    <PotserGridItems key={poster.id}>
+                        <Posters src={poster.thumbnailImage} alt={poster.year} onClick={() => handlePosterClick(poster)} />
+                    </PotserGridItems>
+                ))}
+            </PosterGridContainer>
+            <Modal isOpen={isOpen} poster={selectedPoster} onClose={closeModal} />
+            <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} />
         </>
     );
 };

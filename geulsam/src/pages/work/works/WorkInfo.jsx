@@ -11,12 +11,15 @@ import axios from 'axios';
 import Modal from 'react-modal';
 import { CheckTitleLength } from './../../../components/CheckLength';
 import { Desktop, Mobile } from '../../../hooks/useMediaQuery';
+import { useAuth } from '../../../store/Auth';
 
 const WorkInfo = () => {
     const [workData, setWorkData] = useState({})
     const { workId } = useParams()
     const [novel, setNovel] = useState('')
     const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const { logout } = useAuth();
 
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => setModalIsOpen(false);
@@ -40,18 +43,53 @@ const WorkInfo = () => {
     };
 
     const getWorkData = async () => {
-        try {
-            const response = await normalAPI.get(`/content/${workId}`)
-            console.log(response)
+        const accesstoken = localStorage.getItem('access')
+        const refreshToken = localStorage.getItem('refresh')
 
+        try {
+            const response = await normalAPI.get(`/content/${workId}`, {
+                headers: {
+                    'accessToken': accesstoken,
+                },
+            })
+            console.log(response)
             const data = response.data.data;
             const translatedWork = {
                 ...data,
                 type: translateType(data.type)  // type만 변환
             };
             setWorkData(translatedWork)
-        } catch (err) {
-            console.error(err)
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                console.log('토큰 재전송');
+                // Access Token이 만료되었으므로, Refresh Token으로 새로운 Access Token을 발급받는다.
+                try {
+                    const tokenResponse = await normalAPI.get(`/content/${workId}`,
+                        {
+                            headers: {
+                                'refreshToken': refreshToken,
+                            }
+                        }
+                    );
+                    console.log(tokenResponse);
+                    if (tokenResponse.status === 200) {
+                        const accessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                        localStorage.setItem('access', accessToken)
+                        if (tokenResponse.headers.refreshtoken) {
+                            const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                            localStorage.setItem('refresh', refreshToken);
+                        }
+                        setWorkData(tokenResponse.data.data)
+                    }
+                } catch (err) {
+                    console.error('Refresh Token Error:', err);
+                    alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                    logout();
+                }
+            } else {
+                console.error('Error:', error);
+                alert('조회 중 문제가 발생했습니다.');
+            }
         }
     }
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import arrow from '../assets/images/arrowup.svg'
 
 export const Container = styled.div`
 background-color: rgba(249, 249, 246, 1);
@@ -7,14 +8,44 @@ margin-left:86px;
 
 export const TitleInput = styled.input`
     border: none;
-    border-bottom: 1px Solid rgba(87, 86, 85, 1);
     height: 56px;
-    width: 80%;
     background-color: inherit;
 font-family: 'MaruBuri-Regular';
     font-size: 27px;
     outline: none;
     font-weight: 700;
+    width: 80%;
+`
+export const TitleContainer = styled.div`
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px Solid rgba(87, 86, 85, 1);
+    
+`
+export const VisibleSelect = styled.select`
+font-family: 'MaruBuri-Regular';
+-moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 16px;
+  color:  rgba(87, 86, 85, 1);
+  border: none;
+  outline: none;
+  background-color: rgba(87, 86, 85, 1);
+  border-radius: 8px;
+  padding: 0.6em 1.4em 0.5em 0.8em;
+  height: 40px;
+  margin: 0;
+  cursor: pointer;
+  background:url(${arrow}) no-repeat 100% 55%/15px auto;
+  /* &:hover{
+    color: rgba(87, 86, 85, 1);
+  } */
+  &:disabled{
+    opacity: 0.5;
+  }
 `
 
 export const GenreContainer = styled.div`

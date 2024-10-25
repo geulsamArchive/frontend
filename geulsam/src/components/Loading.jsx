@@ -12,10 +12,10 @@ const Loading = ({ loading }) => {
     return (
         <div>
             <SyncLoader
-                color="#616114"
+                color="rgba(45, 43, 42, 1)"
                 loading={loading}
                 cssOverride={override}
-                size={150}
+                size={50}
             />
         </div>
     );

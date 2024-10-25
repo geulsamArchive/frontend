@@ -345,6 +345,7 @@ const MyInfoModify = () => {
                         <PasswordText onClick={openPasswordChangeModal}>비밀번호 변경</PasswordText>
                         {{ isModalOpen } && (<PasswordChangeModal isModalOpen={isModalOpen} closeModal={closePasswordChangeModal}
                         />)}
+                        <PasswordText onClick={() => (navigate('/author/modify'))}>작가 페이지 수정</PasswordText>
                     </>
                 )}
             </ButtonContainer>
