@@ -3,7 +3,6 @@ import { normalAPI } from '../../../../apis/Api';
 import {
     MemberTitle,
     BookInfoContainer,
-    Button,
     ButtonForMember,
     StyledTable,
     TableHeader,
@@ -21,7 +20,7 @@ const MemberModify = () => {
     const [members, setMembers] = useState([]); // 회원 목록 상태
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
     const [totalPage, setTotalPage] = useState(1); // 전체 페이지 수
-    const membersPerPage = 10; // 페이지당 회원 수
+    const membersPerPage = 8; // 페이지당 회원 수 8로 설정
     const [order, setOrder] = useState('asc');
     const [currentLevel, setCurrentLevel] = useState('NORMAL'); // 현재 선택된 회원 레벨
     const [isSuspendedActive, setIsSuspendedActive] = useState(false);
@@ -36,40 +35,44 @@ const MemberModify = () => {
                     page: page,
                     order: order,
                     level: level,
-                    size: membersPerPage,
+                    size: membersPerPage, // 페이지당 회원 수
                     search: search // 검색어 추가
                 },
                 headers: {
                     'accessToken': accessToken,
                 },
             });
-            console.log(resp.data); // 응답 구조를 확인
-            setMembers(resp.data.data.content || []); // 상태에 회원 데이터 저장
             setTotalPage(resp.data.data.pageTotal); // 전체 페이지 수 설정
+            return resp.data.data.content || []; // 데이터를 반환
         } catch (error) {
             console.error("회원 데이터를 가져오는 중 오류 발생:", error);
-            setMembers([]); // 오류 시 회원 목록 초기화
+            return []; // 오류 시 빈 배열 반환
         }
     };
 
-    useEffect(() => {
-        getMemberData(currentLevel, currentPage, searchTerm); // searchTerm이 변경될 때마다 회원 데이터 가져오기
-    }, [currentLevel, currentPage, searchTerm]);
-
-    // "등록된 회원" 버튼을 눌렀을 때 NORMAL 회원을 가져옴
-    const handleNormalMembers = () => {
-        setCurrentLevel('NORMAL');
+    // NORMAL과 ADMIN 회원 데이터를 모두 가져옴
+    const handleNormalMembers = async () => {
         setCurrentPage(1); // 첫 페이지로 리셋
         setIsSuspendedActive(false); // SUSPENDED 버튼 비활성화
         setIsNormalActive(true); // NORMAL 버튼 활성화
+
+        // NORMAL 회원과 ADMIN 회원 데이터를 각각 가져오고 합침
+        const normalMembers = await getMemberData('NORMAL', currentPage, searchTerm);
+        const adminMembers = await getMemberData('ADMIN', currentPage, searchTerm);
+
+        // NORMAL과 ADMIN 데이터를 합쳐서 상태 업데이트
+        const combinedMembers = [...normalMembers, ...adminMembers];
+        setMembers(combinedMembers);
     };
 
     // "가입 신청된 회원" 버튼을 눌렀을 때 SUSPENDED 회원을 가져옴
-    const handleSuspendedMembers = () => {
+    const handleSuspendedMembers = async () => {
         setCurrentLevel('SUSPENDED');
         setCurrentPage(1); // 첫 페이지로 리셋
         setIsSuspendedActive(true); // SUSPENDED 버튼 활성화
         setIsNormalActive(false); // NORMAL 버튼 비활성화
+        const suspendedMembers = await getMemberData('SUSPENDED', currentPage, searchTerm);
+        setMembers(suspendedMembers);
     };
 
     // 검색어가 변경될 때 호출되는 함수
@@ -183,7 +186,7 @@ const MemberModify = () => {
             <StyledTable>
                 <thead>
                     <tr>
-                        {currentLevel === 'NORMAL' && <TableHeader>권한</TableHeader>} {/* 권한 추가 */}
+                        <TableHeader>권한</TableHeader> {/* 권한 추가 */}
                         <TableHeader>이름</TableHeader>
                         <TableHeader>가입연도</TableHeader>
                         <TableHeader>학번</TableHeader>
@@ -197,18 +200,16 @@ const MemberModify = () => {
                     {members.length > 0 ? (
                         members.map((member) => (
                             <TableRow key={member.userId}>
-                                {currentLevel === 'NORMAL' && (
-                                    <TableCell>
-                                        {/* 권한 드롭다운 */}
-                                        <select
-                                            value={member.role}
-                                            onChange={(e) => updateMemberRole(member, e.target.value)}
-                                        >
-                                            <Option value="NORMAL">일반</Option>
-                                            <Option value="ADMIN">관리자</Option>
-                                        </select>
-                                    </TableCell>
-                                )}
+                                <TableCell>
+                                    {/* 권한 드롭다운 */}
+                                    <select
+                                        value={member.level}
+                                        onChange={(e) => updateMemberRole(member, e.target.value)}
+                                    >
+                                        <option value="NORMAL">일반</option>
+                                        <option value="ADMIN">관리자</option>
+                                    </select>
+                                </TableCell>
                                 <TableCell>{member.name}</TableCell>
                                 <TableCell>{member.joinedAt}</TableCell>
                                 <TableCell>{member.schoolNum}</TableCell>
@@ -216,15 +217,15 @@ const MemberModify = () => {
                                 <TableCell>{member.phone}</TableCell>
                                 <TableCell>{member.email}</TableCell>
                                 <TableCell>
-                                    {currentLevel === 'NORMAL' ? (
+                                    {member.role === 'SUSPENDED' ? (
                                         <>
-                                            <BackButtonAtMyInfoModify onClick={() => deleteMember(member.schoolNum)}>회원 탈퇴</BackButtonAtMyInfoModify>
-                                            <ButtonForPassword onClick={() => resetMemberPassword(member)}>비밀번호 초기화</ButtonForPassword>
+                                            <BackButtonAtMyInfoModify onClick={() => rejectMember(member.schoolNum)}>가입 거부</BackButtonAtMyInfoModify>
+                                            <ButtonForPassword onClick={() => approveMember(member)}>가입 승인</ButtonForPassword>
                                         </>
                                     ) : (
                                         <>
-                                            <BackButtonAtMyInfoModify onClick={() => rejectMember(member.schoolNum)}>가입 거부</BackButtonAtMyInfoModify>
-                                            <Button onClick={() => approveMember(member)}>가입 승인</Button>
+                                            <BackButtonAtMyInfoModify onClick={() => deleteMember(member.schoolNum)}>회원 탈퇴</BackButtonAtMyInfoModify>
+                                            <ButtonForPassword onClick={() => resetMemberPassword(member)}>비밀번호 초기화</ButtonForPassword>
                                         </>
                                     )}
                                 </TableCell>
