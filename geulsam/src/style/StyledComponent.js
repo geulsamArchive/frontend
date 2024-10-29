@@ -325,11 +325,11 @@ display: block;
 }
 font-family: 'MaruBuri-Regular';
 background-color: rgba(234, 233, 227, 1);
-height: 57px;
+height: 41px;
 display: flex;
 align-items: center;
 justify-content: space-between;
-font-size: 20px;
+font-size: 16px;
 color: rgba(87, 86, 85, 1)  ;
 a{
   text-decoration: none;
@@ -461,7 +461,6 @@ padding-bottom: 10px;
 padding-top: 10px;
 font-weight: 700;
 font-size: 22px;
-text-shadow: 0 4px 4px black;
 `
 export const Recents = styled.div`
 display: flex;
@@ -472,6 +471,9 @@ width: 100%;
 
 
 export const RecentWorkText = styled.div`
+@media only screen and (max-width:1023px) {
+ font-size: 16px;
+}
 width: 90%;
 height: 40%;
 opacity: 1;
@@ -503,7 +505,6 @@ export const RecentWorkOverlayText = styled.div`
  align-items: center;
  justify-content: center;
  text-align: center;
- padding-top: 70px;
 }
 padding-top: 33px;
 padding-bottom: 33px;
@@ -516,6 +517,9 @@ flex-direction: column;
 `
 
 export const TextOverflow = styled.span`
+@media only screen and (max-width:1023px) {
+ font-size: 18px;
+}
 overflow: hidden;
 `
 export const RecentWorkContainer = styled.div`
@@ -530,6 +534,7 @@ export const RecentWorkContainer = styled.div`
 @media only screen and (max-width:1023px) {
   width: 90dvw;
   height: 51dvw;
+margin: none;
   
   line-height: 1.6;
 }
@@ -555,7 +560,7 @@ export const ArchiveButtonContainer = styled.div`
 padding-top: 30px;
 }
    display: flex;
-padding-top: 77px;
+padding-top: 50px;
 justify-content: center;
 background-color: rgba(249, 249, 246, 1);
 
@@ -685,6 +690,7 @@ export const PosterGridContainer = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
 }
+background-color: beige;
  // display: grid;
   //grid-template-columns: repeat(3, 1fr);
   display: flex;
@@ -694,7 +700,6 @@ export const PosterGridContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px;
-  margin: 50px;
 
 `;
 export const PotserGridItems = styled.div`

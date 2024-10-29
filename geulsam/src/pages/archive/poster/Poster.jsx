@@ -71,7 +71,7 @@ const Poster = () => {
                 ))}
             </PosterGridContainer>
             <Modal isOpen={isOpen} poster={selectedPoster} onClose={closeModal} />
-            <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} />
+            <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} isDark='true' />
         </>
     );
 };

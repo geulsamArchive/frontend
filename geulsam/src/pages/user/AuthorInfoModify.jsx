@@ -148,7 +148,7 @@ const AuthorInfoModify = () => {
             const refreshToken = localStorage.getItem('refresh')
 
             try {
-                const response = await normalAPI.delete(`/content?id=${id}`, {
+                const response = await normalAPI.delete(`/content?contentId=${id}`, {
                     headers: {
                         'accessToken': accesstoken,
                     },
@@ -160,7 +160,7 @@ const AuthorInfoModify = () => {
                 if (error.response && error.response.status === 403) {
                     console.log('토큰 재전송');
                     try {
-                        const tokenResponse = await normalAPI.delete(`/content?id=${id}`,
+                        const tokenResponse = await normalAPI.delete(`/content?contentId=${id}`,
                             {
                                 headers: {
                                     'refreshToken': refreshToken,

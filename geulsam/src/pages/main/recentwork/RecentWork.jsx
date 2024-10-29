@@ -40,10 +40,10 @@ const SmallRecentWorks = ({ isOpen, closeMenu, work }) => {
                         <RecentWorkOverlay onClick={() => (navigate(`/work/${work.contentId}`))}>
                             <RecentWorkOverlayText>
                                 <div>
-                                    <L><B><TextOverflow>
+                                    <B><TextOverflow>
                                         {CheckTitleLength(work.title, 12)}
                                     </TextOverflow>
-                                    </B></L>
+                                    </B>
                                     <br />
                                     <br />
                                     <GrayTexts>

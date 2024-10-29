@@ -43,13 +43,14 @@ height:45px ;
 `
 
 export const CloseSVG = styled.div`
-    margin-right: 30px;
+    margin-right: 20px;
     cursor: pointer;
 `
 
 export const MobileRecentWorksContainer = styled.div`
 overflow-y: auto;
 max-height: calc(100dvh - 45px);
+width: 100dvw;
 position: absolute;
 top: 50px;
 &::-webkit-scrollbar{
