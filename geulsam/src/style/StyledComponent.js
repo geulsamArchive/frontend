@@ -31,10 +31,20 @@ font-family: 'MaruBuri-Regular';
 
 //입력 폼 관련 요소
 export const RightSubmit = styled.div`
+  @media only screen and (max-width: 1023px) {
+    align-items:center;
+    padding-right:50px;
+  }
 display: flex;
 justify-content: right;
 `
 export const InputUploads = styled.div`
+  @media only screen and (max-width: 1023px) {
+    width: 90dvw;
+    padding-up:30px;
+    padding-down:30px;
+    flex-direction: column; /* 1023px 이하에서 세로 배열 */
+  }
 display: flex;
 flex-direction: row;
 gap: 20px;
@@ -58,16 +68,33 @@ filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))';
 `;
 
 export const Inputs = styled.div`
+  @media only screen and (max-width:1023px) {
+  width: 90dvw;
+  display: flex; /* 기본 가로 배열 */
+  flex-direction: column;
+}
 text-align: left;
 margin-bottom: 100px;
 `;
 
 export const InputTitle = styled.div`
+  @media only screen and (max-width: 1023px) {
+    width: 90dvw;
+    flex-direction: column; /* 1023px 이하에서 세로 배열 */
+    padding-left:10px;
+  }
 margin-top: 10px;
 margin-bottom: 5px;
 
 `
 export const Input = styled.input`
+  @media only screen and (max-width: 1023px) {
+    width: 90dvw;
+    flex-direction: column; /* 1023px 이하에서 세로 배열 */
+    overflow:hidden;
+    max-width: 90dvw;
+    z-index : 0; 
+  }
 border: none;
 border-bottom:1px solid rgba(171, 170, 170 , 1);
 padding: 5px;
@@ -569,11 +596,10 @@ background-color: rgba(249, 249, 246, 1);
 
 //문집 페이지
 export const BookInfoContainer = styled.div`
-@media only screen and (max-width:1023px) {
-width: 100%;
-margin-left: 0;
-padding: 5dvw;
-padding-top: 30px;
+  @media only screen and (max-width:1023px) {
+  width: 90dvw;
+  flex-direction :column;
+  
 }
 font-family: 'MaruBuri-Regular';
 width: 90%;
@@ -588,6 +614,7 @@ export const BookTitle = styled.div`
 @media only screen and (max-width:1023px) {
     font-size: 18px;
     padding-bottom: 15px;
+    padding-left:10px;
 }
    
 font-size: 27px;
@@ -720,6 +747,10 @@ export const PotserGridItems = styled.div`
 
 //포스터 수정하는 페이지
 export const PotserModifyGridItems = styled.div`
+  @media only screen and (max-width:1023px) {
+  width: 90dvw;
+  
+}
   width: 401px;
   height: 568px;
   position: relative;

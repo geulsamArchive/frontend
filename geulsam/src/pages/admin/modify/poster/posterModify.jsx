@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PosterLink, Button, HiddenButton, GridContainer, GridItems, PageButton, Paging, PosterGridContainer, Posters, PotserModifyGridItems } from '../../../../style/StyledComponent';
+//import { , , PageButton, Paging, PosterGridContainer, Posters, PotserGridItems } from '../../../style/StyledComponent';
+
 import Pagination from '../../../../components/Paging/Pagination';
 import { normalAPI } from '../../../../apis/Api';
 
