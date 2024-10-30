@@ -38,6 +38,14 @@ export const RightSubmit = styled.div`
 display: flex;
 justify-content: right;
 `
+export const PosterUploadRightSubmit = styled.div`
+  @media only screen and (max-width: 1023px) {
+    align-items:center;
+    padding-right:100px;
+  }
+display: flex;
+justify-content: right;
+`
 export const InputUploads = styled.div`
   @media only screen and (max-width: 1023px) {
     width: 90dvw;
@@ -55,17 +63,24 @@ margin: 50px;
 `;
 
 export const Form = styled.div`
-background-color: white;
-border-radius: 8.6px;
-text-align: center;
-width:408px;
-height: 486px;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-align-items: center;
-filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))';
+
+  background-color: white;
+  border-radius: 8.6px;
+  text-align: center;
+  width: 408px;
+  height: 486px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
+
+  @media only screen and (max-width: 1023px) {
+    width: 300px; /* 작은 화면에서 더 작은 너비 */
+    height: 357px; /* 작은 화면에서 더 작은 높이 */
+  }
 `;
+
 
 export const Inputs = styled.div`
   @media only screen and (max-width:1023px) {
@@ -92,8 +107,9 @@ export const Input = styled.input`
     width: 90dvw;
     flex-direction: column; /* 1023px 이하에서 세로 배열 */
     overflow:hidden;
-    max-width: 90dvw;
+    max-width: 80dvw;
     z-index : 0; 
+    margin-left:15px;
   }
 border: none;
 border-bottom:1px solid rgba(171, 170, 170 , 1);
@@ -609,14 +625,27 @@ background-color: rgba(249, 249, 246, 1);
 box-sizing: border-box;
 
 `
+export const PosterTitle = styled.div`
+@media only screen and (max-width:1023px) {
+    font-size: 18px;
+    padding-bottom: 15px;
+    padding-left:18px;
+}
+   
+font-size: 27px;
+font-weight: 700;
+width: 100%;
+border-bottom:2px solid black;
+padding-bottom: 18px;
+`
 
 export const BookTitle = styled.div`
 @media only screen and (max-width:1023px) {
     font-size: 18px;
     padding-bottom: 15px;
     padding-left:10px;
+    border-bottom : 2px black solid;
 }
-   
 font-size: 27px;
 font-weight: 700;
 width: 100%;
@@ -1157,11 +1186,17 @@ padding-bottom: 100px;
 `;
 
 export const BackButtonAtMyInfoModify = styled(Button)`
+@media only screen and (max-width:1023px) {
+    margin-left:60px;
+}
     background-color: #f0f0f0;
     color: #333;
 `;
 
 export const EditButton = styled(Button)`
+ @media only screen and (max-width: 1023px) {
+    margin-left:15px;
+  }
     color: white;
     margin-right:10px;
     font-weight: 700;
@@ -1232,14 +1267,15 @@ font-size: 27px;
 font-weight: 700;
 margin-right : 20px;
 width: 100%;
-border-bottom:2px solid black;
+border-top:2px solid black;
 padding-bottom: 18px;
+padding-top:10px;
+flex-direction:row;
 `
 export const StyledTable = styled.table`
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    font-weight:bold;
 `;
 
 export const TableHeader = styled.th`

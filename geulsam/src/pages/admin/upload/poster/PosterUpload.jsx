@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForms } from '../../../../hooks/useForms';
-import { Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../../style/StyledComponent'
+import { PosterUploadRightSubmit, PosterTitle, Input, Inputs, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit } from '../../../../style/StyledComponent'
 import axios from 'axios';
 import Resizer from "react-image-file-resizer"
 import { normalAPI } from '../../../../apis/Api';
@@ -126,9 +126,9 @@ const PosterUpload = () => {
 
     return (
         <BookInfoContainer>
-            <BookTitle>
+            <PosterTitle>
                 새 포스터 개시하기
-            </BookTitle>
+            </PosterTitle>
             <br />
             <br />
             <Inputs>
@@ -155,9 +155,9 @@ const PosterUpload = () => {
             )}
             <hr />
             <br />
-            <RightSubmit>
+            <PosterUploadRightSubmit>
                 <Button type='submit' onClick={onClickUpload}>게시하기</Button>
-            </RightSubmit>
+            </PosterUploadRightSubmit>
             <br />
             <br />
             <br />

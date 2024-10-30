@@ -6,6 +6,9 @@ export const UserInfos = styled.div`
 `
 
 export const Left = styled.div`
+ @media only screen and (max-width: 1023px) {
+    margin-left:10px;
+  }
     width: 100px;
     height: 30px;
     padding-top: 5px;
