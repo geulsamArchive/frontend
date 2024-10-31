@@ -111,6 +111,12 @@ filter: drop-shadow(10px 10px 30px rgba(152, 147, 142, 0.25)) blur(0);
 }
 `
 
+export const CalendarSliderContainer = styled.div`
+    width: 100dvw;
+    overflow:hidden;
+    
+`
+
 export const SliderContainer = styled.div`
     width: 100dvw;
     overflow:hidden;

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const CommentInput = styled.input`
+@media only screen and (max-width:1023px) {
+    width: 90dvw;
+}
 width: 996px;
 height: 85px;
 border:none;
@@ -15,6 +18,9 @@ overflow: scroll;
 `
 
 export const CommentInputBottom = styled.div`
+@media only screen and (max-width:1023px) {
+    display: none;
+}
     width: 1056px;
 font-family: 'Grandpa_sharing';
     height: 75px;
@@ -27,8 +33,13 @@ font-family: 'Grandpa_sharing';
 `
 
 export const CommentInputContainer = styled.div`
-filter: drop-shadow(0 10px 30 rgba(152, 147, 142, 0.25));
+@media only screen and (max-width:1023px) {
+    width: 100dvw;
+    display: flex;
+    justify-content: center;
+}filter: drop-shadow(0 10px 30 rgba(152, 147, 142, 0.25));
 margin-top: 50px;
+
 `
 
 export const TextCounter = styled.div`
@@ -67,6 +78,7 @@ export const CommentWriter = styled.div`
 export const CommentWriting = styled.div`
     font-size: 16px;
     word-break: break-all;
+    white-space: pre-line;
 `
 
 export const CommentCreatedAt = styled.div`

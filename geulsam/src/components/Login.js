@@ -47,7 +47,7 @@ const Logins = () => {
                 localStorage.removeItem('prevpath');
             } catch (error) {
                 console.error('Login Error:', error);
-                setPwError('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
+                setPwError('아이디와 비밀번호를 확인해주세요.');
             }
         }
     }
@@ -61,11 +61,14 @@ const Logins = () => {
                     </InputTitle>
                     <Input value={id} onChange={onChangeId} />
                     {idError && <ErrorMessage>{idError}</ErrorMessage>}
+                    <br />
+                    <br />
+                    <br />
                     <InputTitle>
                         비밀번호
                     </InputTitle>
                     <Input type='password' value={pw} onChange={onChangePw} />
-                    {pwError && <ErrorMessage>{pwError}</ErrorMessage>}
+                    {pwError ? (<ErrorMessage>{pwError}</ErrorMessage>) : (<p>&nbsp;</p>)}
                 </Inputs>
                 <Buttons>
                     <Button onClick={onClick}>로그인</Button>

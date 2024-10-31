@@ -266,6 +266,7 @@ const Comment = ({ contentId }) => {
             const response = await normalAPI.get(`/comment?page=${page}&contentId=${content}`);
             console.log('서버 응답:', response.data);
             setCommentList(response.data.data.content)
+            setTotalPage(response.data.data.pageTotal)
         } catch (error) {
             console.log('에러 발생', error)
         }
@@ -317,12 +318,12 @@ const Comment = ({ contentId }) => {
 
     useEffect(() => {
         getCommentList();
-    }, [])
+    }, [page])
     return (
 
         <div>
             <CommentInputContainer>
-                <CommentInput value={writing} maxLength="250" onChange={onChangeWriting} />
+                <CommentInput value={writing} maxLength="250" onChange={onChangeWriting} placeholder='후기 작성하기...' />
                 <CommentInputBottom>
                     <TextCounter length={writing.length}>
                         {writing.length}/250

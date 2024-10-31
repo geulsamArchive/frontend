@@ -61,11 +61,12 @@ background-color: inherit;
 margin-left: 30px;
 height: 55px;
 width: 80dvw;
-font-size: 18px;
+font-size: 27px;
     font-family: 'Grandpa_sharing';
 outline: none;
 &::placeholder{
     font-family: 'MaruBuri-Regular';
+    font-size: 18px;
     
 }
 

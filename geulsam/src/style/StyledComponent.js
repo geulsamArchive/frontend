@@ -462,7 +462,6 @@ color: rgba(87, 86, 85, 1);
 font-family: 'MaruBuri-Regular';
 margin-left: 86px;
 margin-right: 86px;
-margin-bottom: 50px;
 border-bottom: 1.5px solid rgba(87, 86, 85, 1);
 padding-bottom:10px ;
 padding-top: 50px;
@@ -470,6 +469,11 @@ font-size: 22px;
 font-weight: 700;
 background-color: rgba(249, 249, 246, 1);
 
+`
+export const CalendarSelectContainer = styled.div`
+display: flex;
+justify-content: right;
+margin-right: 86px;
 `
 
 //최근 공개된 작품 관련 요소
@@ -1131,6 +1135,8 @@ export const InputsContainer = styled.div`
 export const ErrorMessage = styled.p`
     color: red;
     font-size: 10px;
+    text-align: right;
+    font-weight: 400;
 `;
 
 export const TextalignLeft = styled.div`

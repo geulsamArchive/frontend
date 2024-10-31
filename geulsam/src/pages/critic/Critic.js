@@ -56,6 +56,9 @@ const Critic = () => {
             <CalendarTitle>
                 금학기 합평 신청 및 승인 확인
             </CalendarTitle>
+            <br />
+            <br />
+            <br />
             <Centering>
                 <CriticSlide criticData={criticData} year={year} onDataUpdate={handleDataUpdate} />
             </Centering>
