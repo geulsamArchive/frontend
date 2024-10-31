@@ -135,7 +135,7 @@ const Works = () => {
                     <GenreButton disabled={genre === 'POEM'} onClick={() => handleGenreClick('POEM')}>시</GenreButton>
                 </Centering>
             </Mobile>
-            <button onClick={handleSearchClear}> 검색결과 초기화</button>
+            {/* <button onClick={handleSearchClear}> 검색결과 초기화</button> */}
             <WorkInfoContainer>
                 <WorkTopBorder />
                 <BookInfoAndButton>

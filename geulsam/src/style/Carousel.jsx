@@ -54,7 +54,7 @@ color: ${(props) => (props.past ? 'rgba(129, 128, 127, 1)' : 'black')};
 export const Contents = styled.div`
 @media only screen and (max-width:2200px ){
   height: 400px;
-  width: 500px;
+  width: 400px;
 }
 @media only screen and (max-width:1900px ){
   height: 350px;
