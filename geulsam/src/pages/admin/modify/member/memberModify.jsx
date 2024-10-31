@@ -176,10 +176,9 @@ const MemberModify = () => {
 
     return (
         <BookInfoContainer>
-            <MemberTitle>회원 관리 &nbsp;&nbsp;
+            <MemberTitle>회원 목록 &nbsp;&nbsp;
                 <ButtonForMember isActive={isNormalActive} onClick={handleNormalMembers} >등록회원</ButtonForMember>
                 <ButtonForMember isActive={isSuspendedActive} onClick={handleSuspendedMembers} >가입신청</ButtonForMember>
-                &nbsp;&nbsp;&nbsp;&nbsp;
                 <SearchWorkForMember onSearch={handleSearch} placeholder='찾으시는 회원의 이름 혹은 학번을 적어주세요.' />
             </MemberTitle>
             {/* 회원 목록 테이블 */}

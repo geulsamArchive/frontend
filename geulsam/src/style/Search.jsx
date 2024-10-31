@@ -43,6 +43,7 @@ export const SearchBoxForMember = styled.div`
     margin-top: 30px;
     display:flex;
     margin-bottom: 20px;
+    flex-direction:row;
 `
 
 
@@ -89,6 +90,7 @@ width: 80dvw;
 font-size: 18px;
     font-family: 'Grandpa_sharing';
 outline: none;
+flex-direction:row;
 &::placeholder{
     font-family: 'MaruBuri-Regular';
     
