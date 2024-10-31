@@ -617,8 +617,12 @@ background-color: rgba(249, 249, 246, 1);
 //문집 페이지
 export const BookInfoContainer = styled.div`
   @media only screen and (max-width:1023px) {
-  width: 90dvw;
+  width: 100dvw;
   flex-direction :column;
+  margin-left: 0;
+  padding-top: 30px;
+  padding-left: 5dvw;
+  padding-right: 5dvw;
   
 }
 font-family: 'MaruBuri-Regular';
