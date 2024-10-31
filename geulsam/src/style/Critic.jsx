@@ -90,12 +90,13 @@ color: ${props => {
     }};
 `
 
-export const CriticButton = styled.button`
+export const CriticButton = styled.div`
 font-family: 'MaruBuri-Regular';
 border: none;
 font-size: 12px;
 border-radius: 21px;
 width: 70px;
+height: 15px;
 display: flex;
 justify-content: center;
 align-items: center;

@@ -54,6 +54,34 @@ color: ${(props) => (props.past ? 'rgba(129, 128, 127, 1)' : 'black')};
 export const Contents = styled.div`
 @media only screen and (max-width:2200px ){
   height: 400px;
+  width: 500px;
+}
+@media only screen and (max-width:1900px ){
+  height: 350px;
+  width: 408px;
+}
+@media only screen and (max-width:1500px ){
+  height: 250px;
+width: 250px;
+margin-top: 10px;
+
+}
+margin-top: 30px;
+overflow: scroll;
+height: 500px;
+width: 408px;
+&::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+}
+&::-webkit-scrollbar-thumb{
+  background-color: transparent;
+}
+`
+
+export const CriticContents = styled.div`
+@media only screen and (max-width:2200px ){
+  height: 400px;
   width: 400px;
 }
 @media only screen and (max-width:1900px ){

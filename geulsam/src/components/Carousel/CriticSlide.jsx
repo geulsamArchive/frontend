@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Contents, Eventlist, Slide, SliderContainer, Button } from '../../style/Carousel';
+import { Contents, Eventlist, Slide, SliderContainer, Button, CriticContents } from '../../style/Carousel';
 import Slider from 'react-slick';
 import { B, Centering, Red, TitleBold } from '../../style/StyledComponent';
 import "slick-carousel/slick/slick.css";
@@ -217,7 +217,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
                             <TitleBold>
                                 {year}년 {monthdata.month}월
                             </TitleBold>
-                            <Contents>
+                            <CriticContents>
                                 {monthdata.criticismRes?.map((critic, criticIdx) => (
                                     <Critics key={criticIdx}>
                                         <Dates><B>{formatDate(critic.start)}</B></Dates>
@@ -252,7 +252,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
                                         </Right>
                                     </Critics>
                                 ))}
-                            </Contents>
+                            </CriticContents>
                         </Slide>
                     </div>
                 ))}
