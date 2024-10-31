@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useForms } from '../hooks/useForms';
 import { useNavigate } from 'react-router-dom';
 import { LoginApi } from '../apis/LoginApi';
-import { ErrorMessage, Wrapper, Title, Form, Input, Inputs, Button, InputTitle, Buttons } from '../style/StyledComponent';
+import { ErrorMessage, Wrapper, Title, Form, Input, Inputs, Button, InputTitle, Buttons, LoginInput, LoginForm, LoginInputs, LoginInputTitle } from '../style/StyledComponent';
 import { useAuth } from '../store/Auth';
+import { Desktop } from '../hooks/useMediaQuery';
 
 const Logins = () => {
     const [id, onChangeId] = useForms();
@@ -53,27 +54,29 @@ const Logins = () => {
     }
     return (
         <Wrapper>
-            <Form>
+            <LoginForm>
                 <Title>회원 로그인</Title>
-                <Inputs>
-                    <InputTitle>
+                <LoginInputs>
+                    <LoginInputTitle>
                         학번
-                    </InputTitle>
-                    <Input value={id} onChange={onChangeId} />
+                    </LoginInputTitle>
+                    <LoginInput value={id} onChange={onChangeId} />
                     {idError && <ErrorMessage>{idError}</ErrorMessage>}
-                    <br />
-                    <br />
-                    <br />
-                    <InputTitle>
+                    <Desktop>
+                        <br />
+                        <br />
+                        <br />
+                    </Desktop>
+                    <LoginInputTitle>
                         비밀번호
-                    </InputTitle>
-                    <Input type='password' value={pw} onChange={onChangePw} />
+                    </LoginInputTitle>
+                    <LoginInput type='password' value={pw} onChange={onChangePw} />
                     {pwError ? (<ErrorMessage>{pwError}</ErrorMessage>) : (<p>&nbsp;</p>)}
-                </Inputs>
+                </LoginInputs>
                 <Buttons>
                     <Button onClick={onClick}>로그인</Button>
                 </Buttons>
-            </Form>
+            </LoginForm>
         </Wrapper>
     );
 };

@@ -27,6 +27,7 @@ export const NavMenu = styled.div`
 
 export const NavMyPage = styled.div`
     margin-right: 10px;
+    cursor: pointer;
 `
 
 export const SmallNavMenuContainer = styled.div`
@@ -56,4 +57,11 @@ export const SmallNavLink = styled(Link)`
     &:hover{
         color: rgba(255, 239, 155, 1);
     }
+`
+
+export const SmallNavLinks = styled.div`
+    font-size: 14px;
+    display: flex;
+    gap: 20px;
+    margin-right: 10px;
 `

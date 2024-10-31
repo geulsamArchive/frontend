@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { GridContainer, GridItems, PageButton, Paging, PosterGridContainer, Posters, PotserGridItems } from '../../../style/StyledComponent';
+import { GridContainer, GridItems, PageButton, Paging, PosterGridContainer, PosterMargin, Posters, PotserGridItems } from '../../../style/StyledComponent';
 import Modal from '../../../components/Modal/Modal';
 import Pagination from '../../../components/Paging/Pagination';
 import { normalAPI } from '../../../apis/Api';
 import Loading from '../../../components/Loading';
+import { Desktop, Mobile } from '../../../hooks/useMediaQuery';
 
 
 
@@ -70,8 +71,16 @@ const Poster = () => {
                     </PotserGridItems>
                 ))}
             </PosterGridContainer>
+            <Desktop>
+                <PosterMargin>
+                    <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} isDark='true' />
+                </PosterMargin>
+            </Desktop>
+            <Mobile>
+                <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} />
+
+            </Mobile>
             <Modal isOpen={isOpen} poster={selectedPoster} onClose={closeModal} />
-            <Pagination page={page} totalPage={pageTotal} onChangePage={setPage} isDark='true' />
         </>
     );
 };

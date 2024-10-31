@@ -24,8 +24,8 @@ export const Wrapper = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-height: 100vh;
-width: 100vw;
+height: 100dvh;
+width: 100dvw;
 font-family: 'MaruBuri-Regular';
 `;
 
@@ -60,6 +60,7 @@ gap: 20px;
 export const Title = styled.div`
 font-size: 20px;
 margin: 50px;
+font-weight: 700;
 `;
 
 export const Form = styled.div`
@@ -100,8 +101,57 @@ export const InputTitle = styled.div`
   }
 margin-top: 10px;
 margin-bottom: 5px;
-
 `
+
+export const LoginForm = styled.div`
+ @media only screen and (max-width: 1023px) {
+    width: 90dvw; /* 작은 화면에서 더 작은 너비 */
+    height: 102dvw; /* 작은 화면에서 더 작은 높이 */
+  }
+background-color: white;
+  border-radius: 8.6px;
+  text-align: center;
+  width: 408px;
+  height: 486px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
+`
+
+
+export const LoginInputs = styled.div`
+  @media only screen and (max-width:1023px) {
+    margin-bottom: 40px;
+}
+text-align: left;
+margin-bottom: 100px;
+`
+
+export const LoginInputTitle = styled.div`
+ @media only screen and (max-width: 1023px) {
+  
+  }
+margin-top: 10px;
+margin-bottom: 5px;
+`
+
+export const LoginInput = styled.input`
+ @media only screen and (max-width: 1023px) {
+    width:  75dvw;
+    /* margin-left: 7.5dvw; */
+  }
+border: none;
+border-bottom:1px solid rgba(171, 170, 170 , 1);
+padding: 5px;
+width: 315px;
+font-family: 'MaruBuri-Regular';
+font-size: 18px;
+text-align: center;
+margin-bottom: 10px;
+`
+
 export const Input = styled.input`
   @media only screen and (max-width: 1023px) {
     width: 90dvw;
@@ -746,6 +796,11 @@ background-color: rgba(249, 249, 246, 1);
   
 `;
 
+export const PosterMargin = styled.div`
+padding-left: 5%;
+background-color:rgba(45, 43, 42, 1) ;
+`
+
 export const PosterGridContainer = styled.div`
 @media only screen and (max-width:1023px) {
   
@@ -753,8 +808,10 @@ export const PosterGridContainer = styled.div`
   margin: 0;
   margin-top: 30px;
   margin-bottom: 30px;
+  background-image: none;
 }
-background-color: beige;
+background-image: linear-gradient(to bottom, #ffffff 150px,rgba(45, 43, 42, 1)100px);
+
  // display: grid;
   //grid-template-columns: repeat(3, 1fr);
   display: flex;
@@ -907,7 +964,7 @@ export const Paging = styled.div`
 }
 margin-left: ${({ isDark }) => (isDark ? '-0.5vw' : '5vw')};
 padding-bottom: 50px;
-background-color:${({ isDark }) => (isDark ? 'inherit' : ' rgba(249, 249, 246, 1)')};;
+background-color:${({ isDark }) => (isDark ? 'rgba(45, 43, 42, 1)' : ' rgba(249, 249, 246, 1)')};;
 `
 
 export const PageButton = styled.button`
