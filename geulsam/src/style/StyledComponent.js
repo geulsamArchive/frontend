@@ -106,6 +106,11 @@ export const InputTitle = styled.div`
   }
 margin-top: 10px;
 margin-bottom: 5px;
+font-weight:bold;
+`
+
+export const Grayp = styled.p`
+color : gray;
 `
 
 export const LoginForm = styled.div`
@@ -175,7 +180,35 @@ font-family: 'MaruBuri-Regular';
 font-size: 18px;
 text-align: center;
 margin-bottom: 10px;
+background-color:inherit;
 `;
+export const TableInput = styled.input`
+  @media only screen and (max-width: 1023px) {
+    width: 90dvw;
+    flex-direction: column; /* 1023px 이하에서 세로 배열 */
+    overflow:hidden;
+    max-width: 80dvw;
+    z-index : 0; 
+    margin-left:15px;
+  }
+border: none;
+border-bottom:1px solid rgba(171, 170, 170 , 1);
+padding: 5px;
+width: 315px;
+font-family: 'Grandpa_sharing';
+font-size: 18px;
+text-align: center;
+margin-bottom: 10px;
+background-color:inherit;
+`;
+export const Bookp = styled.p`
+color:black;
+border-bottom:black solid 1px;
+`
+export const SmallTableInput = styled(TableInput)`
+  width: 5vw; // vw 단위를 사용하여 너비 설정
+`
+
 export const InputShort = styled.input`
 border: none;
 border-bottom:1px solid rgba(171, 170, 170 , 1);
@@ -1378,23 +1411,26 @@ export const StyledTable = styled.table`
 `;
 
 export const TableHeader = styled.th`
-    background-color: #f2f2f2;
+    background-color: inherit;
     padding: 12px;
     text-align: left;
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid black;
+    border-top:2px solid black;
+    border-right:1px solid black;
     font-weight : bold;
 `;
 
 export const TableRow = styled.tr`
     &:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: inherit;
     }
 `;
 
 export const TableCell = styled.td`
     padding: 12px;
-    border-bottom: 1px solid #ddd;
-        border-right: 2px solid #ddd;  /* 오른쪽 경계 추가 */
+    background-color:inherit;
+    border-bottom: 1px solid black;
+        border-right: 1px solid black;  /* 오른쪽 경계 추가 */
 
     /* 마지막 셀에 오른쪽 경계 제거 */
     &:last-child {
