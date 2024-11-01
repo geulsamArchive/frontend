@@ -1,17 +1,38 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { WorkTopBorder } from '../../../style/Works';
 import { normalAPI } from '../../../apis/Api';
-import { Content, CriticContainer, Slide, SliderContainer } from '../../../style/admin/critic';
+import { Content, ContentsInfo, CriticContainer, EditCalendarInfo, EditCalendarTitle, Slide, SliderContainer } from '../../../style/admin/critic';
 import Slider from 'react-slick';
-import { TitleBold } from '../../../style/StyledComponent';
+import { B, Red, TitleBold } from '../../../style/StyledComponent';
 import { translateCondition, translateType } from '../../../components/Translate';
+import { useAuth } from '../../../store/Auth';
+import { Conditions, CriticButton, CriticDay, CriticInfos, Critics, Dates, NameGenre, OrderAndTime, Right } from '../../../style/Critic';
 
 const AdminCritic = () => {
+    const date = new Date();
+    const yearNow = date.getFullYear();
+    const monthNow = date.getMonth();
+
+    const { logout } = useAuth()
+
+    // const translateSemester = (years, monthes) => {
+    //     if (monthes <= 1) {
+    //         setYear(years - 1)
+    //         setSemester(2)
+    //     } else if (monthes <= 7) {
+    //         setYear(years)
+    //         setSemester(1)
+    //     } else {
+    //         setYear(years)
+    //         setSemester(2)
+    //     }
+    // }
+
     const [criticData, setCriticData] = useState([])
     const [monthIdx, setMonthIdx] = useState(0);
 
     const [criticMonth, setCriticMonth] = useState(9)
-    const [criticYear, setCriticYear] = useState(2024)
+    const [criticYear, setCriticYear] = useState(yearNow)
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCriticism, setSelectedCriticism] = useState(null);
@@ -23,7 +44,7 @@ const AdminCritic = () => {
         className: "center",
         centerMode: true,
         infinite: true,
-        centerPadding: "50px",
+        centerPadding: "0",
         slidesToShow: 3,
         slidesToScroll: 1,
         speed: 300,
@@ -185,6 +206,8 @@ const AdminCritic = () => {
     }
 
 
+
+
     useEffect(() => {
         getCriticData()
     }, [])
@@ -192,8 +215,12 @@ const AdminCritic = () => {
     return (
         <CriticContainer>
             <WorkTopBorder />
-            <div>금학기 합평 신청 승인</div>
-            <div>이미 승인한 합평을 수정하려면 해당 항목을 꾹 눌러주세요.</div>
+            <EditCalendarTitle>
+                금학기 합평 신청 승인
+            </EditCalendarTitle>
+            <EditCalendarInfo>
+                합평을 삭제하시려면 클릭해주세요.
+            </EditCalendarInfo>
             <SliderContainer>
                 <Slider ref={sliderRef} {...settings}>
                     {criticData.map((monthdata, idx) => (
@@ -204,33 +231,63 @@ const AdminCritic = () => {
                                 </TitleBold>
                                 <Content>
                                     {monthdata.criticismRes?.map((critic, criticIdx) => (
-                                        <div key={criticIdx}>
-                                            {critic.criticismAuthorResList.map((author, authorIdx) => (
-                                                <div key={authorIdx}>
-                                                    {authorIdx === 0 && (
-                                                        <div>{formatDate(critic.start)}</div>
-                                                    )}
-                                                    {author.order}부 (
-                                                    {formatTime(critic.start, author.order)})
-                                                    {author.userName ? (
-                                                        <>
-                                                            <div>
-                                                                {author.userName}
-                                                                {translateType(author.genre)}
-                                                                {translateCondition(author.condition)}
-                                                                {author.condition !== "FIXED" && (
-                                                                    <button onClick={() => handleApply(author.criticismAuthorId)}>승인하기</button>
-                                                                )}
-                                                                <button onClick={() => handleDelete(author.criticismAuthorId)}>삭제하기</button>
+                                        <Critics key={criticIdx}>
+                                            <Dates>
+                                                <B>
+                                                    {formatDate(critic.start)}
+                                                </B>
+                                            </Dates>
+                                            <Right>
+                                                {critic.criticismAuthorResList.map((author, authorIdx) => (
+                                                    <CriticDay key={authorIdx}>
+                                                        {author.userName ? (
+                                                            <>
+                                                                <CriticInfos condition={author.condition} onClick={() => handleDelete(author.criticismAuthorId)}>
+                                                                    <NameGenre>
+                                                                        {author.userName}
+                                                                        ({translateType(author.genre)})
+                                                                    </NameGenre>
+                                                                    <OrderAndTime>
+                                                                        {author.order}부 ({formatTime(critic.start, author.order)})
+                                                                    </OrderAndTime>
+                                                                    <Conditions >
+                                                                        {author.condition !== "FIXED" && (
+                                                                            <CriticButton onClick={() => handleApply(author.criticismAuthorId)}>승인하기</CriticButton>
+                                                                        )}
+                                                                        {
+                                                                            author.condition === "FIXED" && (
+                                                                                <>
+                                                                                    {translateCondition(author.condition)}
+                                                                                </>
+                                                                            )
+                                                                        }
 
-                                                            </div>
-                                                        </>
-                                                    ) : (
-                                                        null
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
+                                                                    </Conditions>
+                                                                </CriticInfos>
+                                                                {/* <div>
+                                                                    {author.userName}
+                                                                    {translateType(author.genre)}
+                                                                    {translateCondition(author.condition)}
+                                                                    {author.condition !== "FIXED" && (
+                                                                        <button onClick={() => handleApply(author.criticismAuthorId)}>승인하기</button>
+                                                                    )}
+                                                                    <button onClick={() => handleDelete(author.criticismAuthorId)}>삭제하기</button>
+
+                                                                </div> */}
+                                                            </>
+                                                        ) : (
+                                                            <CriticInfos>
+                                                                <OrderAndTime>
+                                                                    <Red>
+                                                                        {author.order}부 ({formatTime(critic.start, author.order)})
+                                                                    </Red>
+                                                                </OrderAndTime>
+                                                            </CriticInfos>
+                                                        )}
+                                                    </CriticDay>
+                                                ))}
+                                            </Right>
+                                        </Critics>
                                     ))}
                                 </Content>
                             </Slide>

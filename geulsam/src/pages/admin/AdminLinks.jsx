@@ -77,9 +77,9 @@ const AdminLinks = () => {
                             </AdminMenus>
                         </AdminMenusContainer>
                     </BookInfoContents>
-                    <WorkButtons>
+                    {/* <WorkButtons>
                         버튼들
-                    </WorkButtons>
+                    </WorkButtons> */}
                 </BookInfoAndButton>
             </WorkInfoContainer>
         </>

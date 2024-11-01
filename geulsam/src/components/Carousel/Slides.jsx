@@ -19,15 +19,14 @@ const formatGenre = (text) => {
 
     // 첫 번째 부분은 숫자와 문자로 나누고, 두 번째 부분은 괄호를 기준으로 나눕니다
     const numberPart = parts[0]; // '1'
-    const genrePart = parts[1];   // 'w(NOVEL)'
-
-    const genreCode = genrePart.match(/\(([^)]+)\)/)[1]; // 'NOVEL'
+    const namePart = parts[1].split('(')[0]; // '이소현'
+    const genreCode = parts[1].match(/\(([^)]+)\)/)[1]; // 'NOVEL'
 
     // 장르 코드를 한국어 이름으로 변환합니다
     const genreName = genreMapping[genreCode] || genreCode; // 기본값으로 원본 코드 반환
 
     // 최종 포맷을 구성합니다
-    return `${numberPart}부 w(${genreName})`;
+    return `${numberPart}부 ${namePart}(${genreName})`;
 };
 
 const isPastEvent = (endTime) => {
