@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Buttons, Checkbox, FlexCenter, Form, Highlight, Red, Small, Title, TitleBold, Welcome, WhiteButton, Wrapper } from '../../style/StyledComponent';
+import { Button, Buttons, Checkbox, FlexCenter, Form, Highlight, LoginForm, Red, Small, Title, TitleBold, Welcome, WhiteButton, Wrapper } from '../../style/StyledComponent';
 
 const Signup1 = ({ nextStep }) => {
     const [isChecked, SetisChecked] = useState(false)
@@ -10,7 +10,7 @@ const Signup1 = ({ nextStep }) => {
 
     return (
         <Wrapper>
-            <Form>
+            <LoginForm>
                 <div></div>
                 <div></div>
                 <TitleBold>
@@ -39,7 +39,7 @@ const Signup1 = ({ nextStep }) => {
                 <Buttons>
                     <Button disabled={!isChecked} onClick={nextStep}>시작하기</Button>
                 </Buttons>
-            </Form>
+            </LoginForm>
         </Wrapper>
     );
 };

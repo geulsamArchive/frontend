@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ErrorMessage, Wrapper, Form, Input, BackButton, Silver, FormTop, Button, InputTitle, Title, Welcome, Red, LeftAlign, MarginLeft, WhiteButtons, WordInput } from '../../style/StyledComponent';
+import { ErrorMessage, Wrapper, Form, Input, BackButton, Silver, FormTop, Button, InputTitle, Title, Welcome, Red, LeftAlign, MarginLeft, WhiteButtons, WordInput, LoginForm } from '../../style/StyledComponent';
 import { useForms } from '../../hooks/useForms';
 import Left from '../../assets/images/grayLeft.png'
 import { SignUpApi } from '../../apis/SignUpApi';
@@ -60,7 +60,7 @@ const Signup5 = ({ prevStep, nextStep, formData }) => {
 
     return (
         <Wrapper>
-            <Form>
+            <LoginForm>
                 <FormTop>
                     <BackButton src={Left} onClick={prevStep} />
                     <Silver>
@@ -83,7 +83,7 @@ const Signup5 = ({ prevStep, nextStep, formData }) => {
                 <WhiteButtons>
                     <Button onClick={handleNext}>다음</Button>
                 </WhiteButtons>
-            </Form>
+            </LoginForm>
         </Wrapper>
     );
 };

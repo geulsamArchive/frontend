@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForms } from '../../hooks/useForms';
 import axios from 'axios';
-import { ButtonSmall, Wrapper, Form, Input, Inputs, Button, InputTitle, FormTop, Silver, BackButton, LeftAlign, WhiteButtons, ErrorMessage, InputShort } from '../../style/StyledComponent';
+import { ButtonSmall, Wrapper, Form, Input, Inputs, Button, InputTitle, FormTop, Silver, BackButton, LeftAlign, WhiteButtons, ErrorMessage, InputShort, LoginForm, LoginInputTitle, LoginInput } from '../../style/StyledComponent';
 import Left from '../../assets/images/grayLeft.png'
 import { normalAPI } from '../../apis/Api';
 
@@ -95,7 +95,7 @@ const SignUp = ({ prevStep, nextStep }) => {
     }
     return (
         <Wrapper>
-            <Form>
+            <LoginForm>
                 <FormTop>
                     <BackButton src={Left} onClick={prevStep} />
                     <Silver>
@@ -103,32 +103,32 @@ const SignUp = ({ prevStep, nextStep }) => {
                     </Silver>
                 </FormTop>
                 <LeftAlign>
-                    <InputTitle>
+                    <LoginInputTitle>
                         이름
-                    </InputTitle>
-                    <Input type='text' value={name} onChange={onChangeName} />
+                    </LoginInputTitle>
+                    <LoginInput type='text' value={name} onChange={onChangeName} />
                     {nameError ? <ErrorMessage>{nameError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
-                    <InputTitle>
+                    <LoginInputTitle>
                         학번
-                    </InputTitle>
+                    </LoginInputTitle>
                     <InputShort placeholder='예) C012345' type='text' value={schoolNum} onChange={onChangeSchoolNum} />
                     <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>
                     {schoolNumError ? <ErrorMessage>{schoolNumError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
-                    <InputTitle>
+                    <LoginInputTitle>
                         생년월일
-                    </InputTitle>
-                    <Input placeholder='예) 2000.12.31' type='date' value={birthDay} onChange={onChangeBirthDay} />
+                    </LoginInputTitle>
+                    <LoginInput placeholder='예) 2000.12.31' type='date' value={birthDay} onChange={onChangeBirthDay} />
                     {/* {birthDayError && <ErrorMessage>{birthDayError}</ErrorMessage>} */}
-                    <InputTitle>
+                    <LoginInputTitle>
                         글샘 가입연도
-                    </InputTitle>
-                    <Input placeholder='예) 2024' type='text' value={joinedAt} onChange={onChangeJoinedAt} />
+                    </LoginInputTitle>
+                    <LoginInput placeholder='예) 2024' type='text' value={joinedAt} onChange={onChangeJoinedAt} />
                     {joinedAtError ? <ErrorMessage>{joinedAtError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
                 </LeftAlign>
                 <WhiteButtons>
                     <Button onClick={handleNext}>다음</Button>
                 </WhiteButtons>
-            </Form>
+            </LoginForm>
         </Wrapper>
     );
 };

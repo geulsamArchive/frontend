@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { WorkTopBorder } from '../../../style/Works';
 import { normalAPI } from '../../../apis/Api';
-import { Content, CriticContainer, Slide, SliderContainer } from '../../../style/admin/critic';
+import { Content, CriticContainer, EditCalendarInfo, EditCalendarTitle, Slide, SliderContainer } from '../../../style/admin/critic';
 import Slider from 'react-slick';
 import { TitleBold } from '../../../style/StyledComponent';
 import Modal from 'react-modal';
@@ -223,8 +223,14 @@ const AdminCalendar = () => {
     return (
         <CriticContainer>
             <WorkTopBorder />
-            <div>{year}년 {semester} 학기 활동 일정</div>
-            <div>각각의 활동을 클릭하여 수정할 수 있습니다.</div>
+            <EditCalendarTitle>
+                {year}년 {semester}학기 활동 일정
+            </EditCalendarTitle>
+            <EditCalendarInfo>
+                해당 학기의 활동 일정만 등록 가능합니다. <br />
+                각각의 활동을 클릭하여 진행 예정 일정을 수정할 수 있습니다.
+            </EditCalendarInfo>
+
             <SliderContainer>
                 <Slider ref={sliderRef} {...settings}>
                     {calendarData.map((monthdata, idx) => (

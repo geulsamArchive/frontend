@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForms } from '../../hooks/useForms';
-import { Wrapper, Form, Input, Button, InputTitle, Silver, FormTop, BackButton, WhiteButtons, LeftAlign, ErrorMessage } from '../../style/StyledComponent';
+import { Wrapper, Form, Input, Button, InputTitle, Silver, FormTop, BackButton, WhiteButtons, LeftAlign, ErrorMessage, LoginForm, LoginInputTitle, LoginInput } from '../../style/StyledComponent';
 import Left from '../../assets/images/grayLeft.png';
 
 const Signup3 = ({ prevStep, nextStep }) => {
@@ -41,7 +41,7 @@ const Signup3 = ({ prevStep, nextStep }) => {
 
     return (
         <Wrapper>
-            <Form>
+            <LoginForm>
                 <FormTop>
                     <BackButton src={Left} onClick={prevStep} />
                     <Silver>
@@ -49,10 +49,10 @@ const Signup3 = ({ prevStep, nextStep }) => {
                     </Silver>
                 </FormTop>
                 <LeftAlign>
-                    <InputTitle>
+                    <LoginInputTitle>
                         이메일
-                    </InputTitle>
-                    <Input
+                    </LoginInputTitle>
+                    <LoginInput
                         placeholder='예) abcd@gmail.com'
                         type='text'
                         value={email}
@@ -60,10 +60,10 @@ const Signup3 = ({ prevStep, nextStep }) => {
                     />
                     {emailError ? <ErrorMessage>{emailError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
 
-                    <InputTitle>
+                    <LoginInputTitle>
                         전화번호
-                    </InputTitle>
-                    <Input
+                    </LoginInputTitle>
+                    <LoginInput
                         placeholder='예) 010-1234-5678'
                         type='text'
                         value={phone}
@@ -74,7 +74,7 @@ const Signup3 = ({ prevStep, nextStep }) => {
                 <WhiteButtons>
                     <Button onClick={handleNext}>다음</Button>
                 </WhiteButtons>
-            </Form>
+            </LoginForm>
         </Wrapper>
     );
 };

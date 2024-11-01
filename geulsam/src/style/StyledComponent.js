@@ -1,6 +1,7 @@
 import { Page } from "react-pdf";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Notes from '../assets/images/notes.svg';
 
 //메인 페이지 로고 위치 조정
 export const Centering = styled.div`
@@ -21,6 +22,10 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
+background-image: url(${Notes});
+background-color: rgba(29, 28, 28, 1);
+background-position: center;
+background-repeat: no-repeat;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -149,6 +154,7 @@ width: 315px;
 font-family: 'MaruBuri-Regular';
 font-size: 18px;
 text-align: center;
+background-color:inherit;
 margin-bottom: 10px;
 `
 
@@ -184,6 +190,9 @@ margin-right: 20px;
 
 
 export const IntroductionTextarea = styled.textarea`
+ @media only screen and (max-width:1023px) {
+ width: 75dvw;
+}
 border: none;
 width: 350px;
 height: 190px;
@@ -1112,6 +1121,11 @@ export const Red = styled.span`
 color:rgba(255, 96, 88, 1);
 `
 export const Silver = styled.span`
+@media only screen and (max-width: 1023px) {
+    width: 90dvw; /* 작은 화면에서 더 작은 너비 */
+margin-right: 5dvw;
+
+  }
 color: rgba(171, 170, 170, 1);
 margin-right: 190px;
 `
@@ -1165,6 +1179,9 @@ border-radius:0 0 10px 10px ;
 
 //회원가입 폼 상단
 export const FormTop = styled.div`
+@media only screen and (max-width: 1023px) {
+    width: 90dvw; /* 작은 화면에서 더 작은 너비 */
+  }
 width: 408px;
 height: 57px;
 border-radius: 8.6px 8.6px 0 0;
@@ -1174,6 +1191,9 @@ align-items: center;
 box-shadow: 5px 1px 3px rgba(0,0,0, 0.1);
 `
 export const FormTopGray = styled.div`
+@media only screen and (max-width: 1023px) {
+    width: 90dvw; /* 작은 화면에서 더 작은 너비 */
+  }
 width: 408px;
 height: 57px;
 border-radius: 8.6px 8.6px 0 0;
@@ -1183,7 +1203,7 @@ background-color:rgba(234, 234, 234, 1) ;
 
 //회원가입 폼 하단
 export const WhiteButtons = styled.div`
-background-color: white;
+background-color: rgba(234, 234, 234, 1);
 width: 100%;
 height:75px ;
 display: flex;
@@ -1191,6 +1211,18 @@ align-items: center;
 justify-content:right;
 border-bottom-left-radius: 8.6px;
 border-bottom-right-radius: 8.6px;
+
+`
+export const RealWhiteButtons = styled.div`
+background-color: inherit;
+width: 100%;
+height:75px ;
+display: flex;
+align-items: center;
+justify-content:right;
+border-bottom-left-radius: 8.6px;
+border-bottom-right-radius: 8.6px;
+
 `
 //글자수 세기
 export const TextCounter = styled.div`
