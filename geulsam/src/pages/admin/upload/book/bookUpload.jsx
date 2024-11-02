@@ -1,35 +1,35 @@
 import React, { useState } from 'react';
 import { useForms } from '../../../../hooks/useForms';
 import {
-  Bookp,SmallTableInput,TableInput, Grayp, InputRow, Input, Inputs, InputTitle,
+  FlexContainer, Bookp, SmallTableInput, TableInput, Grayp, InputRow, Input, Inputs, InputTitle,
   Button, BookInfoContainer, BookTitle, RightSubmit, Red, InputsContainer, StyledTable, TableRow, TableHeader, TableCell
 } from '../../../../style/StyledComponent';
 import Resizer from "react-image-file-resizer";
 import { normalAPI } from '../../../../apis/Api';
 import { useAuth } from '../../../../store/Auth';
-import { useNavigate } from 'react-router-dom'; // 라우팅을 위해 추가
+import { useNavigate } from 'react-router-dom';
 
 const BookUpload = () => {
-const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { logout } = useAuth();
   const [title, onChangeTitle] = useForms();
   const [release, onChangeRelease] = useForms();
   const [designer, onChangeDesigner] = useForms();
   const [plate, onChangePlate] = useForms();
-  const [pageNumber, onChangePageNumber] = useForms();
+  const [pageNumber, setPageNumber] = useState(0); // 기본값을 0으로 설정
   const [bookCover, setBookCover] = useState(null);
-  const [bookCoverThumbnail, setBookCoverThumbnail] = useState();
   const [bookCoverUrl, setBookCoverUrl] = useState();
   const [backCover, setBackCover] = useState(null);
   const [backCoverUrl, setBackCoverUrl] = useState();
-  const [backCoverThumbnail, setBackCoverThumbnail] = useState();
   const [pdf, setPdf] = useState(null);
-  const [year, onChangeYear] = useForms();
-  
-  // 목차 등록하기 테이블 상태
+  const [year, setYear] = useState(0); // 기본값을 0으로 설정
   const [rows, setRows] = useState([{ pageNumber: '', author: '', title: '', error: '', showButton: true, workName: '', workId: '' }]);
-  const [loading, setLoading] = useState(false);
+  const [bookContentList, setBookContentList] = useState([]);
 
+  const addBookContent = (page, title, name, contentId) => {
+    const newContent = { page, title, name, contentId };
+    setBookContentList([...bookContentList, newContent]);
+  };
 
   const handleInputChange = (index, field, value) => {
     const updatedRows = [...rows];
@@ -43,14 +43,12 @@ const navigate = useNavigate();
 
   const handleFindWork = async (index, author, title) => {
     const accessToken = localStorage.getItem('access');
-    setLoading(true);
     try {
       const response = await normalAPI.get('/content/forBook', {
         params: { userName: author, contentTitle: title },
         headers: { 'accessToken': accessToken }
       });
-      const id = response.data.data; // Assuming the first ID is used
-      console.log(id);
+      const id = response.data.data;
       if (!id) {
         const updatedRows = [...rows];
         updatedRows[index].error = '현재 사이트에 게시되지 않은 작품입니다.';
@@ -61,7 +59,9 @@ const navigate = useNavigate();
           headers: { 'accessToken': accessToken }
         });
         const workData = workResponse.data;
-        console.log(workData);
+        if (workData) {
+          addBookContent(rows[index].pageNumber || 0, workData.title, author, id); // 기본값 0 사용
+        }
         const updatedRows = [...rows];
         updatedRows[index].workName = workData.title;
         updatedRows[index].workId = id;
@@ -69,13 +69,11 @@ const navigate = useNavigate();
         setRows(updatedRows);
       }
     } catch (error) {
-      console.error('Error fetching work:', error);
       const updatedRows = [...rows];
-      updatedRows[index].error = '작품을 찾는 중 오류가 발생했습니다.';
+      updatedRows[index].error = '현재 사이트에 게시되지 않은 작품입니다.';
       updatedRows[index].showButton = false;
       setRows(updatedRows);
     }
-    setLoading(false);
   };
 
   const handleRetry = (index) => {
@@ -88,9 +86,17 @@ const navigate = useNavigate();
   };
 
   const handleWorkClick = (id) => {
-    navigate(`/work/${id}`); // 작품 페이지로 이동
-  }
-  
+    navigate(`/work/${id}`);
+  };
+
+  const handleDelete = (index) => {
+    const updatedRows = [...rows];
+    updatedRows[index].workName = '';
+    updatedRows[index].workId = '';
+    updatedRows[index].showButton = true;
+    setRows(updatedRows);
+  };
+
   const resizeFile = (file) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
@@ -112,135 +118,68 @@ const navigate = useNavigate();
   };
 
   const onBookCoverChange = async (e) => {
-    try {
-      const selectedBookCoverFile = e.target.files[0];
+    const selectedBookCoverFile = e.target.files[0];
+    if (selectedBookCoverFile) {
+      const reader = new FileReader();
+      reader.onload = () => setBookCoverUrl(reader.result);
+      reader.readAsDataURL(selectedBookCoverFile);
       setBookCover(selectedBookCoverFile);
-
-      const resizedBookCover = await resizeFile(selectedBookCoverFile);
-      setBookCoverThumbnail(resizedBookCover);
-
-      const readerBookCover = new FileReader();
-      readerBookCover.onload = () => {
-        setBookCoverUrl(readerBookCover.result);
-      };
-      readerBookCover.readAsDataURL(resizedBookCover);
-
-      console.log(selectedBookCoverFile);
-      console.log(resizedBookCover);
-    } catch (err) {
-      console.log(err);
     }
   };
 
   const onBackCoverChange = async (e) => {
-    try {
-      const selectedBackCoverFile = e.target.files[0];
+    const selectedBackCoverFile = e.target.files[0];
+    if (selectedBackCoverFile) {
+      const reader = new FileReader();
+      reader.onload = () => setBackCoverUrl(reader.result);
+      reader.readAsDataURL(selectedBackCoverFile);
       setBackCover(selectedBackCoverFile);
-
-      const resizedBackCover = await resizeFile(selectedBackCoverFile);
-      setBackCoverThumbnail(resizedBackCover);
-
-      const readerBackCover = new FileReader();
-      readerBackCover.onload = () => {
-        setBackCoverUrl(readerBackCover.result);
-      };
-      readerBackCover.readAsDataURL(resizedBackCover);
-
-      console.log(selectedBackCoverFile);
-      console.log(resizedBackCover);
-    } catch (err) {
-      console.log(err);
     }
   };
 
   const onClickUpload = async (e) => {
-    const suppertedFormats = ["image/jpeg", "image/png", "image/svg+xml"];
     e.preventDefault();
-    if (!bookCover || !backCover) {
-      alert("파일을 선택해주세요.");
-      return;
-    }
-    if (!suppertedFormats.includes(bookCover.type) || !suppertedFormats.includes(backCover.type)) {
-      alert("지원되지 않은 이미지 형식입니다. JPEG, PNG형식의 이미지를 업로드해주세요.");
-      return;
-    }
 
+    // Prepare data for JSON payload
+    const data = {
+      title,
+      release,
+      designer,
+      plate,
+      pageNumber: pageNumber || 0, // 기본값 0 설정
+      year: year || 0, // 기본값 0 설정
+      bookContentList: bookContentList.length > 0 ? bookContentList : [],
+    };
+
+    // Handle file uploads separately
     const formData = new FormData();
-    if (bookCover !== null) {
-      formData.append('bookCover', bookCover);
-    }
-    if (bookCoverThumbnail !== null) {
-      formData.append('bookCoverThumbnail', bookCoverThumbnail);
-    }
-    if (backCover !== null) {
-      formData.append('backCover', backCover);
-    }
-    if (backCoverThumbnail !== null) {
-      formData.append('backCoverThumbnail', backCoverThumbnail);
-    }
-    if (pdf !== null) {
-      formData.append('pdf', pdf);
-    }
-    if (designer !== null) {
-      formData.append('designer', designer);
-    }
-    if (plate !== null) {
-      formData.append('plate', plate);
-    }
-    if (pageNumber !== null) {
-      formData.append('pageNumber', pageNumber);
-    }
-    if (year !== null) {
-      formData.append('year', year);
-    }
-    if (release !== null) {
-      formData.append('release', release);
-    }
-    if (title !== null) {
-      formData.append('title', title);
-    }
+    if (bookCover) formData.append('bookCover', bookCover);
+    if (backCover) formData.append('backCover', backCover);
+    if (pdf) formData.append('pdf', pdf);
 
     const accessToken = localStorage.getItem('access');
-    const refreshToken = localStorage.getItem('refresh');
 
     try {
-      const res = await normalAPI.post('/book', formData, {
+      // Upload metadata first
+      const res = await normalAPI.post('/book', data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'accessToken': accessToken,
+        },
+      });
+
+      // Upload files
+      await normalAPI.post('/book/uploadFiles', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'accessToken': accessToken
-        }
+          'accessToken': accessToken,
+        },
       });
-      console.log(res);
+
       alert('게시에 성공했습니다.');
     } catch (error) {
-      if (error.response && error.response.status === 403) {
-        console.log('토큰 재전송');
-        try {
-          const tokenResponse = await normalAPI.post('/book', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'refreshToken': refreshToken,
-            }
-          });
-          console.log(tokenResponse);
-          if (tokenResponse.status === 200) {
-            const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '');
-            localStorage.setItem('access', newAccessToken);
-            if (tokenResponse.headers.refreshtoken) {
-              const newRefreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
-              localStorage.setItem('refresh', newRefreshToken);
-            }
-            alert('포스터를 성공적으로 게시했습니다.');
-          }
-        } catch (err) {
-          console.error('Refresh Token Error:', err);
-          alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
-          logout();
-        }
-      } else {
-        console.error('Error:', error);
-        alert('게시 중 문제가 발생했습니다.');
-      }
+      console.error('Error:', error);
+      alert('게시 중 문제가 발생했습니다.');
     }
   };
 
@@ -260,21 +199,31 @@ const navigate = useNavigate();
             </div>
             <div>
               <InputTitle>디자인</InputTitle>
-              <Input value={designer} onChange={onChangeDesigner} placeholder='예) 피카소 ' />
+              <Input value={designer} onChange={onChangeDesigner} placeholder='예) 피카소' />
             </div>
           </InputRow>
           <InputRow>
             <div>
               <InputTitle>년도</InputTitle>
-              <Input value={year} onChange={onChangeYear} placeholder='예) 2025 ' />
+              <Input
+                type="number"
+                value={year}
+                onChange={(e) => setYear(e.target.value ? parseInt(e.target.value, 10) : 0)}
+                placeholder='예) 2025'
+              />
             </div>
             <div>
               <InputTitle>판형</InputTitle>
-              <Input value={plate} onChange={onChangePlate} placeholder='예)B6' />
+              <Input value={plate} onChange={onChangePlate} placeholder='예) B6' />
             </div>
             <div>
               <InputTitle>쪽수</InputTitle>
-              <Input value={pageNumber} onChange={onChangePageNumber} placeholder='예)370' />
+              <Input
+                type="number"
+                value={pageNumber}
+                onChange={(e) => setPageNumber(e.target.value ? parseInt(e.target.value, 10) : 0)}
+                placeholder='예) 370'
+              />
             </div>
           </InputRow>
         </InputsContainer>
@@ -309,9 +258,9 @@ const navigate = useNavigate();
       <hr />
       <br />
       <InputTitle>목차 등록하기</InputTitle>
-      <br/>
+      <br />
       <p>특정 작가의 작품이 아닌 목차의 경우 작가란을 공란으로 남겨두세요.</p>
-      <br/>
+      <br />
       <Grayp>(단, 작품 페이지는 작가/제목을 전부 작성해야 연결할 수 있습니다.)</Grayp>
       <StyledTable>
         <thead>
@@ -327,8 +276,9 @@ const navigate = useNavigate();
             <TableRow key={index}>
               <TableCell>
                 <SmallTableInput
+                  type="number"
                   value={row.pageNumber}
-                  onChange={(e) => handleInputChange(index, 'pageNumber', e.target.value)}
+                  onChange={(e) => handleInputChange(index, 'pageNumber', e.target.value ? parseInt(e.target.value, 10) : 0)}
                   placeholder="쪽수 입력"
                 />
               </TableCell>
@@ -352,19 +302,17 @@ const navigate = useNavigate();
                     작품 찾기
                   </Button>
                 ) : (
-                  <>
+                  <FlexContainer>
                     {row.error ? (
                       <Red>{row.error}</Red>
                     ) : (
-                      <Bookp
-                        onClick={() => handleWorkClick(row.workId)}
-                      >
+                      <Bookp onClick={() => handleWorkClick(row.workId)}>
                         {row.author} - {row.title}
                       </Bookp>
                     )}
                     <Grayp onClick={() => handleRetry(index)}>다시 찾기</Grayp>
-                  </>
-                  
+                    <Grayp onClick={() => handleDelete(index)}>연결 끊기</Grayp>
+                  </FlexContainer>
                 )}
               </TableCell>
             </TableRow>

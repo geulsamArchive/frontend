@@ -111,8 +111,12 @@ font-weight:bold;
 
 export const Grayp = styled.p`
 color : gray;
+display:flex;
 `
-
+export const FlexContainer = styled.div`
+  display: flex;
+  gap: 10px; /* 요소 사이의 간격 조절 */
+`;
 export const LoginForm = styled.div`
  @media only screen and (max-width: 1023px) {
     width: 90dvw; /* 작은 화면에서 더 작은 너비 */
