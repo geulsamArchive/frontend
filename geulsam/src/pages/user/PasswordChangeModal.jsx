@@ -7,7 +7,7 @@ import { ModalTop } from '../../style/Critic';
 import PasswordChangeModal2 from './PasswordChangeModal2';
 
 import {
-    ErrorMessage, Wrapper, Title, Form, Input, Inputs,
+    LoginForm,ErrorMessage, Wrapper, Title, Form, Input, Inputs,
     Button, InputTitle, Buttons
 } from '../../style/StyledComponent';
 
@@ -22,8 +22,11 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
             backgroundColor: 'inherit',
         },
         content: {
-            width: '408px',
-            height: '486px',
+           background:'inherit',
+           flexDirection:'column',
+           height: '100dvh',
+            width: '100dvw',
+            backgroundPosition:'center',
             border: 'none',
             display: 'flex',
             justifyContent: 'center',
@@ -33,6 +36,15 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
             fontFamily: 'MaruBuri-Regular',
             filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))', //transform: 'scale(0.4)',
         }
+        // background-color: rgba(29, 28, 28, 1);
+        // background-position: center;
+        // background-repeat: no-repeat;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // height: 100dvh;
+        // width: 100dvw;
+        // font-family: 'MaruBuri-Regular';
     };
     const onClick = async () => {
         let valid = true;
@@ -112,8 +124,8 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
                 contentLabel="비밀번호 변경"
                 style={modalStyles}
             >
-                <div>
-                    <Form>
+                
+                    <LoginForm>
                         <Title>비밀번호 변경</Title>
                         <Inputs>
                             <InputTitle>기존 비밀번호</InputTitle>
@@ -124,8 +136,8 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
                             <Button onClick={onClick}>변경하기</Button>
                             <Button onClick={closeModal}>닫기</Button>
                         </Buttons>
-                    </Form>
-                </div>
+                    </LoginForm>
+                
             </Modal>
             <PasswordChangeModal2
                 isModalOpen={isModal2Open}
