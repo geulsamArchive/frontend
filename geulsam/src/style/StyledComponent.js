@@ -1414,6 +1414,61 @@ export const StyledTable = styled.table`
     margin-top: 20px;
 `;
 
+export const BookStyledTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* 입력 필드를 테이블 헤더 아래에 배치하기 위해 각 행을 열 구조로 변경 */
+@media only screen and (max-width: 1023px) {
+    th, td {
+      display: block; /* 각 헤더와 데이터 셀이 세로로 쌓이게 설정 */
+      width: 100%; /* 블록 요소로 설정하여 너비 100% 차지 */
+    }
+
+    th {
+      margin-top: 20px; /* 헤더 간의 간격 조정 */
+    }
+  }
+`;
+
+export const BookIndex = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width: auto; /* 글자 수에 따라 크기가 조절됨 */
+  white-space: nowrap; /* 글자가 줄 바꿈되지 않도록 설정 */height: 36px;
+background-color: rgba(234, 233, 227, 1);
+&:hover{
+  background-color: rgba(255, 239, 155, 255);
+}
+  color: black;pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+`;
+
+
+export const BookIndexList = styled.div`
+  flex: 1; /* 인덱스가 차지하는 비율 */
+  display: flex;
+  position:absolute;
+  top:48%;
+  right:25%;
+  flex-direction: column;
+  align-items: flex-end; /* 인덱스를 더 오른쪽으로 정렬 */
+  max-height: 100dvh; /* 뷰포트 높이에 맞게 설정 */
+  overflow-y: auto; /* 긴 내용은 스크롤 가능 */
+  padding: 10px;
+  margin-left: auto; /* 여유 공간을 왼쪽에 두어 요소가 더 오른쪽으로 이동 */
+`;
+
 export const TableHeader = styled.th`
     background-color: inherit;
     padding: 12px;

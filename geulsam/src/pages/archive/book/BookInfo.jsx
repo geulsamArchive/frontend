@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PDFView from '../../../components/pdf/PDFView';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ViewerAndLinks, BookInfoContainer, BookTitle, BookInfos, BookInfoContents, BookInfoAndButton, BookButtons, URLButton, NoneLinkBookInfos } from '../../../style/StyledComponent';
+import { BookIndex, BookIndexList, ViewerAndLinks, BookInfoContainer, BookTitle, BookInfos, BookInfoContents, BookInfoAndButton, BookButtons, URLButton, NoneLinkBookInfos } from '../../../style/StyledComponent';
 import CopyURL from '../../../components/CopyURL/CopyURL';
 import PDFDownload from '../../../components/Download/PDFDownload';
 import { normalAPI } from '../../../apis/Api';
@@ -11,6 +11,7 @@ const BookInfo = () => {
     const [bookData, setBooktData] = useState({})
     const [loading, setLoading] = useState(true)
     const { bookId } = useParams()
+    const [bookIndexList, setBookIndexList] = useState([]);
 
 
     const navigate = useNavigate();
@@ -23,11 +24,18 @@ const BookInfo = () => {
             const resp = await normalAPI.get(`/book/${bookId}`)
             console.log(resp.data)
             setBooktData(resp.data.data);
+            setBookIndexList(resp.data.data.bookContentResList)
             setLoading(false);
         } catch (error) {
             console.error('api fetching error', error)
         }
     }
+
+    const handleWorkClick = (id) => {
+        navigate(`/work/${id}`); // 작품 페이지로 이동
+    }
+
+
 
     useEffect(() => {
         getBookData()
@@ -77,6 +85,15 @@ const BookInfo = () => {
                     </BookButtons>
                 </Desktop>
             </BookInfoAndButton>
+            <BookIndexList>
+                {bookIndexList.map((book) => (
+                    <BookIndex key={book.bookContentId} onClick={() => handleWorkClick(book.bookContentId)}>
+                        {book.page}&nbsp;&nbsp;{book.name}&nbsp; &middot; &nbsp;{book.title}
+                    </BookIndex>
+                ))}
+            </BookIndexList>
+
+
             <Mobile>
                 <PDFDownload PDFLink={bookData.url} />
                 <CopyURL />
