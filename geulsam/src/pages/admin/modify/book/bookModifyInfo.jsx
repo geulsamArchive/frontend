@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForms } from '../../../../hooks/useForms';
-import { InputsContainer, InputRow, Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit, Red } from '../../../../style/StyledComponent';
+import { BookStyledTable, TableHeader, TableRow, TableCell, FlexContainer, Bookp, SmallTableInput, TableInput, Grayp, InputsContainer, InputRow, Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit, Red } from '../../../../style/StyledComponent';
 import Resizer from "react-image-file-resizer";
 import { normalAPI } from '../../../../apis/Api';
 
@@ -24,11 +24,112 @@ const BookUpload = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    // 목차 등록하기 테이블 상태
+    const [rows, setRows] = useState([{ pageNumber: '', author: '', title: '', error: '', showButton: true, workName: '', workId: '' }]);
+    const [bookContentList, setBookContentList] = useState([]);
+
+    const addBookContent = (bookContentId, title, name, page) => {
+        const contentId = bookContentId[0];
+        const newContent = { contentId, title, name, page };
+        console.log(contentId, title, name, page);
+        console.log(newContent);
+        setBookContentList([...bookContentList, newContent]);
+    };
+
+    const handleInputChange = (index, field, value) => {
+        const updatedRows = [...rows];
+        updatedRows[index][field] = value;
+        setRows(updatedRows);
+    };
+
+    const addRow = () => {
+        setRows([...rows, { pageNumber: '', author: '', title: '', error: '', showButton: true, workName: '', workId: '' }]);
+    };
+
+    const handleFindWork = async (index, author, title, page) => {
+        const accessToken = localStorage.getItem('access');
+        setLoading(true);
+        try {
+            const response = await normalAPI.get('/content/forBook', {
+                params: { userName: author, contentTitle: title },
+                headers: { 'accessToken': accessToken }
+            });
+            const id = response.data.data; // Assuming the first ID is used
+            console.log(id);
+
+            if (!id) {
+                const updatedRows = [...rows];
+                updatedRows[index].error = '현재 사이트에 게시되지 않은 작품입니다.';
+                updatedRows[index].showButton = false;
+                setRows(updatedRows);
+            } else {
+                const workResponse = await normalAPI.get(`/content/${id}`, {
+                    headers: { 'accessToken': accessToken }
+                });
+                const workData = workResponse.data;
+                console.log(workData);
+                if (workData) {
+                    console.log(id, title, author, page);
+                    addBookContent(id, title, author, page); // 데이터 추가
+                }
+                const updatedRows = [...rows];
+                updatedRows[index].workName = workData.title;
+                updatedRows[index].workId = id;
+                updatedRows[index].showButton = false;
+                setRows(updatedRows);
+            }
+        } catch (error) {
+            console.error('Error fetching work:', error);
+            const updatedRows = [...rows];
+            updatedRows[index].error = '현재 사이트에 게시되지 않은 작품입니다.';
+            updatedRows[index].showButton = false;
+            setRows(updatedRows);
+        }
+        setLoading(false);
+    };
+
+    const handleRetry = (index) => {
+        const updatedRows = [...rows];
+        updatedRows[index].error = '';
+        updatedRows[index].showButton = true;
+        updatedRows[index].workName = '';
+        updatedRows[index].workId = '';
+        setRows(updatedRows);
+    };
+
+    const handleWorkClick = (id) => {
+        navigate(`/work/${id}`); // 작품 페이지로 이동
+    }
+
+    const handleDelete = (index) => {
+        const updatedRows = [...rows];
+        updatedRows[index].workName = '';
+        updatedRows[index].workId = '';
+        updatedRows[index].showButton = true; // "작품 찾기" 버튼을 다시 표시
+        setRows(updatedRows);
+    };
+
     const getBookData = async () => {
         try {
             const resp = await normalAPI.get(`/book/${bookId}`);
             console.log(resp.data);
             setBooktData(resp.data.data);
+            const fetchedData = resp.data.data;
+            setBooktData(fetchedData);
+            if (fetchedData.bookContentResList) {
+                const updatedRows = fetchedData.bookContentResList.map((content) => ({
+                    page: content.page,
+                    author: content.name,
+                    title: content.title,
+                    workName: content.title,
+                    workId: content.bookContentId,
+                    error: '',
+                    showButton: false // 이미 연결된 작품이므로 버튼 비활성화
+                }));
+                setRows(updatedRows);
+            }
+
+
             setLoading(false);
         } catch (error) {
             console.error('api fetching error', error);
@@ -158,6 +259,12 @@ const BookUpload = () => {
         if (title !== null) {
             formData.append('title', title);
         }
+        if (bookContentList !== null) {
+            console.log(bookContentList);
+            console.log(JSON.stringify(bookContentList));
+            formData.append('bookContentList', JSON.stringify(bookContentList));
+        }//JSON.stringify(bookContentList)
+
         const accessToken = localStorage.getItem('access');
         //https://geulsaem.store/book?field=id&search=dssda-sdfasdf-dsafdasf-asdfdsa
         ///book?field=${field}&search=${search}
@@ -274,6 +381,75 @@ const BookUpload = () => {
                     <Input type='file' onChange={onChangePdf} />
                 </div>
             </Inputs>
+            <hr />
+            <br />
+            <InputTitle>목차 등록하기</InputTitle>
+            <br />
+            <p>특정 작가의 작품이 아닌 목차의 경우 작가란을 공란으로 남겨두세요.</p>
+            <br />
+            <Grayp>(단, 작품 페이지는 작가/제목을 전부 작성해야 연결할 수 있습니다.)</Grayp>
+            <BookStyledTable>
+                <thead>
+                    <TableRow>
+                        <TableHeader>쪽수</TableHeader>
+                        <TableHeader>작가</TableHeader>
+                        <TableHeader>제목</TableHeader>
+                        <TableHeader>작품 페이지 연결</TableHeader>
+                    </TableRow>
+                </thead>
+                <tbody>
+                    {rows.map((row, index) => (
+                        <TableRow key={index}>
+                            <TableCell>
+                                <SmallTableInput
+                                    value={row.page}
+                                    onChange={(e) => handleInputChange(index, 'page', e.target.value)}
+                                    placeholder="쪽수 입력"
+                                />
+                            </TableCell>
+                            <TableCell>
+                                <SmallTableInput
+                                    value={row.author}
+                                    onChange={(e) => handleInputChange(index, 'author', e.target.value)}
+                                    placeholder="작가 입력"
+                                />
+                            </TableCell>
+                            <TableCell>
+                                <TableInput
+                                    value={row.title}
+                                    onChange={(e) => handleInputChange(index, 'title', e.target.value)}
+                                    placeholder="제목 입력"
+                                />
+                            </TableCell>
+                            <TableCell>
+                                {row.showButton ? (
+                                    <Button onClick={() => handleFindWork(index, row.author, row.title, row.page)}>
+                                        작품 찾기
+                                    </Button>
+                                ) : (
+                                    <>
+                                        <FlexContainer>
+                                            {row.error ? (
+                                                <Red>{row.error}</Red>
+                                            ) : (
+                                                <Bookp
+                                                    onClick={() => handleWorkClick(row.workId)}
+                                                >
+                                                    {row.author}  &middot; {row.title}
+                                                </Bookp>
+                                            )}
+                                            <Grayp onClick={() => handleRetry(index)}>다시 찾기</Grayp>
+                                            <Grayp onClick={() => handleDelete(index)}>연결 끊기</Grayp>
+                                        </FlexContainer>
+                                    </>
+
+                                )}
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </tbody>
+            </BookStyledTable>
+            <Button onClick={addRow}>행 추가</Button>
             <RightSubmit>
                 <Button type='submit' onClick={onClickUpload}>수정하기</Button>
                 <Button type='button' onClick={onClickDelete}>삭제하기</Button>

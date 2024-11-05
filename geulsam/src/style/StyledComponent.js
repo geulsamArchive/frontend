@@ -1452,6 +1452,7 @@ background-color: rgba(234, 233, 227, 1);
   color: black;pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
 cursor: pointer;
 margin-right: 23px;
+margin-bottom:10px;
 `;
 
 
@@ -1460,9 +1461,9 @@ export const BookIndexList = styled.div`
   display: flex;
   position:absolute;
   top:48%;
-  right:25%;
+  right:20%;
   flex-direction: column;
-  align-items: flex-end; /* 인덱스를 더 오른쪽으로 정렬 */
+  align-items: flex-start; /* 인덱스를 더 오른쪽으로 정렬 */
   max-height: 100dvh; /* 뷰포트 높이에 맞게 설정 */
   overflow-y: auto; /* 긴 내용은 스크롤 가능 */
   padding: 10px;
