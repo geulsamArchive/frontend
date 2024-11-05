@@ -4,7 +4,7 @@ import { normalAPI } from '../../../apis/Api';
 import { BookButtons, BookInfos, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookTitle, URLButton, NoneLinkBookInfos } from '../../../style/StyledComponent';
 import PDFDownload from '../../../components/Download/PDFDownload';
 import CopyURL from '../../../components/CopyURL/CopyURL';
-import { WorkButtons, WorkLink, WorkReaderLink, WorkSentence, WorkSentenceContainer } from '../../../style/Works';
+import { MobileWorkButtons, WorkButtons, WorkLink, WorkReaderLink, WorkSentence, WorkSentenceContainer } from '../../../style/Works';
 import Comments from '../../../components/Comment/Comments';
 import NovelViewer from '../viewer/NovelViewer';
 import axios from 'axios';
@@ -176,11 +176,16 @@ const WorkInfo = () => {
                     </Desktop>
                 </BookInfoAndButton>
                 <Mobile>
-                    <PDFDownload PDFLink={workData.pdf} />
-                    <CopyURL />
-                    <URLButton onClick={onClickList}>
-                        목록
-                    </URLButton>
+                    <MobileWorkButtons>
+                        <PDFDownload PDFLink={workData.pdf} />
+                        <br />
+                        <CopyURL />
+                        <br />
+                        <URLButton onClick={onClickList}>
+                            목록
+                        </URLButton>
+                        <br />
+                    </MobileWorkButtons>
                 </Mobile>
             </BookInfoContainer>
             <Modal

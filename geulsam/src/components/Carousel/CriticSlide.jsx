@@ -185,7 +185,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
                 }
             } else {
                 console.error('Error:', error);
-                alert('신청 중 문제가 발생했습니다.');
+                alert(error.response.data.message);
             }
         }
     };

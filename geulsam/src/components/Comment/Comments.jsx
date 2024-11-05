@@ -5,8 +5,9 @@ import { useForms } from '../../hooks/useForms';
 import { useAuth } from '../../store/Auth';
 import { normalAPI } from '../../apis/Api';
 import Pagination from '../Paging/Pagination';
-import { CommentInput, TextCounter, CommentInputBottom, CommentInputContainer, CommentContainer, CommentWriter, CommentWriting, CommentTop, CommentCreatedAt, CommentDelete } from '../../style/Comment';
+import { CommentInput, TextCounter, CommentInputBottom, CommentInputContainer, CommentContainer, CommentWriter, CommentWriting, CommentTop, CommentCreatedAt, CommentDelete, CommentsContainer, Upload } from '../../style/Comment';
 import { Button } from '../../style/StyledComponent';
+import { Mobile } from '../../hooks/useMediaQuery';
 
 export const Accordion = ({ name, content: ContentComponent, contentId }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -107,45 +108,48 @@ export const GuestBook = ({ contentId }) => {
     }
 
     const deleteComment = async (id) => {
-        const accesstoken = localStorage.getItem('access')
-        const refreshToken = localStorage.getItem('refresh')
+        if (window.confirm('정말 댓글을 삭제하시겠습니까?')) {
 
-        try {
-            const response = await normalAPI.delete(`/guestBook?id=${id}`, {
-                headers: {
-                    'accessToken': accesstoken,
-                },
-            });
-            console.log('서버 응답:', response.data);
-            alert('독자 후기를 성공적으로 삭제했습니다.')
-            getGuestBookList();
-        } catch (error) {
-            if (error.response && error.response.status === 403) {
-                console.log('토큰 재전송');
-                try {
-                    const tokenResponse = await normalAPI.delete(`/guestBook?id=${id}`,
-                        {
-                            headers: {
-                                'refreshToken': refreshToken,
-                            },
-                        });
-                    console.log(tokenResponse);
-                    const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
-                    localStorage.setItem('access', newAccessToken)
-                    if (tokenResponse.headers.refreshtoken) {
-                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
-                        localStorage.setItem('refresh', refreshToken);
+            const accesstoken = localStorage.getItem('access')
+            const refreshToken = localStorage.getItem('refresh')
+
+            try {
+                const response = await normalAPI.delete(`/guestBook?id=${id}`, {
+                    headers: {
+                        'accessToken': accesstoken,
+                    },
+                });
+                console.log('서버 응답:', response.data);
+                alert('독자 후기를 성공적으로 삭제했습니다.')
+                getGuestBookList();
+            } catch (error) {
+                if (error.response && error.response.status === 403) {
+                    console.log('토큰 재전송');
+                    try {
+                        const tokenResponse = await normalAPI.delete(`/guestBook?id=${id}`,
+                            {
+                                headers: {
+                                    'refreshToken': refreshToken,
+                                },
+                            });
+                        console.log(tokenResponse);
+                        const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                        localStorage.setItem('access', newAccessToken)
+                        if (tokenResponse.headers.refreshtoken) {
+                            const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                            localStorage.setItem('refresh', refreshToken);
+                        }
+                        alert('독자 후기를 성공적으로 삭제했습니다.')
+                        getGuestBookList();
+                    } catch (err) {
+                        console.error('Refresh Token Error:', err);
+                        alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                        logout();
                     }
-                    alert('독자 후기를 성공적으로 삭제했습니다.')
-                    getGuestBookList();
-                } catch (err) {
-                    console.error('Refresh Token Error:', err);
-                    alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
-                    logout();
+                } else {
+                    console.error('Error:', error);
+                    alert('삭제 중 문제가 발생했습니다.');
                 }
-            } else {
-                console.error('Error:', error);
-                alert('삭제 중 문제가 발생했습니다.');
             }
         }
     }
@@ -164,8 +168,17 @@ export const GuestBook = ({ contentId }) => {
                     </TextCounter>
                     <Button onClick={onClickUpload}>게시하기</Button>
                 </CommentInputBottom>
+                <Mobile>
+                    <Upload>
+                        <svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={onClickUpload}>
+                            <path d="M1.73426 2.99711L1.04635 2.6466H1.04635L1.73426 2.99711ZM1.32673 9.67969V10.4517C1.75313 10.4517 2.09879 10.1061 2.09879 9.67969H1.32673ZM1.32666 9.67969V8.90763C0.900264 8.90763 0.554601 9.25329 0.554601 9.67969H1.32666ZM2.2841 19.9393L2.83003 20.4853L2.83003 20.4853L2.2841 19.9393ZM6.31175 15.9117V15.1396C6.10699 15.1396 5.91062 15.221 5.76583 15.3657L6.31175 15.9117ZM19.2267 15.5041L18.8762 14.8162L19.2267 15.5041ZM20.8607 13.8701L20.1728 13.5196L20.8607 13.8701ZM20.8607 2.99711L20.1728 3.34762V3.34762L20.8607 2.99711ZM19.2267 1.3631L19.5772 0.675186L19.5772 0.675186L19.2267 1.3631ZM3.36828 1.3631L3.01777 0.675186L3.01777 0.675186L3.36828 1.3631ZM2.09879 6.938C2.09879 5.87824 2.09939 5.12985 2.14717 4.54509C2.19421 3.96935 2.28311 3.62055 2.42217 3.34762L1.04635 2.6466C0.777888 3.17349 0.66302 3.74812 0.608178 4.41935C0.554073 5.08157 0.554673 5.90372 0.554673 6.938H2.09879ZM2.09879 9.67969V6.938H0.554673V9.67969H2.09879ZM1.32673 8.90763H1.32666V10.4517H1.32673V8.90763ZM0.554601 9.67969V15.9114H2.09872V9.67969H0.554601ZM0.554601 15.9114V19.5427H2.09872V15.9114H0.554601ZM0.554601 19.5427C0.554601 20.7302 1.99034 21.3249 2.83003 20.4853L1.73817 19.3934C1.87122 19.2604 2.09872 19.3546 2.09872 19.5427H0.554601ZM2.83003 20.4853L6.85768 16.4576L5.76583 15.3657L1.73817 19.3934L2.83003 20.4853ZM15.2858 15.1396H6.31175V16.6837H15.2858V15.1396ZM18.8762 14.8162C18.6032 14.9553 18.2544 15.0442 17.6787 15.0912C17.0939 15.139 16.3455 15.1396 15.2858 15.1396V16.6837C16.32 16.6837 17.1422 16.6843 17.8044 16.6302C18.4757 16.5754 19.0503 16.4605 19.5772 16.192L18.8762 14.8162ZM20.1728 13.5196C19.8883 14.0779 19.4344 14.5318 18.8762 14.8162L19.5772 16.192C20.426 15.7596 21.1161 15.0694 21.5486 14.2206L20.1728 13.5196ZM20.4961 9.92923C20.4961 10.989 20.4955 11.7374 20.4478 12.3221C20.4007 12.8979 20.3118 13.2467 20.1728 13.5196L21.5486 14.2206C21.817 13.6937 21.9319 13.1191 21.9868 12.4479C22.0409 11.7857 22.0403 10.9635 22.0403 9.92923H20.4961ZM20.4961 6.93801V9.92923H22.0403V6.93801H20.4961ZM20.1728 3.34762C20.3118 3.62055 20.4007 3.96935 20.4478 4.54509C20.4955 5.12985 20.4961 5.87824 20.4961 6.93801H22.0403C22.0403 5.90372 22.0409 5.08157 21.9868 4.41935C21.9319 3.74812 21.817 3.17349 21.5486 2.6466L20.1728 3.34762ZM18.8762 2.05101C19.4344 2.33546 19.8883 2.78935 20.1728 3.34762L21.5486 2.6466C21.1161 1.79779 20.426 1.10768 19.5772 0.675186L18.8762 2.05101ZM15.2858 1.72763C16.3455 1.72763 17.0939 1.72823 17.6787 1.776C18.2544 1.82304 18.6032 1.91194 18.8762 2.05101L19.5772 0.675186C19.0503 0.406723 18.4757 0.291855 17.8044 0.237013C17.1422 0.182907 16.32 0.183508 15.2858 0.183508V1.72763ZM7.30917 1.72763H15.2858V0.183508H7.30917V1.72763ZM3.71878 2.05101C3.99171 1.91194 4.34051 1.82304 4.91626 1.776C5.50102 1.72823 6.24941 1.72763 7.30917 1.72763V0.183508C6.27489 0.183508 5.45274 0.182907 4.79052 0.237013C4.11928 0.291855 3.54466 0.406723 3.01777 0.675186L3.71878 2.05101ZM2.42217 3.34762C2.70662 2.78935 3.16051 2.33546 3.71878 2.05101L3.01777 0.675186C2.16895 1.10768 1.47884 1.79779 1.04635 2.6466L2.42217 3.34762Z" fill="#ABAAAA" />
+                            <path d="M6.31201 5.94043L16.2827 5.94043" stroke="#ABAAAA" stroke-width="1.85294" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6.31201 10.9263L12.5437 10.9263" stroke="#ABAAAA" stroke-width="1.85294" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </Upload>
+                </Mobile>
             </CommentInputContainer>
-            <div>
+            <CommentsContainer>
                 {GuestBookList?.map((comment) => (
                     <>
                         <CommentContainer>
@@ -193,9 +206,8 @@ export const GuestBook = ({ contentId }) => {
                         </CommentContainer>
                     </>
                 ))}
-            </div>
+            </CommentsContainer>
             <Pagination isDark='true' page={page} totalPage={totalPage} onChangePage={setPage} />
-
         </div>
     )
 }
@@ -256,7 +268,7 @@ const Comment = ({ contentId }) => {
                 }
             } else {
                 console.error('Error:', error);
-                alert('게시 중 문제가 발생했습니다.');
+                alert(error.response.data.message);
             }
         }
     }
@@ -273,45 +285,48 @@ const Comment = ({ contentId }) => {
     }
 
     const deleteComment = async (id) => {
-        const accesstoken = localStorage.getItem('access')
-        const refreshToken = localStorage.getItem('refresh')
+        if (window.confirm("정말 댓글을 삭제하시겠습니까?")) {
 
-        try {
-            const response = await normalAPI.delete(`/comment?commentId=${id}`, {
-                headers: {
-                    'accessToken': accesstoken,
-                },
-            });
-            console.log('서버 응답:', response.data);
-            alert('독자 후기를 성공적으로 삭제했습니다.')
-            getCommentList()
-        } catch (error) {
-            if (error.response && error.response.status === 403) {
-                console.log('토큰 재전송');
-                try {
-                    const tokenResponse = await normalAPI.delete(`/comment?commentId=${id}`,
-                        {
-                            headers: {
-                                'refreshToken': refreshToken,
-                            },
-                        });
-                    console.log(tokenResponse);
-                    const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
-                    localStorage.setItem('access', newAccessToken)
-                    if (tokenResponse.headers.refreshtoken) {
-                        const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
-                        localStorage.setItem('refresh', refreshToken);
+            const accesstoken = localStorage.getItem('access')
+            const refreshToken = localStorage.getItem('refresh')
+
+            try {
+                const response = await normalAPI.delete(`/comment?commentId=${id}`, {
+                    headers: {
+                        'accessToken': accesstoken,
+                    },
+                });
+                console.log('서버 응답:', response.data);
+                alert('독자 후기를 성공적으로 삭제했습니다.')
+                getCommentList()
+            } catch (error) {
+                if (error.response && error.response.status === 403) {
+                    console.log('토큰 재전송');
+                    try {
+                        const tokenResponse = await normalAPI.delete(`/comment?commentId=${id}`,
+                            {
+                                headers: {
+                                    'refreshToken': refreshToken,
+                                },
+                            });
+                        console.log(tokenResponse);
+                        const newAccessToken = tokenResponse.headers.accesstoken.replace('Bearer ', '')
+                        localStorage.setItem('access', newAccessToken)
+                        if (tokenResponse.headers.refreshtoken) {
+                            const refreshToken = tokenResponse.headers.refreshtoken.replace('Bearer ', '');
+                            localStorage.setItem('refresh', refreshToken);
+                        }
+                        alert('독자 후기를 성공적으로 삭제했습니다.')
+                        getCommentList();
+                    } catch (err) {
+                        console.error('Refresh Token Error:', err);
+                        alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+                        logout();
                     }
-                    alert('독자 후기를 성공적으로 삭제했습니다.')
-                    getCommentList();
-                } catch (err) {
-                    console.error('Refresh Token Error:', err);
-                    alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
-                    logout();
+                } else {
+                    console.error('Error:', error);
+                    alert(error.response.data.message);
                 }
-            } else {
-                console.error('Error:', error);
-                alert('삭제 중 문제가 발생했습니다.');
             }
         }
     }
@@ -330,8 +345,17 @@ const Comment = ({ contentId }) => {
                     </TextCounter>
                     <Button onClick={onClickUpload}>게시하기</Button>
                 </CommentInputBottom>
+                <Mobile>
+                    <Upload>
+                        <svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={onClickUpload}>
+                            <path d="M1.73426 2.99711L1.04635 2.6466H1.04635L1.73426 2.99711ZM1.32673 9.67969V10.4517C1.75313 10.4517 2.09879 10.1061 2.09879 9.67969H1.32673ZM1.32666 9.67969V8.90763C0.900264 8.90763 0.554601 9.25329 0.554601 9.67969H1.32666ZM2.2841 19.9393L2.83003 20.4853L2.83003 20.4853L2.2841 19.9393ZM6.31175 15.9117V15.1396C6.10699 15.1396 5.91062 15.221 5.76583 15.3657L6.31175 15.9117ZM19.2267 15.5041L18.8762 14.8162L19.2267 15.5041ZM20.8607 13.8701L20.1728 13.5196L20.8607 13.8701ZM20.8607 2.99711L20.1728 3.34762V3.34762L20.8607 2.99711ZM19.2267 1.3631L19.5772 0.675186L19.5772 0.675186L19.2267 1.3631ZM3.36828 1.3631L3.01777 0.675186L3.01777 0.675186L3.36828 1.3631ZM2.09879 6.938C2.09879 5.87824 2.09939 5.12985 2.14717 4.54509C2.19421 3.96935 2.28311 3.62055 2.42217 3.34762L1.04635 2.6466C0.777888 3.17349 0.66302 3.74812 0.608178 4.41935C0.554073 5.08157 0.554673 5.90372 0.554673 6.938H2.09879ZM2.09879 9.67969V6.938H0.554673V9.67969H2.09879ZM1.32673 8.90763H1.32666V10.4517H1.32673V8.90763ZM0.554601 9.67969V15.9114H2.09872V9.67969H0.554601ZM0.554601 15.9114V19.5427H2.09872V15.9114H0.554601ZM0.554601 19.5427C0.554601 20.7302 1.99034 21.3249 2.83003 20.4853L1.73817 19.3934C1.87122 19.2604 2.09872 19.3546 2.09872 19.5427H0.554601ZM2.83003 20.4853L6.85768 16.4576L5.76583 15.3657L1.73817 19.3934L2.83003 20.4853ZM15.2858 15.1396H6.31175V16.6837H15.2858V15.1396ZM18.8762 14.8162C18.6032 14.9553 18.2544 15.0442 17.6787 15.0912C17.0939 15.139 16.3455 15.1396 15.2858 15.1396V16.6837C16.32 16.6837 17.1422 16.6843 17.8044 16.6302C18.4757 16.5754 19.0503 16.4605 19.5772 16.192L18.8762 14.8162ZM20.1728 13.5196C19.8883 14.0779 19.4344 14.5318 18.8762 14.8162L19.5772 16.192C20.426 15.7596 21.1161 15.0694 21.5486 14.2206L20.1728 13.5196ZM20.4961 9.92923C20.4961 10.989 20.4955 11.7374 20.4478 12.3221C20.4007 12.8979 20.3118 13.2467 20.1728 13.5196L21.5486 14.2206C21.817 13.6937 21.9319 13.1191 21.9868 12.4479C22.0409 11.7857 22.0403 10.9635 22.0403 9.92923H20.4961ZM20.4961 6.93801V9.92923H22.0403V6.93801H20.4961ZM20.1728 3.34762C20.3118 3.62055 20.4007 3.96935 20.4478 4.54509C20.4955 5.12985 20.4961 5.87824 20.4961 6.93801H22.0403C22.0403 5.90372 22.0409 5.08157 21.9868 4.41935C21.9319 3.74812 21.817 3.17349 21.5486 2.6466L20.1728 3.34762ZM18.8762 2.05101C19.4344 2.33546 19.8883 2.78935 20.1728 3.34762L21.5486 2.6466C21.1161 1.79779 20.426 1.10768 19.5772 0.675186L18.8762 2.05101ZM15.2858 1.72763C16.3455 1.72763 17.0939 1.72823 17.6787 1.776C18.2544 1.82304 18.6032 1.91194 18.8762 2.05101L19.5772 0.675186C19.0503 0.406723 18.4757 0.291855 17.8044 0.237013C17.1422 0.182907 16.32 0.183508 15.2858 0.183508V1.72763ZM7.30917 1.72763H15.2858V0.183508H7.30917V1.72763ZM3.71878 2.05101C3.99171 1.91194 4.34051 1.82304 4.91626 1.776C5.50102 1.72823 6.24941 1.72763 7.30917 1.72763V0.183508C6.27489 0.183508 5.45274 0.182907 4.79052 0.237013C4.11928 0.291855 3.54466 0.406723 3.01777 0.675186L3.71878 2.05101ZM2.42217 3.34762C2.70662 2.78935 3.16051 2.33546 3.71878 2.05101L3.01777 0.675186C2.16895 1.10768 1.47884 1.79779 1.04635 2.6466L2.42217 3.34762Z" fill="#ABAAAA" />
+                            <path d="M6.31201 5.94043L16.2827 5.94043" stroke="#ABAAAA" stroke-width="1.85294" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M6.31201 10.9263L12.5437 10.9263" stroke="#ABAAAA" stroke-width="1.85294" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </Upload>
+                </Mobile>
             </CommentInputContainer>
-            <div>
+            <CommentsContainer>
                 {commentList?.map((comment) => (
 
                     <>
@@ -360,7 +384,7 @@ const Comment = ({ contentId }) => {
                         </CommentContainer>
                     </>
                 ))}
-            </div>
+            </CommentsContainer>
             <Pagination isDark='true' page={page} totalPage={totalPage} onChangePage={setPage} />
 
         </div>

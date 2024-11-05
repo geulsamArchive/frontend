@@ -12,6 +12,9 @@ font-family: 'MaruBuri-Regular';
 `
 
 export const AccordionContainer = styled.div`
+@media only screen and (max-width:1023px) {
+   background-color: rgba(29, 28, 28, 1);
+}
    max-width: 100dvw;
 background-color:  rgba(45, 43, 42, 1);
 color: white;

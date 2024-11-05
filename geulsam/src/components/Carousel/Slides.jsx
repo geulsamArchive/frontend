@@ -13,7 +13,7 @@ const genreMapping = {
     POEM: '시',
 };
 
-const formatGenre = (text) => {
+export const formatGenre = (text) => {
     // 텍스트를 공백 기준으로 분리합니다
     const parts = text.split(' ');
 
@@ -34,7 +34,7 @@ const isPastEvent = (endTime) => {
     return eventEndDate < now;
 };
 
-const formatEventTime = (startTime, endTime) => {
+export const formatEventTime = (startTime, endTime) => {
     const start = new Date(startTime);
     const end = new Date(endTime);
 
