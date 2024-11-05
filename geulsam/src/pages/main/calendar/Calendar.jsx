@@ -5,6 +5,7 @@ import { normalAPI } from '../../../apis/Api';
 import { Desktop, Mobile } from './../../../hooks/useMediaQuery';
 import { MobileCalendarContainer } from '../../../style/MobileCalendar';
 import { VisibleSelect } from '../../../style/WokrUpload';
+import MobileCalendar from '../../../components/MobileCalendar';
 
 
 
@@ -68,6 +69,7 @@ const Calendar = () => {
                     <BookTitle>
                         {year}년 {semester}학기 활동 일정
                     </BookTitle>
+                    <MobileCalendar data={calendarData} />
                 </MobileCalendarContainer>
             </Mobile>
             <Desktop>
