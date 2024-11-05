@@ -370,7 +370,6 @@ export const URLButton = styled.button`
   width: 90dvw;
 font-family: 'MaruBuri-Regular';
 font-weight: 700;
-margin-bottom: 16px;
 font-size: 16px;
 }
 border-top-right-radius:30px;

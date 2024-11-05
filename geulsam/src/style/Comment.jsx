@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 export const CommentInput = styled.input`
 @media only screen and (max-width:1023px) {
-    width: 90dvw;
+    width: 77dvw;
+    height: 44px;
+    border-radius: 3px;
+
 }
 width: 996px;
 height: 85px;
@@ -32,11 +35,19 @@ font-family: 'Grandpa_sharing';
     align-items: center;
 `
 
+export const Upload = styled.div`
+    margin-right: 10px;
+`
+
 export const CommentInputContainer = styled.div`
 @media only screen and (max-width:1023px) {
-    width: 100dvw;
+    width: 88dvw;
+    border-radius: 3px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    gap: 10px;
 }filter: drop-shadow(0 10px 30 rgba(152, 147, 142, 0.25));
 margin-top: 50px;
 
@@ -49,7 +60,20 @@ color: ${props => props.length === 0 ? 'rgba(213, 213, 212, 1)' : 'black'};
 `
 
 
+export const CommentsContainer = styled.div`
+@media only screen and (max-width:1023px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+`
+
 export const CommentContainer = styled.div`
+@media only screen and (max-width:1023px) {
+    width: 80dvw;
+    padding: 20px;
+}
 font-family: 'MaruBuri-Regular';
 width: 978px;
     background-color: rgba(57, 55, 53, 1);
