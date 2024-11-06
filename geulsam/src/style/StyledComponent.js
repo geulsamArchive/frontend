@@ -297,6 +297,26 @@ cursor: pointer;
 margin-right: 23px;
 `;
 
+// export const AllowButtonForPassword = styled.button`
+// font-family: 'MaruBuri-Regular';
+// border: none;
+// font-size: 17px;
+// border-radius: 30px;
+// color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+// background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+// pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+// cursor: pointer;
+// margin-right: 23px;
+// `;
+
+export const AllowButtonForPassword = styled(Button)`
+@media only screen and (max-width:1023px) {
+    margin-left:60px;
+}
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+`;
+
 export const ButtonForPassword = styled.button`
 font-family: 'MaruBuri-Regular';
 border: none;
@@ -1411,6 +1431,20 @@ export const StyledTable = styled.table`
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+`;
+
+export const MemberStyledTable = styled.table`
+    border-collapse: collapse;
+    margin-top: 20px;
+    width: 100%;
+    
+`;
+
+export const ScrolledContainerTable = styled.div`
+     @media only screen and (max-width: 1023px) {
+  overflow-x: auto; /* 가로 스크롤 활성화 */
+  width: 100%; /* 부모 요소에 맞춰서 전체 너비 사용 */
+}
 `;
 
 export const BookStyledTable = styled.table`
