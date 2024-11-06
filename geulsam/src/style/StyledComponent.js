@@ -1427,8 +1427,9 @@ export const BookStyledTable = styled.table`
   /* 입력 필드를 테이블 헤더 아래에 배치하기 위해 각 행을 열 구조로 변경 */
 @media only screen and (max-width: 1023px) {
     th, td {
-      display: block; /* 각 헤더와 데이터 셀이 세로로 쌓이게 설정 */
+      display: grid; /* 각 헤더와 데이터 셀이 세로로 쌓이게 설정 */
       width: 100%; /* 블록 요소로 설정하여 너비 100% 차지 */
+
     }
 
     th {
