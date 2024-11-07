@@ -317,6 +317,26 @@ color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
 background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
 `;
 
+export const ResponsiveButton = styled(Button)`
+  display: none; // 기본적으로 숨김 처리
+
+  @media only screen and (max-width: 1023px) {
+  margin-bottom : 5px;
+    display: inline-block; // 1023px 이하일 때 버튼을 표시
+        font-size: 0.8rem; /* 글자 크기 줄이기 */
+    padding: 5px 10px; /* 버튼 크기를 글자 수에 맞추도록 설정 */
+    cursor: pointer;
+    white-space: nowrap; /* 버튼이 글자 수에 맞춰지도록 설정 */
+color:${props => (props.isActive ? 'rgba(129, 128, 127, 1)' : 'rgba(249, 249, 246, 1)')}; 
+background-color: ${props => (props.isActive ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+    cursor: pointer;
+
+    &:hover {
+      background-color: ${(props) => (props.isActive ? 'rgba(213, 213, 212, 1)' : '#ddd')};
+      color: ${(props) => (props.isActive ? 'white' : 'black')};
+    }
+  }
+`;
 export const ButtonForPassword = styled.button`
 font-family: 'MaruBuri-Regular';
 border: none;
@@ -1422,7 +1442,21 @@ font-size: 27px;
 font-weight: 700;
 margin-right : 20px;
 width: 100%;
-border-top:2px solid black;
+padding-bottom: 18px;
+padding-top:10px;
+flex-direction:row;
+`
+export const MemberTitleTop = styled.div`
+@media only screen and (max-width:1023px) {
+    font-size: 18px;
+    padding-bottom: 15px;
+}
+   
+font-size: 27px;
+font-weight: 700;
+margin-right : 20px;
+width: 100%;
+border-bottom:2px solid black;
 padding-bottom: 18px;
 padding-top:10px;
 flex-direction:row;
