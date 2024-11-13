@@ -251,7 +251,7 @@ justify-content: left;
 margin-top: 14px;
 line-height: 1.7;
 font-weight: 700;
-margin-bottom: 30px;
+margin-bottom: 10px;
 
 `
 

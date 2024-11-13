@@ -23,11 +23,25 @@ font-size: 10px;
     margin-left: 25px;
 `
 export const CriticDay = styled.div`
+
 @media only screen and (max-width:1500px ){
 width: 200px;
 padding-top: 8px;
 
 }
+
+@media only screen and (max-width:1023px ){
+width: 90dvw;
+padding-top: 25px;
+padding-bottom: 10px;
+border-top: none;
+border-bottom: 1px solid rgba(213, 213, 212, 1);
+&:last-child{
+    border-bottom: none;
+    padding-bottom: 0px;
+}
+}
+
     border-top: 0.68px solid rgba(171, 170, 170, 1);
     height:25px;
     width: 270px;
@@ -53,6 +67,9 @@ export const OrderAndTime = styled.span`
  @media only screen and (max-width:1500px ){
 width: 80px;
 }
+@media only screen and (max-width:1023px ){
+width: auto
+}
  width: 113px;
     
 `
@@ -68,13 +85,20 @@ padding-top: 8px;
     padding-top: 12px;
 `
 export const NameGenre = styled.div`
+
 @media only screen and (max-width:1500px ){
 width: 50px;
+}
+@media only screen and (max-width:1023px ){
+width: auto
 }
 text-align: left;
 width: 70px;
 `
 export const CriticInfos = styled.div`
+@media only screen and (max-width:1023px ){
+width: 90dvw
+}
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -91,6 +115,12 @@ color: ${props => {
 `
 
 export const CriticButton = styled.div`
+@media only screen and (max-width:1023px ){
+height: 28px;
+width: 82px;
+font-weight: 700;
+font-size: 14px;
+}
 font-family: 'MaruBuri-Regular';
 border: none;
 font-size: 12px;

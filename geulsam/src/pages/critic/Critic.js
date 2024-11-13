@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { CalendarTitle, Centering } from '../../style/StyledComponent';
+import { BookTitle, CalendarTitle, Centering } from '../../style/StyledComponent';
 import { CriticContainer, Notice } from '../../style/Critic';
 import { normalAPI } from '../../apis/Api';
 import CriticSlide from '../../components/Carousel/CriticSlide';
 import { Accordion } from '../../components/Comment/Comments';
 import CriticLog from './CriticLog';
+import { Desktop, Mobile } from '../../hooks/useMediaQuery';
+import MobileCriticCalendar from '../../components/MobileCriticCalendar';
 
 const translateSemester = (monthes) => {
     if (monthes <= 1) {
@@ -52,23 +54,30 @@ const Critic = () => {
     };
 
     return (
-        <CriticContainer>
-            <CalendarTitle>
-                금학기 합평 신청 및 승인 확인
-            </CalendarTitle>
-            <br />
-            <br />
-            <br />
-            <Centering>
-                <CriticSlide criticData={criticData} year={year} onDataUpdate={handleDataUpdate} />
-            </Centering>
-            <Centering>
-                <Notice>
-                    신청을 삭제하려면 해당하는 칸을 클릭해주세요.
-                </Notice>
-            </Centering>
-            <Accordion name='지난 합평회' content={CriticLog} />
-        </CriticContainer>
+        <>
+            <Mobile>
+                <MobileCriticCalendar criticData={criticData} onDataUpdate={handleDataUpdate} />
+            </Mobile>
+            <Desktop>
+                <CriticContainer>
+                    <CalendarTitle>
+                        금학기 합평 신청 및 승인 확인
+                    </CalendarTitle>
+                    <br />
+                    <br />
+                    <br />
+                    <Centering>
+                        <CriticSlide criticData={criticData} year={year} onDataUpdate={handleDataUpdate} />
+                    </Centering>
+                    <Centering>
+                        <Notice>
+                            신청을 삭제하려면 해당하는 칸을 클릭해주세요.
+                        </Notice>
+                    </Centering>
+                    <Accordion name='지난 합평회' content={CriticLog} />
+                </CriticContainer>
+            </Desktop>
+        </>
     );
 };
 

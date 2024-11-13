@@ -11,6 +11,21 @@ import { translateCondition, translateType } from './../Translate';
 import { CloseButton, Conditions, CriticButton, CriticDay, CriticInfos, Critics, Dates, GenreButton, ModalBottom, Modalcontent, ModalTop, NameGenre, OrderAndTime, Right } from '../../style/Critic';
 import { useAuth } from '../../store/Auth';
 
+export const formatTime = (startTime, order) => {
+    const start = new Date(startTime);
+    const sessionStart = new Date(start.getTime() + (order - 1) * 60 * 60 * 1000);
+    const sessionEnd = new Date(sessionStart.getTime() + 60 * 60 * 1000);
+    const startFormatted = sessionStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+    const endFormatted = sessionEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+    return `${startFormatted} ~ ${endFormatted}`;
+};
+
+export const formatDate = (startTime) => {
+    const start = new Date(startTime);
+    return `${start.getMonth() + 1}월 ${start.getDate()}일`;
+};
+
+
 const CriticSlide = ({ criticData, year, onDataUpdate }) => {
     const [monthIdx, setMonthIdx] = useState(0);
     const sliderRef = useRef(null);
@@ -39,13 +54,7 @@ const CriticSlide = ({ criticData, year, onDataUpdate }) => {
         sliderRef.current.slickGoTo(idx);
     }, []);
 
-    const formatTime = (startTime, order) => {
-        const start = new Date(startTime);
-        const end = new Date(start.getTime() + order * 60 * 60 * 1000);
-        const startFormatted = start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-        const endFormatted = end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-        return `${startFormatted} ~ ${endFormatted}`;
-    };
+
 
     const formatDate = (startTime) => {
         const start = new Date(startTime);

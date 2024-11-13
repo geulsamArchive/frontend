@@ -6,7 +6,6 @@ import { Desktop, Mobile } from '../../hooks/useMediaQuery';
 const Footer = () => {
     const location = useLocation();
 
-    // 모바일에서 `/` 또는 `/main`일 때는 Footer를 숨김
     const isHiddenOnMobile = location.pathname === '/' || location.pathname === '/main';
 
     return (

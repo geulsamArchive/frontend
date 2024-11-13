@@ -58,3 +58,34 @@ export const Left = styled.div`
 export const Right = styled.div`
 text-align: right;
 `
+
+export const CriticTop = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+`
+export const CriticContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+export const CriticDayes = styled.div`
+    background-color: white;
+    border-radius: 4.5px;
+    width: 90dvw;
+    filter: drop-shadow(0 4px 12px rgba(38, 38, 38, 0.04));
+    padding: 15px;
+    margin: 15px 0 15px 0;
+`
+
+export const CriticInfoTop = styled.div`
+    border-bottom: 1px solid rgba(213, 213, 212, 1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.7;
+`
