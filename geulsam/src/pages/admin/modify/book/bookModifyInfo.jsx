@@ -25,16 +25,18 @@ const BookUpload = () => {
     const navigate = useNavigate();
 
     // 목차 등록하기 테이블 상태
-    const [rows, setRows] = useState([{ pageNumber: '', author: '', title: '', error: '', showButton: true, workName: '', workId: '' }]);
+    const [rows, setRows] = useState([{ pageNumber: '', author: '', title: '', error: '', showButton: true, workName: '', workId: '', uuid: ' ' }]);
     const [bookContentList, setBookContentList] = useState([]);
 
     const addBookContent = (bookContentId, title, name, page) => {
-        const contentId = bookContentId[0];
+        // bookContentId가 배열로 들어오고 첫 번째 요소만 필요할 경우, 배열에서 꺼내 단일 값으로 설정
+        const contentId = Array.isArray(bookContentId) ? bookContentId[0] : bookContentId;
         const newContent = { contentId, title, name, page };
         console.log(contentId, title, name, page);
         console.log(newContent);
         setBookContentList([...bookContentList, newContent]);
     };
+
 
     const handleInputChange = (index, field, value) => {
         const updatedRows = [...rows];
@@ -62,6 +64,7 @@ const BookUpload = () => {
                 updatedRows[index].error = '현재 사이트에 게시되지 않은 작품입니다.';
                 updatedRows[index].showButton = false;
                 setRows(updatedRows);
+                addBookContent(id, null, null, null); // 데이터 추가
             } else {
                 const workResponse = await normalAPI.get(`/content/${id}`, {
                     headers: { 'accessToken': accessToken }
@@ -122,7 +125,8 @@ const BookUpload = () => {
                     author: content.name,
                     title: content.title,
                     workName: content.title,
-                    workId: content.bookContentId,
+                    workId: content.contentId,
+                    uuid: content.bookContentId,
                     error: '',
                     showButton: false // 이미 연결된 작품이므로 버튼 비활성화
                 }));
@@ -259,12 +263,19 @@ const BookUpload = () => {
         if (title !== null) {
             formData.append('title', title);
         }
-        if (bookContentList !== null) {
-            console.log(bookContentList);
-            console.log(JSON.stringify(bookContentList));
-            formData.append('bookContentList', JSON.stringify(bookContentList));
-        }//JSON.stringify(bookContentList)
+        const contentListWithUuid = rows.map(row => ({
+            uuid: row.uuid ?? null,
+            page: row.page ?? null,
+            title: row.title ?? null,
+            name: row.author ?? null,
+            contentId: Array.isArray(row.workId) ? row.workId[0] : row.workId // 배열일 경우 첫 번째 값만 사용
+        }));
+        console.log("uuid가 추가된 list", contentListWithUuid);
+        formData.append('bookContentList', JSON.stringify(contentListWithUuid));
 
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
         const accessToken = localStorage.getItem('access');
         //https://geulsaem.store/book?field=id&search=dssda-sdfasdf-dsafdasf-asdfdsa
         ///book?field=${field}&search=${search}

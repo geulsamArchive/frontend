@@ -87,7 +87,7 @@ const BookInfo = () => {
             </BookInfoAndButton>
             <BookIndexList>
                 {bookIndexList.map((book) => (
-                    <BookIndex key={book.bookContentId} onClick={() => handleWorkClick(book.bookContentId)}>
+                    <BookIndex key={book.bookContentId} onClick={() => handleWorkClick(book.contentId)}>
                         {book.page}&nbsp;&nbsp;{book.name}&nbsp; &middot; &nbsp;{book.title}
                     </BookIndex>
                 ))}
