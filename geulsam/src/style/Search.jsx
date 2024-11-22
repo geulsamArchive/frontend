@@ -30,8 +30,12 @@ export const SearchBoxForMember = styled.div`
 @media only screen and (max-width:1023px) {
     height: 42px;
     width: 90dvw;
-    margin-left: 5dvw;
+    margin-left: 1dvw;
+    margin-top:20dvw;
+    margin-right:3dvw;
 }
+    position:absolute;
+    top:1dvw;
     width: 30dvw;
     height: 64px;
     border: 1px solid black;

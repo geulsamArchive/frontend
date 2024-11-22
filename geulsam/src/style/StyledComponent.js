@@ -471,6 +471,9 @@ margin-right: 23px;
 `;
 
 export const ButtonForMember = styled.button`
+@media only screen and (max-width:1023px) {
+ margin-left:13dvw; 
+}
 font-family: 'MaruBuri-Regular';
 border: none;
 font-size: 17px;
@@ -482,8 +485,27 @@ background-color: ${props => (props.isActive ? 'rgba(213, 213, 212, 1)' : 'rgba(
 pointer-events: ${props => (props.isActive ? 'none' : 'auto')};
 cursor: pointer;
 margin-right: 23px;
+margin-top:25px;
+z-index:1000;
+postion:absolute;
 `;
 
+export const ButtonForMember2 = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width:93px;
+height: 36px;
+color:${props => (props.isActive ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.isActive ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.isActive ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+margin-top:25px;
+z-index:1000;
+position:absolute;
+`;
 export const Back = styled.div`
 background-color: gray;
 min-height: 100vh;
@@ -1574,23 +1596,27 @@ width: 100%;
 padding-bottom: 18px;
 padding-top:10px;
 flex-direction:row;
+position:relative;
+
 `
 export const MemberTitleTop = styled.div`
 @media only screen and (max-width:1023px) {
     font-size: 18px;
-    padding-bottom: 15px;
+    padding-bottom: 14px;
     border-bottom:2px solid black;
     border-top:0px;
+    top:5dvw;
 }
-   
+pointer-events: none;   
 font-size: 27px;
 font-weight: 700;
 margin-right : 20px;
 width: 100%;
 border-top:2px solid black;
 padding-bottom: 18px;
-padding-top:10px;
-flex-direction:row;
+padding-top:25px;
+position:absolute;
+z-index:0;
 `
 export const StyledTable = styled.table`
     width: 100%;
@@ -1754,12 +1780,15 @@ export const BookIndexHeader = styled.div`
 `;
 export const TableHeader = styled.th`
   background-color: inherit;
-  text-align: left;
+  text-align: center;
   border-bottom: 2px solid black;
-  border-top: 2px solid black;
+  border-top: none;
   border-right: 1px solid black;
+  padding-bottom:5px;
   font-weight: bold;
-
+    &:last-child {
+      border-right: none;
+    }
   @media only screen and (max-width: 1023px) {
     padding: 5px; /* 추가 간격 조정 */
     margin-right:10px;
@@ -1798,6 +1827,8 @@ export const TableCell = styled.td`
     background-color:inherit;
     border-bottom: 1px solid black;
         border-right: 1px solid black;  /* 오른쪽 경계 추가 */
+    font-weight:bold;
+    text-align:center;
 
     /* 마지막 셀에 오른쪽 경계 제거 */
     &:last-child {
