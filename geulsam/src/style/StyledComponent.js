@@ -138,9 +138,13 @@ margin-bottom: 5px;
 font-weight:bold;
 `
 
+
 export const Grayp = styled.p`
 color : gray;
 display:flex;
+`
+export const Bold = styled.p`
+font-weight:bold;
 `
 export const FlexContainer = styled.div`
   display: flex;
@@ -172,6 +176,23 @@ background-color: white;
   justify-content: space-between;
   align-items: center;
   filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
+`
+export const EmailForm = styled.div`
+ @media only screen and (max-width: 1023px) {
+    width: 85dvw; /* 작은 화면에서 더 작은 너비 */
+    height: 102dvw; /* 작은 화면에서 더 작은 높이 */
+  transform: translateX(-10%); /* X축으로 10% 왼쪽 이동 */
+  overflow:visible;
+    }
+background-color: white;
+  border-radius: 8.6px;
+  text-align: center;
+  width: 408px;
+  height: 486px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 `
 
 

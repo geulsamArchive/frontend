@@ -21,9 +21,11 @@ import {
 } from '../../../../style/StyledComponent';
 import Pagination from '../../../../components/Paging/Pagination'; // 페이지네이션 컴포넌트 불러오기
 import SearchWorkForMember from '../../../../components/Search/SearchWorkForMember';
-
+import PasswordChangeEmail from './PasswordChangeEmail';
 const MemberModify = () => {
+    const [selectedMember, setSelectedMember] = useState(null);
     const navigate = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState(''); // 검색어 상태
     const [members, setMembers] = useState([]); // 회원 목록 상태
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -184,7 +186,13 @@ const MemberModify = () => {
         }
     }, [currentPage, searchTerm]); // currentPage와 searchTerm 상태가 변경될 때 실행
 
-
+    const openPasswordChangeEmailModal = (member) => {
+        setSelectedMember(member);
+        setIsModalOpen(true);
+    };
+    const closePasswordChangeEmailModal = () => {
+        setIsModalOpen(false);
+    };
 
     // 비밀번호 초기화 함수 (PUT 요청)
     const resetMemberPassword = async (member) => {
@@ -257,7 +265,10 @@ const MemberModify = () => {
                                         ) : (
                                             <>
                                                 <BackButtonAtMyInfoModify onClick={() => deleteMember(member.schoolNum)}>회원 탈퇴</BackButtonAtMyInfoModify>
-                                                <ButtonForPassword onClick={() => resetMemberPassword(member)}>비밀번호 초기화</ButtonForPassword>
+                                                <ButtonForPassword onClick={() => openPasswordChangeEmailModal(member)}>비밀번호 초기화</ButtonForPassword>
+                                                {isModalOpen && (
+                                                    <PasswordChangeEmail member={selectedMember} isModalOpen={isModalOpen} closeModal={closePasswordChangeEmailModal} />
+                                                )}
                                             </>
                                         )}
                                     </TableCell>
