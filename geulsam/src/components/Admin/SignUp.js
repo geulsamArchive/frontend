@@ -115,11 +115,6 @@ const SignUp = ({ prevStep, nextStep }) => {
                     <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>
                     {schoolNumError ? <ErrorMessage>{schoolNumError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
                     <LoginInputTitle>
-                        생년월일
-                    </LoginInputTitle>
-                    <LoginInput placeholder='예) 2000.12.31' type='date' value={birthDay} onChange={onChangeBirthDay} />
-                    {/* {birthDayError && <ErrorMessage>{birthDayError}</ErrorMessage>} */}
-                    <LoginInputTitle>
                         글샘 가입연도
                     </LoginInputTitle>
                     <LoginInput placeholder='예) 2024' type='text' value={joinedAt} onChange={onChangeJoinedAt} />

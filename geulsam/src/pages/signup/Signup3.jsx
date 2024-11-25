@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForms } from '../../hooks/useForms';
-import { Wrapper, Form, Input, Button, InputTitle, Silver, FormTop, BackButton, WhiteButtons, LeftAlign, ErrorMessage, LoginForm, LoginInputTitle, LoginInput } from '../../style/StyledComponent';
+import { Red, RedSignMobile, ModalMobilep, ModalDiv, Modalp, CenterAlign, RedSign, Wrapper, Form, Input, Button, InputTitle, Silver, FormTop, BackButton, WhiteButtons, LeftAlign, ErrorMessage, LoginForm, LoginInputTitle, LoginInput } from '../../style/StyledComponent';
 import Left from '../../assets/images/grayLeft.png';
 
 const Signup3 = ({ prevStep, nextStep }) => {
@@ -26,16 +26,8 @@ const Signup3 = ({ prevStep, nextStep }) => {
             setEmailError('');
         }
 
-        // 전화번호 유효성 검사
-        if (!phoneRegex.test(phone)) {
-            setPhoneError('올바른 전화번호 형식을 입력하세요. (예: 010-1234-5678)');
-            valid = false;
-        } else {
-            setPhoneError('');
-        }
-
         if (valid) {
-            nextStep({ email, phone });
+            nextStep({ email });
         }
     }
 
@@ -49,9 +41,19 @@ const Signup3 = ({ prevStep, nextStep }) => {
                     </Silver>
                 </FormTop>
                 <LeftAlign>
+                    <ModalDiv>
+                        <Modalp>&nbsp;&nbsp;가입승인이 완료되면 이메일로 임시 비밀번호를<br />&nbsp;&nbsp;보내드리고 있습니다. 메일을 받을 주소를 입력해<br />&nbsp;&nbsp;주세요.</Modalp>
+                        <ModalMobilep>&nbsp;&nbsp;가입승인이 완료되면 이메일로 임시 비<br />&nbsp;&nbsp;밀번호를 보내드리고 있습니다. 메일을<br />&nbsp; 받을 주소를 입력해주세요.</ModalMobilep>
+
+                        <br /><RedSign>&nbsp;&nbsp;해당 정보는 이메일 전송 후 자동폐기됩니다.</RedSign>
+                        <RedSignMobile><Red>&nbsp;&nbsp;해당 정보는 이메일 전송 후 자동 폐기됩니다.</Red></RedSignMobile>
+                    </ModalDiv>
+                    <br />
+                    <ModalMobilep><br /><br /><br /></ModalMobilep>
                     <LoginInputTitle>
-                        이메일
+                        &nbsp;&nbsp;&nbsp;&nbsp;이메일
                     </LoginInputTitle>
+                    &nbsp;&nbsp;&nbsp;
                     <LoginInput
                         placeholder='예) abcd@gmail.com'
                         type='text'
@@ -59,17 +61,6 @@ const Signup3 = ({ prevStep, nextStep }) => {
                         onChange={onChangeEmail}
                     />
                     {emailError ? <ErrorMessage>{emailError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
-
-                    <LoginInputTitle>
-                        전화번호
-                    </LoginInputTitle>
-                    <LoginInput
-                        placeholder='예) 010-1234-5678'
-                        type='text'
-                        value={phone}
-                        onChange={onChangePhone}
-                    />
-                    {phoneError ? <ErrorMessage>{phoneError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
                 </LeftAlign>
                 <WhiteButtons>
                     <Button onClick={handleNext}>다음</Button>

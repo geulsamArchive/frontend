@@ -101,42 +101,28 @@ const MyInfoModify = () => {
             setNameError('');
         }
 
-        if (!schoolNumRegax.test(userInfo.schoolNum)) {
-            setSchoolNumError('올바른 학번 형식을 입력하세요. (예: A111111)');
-            valid = false;
-        } else if (!userInfo.isSchoolNumChecked) {
-            setSchoolNumError('학번 중복 검사를 해주세요.');
-            valid = false;
-        } else {
-            setSchoolNumError('');
-        }
-
         if (!joinedAtRegax.test(userInfo.joinedAt)) {
             setJoinedAtError('올바른 가입 연도를 입력하세요. (예: 2000)');
             valid = false;
         } else {
             setJoinedAtError('');
         }
-        if (!emailRegex.test(userInfo.email)) {
-            setEmailError('올바른 이메일 형식을 입력하세요. (예: abcd@gmail.com)');
-            valid = false;
-        } else {
-            setEmailError('');
-        }
 
-        // 전화번호 유효성 검사
-        if (!phoneRegex.test(userInfo.phone)) {
-            setPhoneError('올바른 전화번호 형식을 입력하세요. (예: 010-1234-5678)');
-            valid = false;
-        } else {
-            setPhoneError('');
-        }
+
+
 
         if (!valid) return;
 
         // 데이터 전송
         const accessToken = localStorage.getItem('access');
         const refreshToken = localStorage.getItem('refresh')
+        userInfo.birthDay = null;
+        userInfo.email = null;
+        userInfo.phone = null;
+        console.log(userInfo.keyword);
+        // var.join(",");
+        console.log(userInfo);
+
         try {
             const res = await normalAPI.put(`/user`, userInfo, {
                 headers: {
@@ -259,62 +245,66 @@ const MyInfoModify = () => {
                                 {userInfo.schoolNum}
                             </Right>)
                     }
-                </UserInfos>   <UserInfos>
-                    <Left>생일</Left>
-                    {
-                        isEditing ? (
-                            <>
-                                <Input
-                                    type='date'
-                                    name='birthDay'
-                                    value={userInfo.birthDay}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                />
-                                {birthDayError && <ErrorMessageInfo>{birthDayError}</ErrorMessageInfo>}
-                            </>
-
-                        ) : (<Right>
-                            {userInfo.birthDay}
-                        </Right>)
-                    }
-                </UserInfos>   <UserInfos>
-                    <Left>전자우편</Left>
-                    {
-                        isEditing ? (
-                            <>
-                                <Input
-                                    type='email'
-                                    name='email'
-                                    value={userInfo.email}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                />
-                                {emailError && <ErrorMessageInfo>{emailError}</ErrorMessageInfo>}
-                            </>
-                        ) : (<Right>
-                            {userInfo.email}
-                        </Right>)
-                    }
-                </UserInfos>  <UserInfos>
-                    <Left>전화번호</Left>
-                    {
-                        isEditing ? (
-                            <>
-                                <Input
-                                    type='text'
-                                    name='phone'
-                                    value={userInfo.phone}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                />
-                                {phoneError && <ErrorMessageInfo>{phoneError}</ErrorMessageInfo>}
-                            </>
-                        ) : (<Right>
-                            {userInfo.phone}
-                        </Right>)
-                    }
-                </UserInfos>   <UserInfos>
+                </UserInfos> {/* 
+<UserInfos>
+    <Left>생일</Left>
+    {
+        isEditing ? (
+            <>
+                <Input
+                    type='date'
+                    name='birthDay'
+                    value={userInfo.birthDay}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                />
+                {birthDayError && <ErrorMessageInfo>{birthDayError}</ErrorMessageInfo>}
+            </>
+        ) : (<Right>
+            {userInfo.birthDay}
+        </Right>)
+    }
+</UserInfos>
+<UserInfos>
+    <Left>전자우편</Left>
+    {
+        isEditing ? (
+            <>
+                <Input
+                    type='email'
+                    name='email'
+                    value={userInfo.email}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                />
+                {emailError && <ErrorMessageInfo>{emailError}</ErrorMessageInfo>}
+            </>
+        ) : (<Right>
+            {userInfo.email}
+        </Right>)
+    }
+</UserInfos>
+<UserInfos>
+    <Left>전화번호</Left>
+    {
+        isEditing ? (
+            <>
+                <Input
+                    type='text'
+                    name='phone'
+                    value={userInfo.phone}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                />
+                {phoneError && <ErrorMessageInfo>{phoneError}</ErrorMessageInfo>}
+            </>
+        ) : (<Right>
+            {userInfo.phone}
+        </Right>)
+    }
+</UserInfos>
+*/}
+                <UserInfos>
                     <Left>가입년도</Left>
                     {
                         isEditing ? (

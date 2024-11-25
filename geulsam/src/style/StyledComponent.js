@@ -143,6 +143,33 @@ export const Grayp = styled.p`
 color : gray;
 display:flex;
 `
+export const Modalp = styled.span`
+font-family:'MaruBuri-Regular';
+font-size : 16px;
+line-height:1.5;
+    @media only screen and (max-width:1023px) {
+    display:none;
+    }
+
+`
+export const ModalMobilep = styled.span`
+display:none;
+@media only screen and (max-width:1023px) {
+display:block;
+font-family:'MaruBuri-Regular';
+font-size : 16px;
+line-height:1.5;
+}
+`
+export const ModalDiv = styled.div`
+  margin-top:0px;
+  position:absolute;
+  top:105px;
+    @media only screen and (max-width:1023px) {
+    top:75px;
+    }
+  
+`
 export const Bold = styled.p`
 font-weight:bold;
 `
@@ -1363,6 +1390,21 @@ color:rgba(255, 96, 88, 1);
 
 }
 `
+export const RedSign = styled.span`
+color:rgba(255, 96, 88, 1);
+font-size:16px;
+@media only screen and (max-width: 1023px) {
+  display:none;
+}
+`
+export const RedSignMobile = styled.span`
+display:none;
+@media only screen and (max-width: 1023px) {
+color:rgba(255, 96, 88, 1);
+display:block;
+font-size:16px;
+}
+`
 export const Silver = styled.span`
 @media only screen and (max-width: 1023px) {
     width: 90dvw; /* 작은 화면에서 더 작은 너비 */
@@ -1408,6 +1450,9 @@ font-size: 12px;
 
 export const LeftAlign = styled.div`
 text-align: left;
+`
+export const CenterAlign = styled.div`
+text-align: center;
 `
 //회원가입시 내 작품 소개 키워드 할때 쓰는 인풋
 export const WordInput = styled.input`
