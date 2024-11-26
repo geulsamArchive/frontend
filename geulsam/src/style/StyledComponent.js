@@ -425,8 +425,8 @@ pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
 cursor: pointer;
 margin-right: 23px;
 @media only screen and (max-width:1023px) {
-display:none;
-`;
+display:none;}
+`
 
 export const BookTableAddButtonMobile = styled.button`
 display:none;

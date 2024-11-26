@@ -6,6 +6,7 @@ import CopyURL from '../../../components/CopyURL/CopyURL';
 import PDFDownload from '../../../components/Download/PDFDownload';
 import { normalAPI } from '../../../apis/Api';
 import { Desktop, Mobile } from '../../../hooks/useMediaQuery';
+import { BookCover, BookCoverContainer } from '../../../style/Book';
 
 const BookInfo = () => {
     const [bookData, setBooktData] = useState({})
@@ -79,7 +80,9 @@ const BookInfo = () => {
                             <PDFView PDF={bookData.url} />
                         </Desktop>
                         <Mobile>
-                            <img src={bookData.bookCover} />
+                            <BookCoverContainer>
+                                <BookCover src={bookData.bookCover} />
+                            </BookCoverContainer>
                         </Mobile>
                     </ViewerAndLinks>
                 </BookInfoContents>
