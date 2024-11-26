@@ -43,6 +43,35 @@ export const RightSubmit = styled.div`
 display: flex;
 justify-content: right;
 `
+export const BookSubmit = styled.div`
+  @media only screen and (max-width: 1023px) {
+    align-items:center;
+    padding-right:100px;
+    padding-top:30px;
+  }
+display: flex;
+justify-content: right;
+`
+export const BookSubmitModify = styled.div`
+  @media only screen and (max-width: 1023px) {
+    display: flex; /* Flexbox 활성화 */
+    gap: 20px; /* 버튼 사이 간격 추가 */
+    padding-top: 30px;
+  }
+`
+export const BookButton = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width:93px;
+height: 36px;
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+`;
+
 export const PosterUploadRightSubmit = styled.div`
   @media only screen and (max-width: 1023px) {
     align-items:center;
@@ -109,13 +138,55 @@ margin-bottom: 5px;
 font-weight:bold;
 `
 
+
 export const Grayp = styled.p`
 color : gray;
 display:flex;
 `
+export const Modalp = styled.span`
+font-family:'MaruBuri-Regular';
+font-size : 16px;
+line-height:1.5;
+    @media only screen and (max-width:1023px) {
+    display:none;
+    }
+
+`
+export const ModalMobilep = styled.span`
+display:none;
+@media only screen and (max-width:1023px) {
+display:block;
+font-family:'MaruBuri-Regular';
+font-size : 16px;
+line-height:1.5;
+}
+`
+export const ModalDiv = styled.div`
+  margin-top:0px;
+  position:absolute;
+  top:105px;
+    @media only screen and (max-width:1023px) {
+    top:75px;
+    }
+  
+`
+export const Bold = styled.p`
+font-weight:bold;
+`
 export const FlexContainer = styled.div`
   display: flex;
   gap: 10px; /* 요소 사이의 간격 조절 */
+  @media only screen and (max-width: 1023px) {
+  margin-top:3px;
+  margin-bottom:3px;
+    font-size:12px;
+      display: flex; /* 플렉스 박스 활성화 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  width: 100%; /* 부모 컨테이너 너비 */
+
+  position:absolute;
+  }
 `;
 export const LoginForm = styled.div`
  @media only screen and (max-width: 1023px) {
@@ -132,6 +203,23 @@ background-color: white;
   justify-content: space-between;
   align-items: center;
   filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
+`
+export const EmailForm = styled.div`
+ @media only screen and (max-width: 1023px) {
+    width: 85dvw; /* 작은 화면에서 더 작은 너비 */
+    height: 102dvw; /* 작은 화면에서 더 작은 높이 */
+  transform: translateX(-10%); /* X축으로 10% 왼쪽 이동 */
+  overflow:visible;
+    }
+background-color: white;
+  border-radius: 8.6px;
+  text-align: center;
+  width: 408px;
+  height: 486px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 `
 
 
@@ -188,10 +276,10 @@ background-color:inherit;
 `;
 export const TableInput = styled.input`
   @media only screen and (max-width: 1023px) {
-    width: 90dvw;
+    width:70dvw;
     flex-direction: column; /* 1023px 이하에서 세로 배열 */
     overflow:hidden;
-    max-width: 80dvw;
+    max-width: 70dvw;
     z-index : 0; 
     margin-left:15px;
   }
@@ -209,6 +297,16 @@ export const Bookp = styled.p`
 color:black;
 border-bottom:black solid 1px;
 `
+export const BookDiv = styled.div`
+ @media only screen and (max-width:1023px) {
+    display: flex; /* 플렉스 박스 활성화 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  height: 100%; /* 부모 컨테이너 높이 */
+  width: 100%; /* 부모 컨테이너 너비 */
+}
+`
+
 export const SmallTableInput = styled(TableInput)`
   width: 5vw; // vw 단위를 사용하여 너비 설정
 `
@@ -261,6 +359,24 @@ justify-content:right ;
 border-bottom-left-radius: 8.6px;
 border-bottom-right-radius: 8.6px;
 `
+export const ConnectButton = styled.button`
+   @media only screen and (max-width:1023px) {
+font-family: 'MaruBuri-Regular';
+border: 1px solid rgba(87, 86, 85, 1);
+font-size: 17px;
+border-radius: 30px;
+display:block;
+position:absolute;
+width:181px;
+height: 36px;
+color:rgba(87, 86, 85, 1);
+background-color: inherit;
+cursor: pointer;
+padding:6px 10px;
+margin-top:4dvw;
+left:28dvw;
+}
+`
 export const ArchiveButton = styled.button`
  @media only screen and (max-width:1023px) {
  height: 31px;
@@ -296,6 +412,43 @@ pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
 cursor: pointer;
 margin-right: 23px;
 `;
+export const BookTableAddButton = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width:93px;
+height: 36px;
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+@media only screen and (max-width:1023px) {
+display:none;
+`;
+
+export const BookTableAddButtonMobile = styled.button`
+display:none;
+@media only screen and (max-width:1023px){
+display:block;
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+width:90dvw;
+height: 44px;
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: rgba(87, 86, 85, 1);
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 18px;
+svg {
+  vertical-align: sub; /* 텍스트 기준으로 조금 아래로 이동 */
+}
+}
+`;
+
+
 
 // export const AllowButtonForPassword = styled.button`
 // font-family: 'MaruBuri-Regular';
@@ -329,7 +482,7 @@ export const ResponsiveButton = styled(Button)`
     white-space: nowrap; /* 버튼이 글자 수에 맞춰지도록 설정 */
 color:${props => (props.isActive ? 'rgba(129, 128, 127, 1)' : 'rgba(249, 249, 246, 1)')}; 
 background-color: ${props => (props.isActive ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
-    cursor: pointer;
+    cursor: pointer; 
 
     &:hover {
       background-color: ${(props) => (props.isActive ? 'rgba(213, 213, 212, 1)' : '#ddd')};
@@ -366,6 +519,9 @@ margin-right: 23px;
 `;
 
 export const ButtonForMember = styled.button`
+@media only screen and (max-width:1023px) {
+ margin-left:13dvw; 
+}
 font-family: 'MaruBuri-Regular';
 border: none;
 font-size: 17px;
@@ -377,8 +533,27 @@ background-color: ${props => (props.isActive ? 'rgba(213, 213, 212, 1)' : 'rgba(
 pointer-events: ${props => (props.isActive ? 'none' : 'auto')};
 cursor: pointer;
 margin-right: 23px;
+margin-top:25px;
+z-index:1000;
+postion:absolute;
 `;
 
+export const ButtonForMember2 = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width:93px;
+height: 36px;
+color:${props => (props.isActive ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.isActive ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.isActive ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+margin-top:25px;
+z-index:1000;
+position:absolute;
+`;
 export const Back = styled.div`
 background-color: gray;
 min-height: 100vh;
@@ -841,6 +1016,22 @@ height: 150dvh;
 width: auto;
 border-left: 1px solid black;
 `
+
+export const BookIndexButton = styled.button`
+@media only screen and (max-width:1023px) {
+  height: 45px;
+  background-color: rgba(234, 233, 227, 1); 
+  color: rgba(87, 86, 85, 1);
+  width: 390px;
+  font-family: 'MaruBuri-Regular';
+  font-weight: 700;
+  font-size: 16px;
+  position:fixed;
+  right:0px;
+  left:0px;
+  border:0px;
+}
+`
 //문집페이지 뷰어와 링크
 export const ViewerAndLinks = styled.div`
 height: 100%;
@@ -1199,6 +1390,24 @@ font-weight: 700;
 
 export const Red = styled.span`
 color:rgba(255, 96, 88, 1);
+@media only screen and (max-width: 1023px) {
+
+}
+`
+export const RedSign = styled.span`
+color:rgba(255, 96, 88, 1);
+font-size:16px;
+@media only screen and (max-width: 1023px) {
+  display:none;
+}
+`
+export const RedSignMobile = styled.span`
+display:none;
+@media only screen and (max-width: 1023px) {
+color:rgba(255, 96, 88, 1);
+display:block;
+font-size:16px;
+}
 `
 export const Silver = styled.span`
 @media only screen and (max-width: 1023px) {
@@ -1245,6 +1454,9 @@ font-size: 12px;
 
 export const LeftAlign = styled.div`
 text-align: left;
+`
+export const CenterAlign = styled.div`
+text-align: center;
 `
 //회원가입시 내 작품 소개 키워드 할때 쓰는 인풋
 export const WordInput = styled.input`
@@ -1323,8 +1535,13 @@ align-items: center;
 
 // 문집 등록 페이지 
 export const InputRow = styled.div`
+@media only screen and (max-width:1023px) {
+  display:flex;
+  flex-direction:column;
+}
     display: flex;
     gap: 20px; // 각 입력 필드 사이의 간격을 설정합니다.;
+    
 `;
 
 export const InputsContainer = styled.div`
@@ -1449,21 +1666,27 @@ width: 100%;
 padding-bottom: 18px;
 padding-top:10px;
 flex-direction:row;
+position:relative;
+
 `
 export const MemberTitleTop = styled.div`
 @media only screen and (max-width:1023px) {
     font-size: 18px;
-    padding-bottom: 15px;
+    padding-bottom: 14px;
+    border-bottom:2px solid black;
+    border-top:0px;
+    top:5dvw;
 }
-   
+pointer-events: none;   
 font-size: 27px;
 font-weight: 700;
 margin-right : 20px;
 width: 100%;
-border-bottom:2px solid black;
+border-top:2px solid black;
 padding-bottom: 18px;
-padding-top:10px;
-flex-direction:row;
+padding-top:25px;
+position:absolute;
+z-index:0;
 `
 export const StyledTable = styled.table`
     width: 100%;
@@ -1498,19 +1721,59 @@ export const BookStyledTable = styled.table`
 
   /* 입력 필드를 테이블 헤더 아래에 배치하기 위해 각 행을 열 구조로 변경 */
 @media only screen and (max-width: 1023px) {
-    th, td {
-      display: grid; /* 각 헤더와 데이터 셀이 세로로 쌓이게 설정 */
-      width: 100%; /* 블록 요소로 설정하여 너비 100% 차지 */
-
-    }
-
-    th {
-      margin-top: 20px; /* 헤더 간의 간격 조정 */
+  display:none;
     }
   }
 `;
+export const BookStyledTableMobile = styled.table`
+display:none;
+  /* 입력 필드를 테이블 헤더 아래에 배치하기 위해 각 행을 열 구조로 변경 */
+@media only screen and (max-width: 1023px) {
+display:table;
+    width: 50%;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  th, td {
+    text-align: left;
+    padding: 5px 0px;
+    border-bottom: 1px  rgba(171, 170, 170, 1);
+  }
+    th{
+      max-width:5px;
+    }
+    }
+  }
+`;
+export const CloseButton = styled.button`
+@media only screen and (max-width: 1023px) {
+  position: absolute;
+  right: 20px;
+  background:none;
+  bottom:6px;
+  border: none;
+  cursor: pointer;
+  width: 6.45px;
+height: 6.45px;
+z-index:0px;
+flex-shrink: 0;
+  svg path {
+    stroke: var(--60, #81807F);
+    stroke-width: 1.86px;
+  }
+}
+`;
 
 export const BookIndex = styled.button`
+@media only screen and (max-width: 1023px){
+background-color:rgba(57, 55, 53, 1);
+color:rgba(249, 249, 246, 1);
+display:inline-block;
+margin-bottom:21px;
+} 
+  white-space: nowrap;
+
+max-width:none;
 font-family: 'MaruBuri-Regular';
 border: none;
 font-size: 17px;
@@ -1529,33 +1792,104 @@ margin-bottom:10px;
 
 
 export const BookIndexList = styled.div`
+@media only screen and (min-width: 1023px){
   flex: 1; /* 인덱스가 차지하는 비율 */
   display: flex;
-  position:absolute;
-  top:48%;
-  right:20%;
+  position: absolute;
+  top: 48%;
+  right: 20%;
   flex-direction: column;
   align-items: flex-start; /* 인덱스를 더 오른쪽으로 정렬 */
   max-height: 100dvh; /* 뷰포트 높이에 맞게 설정 */
   overflow-y: auto; /* 긴 내용은 스크롤 가능 */
   padding: 10px;
   margin-left: auto; /* 여유 공간을 왼쪽에 두어 요소가 더 오른쪽으로 이동 */
+}
+  /* 모바일 화면에서 하단 슬라이드 애니메이션 */
+  @media only screen and (max-width: 1023px) {
+    position: fixed;
+    bottom: ${(props) => (props.isOpen ? "0" : "-100%")}; /* isOpen이 true일 때만 나타남 */
+    left: 0;
+    width: 100dvw;
+    background-color: black;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    transition: bottom 0.3s ease-in-out;
+    z-index: 999;
+  }
+`;
+export const AnimatedBookIndexList = styled(BookIndexList)`
+  @media only screen and (max-width: 1023px) {
+  position: fixed;
+  bottom: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+  left: 0;
+  width: 90dvw;
+  height: 130vh; /* 세로 길이 조정 */
+
+  background-color: black;
+  color: white;
+  padding: 20px;
+  transition: bottom 0.5s ease-in-out;
+  z-index: 1000;
+}
 `;
 
-export const TableHeader = styled.th`
-    background-color: inherit;
-    padding: 12px;
-    text-align: left;
-    border-bottom: 2px solid black;
-    border-top:2px solid black;
-    border-right:1px solid black;
-    font-weight : bold;
+export const BookIndexAlign = styled.div`
+  flex-direction: column; /* 세로 방향으로 정렬 */
+    align-items: flex-start;
+
 `;
+export const BookIndexHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: black;
+  color: white;
+  z-index: 1001; /* 헤더가 목록 위에 표시되도록 설정 */
+`;
+export const TableHeader = styled.th`
+  background-color: inherit;
+  text-align: center;
+  border-bottom: 2px solid black;
+  border-top: none;
+  border-right: 1px solid black;
+  padding-bottom:5px;
+  font-weight: bold;
+    &:last-child {
+      border-right: none;
+    }
+  @media only screen and (max-width: 1023px) {
+    padding: 5px; /* 추가 간격 조정 */
+    margin-right:10px;
+    font-size: 14px; /* 글자 크기 조정 */
+    width: auto; /* 글자 길이에 따라 자동 크기 */
+    min-width: 50px; /* 최소 너비 */
+    max-width: 80px; /* 최대 너비 */
+    border: 1px solid rgba(171, 170, 170, 1);
+    color: rgba(87, 86, 85, 1);
+
+    &:first-child {
+      border-left: none;
+    }
+    &:first-child {
+      border-bottom: 1px solid rgba(171, 170, 170, 1); ;
+    }
+`;
+
 
 export const TableRow = styled.tr`
     &:nth-child(even) {
         background-color: inherit;
     }
+      @media only screen and (max-width: 1023px) {
+      max-width:50dvw;
+        &:last-child {
+        border-right: none;
+        border-bottom:1px solid rgba(171, 170, 170, 1);
+    }
+      }        
+
 `;
 
 export const TableCell = styled.td`
@@ -1563,9 +1897,22 @@ export const TableCell = styled.td`
     background-color:inherit;
     border-bottom: 1px solid black;
         border-right: 1px solid black;  /* 오른쪽 경계 추가 */
+    font-weight:bold;
+    text-align:center;
 
     /* 마지막 셀에 오른쪽 경계 제거 */
     &:last-child {
         border-right: none;
     }
+        
+
+      @media only screen and (max-width: 1023px) {
+      max-width:auto;
+      border:1px solid rgba(171, 170, 170, 1);
+      color:rgba(87, 86, 85, 1);
+          &:last-child {
+        border-right: none;
+        border-bottom:1px solid rgba(171, 170, 170, 1);
+    }
+      }
 `;

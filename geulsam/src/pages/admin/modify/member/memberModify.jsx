@@ -10,6 +10,7 @@ import {
     MemberTitle,
     BookInfoContainer,
     ButtonForMember,
+    ButtonForMember2,
     StyledTable,
     TableHeader,
     TableRow,
@@ -20,9 +21,11 @@ import {
 } from '../../../../style/StyledComponent';
 import Pagination from '../../../../components/Paging/Pagination'; // 페이지네이션 컴포넌트 불러오기
 import SearchWorkForMember from '../../../../components/Search/SearchWorkForMember';
-
+import PasswordChangeEmail from './PasswordChangeEmail';
 const MemberModify = () => {
+    const [selectedMember, setSelectedMember] = useState(null);
     const navigate = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState(''); // 검색어 상태
     const [members, setMembers] = useState([]); // 회원 목록 상태
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -171,12 +174,31 @@ const MemberModify = () => {
             console.error("회원 탈퇴 중 오류 발생:", error);
         }
     };
+    useEffect(() => {
+        handleNormalMembers(); // 컴포넌트가 처음 렌더링될 때 실행
+    }, []); // 빈 의존성 배열로 한 번만 실행
+
+    useEffect(() => {
+        if (isNormalActive) {
+            handleNormalMembers();
+        } else if (isSuspendedActive) {
+            handleSuspendedMembers();
+        }
+    }, [currentPage, searchTerm]); // currentPage와 searchTerm 상태가 변경될 때 실행
+
+    const openPasswordChangeEmailModal = (member) => {
+        setSelectedMember(member);
+        setIsModalOpen(true);
+    };
+    const closePasswordChangeEmailModal = () => {
+        setIsModalOpen(false);
+    };
 
     // 비밀번호 초기화 함수 (PUT 요청)
     const resetMemberPassword = async (member) => {
         const accessToken = localStorage.getItem('access');
         try {
-            await normalAPI.get(`/user/resetPassword?id=${member.userId}`, {
+            await normalAPI.post(`/user/resetPassword?id=${member.userId}`, {
                 headers: {
                     'accessToken': accessToken,
                 }
@@ -185,6 +207,7 @@ const MemberModify = () => {
         } catch (error) {
             console.error("비밀번호 초기화 중 오류 발생:", error);
         }
+
     };
 
     return (
@@ -196,9 +219,10 @@ const MemberModify = () => {
             <ResponsiveButton isActive={activeButton === 3}
                 onClick={() => navigate('/user/mypage')}>관리자 정보</ResponsiveButton>
             <MemberTitle>
-                <MemberTitleTop>회원 목록</MemberTitleTop> &nbsp;&nbsp;
+                <MemberTitleTop>회원 목록</MemberTitleTop> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <ButtonForMember isActive={isNormalActive} onClick={handleNormalMembers} >등록회원</ButtonForMember>
-                <ButtonForMember isActive={isSuspendedActive} onClick={handleSuspendedMembers} >가입신청</ButtonForMember>
+                <ButtonForMember2 isActive={isSuspendedActive} onClick={handleSuspendedMembers} >가입신청</ButtonForMember2>
                 <SearchWorkForMember onSearch={handleSearch} placeholder='찾으시는 회원의 이름 혹은 학번을 적어주세요.' />
             </MemberTitle>
             {/* 회원 목록 테이블 */}
@@ -206,13 +230,10 @@ const MemberModify = () => {
                 <MemberStyledTable>
                     <thead>
                         <tr>
-                            <TableHeader>권한</TableHeader> {/* 권한 추가 */}
+                            {isNormalActive && <TableHeader>권한</TableHeader>}
                             <TableHeader>이름</TableHeader>
                             <TableHeader>가입연도</TableHeader>
                             <TableHeader>학번</TableHeader>
-                            <TableHeader>생년월일</TableHeader>
-                            <TableHeader>전화번호</TableHeader>
-                            <TableHeader>이메일</TableHeader>
                             <TableHeader>관리</TableHeader>
                         </tr>
                     </thead>
@@ -220,24 +241,21 @@ const MemberModify = () => {
                         {members.length > 0 ? (
                             members.map((member) => (
                                 <TableRow key={member.userId}>
-                                    <TableCell>
-                                        {/* 권한 드롭다운 */}
-                                        {member.level !== "SUSPENDED" ? (
+                                    {member.level !== "SUSPENDED" && (
+                                        <TableCell>
+                                            {/* 권한 드롭다운 */}
                                             <select
                                                 value={member.level}
                                                 onChange={(e) => updateMemberRole(member, e.target.value)}
                                             >
                                                 <option value="NORMAL">일반</option>
                                                 <option value="ADMIN">관리자</option>
-                                            </select>) :
-                                            <></>}
-                                    </TableCell>
+                                            </select>
+                                        </TableCell>
+                                    )}
                                     <TableCell>{member.name}</TableCell>
                                     <TableCell>{member.joinedAt}</TableCell>
                                     <TableCell>{member.schoolNum}</TableCell>
-                                    <TableCell>{member.birthDay}</TableCell>
-                                    <TableCell>{member.phone}</TableCell>
-                                    <TableCell>{member.email}</TableCell>
                                     <TableCell>
                                         {(member.level === 'SUSPENDED') ? (
                                             <>
@@ -247,7 +265,10 @@ const MemberModify = () => {
                                         ) : (
                                             <>
                                                 <BackButtonAtMyInfoModify onClick={() => deleteMember(member.schoolNum)}>회원 탈퇴</BackButtonAtMyInfoModify>
-                                                <ButtonForPassword onClick={() => resetMemberPassword(member)}>비밀번호 초기화</ButtonForPassword>
+                                                <ButtonForPassword onClick={() => openPasswordChangeEmailModal(member)}>비밀번호 초기화</ButtonForPassword>
+                                                {isModalOpen && (
+                                                    <PasswordChangeEmail member={selectedMember} isModalOpen={isModalOpen} closeModal={closePasswordChangeEmailModal} />
+                                                )}
                                             </>
                                         )}
                                     </TableCell>

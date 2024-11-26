@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForms } from '../../../../hooks/useForms';
-import { BookStyledTable, TableHeader, TableRow, TableCell, FlexContainer, Bookp, SmallTableInput, TableInput, Grayp, InputsContainer, InputRow, Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit, Red } from '../../../../style/StyledComponent';
+import {
+    BookButton, BookSubmitModify, BookSubmit, BookTableAddButtonMobile, BookTableAddButton, BookDiv, ConnectBox, ConnectButton, BookStyledTableMobile,
+    BookStyledTable, TableHeader, TableRow, TableCell, FlexContainer, Bookp, SmallTableInput, TableInput, Grayp, InputsContainer, InputRow, Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit, Red
+} from '../../../../style/StyledComponent';
 import Resizer from "react-image-file-resizer";
 import { normalAPI } from '../../../../apis/Api';
 
@@ -460,11 +463,88 @@ const BookUpload = () => {
                     ))}
                 </tbody>
             </BookStyledTable>
-            <Button onClick={addRow}>행 추가</Button>
-            <RightSubmit>
-                <Button type='submit' onClick={onClickUpload}>수정하기</Button>
-                <Button type='button' onClick={onClickDelete}>삭제하기</Button>
-            </RightSubmit>
+            <BookTableAddButton onClick={addRow}>행 추가</BookTableAddButton>
+
+
+            {/*모바일 테이블*/}
+            <BookStyledTableMobile>
+                <tbody>
+                    {rows.map((row, index) => (
+                        <>
+                            <TableRow key={`${index}-page`}>
+                                <TableHeader>쪽수</TableHeader>
+                                <TableCell>
+                                    <TableInput
+                                        value={row.page}
+                                        onChange={(e) => handleInputChange(index, 'page', e.target.value)}
+                                        placeholder="쪽수 입력"
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow key={`${index}-author`}>
+                                <TableHeader>작가</TableHeader>
+                                <TableCell>
+                                    <TableInput
+                                        value={row.author}
+                                        onChange={(e) => handleInputChange(index, 'author', e.target.value)}
+                                        placeholder="작가 입력"
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            <TableRow key={`${index}-title`}>
+                                <TableHeader>제목</TableHeader>
+                                <TableCell>
+                                    <TableInput
+                                        value={row.title}
+                                        onChange={(e) => handleInputChange(index, 'title', e.target.value)}
+                                        placeholder="제목 입력"
+                                    />
+                                </TableCell>
+                            </TableRow>
+                            {row.showButton ? (
+                                <>
+                                    <ConnectButton onClick={() => handleFindWork(index, row.author, row.title, row.page)}>
+                                        작품 페이지 연결하기
+                                    </ConnectButton>
+                                    <div><br /><br /></div>
+                                </>
+                            ) : (
+                                <>
+                                    <div><br /></div>
+                                    <FlexContainer>
+                                        {row.error ? (
+                                            <>
+                                                <div><br /><br /><br /><br /></div>
+                                                <Red>{row.error}</Red>
+                                            </>
+                                        ) : (
+                                            <Bookp onClick={() => handleWorkClick(row.workId)}>
+                                                {row.author} &middot; {row.title}
+                                            </Bookp>
+                                        )}
+                                        <Grayp onClick={() => handleRetry(index)}>다시 찾기</Grayp>
+                                        <Grayp onClick={() => handleDelete(index)}>연결 끊기</Grayp>
+                                    </FlexContainer>
+                                </>
+                            )}<br /><br />
+                        </>
+                    ))}
+                </tbody >
+            </BookStyledTableMobile>
+            <BookTableAddButtonMobile onClick={addRow}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.2518 9.52876C18.2518 14.5422 14.1876 18.6063 9.17424 18.6063C4.16082 18.6063 0.0966492 14.5422 0.0966492 9.52876C0.0966492 4.51535 4.16082 0.451172 9.17424 0.451172C14.1876 0.451172 18.2518 4.51535 18.2518 9.52876ZM9.17429 15.5805C8.61724 15.5805 8.16567 15.1289 8.16567 14.5718V10.5379H4.13115C3.5741 10.5379 3.12252 10.0863 3.12252 9.5293C3.12252 8.97225 3.5741 8.52068 4.13115 8.52068H8.16567V4.48564C8.16567 3.92859 8.61724 3.47702 9.17429 3.47702C9.73133 3.47702 10.1829 3.92859 10.1829 4.48564V8.52068H14.2174C14.7744 8.52068 15.226 8.97225 15.226 9.5293C15.226 10.0863 14.7744 10.5379 14.2174 10.5379H10.1829V14.5718C10.1829 15.1289 9.73133 15.5805 9.17429 15.5805Z" fill="#EAE9E3" />
+                </svg>
+                &nbsp;&nbsp;&nbsp;목차 추가하기
+            </BookTableAddButtonMobile>
+            <BookSubmitModify>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <BookButton type='submit' onClick={onClickUpload}>수정하기</BookButton>
+                <BookButton type='button' onClick={onClickDelete}>삭제하기</BookButton>
+            </BookSubmitModify>
+            <br />
+            <br />
         </BookInfoContainer>
     );
 }
