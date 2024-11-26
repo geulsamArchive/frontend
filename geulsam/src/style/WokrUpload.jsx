@@ -1,6 +1,16 @@
 import styled from "styled-components";
 import arrow from '../assets/images/arrowup.svg'
 
+
+export const WorkUploadContainer = styled.div`
+   @media only screen and (max-width:1023px) {
+width: 90%;
+padding-left: 5%;
+padding-right: 5%;
+background-color: rgba(249, 249, 246, 1);
+}
+`
+
 export const Container = styled.div`
 background-color: rgba(249, 249, 246, 1);
 margin-left:86px;
@@ -115,6 +125,9 @@ overflow: visible;
 `
 
 export const EditorContainer = styled.div`
+ @media only screen and (max-width:1023px) {
+display: none;
+}
      width: 80%;
     background-color: white;
     border-radius: 11px;

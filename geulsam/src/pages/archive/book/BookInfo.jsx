@@ -73,7 +73,12 @@ const BookInfo = () => {
                         {bookData.plate} / {bookData.page}
                     </NoneLinkBookInfos>
                     <ViewerAndLinks>
-                        <PDFView PDF={bookData.url} />
+                        <Desktop>
+                            <PDFView PDF={bookData.url} />
+                        </Desktop>
+                        <Mobile>
+                            <img src={bookData.bookCover} />
+                        </Mobile>
                     </ViewerAndLinks>
                 </BookInfoContents>
                 <Desktop>
@@ -92,8 +97,6 @@ const BookInfo = () => {
                     </BookIndex>
                 ))}
             </BookIndexList>
-
-
             <Mobile>
                 <PDFDownload PDFLink={bookData.url} />
                 <CopyURL />

@@ -1,5 +1,5 @@
 import { B, CalendarTitle } from '../../../style/StyledComponent';
-import { Container, EditorContainer, FileInput, GenreButton, GenreContainer, SentenceContainer, SentenceInput, TitleContainer, TitleInput, UploadButton, VisibleSelect } from '../../../style/WokrUpload';
+import { Container, EditorContainer, FileInput, GenreButton, GenreContainer, SentenceContainer, SentenceInput, TitleContainer, TitleInput, UploadButton, VisibleSelect, WorkUploadContainer } from '../../../style/WokrUpload';
 import { useForms } from '../../../hooks/useForms';
 import { useRef, useState, useEffect } from 'react';
 import Editor from '../../../components/Editor/CKEditor';
@@ -143,7 +143,7 @@ const UploadWork = () => {
     };
 
     return (
-        <>
+        <WorkUploadContainer>
             <CalendarTitle>작품 게시하기</CalendarTitle>
             <Container>
                 <TitleContainer>
@@ -196,7 +196,7 @@ const UploadWork = () => {
                 </EditorContainer>
                 <UploadButton onClick={handleSubmit}>게시하기</UploadButton>
             </Container>
-        </>
+        </WorkUploadContainer>
     );
 };
 

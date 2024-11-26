@@ -609,6 +609,10 @@ height: 800px;
 `;
 
 export const CalendarTitle = styled.div`
+@media only screen and (max-width:1023px) {
+ margin-left: 0px;
+margin-right: 0px;
+}
 color: rgba(87, 86, 85, 1);
 font-family: 'MaruBuri-Regular';
 margin-left: 86px;
