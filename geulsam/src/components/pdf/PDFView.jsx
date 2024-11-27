@@ -43,9 +43,9 @@ function PDFView({ PDF }) {
         <PDFViewerContainer>
             <Document file={PDF} onLoadSuccess={onDocumentLoadSuccess}>
                 <PageRow>
-                    <PDFPage pageNumber={pageNumber} canvasBackground='rgba(235, 235, 235, 1)' scale='0.7' />
+                    <PDFPage pageNumber={pageNumber} canvasBackground='rgba(235, 235, 235, 1)' />
                     {pageNumber + 1 <= numPages && (
-                        <PDFPage pageNumber={pageNumber + 1} canvasBackground='rgba(235, 235, 235, 1)' scale='0.7' />
+                        <PDFPage pageNumber={pageNumber + 1} canvasBackground='rgba(235, 235, 235, 1)' />
                     )}
                 </PageRow>
             </Document>

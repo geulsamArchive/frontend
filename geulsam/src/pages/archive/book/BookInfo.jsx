@@ -6,7 +6,8 @@ import CopyURL from '../../../components/CopyURL/CopyURL';
 import PDFDownload from '../../../components/Download/PDFDownload';
 import { normalAPI } from '../../../apis/Api';
 import { Desktop, Mobile } from '../../../hooks/useMediaQuery';
-import { BookCover, BookCoverContainer } from '../../../style/Book';
+import { BookButton, BookCover, BookCoverContainer } from '../../../style/Book';
+import BookModal from '../../../components/Modal/BookModal.';
 
 const BookInfo = () => {
     const [bookData, setBooktData] = useState({})
@@ -14,6 +15,14 @@ const BookInfo = () => {
     const { bookId } = useParams()
     const [bookIndexList, setBookIndexList] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
+
+    const [PDFModalIsOpen, setPDFModalIsOpen] = useState(false);
+    const CloseModal = () => {
+        setPDFModalIsOpen(false)
+    }
+    const onClickBook = () => {
+        setPDFModalIsOpen(true)
+    }
 
     const navigate = useNavigate();
     const onClickList = () => {
@@ -81,7 +90,8 @@ const BookInfo = () => {
                         </Desktop>
                         <Mobile>
                             <BookCoverContainer>
-                                <BookCover src={bookData.bookCover} />
+                                <BookCover src={bookData.bookCover} onClick={onClickBook} />
+                                <BookButton onClick={onClickBook}>꾹 눌러 문집 미리보기</BookButton>
                             </BookCoverContainer>
                         </Mobile>
                     </ViewerAndLinks>
@@ -139,6 +149,9 @@ const BookInfo = () => {
                         </BookIndexAlign>
                     </AnimatedBookIndexList>
                 }
+            </Mobile>
+            <Mobile>
+                <BookModal isOpen={PDFModalIsOpen} onClose={CloseModal} PDF={bookData.url} />
             </Mobile>
         </BookInfoContainer>
 
