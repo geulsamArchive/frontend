@@ -1046,7 +1046,7 @@ export const BookIndexButtonTop = styled.button`
 align-items: center;
 justify-content: center  ;
     position: fixed;
-    bottom: 194dvw;
+    bottom: 70dvh;
     left:0;
     width: 100dvw;
     background-color: rgba(234, 233, 227, 1);
@@ -1862,8 +1862,8 @@ export const AnimatedBookIndexList = styled(BookIndexList)`
   position: fixed;
   bottom: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
   left: 0;
-  width: 90dvw;
-  height: 90dvh; /* 세로 길이 조정 */
+  width: 93dvw;
+  height: 70dvh; /* 세로 길이 조정 */
 
   background-color: black;
   color: white;
