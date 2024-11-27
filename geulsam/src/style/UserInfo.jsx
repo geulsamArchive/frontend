@@ -52,6 +52,7 @@ align-items: end;
 @media only screen and (max-width:1023px) {
     align-items:center;
     justify-content:center;
+    width:60dvw;
 }
 `
 export const AuthorIntroduceInput = styled.textarea`
