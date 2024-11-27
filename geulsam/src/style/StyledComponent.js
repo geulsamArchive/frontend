@@ -1019,19 +1019,45 @@ border-left: 1px solid black;
 
 export const BookIndexButton = styled.button`
 @media only screen and (max-width:1023px) {
-  height: 45px;
-  background-color: rgba(234, 233, 227, 1); 
-  color: rgba(87, 86, 85, 1);
-  width: 390px;
-  font-family: 'MaruBuri-Regular';
-  font-weight: 700;
-  font-size: 16px;
-  position:fixed;
-  right:0px;
-  left:0px;
-  border:0px;
+    display: flex;
+align-items: center;
+justify-content: space-between  ;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    width: 100dvw;
+    background-color: rgba(234, 233, 227, 1);
+font-family: 'MaruBuri-Regular';
+font-weight: 700;
+font-size: 16px;
+color: rgba(87, 86, 85, 1);
+height:45px ;
+border:0px;
+text-align:center;
+
 }
 `
+export const BookIndexButtonTop = styled.button`
+@media only screen and (max-width:1023px) {
+    display: flex;
+align-items: center;
+justify-content: space-between  ;
+    position: sticky;
+    bottom: 0;
+    left:0;
+    width: 100dvw;
+    background-color: rgba(234, 233, 227, 1);
+font-family: 'MaruBuri-Regular';
+font-weight: 700;
+font-size: 16px;
+color: rgba(87, 86, 85, 1);
+height:45px ;
+border:0px;
+text-align:center;
+
+}
+`
+
 //문집페이지 뷰어와 링크
 export const ViewerAndLinks = styled.div`
 height: 100%;
@@ -1804,6 +1830,7 @@ export const BookIndexList = styled.div`
   overflow-y: auto; /* 긴 내용은 스크롤 가능 */
   padding: 10px;
   margin-left: auto; /* 여유 공간을 왼쪽에 두어 요소가 더 오른쪽으로 이동 */
+  z-index:1000;
 }
   /* 모바일 화면에서 하단 슬라이드 애니메이션 */
   @media only screen and (max-width: 1023px) {
@@ -1823,7 +1850,7 @@ export const AnimatedBookIndexList = styled(BookIndexList)`
   bottom: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
   left: 0;
   width: 90dvw;
-  height: 130vh; /* 세로 길이 조정 */
+  height: 80vh; /* 세로 길이 조정 */
 
   background-color: black;
   color: white;
