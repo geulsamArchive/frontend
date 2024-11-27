@@ -120,7 +120,7 @@ const BookInfo = () => {
                 </URLButton>
                 {!isOpen &&
                     <BookIndexButton onClick={toggleList}>
-                        &nbsp;&nbsp;&nbsp;목차
+                        목차
                     </BookIndexButton>
                 }
                 {isOpen &&

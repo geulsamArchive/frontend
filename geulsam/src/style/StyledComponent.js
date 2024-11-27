@@ -1022,7 +1022,8 @@ export const BookIndexButton = styled.button`
 @media only screen and (max-width:1023px) {
     display: flex;
 align-items: center;
-justify-content: space-between  ;
+text-align:center;
+justify-content: center ;
     position: fixed;
     bottom: 0;
     left:0;
@@ -1043,9 +1044,9 @@ export const BookIndexButtonTop = styled.button`
 @media only screen and (max-width:1023px) {
     display: flex;
 align-items: center;
-justify-content: space-between  ;
-    position: sticky;
-    bottom: 0;
+justify-content: center  ;
+    position: fixed;
+    bottom: 194dvw;
     left:0;
     width: 100dvw;
     background-color: rgba(234, 233, 227, 1);
@@ -1056,7 +1057,6 @@ color: rgba(87, 86, 85, 1);
 height:45px ;
 border:0px;
 text-align:center;
-
 }
 `
 
@@ -1863,7 +1863,7 @@ export const AnimatedBookIndexList = styled(BookIndexList)`
   bottom: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
   left: 0;
   width: 90dvw;
-  height: 80vh; /* 세로 길이 조정 */
+  height: 90dvh; /* 세로 길이 조정 */
 
   background-color: black;
   color: white;
