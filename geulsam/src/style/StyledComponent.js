@@ -1034,8 +1034,9 @@ font-size: 16px;
 color: rgba(87, 86, 85, 1);
 height:45px ;
 border:0px;
-text-align:center;
-
+text-align:center;    
+    position: fixed ;
+    z-index: 10;
 }
 `
 export const BookIndexButtonTop = styled.button`
