@@ -49,6 +49,10 @@ align-items: end;
     background-color: rgba(249, 249, 246, 1);
     filter: drop-shadow(0 2px 24px rgba(182, 182, 182, 0.15));
     border-radius: 11px;
+@media only screen and (max-width:1023px) {
+    align-items:center;
+    justify-content:center;
+}
 `
 export const AuthorIntroduceInput = styled.textarea`
 background-color: inherit;
@@ -60,7 +64,9 @@ height: 74px;
 font-size: 14px;
 padding: 20px;
 width: 1000px;
-    
+    @media only screen and (max-width:1023px) {
+    width:45dvw;
+    }
 `
 export const TextCounter = styled.div`
 font-size: 18px;
@@ -78,6 +84,9 @@ font-family: 'MaruBuri-Regular';
 font-size: 14px;
 border:1.5px solid rgba(129, 128, 127, 1);
     margin-right: 10px;
+    @media only screen and (max-width:1023px) {
+    margin-bottom:3dvw;
+    }
 `
 
 export const AuthorContainer = styled.div`
@@ -86,6 +95,9 @@ export const AuthorContainer = styled.div`
 `
 export const AuthorKewordContainer = styled.div`
     margin-top: 10px;
+    @media only screen and (max-width:1023px) {
+    width:5dvw;
+    }
 `
 export const LeftWord = styled.div`
     width: 120px;

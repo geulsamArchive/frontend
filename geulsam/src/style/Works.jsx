@@ -45,6 +45,10 @@ padding-bottom: 10px;
 padding-top:10px ;
 display: flex;
 justify-content: space-between;
+@media only screen and (max-width:1023px) {
+    width:40dvw;
+    border:none;
+}
 
 `
 export const Searchfailed = styled.div`
@@ -60,21 +64,33 @@ export const WorkTitleType = styled.div`
     width: 500px;
     align-items: center;
     text-align: left;
+
 `
 export const WorkType = styled.div`
     width: 100px;
     color: rgba(171, 170, 170, 1);
     margin-left: 10px;
+    @media only screen and (max-width:1023px) {
+    width:13dvw;
+    }
 `
 
 export const WorkInfoRight = styled.div`
 display: flex;
 align-items: center;
-text-align: right;
+text-align: center;
     margin-right: 20px;
+    @media only screen and (max-width:1023px) {
+    width:50dvw;
+    margin-right:0px;
+    }
 `
 export const WorkCreatedAt = styled.div`
     width: 200px;
+        @media only screen and (max-width:1023px) {
+        bottom:0px;
+        color: rgba(171, 170, 170, 1);
+        }
 `
 
 export const Space = styled.span`
@@ -84,6 +100,9 @@ margin-left: 30px;
 export const WorkTitle = styled.div`
 word-break: normal;
 width: 500px;
+@media only screen and (max-width:1023px) {
+    width:30dvw;
+}
 `
 
 export const ModifyButtons = styled.div`
@@ -280,6 +299,25 @@ export const AuthorWorkContainer = styled.div`
     width: 75dvw;
     margin-top: 100px;
     border-top: 1px solid black;
+    @media only screen and (max-width:1023px) {
+    display:none;
+    }
+`
+export const MobileAuthorWorkContainer = styled.div`
+    display:none;
+  @media only screen and (max-width: 1023px) {
+    display: flex;
+    flex-direction:column;
+    height: 90dvw;
+        border-top:1px solid rgba(129, 128, 127, 1);
+        margin-top:10dvw;
+
+  }
+`
+export const MobileWork = styled.div`
+@media only screen and (max-width: 1023px) {
+    border-bottom:1px solid rgba(129, 128, 127, 1);
+}
 `
 export const AuthorWorkInfo = styled.div`
     width: 75dvw;
