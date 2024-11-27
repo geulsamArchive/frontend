@@ -29,6 +29,7 @@ width: 50dvw;
 export const MobilePDFViewerContainer = styled.div`
 font-family: 'MaruBuri-Regular';
 width: 80dvw;
+
 `
 
 
@@ -51,4 +52,12 @@ export const MobilePdfPage = styled(Page)`
         top: 0;
         left: 0;
     }
+`
+
+export const SpaceBot = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    color: rgba(249, 249, 246, 1);
 `

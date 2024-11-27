@@ -3,7 +3,7 @@ import { Page, Document, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import { Centering, PageRow, PDFPage } from '../../style/StyledComponent';
-import { Button, MobilePdfPage, MobilePDFViewerContainer, PageInput, PDFViewerContainer, Spaceb } from '../../style/PDFViewer';
+import { Button, MobilePdfPage, MobilePDFViewerContainer, PageInput, PDFViewerContainer, Spaceb, SpaceBot } from '../../style/PDFViewer';
 
 function MobilePDF({ PDF }) {
     useEffect(() => {
@@ -40,18 +40,18 @@ function MobilePDF({ PDF }) {
             <Document file={PDF} onLoadSuccess={onDocumentLoadSuccess}>
                 <MobilePdfPage pageNumber={pageNumber} canvasBackground="rgba(235, 235, 235, 1)" />
             </Document>
-            <Spaceb>
-                <Centering>
-                    <Button onClick={() => {
-                        const newPage = pageNumber > 1 ? pageNumber - 1 : 1;
-                        setPageNumber(newPage);
-                        setInputValue(newPage); // 입력 필드 동기화.
-                    }}>
-                        <svg width="12" height="19" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.6839 16.2533L2.8418 9.41119L9.6839 2.56909" stroke="#575655" strokeWidth="4" strokeLinecap="round" />
-                        </svg>
-                    </Button>
-                    &nbsp;&nbsp;
+            <SpaceBot>
+                <Button onClick={() => {
+                    const newPage = pageNumber > 1 ? pageNumber - 1 : 1;
+                    setPageNumber(newPage);
+                    setInputValue(newPage); // 입력 필드 동기화.
+                }}>
+                    <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.68439 15.9473L2.84229 9.10516L9.68439 2.26305" stroke="#F9F9F6" stroke-width="4" stroke-linecap="round" />
+                    </svg>
+                </Button>
+                &nbsp;&nbsp;
+                <div>
                     <PageInput
                         value={inputValue}
                         onChange={handlePageInput}
@@ -59,18 +59,19 @@ function MobilePDF({ PDF }) {
                         min="1"
                         max={numPages}
                     />/{numPages}
-                    &nbsp;&nbsp;
-                    <Button onClick={() => {
-                        const newPage = pageNumber < numPages ? pageNumber + 1 : numPages;
-                        setPageNumber(newPage);
-                        setInputValue(newPage); // 입력 필드 동기화.
-                    }}>
-                        <svg width="12" height="19" viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.3161 16.2533L9.1582 9.41119L2.3161 2.56909" stroke="#575655" strokeWidth="4" strokeLinecap="round" />
-                        </svg>
-                    </Button>
-                </Centering>
-            </Spaceb>
+                </div>
+                &nbsp;&nbsp;
+                <Button onClick={() => {
+                    const newPage = pageNumber < numPages ? pageNumber + 1 : numPages;
+                    setPageNumber(newPage);
+                    setInputValue(newPage); // 입력 필드 동기화.
+                }}>
+                    <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.31561 15.9473L9.15771 9.10516L2.31561 2.26305" stroke="#F9F9F6" stroke-width="4" stroke-linecap="round" />
+                    </svg>
+
+                </Button>
+            </SpaceBot>
         </MobilePDFViewerContainer>
     );
 };
