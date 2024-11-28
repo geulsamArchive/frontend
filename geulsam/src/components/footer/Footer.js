@@ -6,8 +6,11 @@ import { Desktop, Mobile } from '../../hooks/useMediaQuery';
 const Footer = () => {
     const location = useLocation();
 
-    const isHiddenOnMobile = location.pathname === '/' || location.pathname === '/main';
-
+    const isHiddenOnMobile =
+        location.pathname === '/' ||
+        location.pathname === '/main' ||
+        location.pathname.startsWith('/work/') ||
+        location.pathname.startsWith('/archive/book/');
     return (
         <>
             <Desktop>
