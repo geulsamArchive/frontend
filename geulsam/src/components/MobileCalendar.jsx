@@ -48,6 +48,7 @@ const MobileCalendar = ({ data }) => {
         <TitleBold>{data[monthIdx].month}</TitleBold>
         {monthIdx < data.length - 1 ? (
           <svg
+            onClick={handleNextMonth}
             width="11"
             height="17"
             viewBox="0 0 11 17"
