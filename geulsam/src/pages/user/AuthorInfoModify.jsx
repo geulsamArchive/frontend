@@ -6,7 +6,7 @@ import { useAuth } from '../../store/Auth';
 import { CheckTitleLength } from '../../components/CheckLength';
 import { normalAPI } from '../../apis/Api';
 import { useNavigate } from 'react-router-dom';
-import { AuthorWorkContainer, AuthorWorkInfo, Margin, ModifyButtons, Trash, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoModify, WorkInfoRight, WorkLink, WorkTitle, WorkTitleType, WorkType } from '../../style/Works';
+import { MobileWork, MobileAuthorWorkContainer, AuthorWorkContainer, AuthorWorkInfo, Margin, ModifyButtons, Trash, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoModify, WorkInfoRight, WorkLink, WorkTitle, WorkTitleType, WorkType } from '../../style/Works';
 import Pagination from '../../components/Paging/Pagination';
 import trashcan from '../../assets/images/trashcan.png'
 import lock from '../../assets/images/locked.svg'
@@ -220,6 +220,7 @@ const AuthorInfoModify = () => {
                         <AuthorKewordInput value={keword2} onChange={onChangeKeyword2} placeholder={authorInfo.keyword[2]} maxLength='6' />
                     </AuthorKewordContainer>
                 </AuthorContainer>
+
                 <AuthorWorkContainer>
                     {works.map((w) => (
                         <>
@@ -252,6 +253,41 @@ const AuthorInfoModify = () => {
                         </>
                     ))}
                 </AuthorWorkContainer>
+
+                <MobileAuthorWorkContainer>
+                    {works.map((w) => (
+                        <>
+                            <MobileWork>
+                                <WorkLink to={`/work/${w.contentId}`}>
+                                    <WorkInfoModify>
+                                        <WorkTitleType>
+                                            <WorkType>
+                                                {translateType(w.type)}
+                                            </WorkType>
+                                            {checkVisible(w.isVisible)}
+                                            <WorkTitle>
+                                                {CheckTitleLength(w.title, 25)}
+                                            </WorkTitle>
+                                        </WorkTitleType>
+                                        <WorkInfoRight>
+                                            <WorkCreatedAt>
+                                                {w.createdAt}
+                                            </WorkCreatedAt>
+                                            <ModifyButtons>
+                                                <svg width="20" height="22" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={() => deleteWork(w.contentId)}>
+                                                    <path d="M8.92993 16.8828L8.92993 12.7742" stroke="#575655" stroke-width="1.77419" stroke-linecap="round" />
+                                                    <path d="M13.7429 16.8828L13.7429 12.7742" stroke="#575655" stroke-width="1.77419" stroke-linecap="round" />
+                                                    <path d="M3.71584 6.20064V18.7483C3.71584 20.968 3.71584 22.0779 4.4054 22.7674C5.09497 23.457 6.20481 23.457 8.42449 23.457H13.4462C15.6659 23.457 16.7757 23.457 17.4653 22.7674C18.1548 22.0779 18.1548 20.968 18.1548 18.7484V6.20064M1.03833 5.67773H20.9803" stroke="#575655" stroke-width="1.77419" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M9.01192 1.57406C9.14903 1.48669 9.45115 1.4095 9.87143 1.35444C10.2917 1.29938 10.8067 1.26953 11.3364 1.26953C11.8662 1.26953 12.3811 1.29938 12.8014 1.35444C13.2217 1.4095 13.5238 1.48669 13.6609 1.57406" stroke="#575655" stroke-width="1.77419" stroke-linecap="round" />
+                                                </svg>
+                                            </ModifyButtons>
+                                        </WorkInfoRight>
+                                    </WorkInfoModify>
+                                </WorkLink>
+                            </MobileWork>
+                        </>
+                    ))}
+                </MobileAuthorWorkContainer>
             </BookInfoContainer>
             <Margin>
                 <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
