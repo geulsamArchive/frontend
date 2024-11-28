@@ -112,6 +112,16 @@ export const WorkInfoContainer = styled.div`
   padding-top: 20px;
   background-color: rgba(249, 249, 246, 1);
 `;
+export const AdminInfoContainer = styled.div`
+  font-family: 'MaruBuri-Regular';
+  width: 90%;
+  margin-left: 4%;
+  padding-top: 20px;
+  background-color: rgba(249, 249, 246, 1);
+  @media only screen and (max-width: 1024px) {
+  flex-direction:column;
+  }
+`;
 export const WorkButtons = styled.div`
   height: auto;
   width: auto;
@@ -265,9 +275,9 @@ export const GenreButton = styled.button`
     border-radius: 30px;
     border: 1px solid rgba(87, 86, 85, 1);
     background-color: ${(props) =>
-      props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
+    props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
     color: ${(props) =>
-      props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
+    props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
     cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
     width: auto;
     padding-right: 15px;
