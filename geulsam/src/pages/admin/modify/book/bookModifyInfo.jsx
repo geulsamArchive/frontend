@@ -32,11 +32,16 @@ const BookUpload = () => {
     const [bookContentList, setBookContentList] = useState([]);
 
     const addBookContent = (bookContentId, title, name, page) => {
-        // bookContentId가 배열로 들어오고 첫 번째 요소만 필요할 경우, 배열에서 꺼내 단일 값으로 설정
-        const contentId = Array.isArray(bookContentId) ? bookContentId[0] : bookContentId;
+        // bookContentId가 빈 문자열 또는 공백일 경우 null로 설정
+        const contentId =
+            (!bookContentId || bookContentId.trim() === "" || bookContentId === " " || bookContentId === undefined) ? null :
+                (Array.isArray(bookContentId) ? bookContentId[0] : bookContentId);
+
+        console.log("처리한 contentId", contentId);
         const newContent = { contentId, title, name, page };
         console.log(contentId, title, name, page);
         console.log(newContent);
+
         setBookContentList([...bookContentList, newContent]);
     };
 
@@ -76,6 +81,9 @@ const BookUpload = () => {
                 console.log(workData);
                 if (workData) {
                     console.log(id, title, author, page);
+                    if (!id) {
+                        id = null;
+                    }
                     addBookContent(id, title, author, page); // 데이터 추가
                 }
                 const updatedRows = [...rows];
@@ -271,8 +279,9 @@ const BookUpload = () => {
             page: row.page ?? null,
             title: row.title ?? null,
             name: row.author ?? null,
-            contentId: Array.isArray(row.workId) ? row.workId[0] : row.workId // 배열일 경우 첫 번째 값만 사용
+            contentId: (Array.isArray(row.workId) ? row.workId[0] : row.workId) ?? null,// 배열일 경우 첫 번째 값만 사용
         }));
+        console.log("contentId", contentListWithUuid[4]);
         console.log("uuid가 추가된 list", contentListWithUuid);
         formData.append('bookContentList', JSON.stringify(contentListWithUuid));
 
