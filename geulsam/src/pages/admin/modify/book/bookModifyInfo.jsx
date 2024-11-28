@@ -216,6 +216,7 @@ const BookUpload = () => {
     const onChangePdf = (e) => {
         setPdf(e.target.files[0]);
     }
+    const [refresh, setRefresh] = useState(false); // 상태 추가
 
     const onClickUpload = async (e) => {
         e.preventDefault();
@@ -302,6 +303,8 @@ const BookUpload = () => {
             console.log(res);
             if (res.status == 200) {
                 alert('문집 수정에 성공했습니다.');
+                setRefresh(true); // 상태 변경하여 리렌더링 트리거
+
             }
         } catch (error) {
             console.error(error);
@@ -321,6 +324,11 @@ const BookUpload = () => {
             }
         }
     };
+    useEffect(() => {
+        if (refresh) {
+            window.location.reload(); // 페이지 새로고침
+        }
+    }, [refresh]);
 
     const onClickDelete = async () => {
         const accessToken = localStorage.getItem('access');

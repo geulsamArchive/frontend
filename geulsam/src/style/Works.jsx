@@ -127,7 +127,14 @@ export const WorkButtons = styled.div`
   width: auto;
   border-left: 1px solid black;
 `;
-
+export const AuthorShareButtons = styled.div`
+  height: auto;
+  width: auto;
+  border-left: 1px solid black;
+    @media only screen and (max-width: 1024px) {
+    border:none;
+    }
+`;
 export const MobileWorkButtons = styled.div`
   background-color: rgba(249, 249, 246, 1);
 `;
@@ -356,6 +363,16 @@ export const MobileAuthorWorkContainer = styled.div`
     height: 90dvw;
     border-top: 1px solid rgba(129, 128, 127, 1);
     margin-top: 10dvw;
+  }
+`;
+export const MobileAuthorInfoWorkContainer = styled.div`
+  display: none;
+  @media only screen and (max-width: 1023px) {
+    display: flex;
+    flex-direction: column;
+    height: 90dvw;
+    border-top: 1px solid rgba(129, 128, 127, 1);
+    margin-bottom:13dvw;
   }
 `;
 export const MobileWork = styled.div`

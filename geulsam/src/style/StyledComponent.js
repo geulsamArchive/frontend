@@ -600,7 +600,30 @@ justify-content: center;
 align-items: center;
 cursor: pointer;
 `
-
+export const URLButtonForAuthor = styled.button`
+@media only screen and (max-width:1023px) {
+  border: 1px solid rgba(87, 86, 85, 1);
+  border-radius: 30px;
+  height: 40px;
+  color: rgba(87, 86, 85, 1);
+  width: 90dvw;
+font-family: 'MaruBuri-Regular';
+font-weight: 700;
+font-size: 16px;
+margin-bottom: 20px;
+}
+border-top-right-radius:30px;
+border-bottom-right-radius:30px;
+border: 1px solid black;
+border-left: none;
+background-color:transparent;
+width: 84px;
+height: 52px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+`
 
 
 
@@ -1011,6 +1034,15 @@ display: flex;
 justify-content: space-between;
 align-items: stretch;
 height: auto;
+`
+export const AuthorInfoAndButton = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: stretch;
+height: auto;
+@media only screen and (max-width:1023px) {
+flex-direction:column;
+}
 `
 export const BookButtons = styled.div`
 height: 150dvh;
