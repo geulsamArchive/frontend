@@ -34,6 +34,17 @@ export const WorkInfo = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+export const WorkInfoForAuthorInfo = styled.div`
+width: 75dvw;
+font-size: 14px;
+border-bottom: 1px solid black;
+padding-bottom: 14px;
+padding-top: 14px;
+display: flex;
+justify-content: space-between;
+  @media only screen and (max-width: 1023px) {
+  width:90dvw;
+`;
 export const WorkInfoModify = styled.div`
   width: 78dvw;
   font-size: 14px;
@@ -78,6 +89,16 @@ export const WorkInfoRight = styled.div`
   @media only screen and (max-width: 1023px) {
     width: 50dvw;
     margin-right: 0px;
+  }
+`;
+export const AuthorWorkInfoRight = styled.div`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-right: 20px;
+  @media only screen and (max-width: 1023px) {
+    width: 50dvw;
+    margin-right: 60dvw;
   }
 `;
 export const WorkCreatedAt = styled.div`
@@ -366,8 +387,11 @@ export const MobileAuthorWorkContainer = styled.div`
   }
 `;
 export const MobileAuthorInfoWorkContainer = styled.div`
-  display: none;
+    width: 75dvw;
+  margin-top: 100px;
+  border-top: 1px solid black;
   @media only screen and (max-width: 1023px) {
+  margin-top:0dvw;
     display: flex;
     flex-direction: column;
     height: 90dvw;
