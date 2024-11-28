@@ -30,6 +30,7 @@ import Modal from 'react-modal';
 import { CheckTitleLength } from './../../../components/CheckLength';
 import { Desktop, Mobile } from '../../../hooks/useMediaQuery';
 import { useAuth } from '../../../store/Auth';
+import MobileNovelViewer from '../viewer/MobileNovelViewer';
 
 const WorkInfo = () => {
   const [workData, setWorkData] = useState({});
@@ -43,6 +44,8 @@ const WorkInfo = () => {
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
+
+  const openNovel = () => setNovelModalIsOpen(true);
 
   const navigate = useNavigate();
   const onClickList = () => {
@@ -168,6 +171,7 @@ const WorkInfo = () => {
                     viewBox="0 0 183 57"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    onClick={openNovel}
                   >
                     <rect
                       x="1.08569"
@@ -330,6 +334,7 @@ const WorkInfo = () => {
           closeModal={closeModal}
         />
       </Modal>
+      <MobileNovelViewer isOpen={novelModalIsOpen} novelHTML={novel} />
       <Comments id={workData.id} />
     </>
   );
