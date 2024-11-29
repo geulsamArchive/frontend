@@ -1283,7 +1283,12 @@ export const Paging = styled.div`
 }
 margin-left: ${({ isDark }) => (isDark ? '-0.5vw' : '5vw')};
 padding-bottom: 50px;
-background-color:${({ isDark }) => (isDark ? 'rgba(45, 43, 42, 1)' : ' rgba(249, 249, 246, 1)')};;
+background-color: ${({ isDark }) =>
+    isDark === 'inherit'
+      ? 'inherit'
+      : isDark
+        ? 'rgba(45, 43, 42, 1)'
+        : 'rgba(249, 249, 246, 1)'};
 `
 
 export const PageButton = styled.button`
@@ -1870,6 +1875,9 @@ export const AnimatedBookIndexList = styled(BookIndexList)`
   padding: 20px;
   transition: bottom 0.5s ease-in-out;
   z-index: 1000;
+  overflow: scroll;
+  font-family: 'MaruBuri-Regular';
+
 }
 `;
 
