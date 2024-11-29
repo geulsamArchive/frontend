@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { normalAPI } from '../../../apis/Api';
-import { B, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookInfos, BookTitle, NoneLinkBookInfos } from '../../../style/StyledComponent';
-import { AuthorWorkContainer, AuthorWorkInfo, Margin, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoRight, WorkLink, WorkTitle, WorkTitleType, WorkType } from '../../../style/Works';
-import CopyURL from '../../../components/CopyURL/CopyURL';
+import { AuthorInfoAndButton, B, BookInfoAndButton, BookInfoContainer, BookInfoContents, BookInfos, BookTitle, NoneLinkBookInfos } from '../../../style/StyledComponent';
+import { WorkInfoForAuthorInfo, AuthorWorkInfoRight, AuthorShareButtons, MobileAuthorInfoWorkContainer, AuthorWorkContainer, AuthorWorkInfo, Margin, WorkButtons, WorkCreatedAt, WorkInfo, WorkInfoRight, WorkLink, WorkTitle, WorkTitleType, WorkType } from '../../../style/Works';
+import CopyURLForAuthor from '../../../components/CopyURL/CopyURLforAuthor';
 import { Accordion, GuestBook } from '../../../components/Comment/Comments';
 import { CheckTitleLength } from '../../../components/CheckLength';
 import { Desktop } from '../../../hooks/useMediaQuery';
@@ -72,7 +72,7 @@ const AuthorInfo = () => {
                 <BookTitle>
                     {author.name}
                 </BookTitle>
-                <BookInfoAndButton>
+                <AuthorInfoAndButton>
                     <BookInfoContents>
                         <NoneLinkBookInfos>
                             <B>
@@ -94,10 +94,10 @@ const AuthorInfo = () => {
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             {author.introduce}
                         </NoneLinkBookInfos>
-                        <AuthorWorkContainer>
+                        <MobileAuthorInfoWorkContainer>
                             {work.map((w) => (
                                 <WorkLink to={`/work/${w.contentId}`}>
-                                    <WorkInfo>
+                                    <WorkInfoForAuthorInfo>
                                         <WorkTitleType>
                                             <WorkType>
                                                 {translateType(w.type)}
@@ -106,25 +106,25 @@ const AuthorInfo = () => {
                                                 {CheckTitleLength(w.title, 25)}
                                             </WorkTitle>
                                         </WorkTitleType>
-                                        <WorkInfoRight>
+                                        <AuthorWorkInfoRight>
                                             <WorkCreatedAt>
                                                 {w.createdAt}
                                             </WorkCreatedAt>
-                                        </WorkInfoRight>
-                                    </WorkInfo>
+                                        </AuthorWorkInfoRight>
+                                    </WorkInfoForAuthorInfo>
                                 </WorkLink>
                             ))}
                             <Desktop>
                                 {work.length < 8 && renderEmptyLogs(8 - work.length)}
                             </Desktop>
-                        </AuthorWorkContainer>
+                        </MobileAuthorInfoWorkContainer>
                     </BookInfoContents>
-                    <WorkButtons>
+                    <AuthorShareButtons>
                         <br />
                         <br />
-                        <CopyURL />
-                    </WorkButtons>
-                </BookInfoAndButton>
+                        <CopyURLForAuthor />
+                    </AuthorShareButtons>
+                </AuthorInfoAndButton>
             </BookInfoContainer>
             <Margin>
                 <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
@@ -135,3 +135,6 @@ const AuthorInfo = () => {
 };
 
 export default AuthorInfo;
+
+
+

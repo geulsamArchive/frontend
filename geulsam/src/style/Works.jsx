@@ -34,6 +34,17 @@ export const WorkInfo = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+export const WorkInfoForAuthorInfo = styled.div`
+width: 75dvw;
+font-size: 14px;
+border-bottom: 1px solid black;
+padding-bottom: 14px;
+padding-top: 14px;
+display: flex;
+justify-content: space-between;
+  @media only screen and (max-width: 1023px) {
+  width:90dvw;
+`;
 export const WorkInfoModify = styled.div`
   width: 78dvw;
   font-size: 14px;
@@ -80,6 +91,16 @@ export const WorkInfoRight = styled.div`
     margin-right: 0px;
   }
 `;
+export const AuthorWorkInfoRight = styled.div`
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-right: 20px;
+  @media only screen and (max-width: 1023px) {
+    width: 50dvw;
+    margin-right: 60dvw;
+  }
+`;
 export const WorkCreatedAt = styled.div`
   width: 200px;
   @media only screen and (max-width: 1023px) {
@@ -112,12 +133,29 @@ export const WorkInfoContainer = styled.div`
   padding-top: 20px;
   background-color: rgba(249, 249, 246, 1);
 `;
+export const AdminInfoContainer = styled.div`
+  font-family: 'MaruBuri-Regular';
+  width: 90%;
+  margin-left: 4%;
+  padding-top: 20px;
+  background-color: rgba(249, 249, 246, 1);
+  @media only screen and (max-width: 1024px) {
+  flex-direction:column;
+  }
+`;
 export const WorkButtons = styled.div`
   height: auto;
   width: auto;
   border-left: 1px solid black;
 `;
-
+export const AuthorShareButtons = styled.div`
+  height: auto;
+  width: auto;
+  border-left: 1px solid black;
+    @media only screen and (max-width: 1024px) {
+    border:none;
+    }
+`;
 export const MobileWorkButtons = styled.div`
   background-color: rgba(249, 249, 246, 1);
 `;
@@ -265,9 +303,9 @@ export const GenreButton = styled.button`
     border-radius: 30px;
     border: 1px solid rgba(87, 86, 85, 1);
     background-color: ${(props) =>
-      props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
+    props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
     color: ${(props) =>
-      props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
+    props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
     cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
     width: auto;
     padding-right: 15px;
@@ -346,6 +384,19 @@ export const MobileAuthorWorkContainer = styled.div`
     height: 90dvw;
     border-top: 1px solid rgba(129, 128, 127, 1);
     margin-top: 10dvw;
+  }
+`;
+export const MobileAuthorInfoWorkContainer = styled.div`
+    width: 75dvw;
+  margin-top: 100px;
+  border-top: 1px solid black;
+  @media only screen and (max-width: 1023px) {
+  margin-top:0dvw;
+    display: flex;
+    flex-direction: column;
+    height: 90dvw;
+    border-top: 1px solid rgba(129, 128, 127, 1);
+    margin-bottom:13dvw;
   }
 `;
 export const MobileWork = styled.div`

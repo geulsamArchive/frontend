@@ -61,9 +61,13 @@ const BookInfo = () => {
   };
 
   const handleWorkClick = (id) => {
-    navigate(`/work/${id}`); // 작품 페이지로 이동
+    if (!id || id === "null") { // id가 null, undefined, 또는 "null"일 때 처리
+      alert("아직 등록되지 않은 작품입니다.");
+      window.location.reload(); // 페이지 새로고침
+      return; // navigate 호출 방지
+    }
+    navigate(`/work/${id}`); // id가 유효할 경우 작품 페이지로 이동
   };
-
   const toggleList = () => {
     setIsOpen(!isOpen);
   };

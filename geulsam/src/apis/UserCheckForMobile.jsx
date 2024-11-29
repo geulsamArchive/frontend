@@ -2,7 +2,7 @@ import { normalAPI } from "./Api";
 import React from "react";
 import { useAuth } from "../store/Auth";
 
-export const UserCheck = async (navigate, logout) => {
+export const UserCheckForMobile = async (navigate, logout) => {
     const accessToken = localStorage.getItem('access');
     const refreshToken = localStorage.getItem('refresh');
 
@@ -21,11 +21,9 @@ export const UserCheck = async (navigate, logout) => {
             const userRoles = response.data.data.roles;
             if (userRoles.includes('ROLE_ADMIN')) {
                 console.log('어드민 권한 확인 완료');
-                console.log("userRoles", userRoles);
                 return userRoles;
                 // 어드민 페이지에 접근 허용
             } else {
-                alert('어드민 권한이 없습니다.');
                 // 어드민 권한이 없을 경우, 메인 페이지로 리다이렉트
                 navigate('/main');
                 return false;
@@ -55,7 +53,7 @@ export const UserCheck = async (navigate, logout) => {
                         localStorage.setItem('refresh', refreshToken);
                     }
                     // 토큰 재발급 후 다시 유저 체크
-                    await UserCheck(navigate, logout);
+                    await UserCheckForMobile(navigate, logout);
 
                 }
             } catch (err) {

@@ -7,20 +7,35 @@ import { normalAPI } from '../../../../apis/Api';
 import { useAuth } from '../../../../store/Auth';
 
 const resizeFile = (file) =>
-    new Promise((resolve) => {
+    new Promise((resolve, reject) => {
+        // 파일 형식이 jpg 또는 png인지 확인
+        const validFormats = ["image/jpeg", "image/png"];
+        if (!validFormats.includes(file.type)) {
+            reject(new Error("지원하지 않는 파일 형식입니다."));
+            return;
+        }
+
+        // MIME 타입에 따라 형식 지정
+        const format = file.type === "image/png" ? "PNG" : "JPEG";
+
         Resizer.imageFileResizer(
             file,
-            700,
-            700,
-            "JPEG",
-            80,
-            0,
+            700, // 가로 크기
+            700, // 세로 크기
+            format, // 출력 형식
+            80, // 품질 (0~100)
+            0, // 회전 (0도)
             (uri) => {
-                resolve(uri);
+                resolve(uri); // 성공 시 리턴
             },
-            "file"
+            "file", // 반환 형식
+            (error) => {
+                reject(error); // 에러 핸들링
+            }
         );
     });
+
+
 
 const PosterUpload = () => {
     const { logout } = useAuth();

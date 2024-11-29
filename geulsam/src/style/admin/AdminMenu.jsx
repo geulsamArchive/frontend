@@ -12,6 +12,9 @@ width: 85dvw;
     border-bottom: 2px solid rgba(87, 86, 85, 1);
     font-size: 22px;
     font-weight: 700;
+        @media only screen and (max-width: 1024px) {
+    margin-left:1dvw;
+    }
 `
 
 export const AdminMenu = styled.div`
@@ -31,4 +34,8 @@ export const MenuLink = styled(Link)`
 export const AdminMenus = styled.div`
     display: flex;
     justify-content: space-between;
+    @media only screen and (max-width: 1024px) {
+    flex-direction:column;
+    margin-left:1dvw;
+    }
 `

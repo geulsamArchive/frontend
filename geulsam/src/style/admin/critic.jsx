@@ -72,6 +72,10 @@ export const CriticLogUploads = styled.div`
 export const CriticLogUploadsSecondLine = styled.div`
     display: flex;
     gap: 30px;
+    @media only screen and (max-width: 1024px) {
+    flex-direction:column;
+    }
+
 `
 
 export const ContentsInfo = styled.div`
