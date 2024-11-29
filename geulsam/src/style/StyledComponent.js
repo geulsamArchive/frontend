@@ -1902,7 +1902,7 @@ export const AnimatedBookIndexList = styled(BookIndexList)`
   left: 0;
   width: 93dvw;
   height: 70dvh; /* 세로 길이 조정 */
-
+overflow: scroll;
   background-color: black;
   color: white;
   padding: 20px;
@@ -1917,6 +1917,7 @@ export const AnimatedBookIndexList = styled(BookIndexList)`
 export const BookIndexAlign = styled.div`
   flex-direction: column; /* 세로 방향으로 정렬 */
     align-items: flex-start;
+    overflow: scroll;
 
 `;
 export const BookIndexHeader = styled.div`
