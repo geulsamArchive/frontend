@@ -610,6 +610,7 @@ export const URLButtonForAuthor = styled.button`
 font-family: 'MaruBuri-Regular';
 font-weight: 700;
 font-size: 16px;
+margin-top:10dvw;
 margin-bottom: 30px;
 }
 border-top-right-radius:30px;

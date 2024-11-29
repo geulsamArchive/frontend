@@ -40,13 +40,14 @@ export const WorkInfo = styled.div`
 export const WorkInfoForAuthorInfo = styled.div`
   width: 75dvw;
   font-size: 14px;
-  border-bottom: 1px solid black;
   padding-bottom: 14px;
   padding-top: 14px;
   display: flex;
+      border-top: 1px solid rgba(129, 128, 127, 1);
   justify-content: space-between;
   @media only screen and (max-width: 1023px) {
     width: 90dvw;
+    border-top: 1px solid rgba(129, 128, 127, 1);
   }
 `;
 export const WorkInfoModify = styled.div`
@@ -307,9 +308,9 @@ export const GenreButton = styled.button`
     border-radius: 30px;
     border: 1px solid rgba(87, 86, 85, 1);
     background-color: ${(props) =>
-      props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
+    props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
     color: ${(props) =>
-      props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
+    props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
     cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
     width: auto;
     padding-right: 15px;
@@ -393,14 +394,13 @@ export const MobileAuthorWorkContainer = styled.div`
 export const MobileAuthorInfoWorkContainer = styled.div`
   width: 75dvw;
   margin-top: 100px;
-  border-top: 1px solid black;
   @media only screen and (max-width: 1023px) {
     margin-top: 0dvw;
     display: flex;
     flex-direction: column;
     height: 90dvw;
-    border-top: 1px solid rgba(129, 128, 127, 1);
     margin-bottom: 13dvw;
+    margin-top:5dvw;
   }
 `;
 export const MobileWork = styled.div`

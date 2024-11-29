@@ -95,9 +95,12 @@ const AuthorInfo = () => {
                             {author.introduce}
                         </NoneLinkBookInfos>
                         <MobileAuthorInfoWorkContainer>
-                            {work.map((w) => (
+                            {work.map((w, index) => (
                                 <WorkLink to={`/work/${w.contentId}`}>
-                                    <WorkInfoForAuthorInfo>
+                                    <WorkInfoForAuthorInfo style={{
+                                        borderBottom: index === work.length - 1 ? '1px solid rgba(129, 128, 127, 1)' : 'none',
+                                    }}
+                                    >
                                         <WorkTitleType>
                                             <WorkType>
                                                 {translateType(w.type)}
