@@ -294,7 +294,7 @@ export const GuestBook = ({ contentId }) => {
   }, [page]);
 
   return (
-    <div>
+    <CommentAllContainer>
       <CommentInputContainer>
         <CommentInput
           value={writing}
@@ -392,12 +392,12 @@ export const GuestBook = ({ contentId }) => {
         ))}
       </CommentsContainer>
       <Pagination
-        isDark="true"
+        isDark="inherit"
         page={page}
         totalPage={totalPage}
         onChangePage={setPage}
       />
-    </div>
+    </CommentAllContainer>
   );
 };
 
