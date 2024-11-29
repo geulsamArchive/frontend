@@ -54,6 +54,13 @@ const CriticLog = () => {
     }
   };
 
+  const handleCopyClipBoard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('클로버노트의 비밀번호가 복사되었어요. Ctrl+V를 입력해주세요');
+    } catch (err) {}
+  };
+
   useEffect(() => {
     getCriticLogs();
   }, [page, keyword]);
@@ -81,6 +88,8 @@ const CriticLog = () => {
             />
           </MarginRight>
         </Centering>
+        클로버노트 비밀번호를 클릭하면 복사할 수 있습니다.
+        <br />
         <CriticLogsContainer>
           {criticList.length === 0 ? (
             <>
@@ -112,7 +121,13 @@ const CriticLog = () => {
                   <LogRight>
                     <LogName>{log.userName}</LogName>
                     <LogDate>{formatDate(log.localDate)}</LogDate>
-                    <LogPassword>{log.cloverNotePassword}</LogPassword>
+                    <LogPassword
+                      onClick={() =>
+                        handleCopyClipBoard(`${log.cloverNotePassword}`)
+                      }
+                    >
+                      {log.cloverNotePassword}
+                    </LogPassword>
                     <LogURL target="_blank" href={log.cloverNoteUrl}>
                       합평 기록 바로가기
                     </LogURL>
