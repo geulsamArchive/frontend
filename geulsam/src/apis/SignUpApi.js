@@ -6,12 +6,10 @@ export const SignUpApi = async (formdata) => {
         const result = await normalAPI.post('/user/signup', {
             name: formdata.name,
             schoolNum: formdata.schoolNum,
-            phone: formdata.phone,
-            email: formdata.email,
             joinedAt: formdata.joinedAt,
-            birthDay: formdata.birthDay,
             introduce: formdata.info,
             keyword: formdata.keyword,
+            password: formdata.password,
         })
         return result
     } catch (error) {

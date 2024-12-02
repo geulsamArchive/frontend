@@ -5,29 +5,45 @@ import Left from '../../assets/images/grayLeft.png';
 
 const Signup3 = ({ prevStep, nextStep }) => {
 
-    const [email, onChangeEmail] = useForms();
-    const [phone, onChangePhone] = useForms();
+    const [password, onChangePw] = useForms();
+    const [pwError, setPwError] = useState('');
 
-    const [emailError, setEmailError] = useState('');
-    const [phoneError, setPhoneError] = useState('');
+    const [confirmPw, setConfirmPw] = useState('');
+    const [confirmPwError, setConfirmPwError] = useState('');
+    const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~`!@#$%^&*()\-_=+]{8,}$/; // 비밀번호 유효성 검사 정규식
 
-    // 이메일과 전화번호 정규 표현식
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net)$/;
-    const phoneRegex = /^01[0-9]-\d{3,4}-\d{4}$/;
-
+    const onChangeConfirmPw = (e) => {
+        setConfirmPw(e.target.value);
+    };
     const handleNext = () => {
         let valid = true;
 
-        // 이메일 유효성 검사
-        if (!emailRegex.test(email)) {
-            setEmailError('올바른 이메일 형식을 입력하세요. (예: abcd@gmail.com)');
+
+        // 비밀번호 유효성 검사
+        if (!pwRegex.test(password)) {
+            setPwError('형식에 맞는 올바른 비밀번호를 입력해주세요');
             valid = false;
         } else {
-            setEmailError('');
+            setPwError('');
         }
 
+        // 비밀번호 확인 검사
+        if (password !== confirmPw) {
+            setConfirmPwError('비밀번호가 일치하지 않습니다.');
+            valid = false;
+        } else {
+            setConfirmPwError('');
+        }
+        // 이메일 유효성 검사
+        // if (!emailRegex.test(email)) {
+        //     setEmailError('올바른 이메일 형식을 입력하세요. (예: abcd@gmail.com)');
+        //     valid = false;
+        // } else {
+        //     setEmailError('');
+        // }
+
         if (valid) {
-            nextStep({ email });
+            nextStep({ password });
         }
     }
 
@@ -42,25 +58,38 @@ const Signup3 = ({ prevStep, nextStep }) => {
                 </FormTop>
                 <LeftAlign>
                     <ModalDiv>
-                        <Modalp>&nbsp;&nbsp;가입승인이 완료되면 이메일로 임시 비밀번호를<br />&nbsp;&nbsp;보내드리고 있습니다. 메일을 받을 주소를 입력해<br />&nbsp;&nbsp;주세요.</Modalp>
-                        <ModalMobilep>&nbsp;&nbsp;가입승인이 완료되면 이메일로 임시 비<br />&nbsp;&nbsp;밀번호를 보내드리고 있습니다. 메일을<br />&nbsp; 받을 주소를 입력해주세요.</ModalMobilep>
+                        <Modalp>사이트에서 사용할 비밀번호를 입력해주세요.영문자와 숫자가 포함된 8자리 이상으로 설정해주세요.특수문자는  ~`!@#$%^&*()-_+= 만 가능합니다.</Modalp>
+                        <ModalMobilep>사이트에서 사용할 비밀번호를 입력해주세요.영문자와 숫자가 포함된 8자리 이상으로 설정해주세요.특수문자는  ~`!@#$%^&*()-_+= 만 가능합니다.</ModalMobilep>
 
-                        <br /><RedSign>&nbsp;&nbsp;해당 정보는 이메일 전송 후 자동폐기됩니다.</RedSign>
-                        <RedSignMobile><Red>&nbsp;&nbsp;해당 정보는 이메일 전송 후 자동 폐기됩니다.</Red></RedSignMobile>
+                        {/* <br /><RedSign>&nbsp;&nbsp;해당 정보는 이메일 전송 후 자동폐기됩니다.</RedSign>
+                        <RedSignMobile><Red>&nbsp;&nbsp;해당 정보는 이메일 전송 후 자동 폐기됩니다.</Red></RedSignMobile> */}
                     </ModalDiv>
-                    <br />
+                    <br /><br /><br /><br /><br />
                     <ModalMobilep><br /><br /><br /></ModalMobilep>
                     <LoginInputTitle>
-                        &nbsp;&nbsp;&nbsp;&nbsp;이메일
+                        &nbsp;&nbsp;&nbsp;&nbsp;비밀번호
                     </LoginInputTitle>
                     &nbsp;&nbsp;&nbsp;
                     <LoginInput
-                        placeholder='예) abcd@gmail.com'
-                        type='text'
-                        value={email}
-                        onChange={onChangeEmail}
+                        placeholder='abcd1234!'
+                        type='password'
+                        value={password}
+                        onChange={onChangePw}
                     />
-                    {emailError ? <ErrorMessage>{emailError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
+                    {pwError && <ErrorMessage>{pwError}</ErrorMessage>}
+
+                    <LoginInputTitle>
+                        &nbsp;&nbsp;&nbsp;&nbsp;비밀번호 확인
+                    </LoginInputTitle>
+                    &nbsp;&nbsp;&nbsp;
+                    <LoginInput
+                        placeholder='abcd1234!'
+                        type='password'
+                        value={confirmPw}
+                        onChange={onChangeConfirmPw}
+                    />
+                    {confirmPwError && <ErrorMessage>{confirmPwError}</ErrorMessage>}
+
                 </LeftAlign>
                 <WhiteButtons>
                     <Button onClick={handleNext}>다음</Button>

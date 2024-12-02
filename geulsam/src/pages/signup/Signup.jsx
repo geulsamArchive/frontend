@@ -11,11 +11,10 @@ const Signup = () => {
     const [formData, setFormData] = useState({
         name: '',
         schoolNum: '',
-        birthDay: '',
         joinedAt: '',
-        email: '',
-        phone: '',
+        introduce: '',
         keyword: [],
+        password: '',
 
     })
 

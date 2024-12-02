@@ -962,7 +962,6 @@ export const BookInfoContainer = styled.div`
   padding-top: 30px;
   padding-left: 5dvw;
   padding-right: 5dvw;
-  
 }
 font-family: 'MaruBuri-Regular';
 width: 90%;
@@ -970,7 +969,6 @@ margin-left: 4%;
 padding-top: 100px;
 background-color: rgba(249, 249, 246, 1);
 box-sizing: border-box;
-
 `
 export const PosterTitle = styled.div`
 @media only screen and (max-width:1023px) {
