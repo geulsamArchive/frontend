@@ -11,6 +11,7 @@ export const SignUpApi = async (formdata) => {
             keyword: formdata.keyword,
             password: formdata.password,
         })
+        console.log(result);
         return result
     } catch (error) {
         console.log('err', error)
