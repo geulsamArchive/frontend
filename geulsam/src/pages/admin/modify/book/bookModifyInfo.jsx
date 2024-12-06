@@ -138,6 +138,7 @@ const BookUpload = () => {
                     workName: content.title,
                     workId: content.contentId,
                     uuid: content.bookContentId,
+                    year: content.year,
                     error: '',
                     showButton: false // 이미 연결된 작품이므로 버튼 비활성화
                 }));
@@ -363,7 +364,7 @@ const BookUpload = () => {
                         </div>
                         <div>
                             <InputTitle>발간일</InputTitle>
-                            <Input value={release} onChange={onChangeRelease} placeholder={bookData.release} />
+                            <Input value={release} onChange={onChangeRelease} placeholder={bookData.release} type='date' />
                         </div>
                         <div>
                             <InputTitle>디자인</InputTitle>

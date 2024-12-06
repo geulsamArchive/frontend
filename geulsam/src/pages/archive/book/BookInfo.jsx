@@ -55,6 +55,18 @@ const BookInfo = () => {
       setBooktData(resp.data.data);
       setBookIndexList(resp.data.data.bookContentResList);
       setLoading(false);
+      console.log(bookData.data.designer);
+      console.log("디자인", bookData.designer);
+      console.log("판형", bookData.plate);
+      // "data": {
+      //   "id": "1",
+      //   "release": "2024년 5월 6일",
+      //   "designer": "김철수",
+      //   "plate": "A4",
+      //   "page": 324,
+      //   "url": "https://sadfjdsaf",
+      //   "title": "책 제목",
+      //   "bookCover": "https://sadsaf",
     } catch (error) {
       console.error('api fetching error', error);
     }
