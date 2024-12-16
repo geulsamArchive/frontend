@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForms } from '../../../../hooks/useForms';
+import { useFormNull } from '../../../../hooks/useFormNull';
 import {
     BookButton, BookSubmitModify, BookSubmit, BookTableAddButtonMobile, BookTableAddButton, BookDiv, ConnectBox, ConnectButton, BookStyledTableMobile,
     BookStyledTable, TableHeader, TableRow, TableCell, FlexContainer, Bookp, SmallTableInput, TableInput, Grayp, InputsContainer, InputRow, Input, Inputs, Form, InputTitle, Button, BookInfoContainer, BookTitle, InputUploads, RightSubmit, Red
@@ -10,10 +11,10 @@ import { normalAPI } from '../../../../apis/Api';
 
 const BookUpload = () => {
     const [title, onChangeTitle] = useForms();
-    const [release, onChangeRelease] = useForms();
-    const [designer, onChangeDesigner] = useForms();
-    const [plate, onChangePlate] = useForms();
-    const [pageNumber, onChangePageNumber] = useForms();
+    const [release, onChangeRelease] = useFormNull();
+    const [designer, onChangeDesigner] = useFormNull();
+    const [plate, onChangePlate] = useFormNull();
+    const [pageNumber, onChangePageNumber] = useFormNull();
     const [bookCover, setBookCover] = useState(null);
     const [bookCoverThumbnail, setBookCoverThumbnail] = useState(null);
     const [bookCoverUrl, setBookCoverUrl] = useState(null);
@@ -21,7 +22,7 @@ const BookUpload = () => {
     const [backCoverUrl, setBackCoverUrl] = useState(null);
     const [backCoverThumbnail, setBackCoverThumbnail] = useState(null);
     const [pdf, setPdf] = useState(null);
-    const [year, onChangeYear] = useForms();
+    const [year, onChangeYear] = useFormNull();
     const { bookId, id } = useParams();
     const [bookData, setBooktData] = useState({});
     const [loading, setLoading] = useState(true);
@@ -253,27 +254,23 @@ const BookUpload = () => {
             formData.append('pdf', pdf);
         }
 
-        if (designer !== null) {
+        if (designer !== null && designer !== "") {
             formData.append('designer', designer);
         }
 
-        if (plate !== null) {
+        if ((plate !== null) && plate !== "") {
             formData.append('plate', plate);
         }
-
-        if (pageNumber !== null) {
+        if (pageNumber !== null && pageNumber !== "") {
             formData.append('pageNumber', pageNumber);
         }
-
-        if (year !== null) {
+        if (year !== null && year !== "") {
             formData.append('year', year);
         }
-
-        if (release !== null) {
+        if (release !== null && release !== "") {
             formData.append('release', release);
         }
-
-        if (title !== null) {
+        if (title !== null && title !== "") {
             formData.append('title', title);
         }
         const contentListWithUuid = rows.map(row => ({
