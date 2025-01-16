@@ -1,6 +1,7 @@
 import Main from './pages/main/Main'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Critic from './pages/critic/Critic';
+import NewCritic from './pages/critic/NewCritic'
 import Archive from './pages/archive/Archive';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
@@ -63,7 +64,7 @@ function App() {
             <Route path='/' element={<Main />} />
             <Route path='/main' element={<Main />} />
             <Route path='/work' element={<Works />} />
-            <Route path='/critic' element={<Critic />} />
+            <Route path='/critic' element={<NewCritic />} />
             <Route path='/archive' element={<Archive />}>
               <Route path='poster' element={<Poster />} />
               <Route path='book' element={<Book />} />

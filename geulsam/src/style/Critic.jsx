@@ -196,10 +196,13 @@ export const CriticLogContainer = styled.div`
 export const MarginRight = styled.div`
     margin-right: 5dvw;
 `
-
+export const MarginLeft = styled.div`
+    margin-left: 5dvw;
+`
 export const CriticLogsContainer = styled.div`
     margin-top: 30px;
     margin-bottom: 50px;
+    margin-left:30px;
 `
 
 export const LogType = styled.div`
@@ -208,21 +211,23 @@ export const LogType = styled.div`
         font-size: 14px;
 `
 export const LogTitle = styled.div`
-    color: rgba(249, 249, 246, 1);
+    color: rgba(29, 28, 28, 1);
         font-size: 14px;
         width: 500px;
+    font-family: 'MaruBuri-Regular';
+
 `
 
 export const Logs = styled.div`
 &:first-child{
-    border-top: 1px solid rgba(249, 249, 246, 1);
+    border-top: 1px solid rgba(29, 28, 28, 1);
 }
     display: flex;
     font-size: 14px;
     padding-bottom: 12px;
 padding-top:12px ;
 justify-content: space-between;
-    border-bottom: 1px solid rgba(249, 249, 246, 1);
+    border-bottom: 1px solid rgba(29, 28, 28, 1);
 `
 
 export const LogSearchFailed = styled.div`
@@ -237,30 +242,37 @@ padding-top:12px ;
 `
 
 export const LogName = styled.div`
-    color: rgba(249, 249, 246, 1);
+    color: rgba(29, 28, 28, 1);
     width: 90px;
+    font-family: 'MaruBuri-Regular';
 
 `
 
 export const LogDate = styled.div`
-    color: rgba(249, 249, 246, 1);
+    color: rgba(29, 28, 28, 1);
     width: 125px;
+    font-family: 'MaruBuri-Regular';
+
 `
 
 export const LogPassword = styled.div`
     width: 75px;
+    font-family: 'MaruBuri-Regular';
+    color:rgba(171, 170, 170, 1);
 `
 
 export const LogURL = styled.a`
     width: 114px;
     font-size: 11px;
-    background-color: rgba(87, 86, 85, 1);
+    font-weight: bold; /* 글자를 굵게 */
+    padding: 4px 0; /* 위아래 여백 추가 */
+    background-color: rgba(234, 233, 227, 1);
     border-radius: 20px;
     text-align: center;
     text-decoration: none;
-    color: rgba(249, 249, 246, 1);
-    
-`
+    font-family: 'MaruBuri-Regular';
+    color: rgba(29, 28, 28, 1);
+`;
 
 export const LogLeft = styled.div`
     display: flex;
