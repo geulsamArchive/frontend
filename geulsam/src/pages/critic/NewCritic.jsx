@@ -13,6 +13,7 @@ import {
     LogTitle,
     LogType,
     LogURL,
+    LogURLMobile,
     MarginRight,
     MarginLeft,
     ModalBottom,
@@ -130,8 +131,10 @@ const NewCritic = () => {
                                             {log.cloverNotePassword}
                                         </LogPassword>
                                         <LogURL target="_blank" href={log.cloverNoteUrl}>
-                                            합평 기록 바로가기
                                         </LogURL>
+                                        {/* <LogURLMobile target="_blank" href={log.cloverNoteUrl}>
+                                            합평 기록 
+                                        </LogURLMobile> */}
                                     </LogRight>
                                 </Logs>
                             ))}

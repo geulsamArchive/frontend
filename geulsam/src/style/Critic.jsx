@@ -191,6 +191,7 @@ export const CloseButton = styled.button`
 
 export const CriticLogContainer = styled.div`
     width: 88dvw;
+    color:black;
 `
 
 export const MarginRight = styled.div`
@@ -209,12 +210,19 @@ export const LogType = styled.div`
     width: 100px;
         color: rgba(171, 170, 170, 1);
         font-size: 14px;
+            @media only screen and (max-width:1023px ){
+            display:none;
+            }
 `
 export const LogTitle = styled.div`
     color: rgba(29, 28, 28, 1);
         font-size: 14px;
         width: 500px;
     font-family: 'MaruBuri-Regular';
+    @media only screen and (max-width:1023px ){
+        color: rgba(249, 249, 246, 1);
+        width: 20dvw;
+}
 
 `
 
@@ -228,6 +236,16 @@ export const Logs = styled.div`
 padding-top:12px ;
 justify-content: space-between;
     border-bottom: 1px solid rgba(29, 28, 28, 1);
+
+    @media only screen and (max-width:1023px ){
+width: 90dvw
+ &:first-child {
+        border-top: 1px solid #575655;
+    }
+
+    border-bottom: 1px solid #575655;
+
+}
 `
 
 export const LogSearchFailed = styled.div`
@@ -245,6 +263,10 @@ export const LogName = styled.div`
     color: rgba(29, 28, 28, 1);
     width: 90px;
     font-family: 'MaruBuri-Regular';
+    @media only screen and (max-width:1500px ){
+    color:  rgba(249, 249, 246, 1);
+    width:17dvw;
+    }
 
 `
 
@@ -252,13 +274,24 @@ export const LogDate = styled.div`
     color: rgba(29, 28, 28, 1);
     width: 125px;
     font-family: 'MaruBuri-Regular';
-
+  @media only screen and (max-width: 1023px) {
+    color:  rgba(249, 249, 246, 1);
+    font-size:10px;
+    bottom: 0px;
+    width:20dvw;
+        margin-right:2dvw;
+    }
 `
 
 export const LogPassword = styled.div`
     width: 75px;
     font-family: 'MaruBuri-Regular';
     color:rgba(171, 170, 170, 1);
+  @media only screen and (max-width: 1023px) {
+        width:8dvw;
+        font-size:10px;
+        margin-right:4dvw;
+}
 `
 
 export const LogURL = styled.a`
@@ -272,8 +305,41 @@ export const LogURL = styled.a`
     text-decoration: none;
     font-family: 'MaruBuri-Regular';
     color: rgba(29, 28, 28, 1);
+    
+    /* 기본 텍스트 */
+    &:not(:only-child)::after {
+        content: '합평기록 바로가기';
+    }
+
+    /* 미디어 쿼리에서 텍스트 변경 */
+    @media only screen and (max-width: 1023px) {
+        &:not(:only-child)::after {
+        content: '합평기록';
+    }
+        font-size: 10px; /* 모바일에서 글자 크기 줄이기 */
+        width: 13dvw; /* 모바일에서는 너비를 자동으로 설정하여 텍스트에 맞게 조정 */
+        height:10px;
+        left-margin:2px;
+    }
 `;
 
+
+// export const LogURLMobile = styled.a`
+// display:block;
+//   @media only screen and (max-width: 1023px) {
+//   display:block;
+//     width: 114px;
+//     font-size: 11px;
+//     font-weight: bold; /* 글자를 굵게 */
+//     padding: 4px 0; /* 위아래 여백 추가 */
+//     background-color: rgba(234, 233, 227, 1);
+//     border-radius: 20px;
+//     text-align: center;
+//     text-decoration: none;
+//     font-family: 'MaruBuri-Regular';
+//     color: rgba(29, 28, 28, 1);
+// }
+// `;
 export const LogLeft = styled.div`
     display: flex;
     align-items: center;
@@ -281,4 +347,5 @@ export const LogLeft = styled.div`
 
 export const LogRight = styled.div`
     display: flex;
+
 `
