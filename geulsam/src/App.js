@@ -34,67 +34,65 @@ import CriticLogUpload from './pages/admin/upload/critic/CriticLogUpload';
 import AuthorInfo from './pages/work/Author/AuthorInfo';
 import MemberModify from './pages/admin/modify/member/memberModify';
 import AuthorInfoModify from './pages/user/AuthorInfoModify';
+import ProtectedRouter from './components/Auth/ProtectedRouter';
 
 
 function App() {
 
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <Routes>
-          <Route path='/test' element={<Test />} />
-          <Route element={<NavLayout />}>
-            <Route path='/admin' element={<Admin />}>
-              <Route path='critic' element={<AdminCritic />} />
-              <Route path='calendar' element={<AdminCalendar />} />
-              <Route path='manage' element={<AdminLinks />} />
-              <Route path='book/modify' element={<BookModify />} />
-              <Route path='book/modify/:bookId' element={<BookModifyInfo />} />
-              <Route path='poster/modify' element={<PosterModify />} />
-              <Route path='member/modify' element={<MemberModify />} />
-              <Route path='poster/modify/:posterId' element={<PosterModifyInfo />} />
-              <Route path='poster/upload' element={<PosterUpload />} />
-              <Route path='book/upload' element={<BookUpload />} />
-              <Route path='critic/log/upload' element={<CriticLogUpload />} />
-            </Route>
-            <Route path='/frontend' element={<Main />} />
-            <Route path='/work/upload' element={<UploadWork />} />
-            <Route path='/author/:id' element={<AuthorInfo />} />
-            <Route path='/author/modify' element={<AuthorInfoModify />} />
-            <Route path='/' element={<Main />} />
-            <Route path='/main' element={<Main />} />
-            <Route path='/work' element={<Works />} />
-            <Route path='/critic' element={<NewCritic />} />
-            <Route path='/archive' element={<Archive />}>
-              <Route path='poster' element={<Poster />} />
-              <Route path='book' element={<Book />} />
-            </Route>
-            <Route path='/work/:workId' element={<WorkInfo />} />
-            <Route path='/archive/book/:bookId' element={<BookInfo />} />
-            <Route path='/user/mypage' element={<MyInfoModify />} />
-            <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
-            <Route path='*' element={<NotFound404 />} />
-          </Route>
           <Route element={<LoginLayout />}>
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
-          </Route>
-          <Route>
-            <Route path='/work/:workId' element={<WorkInfo />} />
-            <Route path='/archive/book/:bookId' element={<BookInfo />} />
-            <Route path='/user/mypage' element={<Mypage />} />
-            <Route path='user/myInfoModify' element={<MyInfoModify />} />
-            <Route path='/user/myInfoModify' element={<MyInfoModify />} />
-            <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
           </Route>
           <Route path='*' element={<NotFound404 />} />
-          <Route element={<LoginLayout />}>
-            <Route path='login' element={<Login />} />
-            <Route path='signup' element={<Signup />} />
+          <Route element={<ProtectedRouter />}>
+            <Route element={<NavLayout />}>
+              <Route path='/admin' element={<Admin />}>
+                <Route path='critic' element={<AdminCritic />} />
+                <Route path='calendar' element={<AdminCalendar />} />
+                <Route path='manage' element={<AdminLinks />} />
+                <Route path='book/modify' element={<BookModify />} />
+                <Route path='book/modify/:bookId' element={<BookModifyInfo />} />
+                <Route path='poster/modify' element={<PosterModify />} />
+                <Route path='member/modify' element={<MemberModify />} />
+                <Route path='poster/modify/:posterId' element={<PosterModifyInfo />} />
+                <Route path='poster/upload' element={<PosterUpload />} />
+                <Route path='book/upload' element={<BookUpload />} />
+                <Route path='critic/log/upload' element={<CriticLogUpload />} />
+              </Route>
+              <Route path='/frontend' element={<Main />} />
+              <Route path='/work/upload' element={<UploadWork />} />
+              <Route path='/author/:id' element={<AuthorInfo />} />
+              <Route path='/author/modify' element={<AuthorInfoModify />} />
+              <Route path='/' element={<Main />} />
+              <Route path='/main' element={<Main />} />
+              <Route path='/work' element={<Works />} />
+              <Route path='/critic' element={<NewCritic />} />
+              <Route path='/archive' element={<Archive />}>
+                <Route path='poster' element={<Poster />} />
+                <Route path='book' element={<Book />} />
+              </Route>
+              <Route path='/work/:workId' element={<WorkInfo />} />
+              <Route path='/archive/book/:bookId' element={<BookInfo />} />
+              <Route path='/user/mypage' element={<MyInfoModify />} />
+              <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
+              <Route path='*' element={<NotFound404 />} />
+            </Route>
+            <Route>
+              <Route path='/work/:workId' element={<WorkInfo />} />
+              <Route path='/archive/book/:bookId' element={<BookInfo />} />
+              <Route path='/user/mypage' element={<Mypage />} />
+              <Route path='user/myInfoModify' element={<MyInfoModify />} />
+              <Route path='/user/myInfoModify' element={<MyInfoModify />} />
+              <Route path="/PasswordChangeModal" element={<PasswordChangeModal />} />
+            </Route>
           </Route>
         </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

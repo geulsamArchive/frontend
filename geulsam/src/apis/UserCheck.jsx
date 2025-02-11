@@ -32,15 +32,11 @@ export const UserCheck = async (navigate, logout) => {
       console.log('토큰 재전송');
 
       try {
-        const tokenResponse = await normalAPI.get(
-          '/user/check',
-          {},
-          {
-            headers: {
-              refreshToken: refreshToken,
-            },
-          }
-        );
+        const tokenResponse = await normalAPI.get('/user/check', {
+          headers: {
+            refreshToken: refreshToken,
+          },
+        });
 
         if (tokenResponse.status === 200) {
           const newAccessToken = tokenResponse.headers.accesstoken.replace(
@@ -60,9 +56,9 @@ export const UserCheck = async (navigate, logout) => {
         }
       } catch (err) {
         console.error('Refresh Token Error:', err);
-        alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+        alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요...');
         logout();
-        navigate('/main'); // 로그인 페이지로 리다이렉트
+        navigate('/login'); // 로그인 페이지로 리다이렉트
       }
     } else {
       console.error('Error:', error);
