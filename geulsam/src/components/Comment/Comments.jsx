@@ -189,7 +189,6 @@ export const GuestBook = ({ contentId }) => {
         }
       );
       console.log('서버 응답:', response.data);
-      alert('독자 후기를 성공적으로 게시했습니다.');
       reset();
       getGuestBookList();
     } catch (error) {
@@ -221,7 +220,6 @@ export const GuestBook = ({ contentId }) => {
             );
             localStorage.setItem('refresh', refreshToken);
           }
-          alert('독자 후기를 성공적으로 게시했습니다.');
           getGuestBookList();
         } catch (err) {
           console.error('Refresh Token Error:', err);
@@ -428,7 +426,6 @@ const Comment = ({ contentId }) => {
         }
       );
       console.log('서버 응답:', response.data);
-      alert('독자 후기를 성공적으로 게시했습니다.');
       reset();
       getCommentList();
     } catch (error) {
@@ -461,7 +458,6 @@ const Comment = ({ contentId }) => {
             );
             localStorage.setItem('refresh', refreshToken);
           }
-          alert('독자 후기를 성공적으로 게시했습니다.');
           getCommentList();
         } catch (err) {
           console.error('Refresh Token Error:', err);

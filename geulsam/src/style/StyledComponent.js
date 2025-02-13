@@ -805,7 +805,7 @@ export const Calendars = styled.div`
 width: 100%;
 background-color: none;
 font-family: 'MaruBuri-Regular';
-height: 800px;
+height: auto;
 `;
 
 export const CalendarTitle = styled.div`
