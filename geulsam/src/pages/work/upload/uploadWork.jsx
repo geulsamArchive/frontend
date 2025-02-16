@@ -90,6 +90,11 @@ const UploadWork = () => {
       return;
     }
 
+    if (!isVisible) {
+      alert('공개범위를 선택해주세요.');
+      return;
+    }
+
     const htmlBlob = new Blob([new TextEncoder().encode(htmlContent)], {
       type: 'text/html; charset=UTF-8',
     });

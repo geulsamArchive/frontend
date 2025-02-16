@@ -80,15 +80,15 @@ time,
 mark,
 audio,
 video {
-    font-family: 'MaruBuri-Regular';
+  font-family: 'MaruBuri-Regular';
 
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-    word-break: keep-all;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  word-break: keep-all;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -103,63 +103,70 @@ hgroup,
 menu,
 nav,
 section {
-    display: block;
+  display: block;
 }
 
 body {
-    line-height: 1;
+  line-height: 1;
 }
 
 ol,
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 blockquote,
 q {
-    quotes: none;
+  quotes: none;
 }
 
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-    content: '';
-    content: none;
+  content: '';
+  content: none;
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 @font-face {
-    font-family: 'MaruBuri-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'MaruBuri-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'RIDIBatang';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'RIDIBatang';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Grandpa_sharing';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Grandpa_sharing.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Grandpa_sharing';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Grandpa_sharing.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 em,
 i {
-    font-style: italic;
+  font-style: italic;
 }
 
 strong,
 b {
-    font-weight: bold;
+  font-weight: bold;
 }
