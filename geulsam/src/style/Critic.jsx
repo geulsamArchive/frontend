@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const Margin = styled.div`
+  margin-bottom: 50px;
+  margin-left:50px;
+`;
+
 export const CriticContainer = styled.div`
 background-color: rgba(249, 249, 246, 1);
 font-family: 'MaruBuri-Regular';
@@ -201,18 +206,32 @@ export const MarginLeft = styled.div`
     margin-left: 5dvw;
 `
 export const CriticLogsContainer = styled.div`
+  @media only screen and (max-width: 1023px) {
+    display: none;
+  }  
+margin-top: 30px;
+  margin-bottom: 50px;
+  margin-left: 60px;
+  width: 90dvw;
+`;
+
+export const MobileCriticLogsContainer = styled.div`
+  @media only screen and (max-width: 1023px) {
+    display: flex 
     margin-top: 30px;
     margin-bottom: 50px;
-    margin-left:30px;
-`
+    margin-left: 60px;
+    width: 90dvw;
+  }  
+    display:none;
+`;
+
 
 export const LogType = styled.div`
     width: 100px;
         color: rgba(171, 170, 170, 1);
         font-size: 14px;
-            @media only screen and (max-width:1023px ){
-            display:none;
-            }
+
 `
 export const LogTitle = styled.div`
     color: rgba(29, 28, 28, 1);
@@ -227,6 +246,9 @@ export const LogTitle = styled.div`
 `
 
 export const Logs = styled.div`
+    @media only screen and (max-width:1023px ){
+    display:flex;
+    }
 &:first-child{
     border-top: 1px solid rgba(29, 28, 28, 1);
 }
@@ -236,9 +258,16 @@ export const Logs = styled.div`
 padding-top:12px ;
 justify-content: space-between;
     border-bottom: 1px solid rgba(29, 28, 28, 1);
+`
 
+export const MobileLogs = styled.div`
     @media only screen and (max-width:1023px ){
-width: 90dvw
+    display: flex;
+    font-size: 14px;
+    padding-bottom: 12px;
+padding-top:12px ;
+justify-content: space-between;
+width: 90dvw;
  &:first-child {
         border-top: 1px solid #575655;
     }
@@ -265,7 +294,8 @@ export const LogName = styled.div`
     font-family: 'MaruBuri-Regular';
     @media only screen and (max-width:1500px ){
     color:  rgba(249, 249, 246, 1);
-    width:17dvw;
+      font-size: 14px;
+  width: 100px;
     }
 
 `

@@ -79,6 +79,8 @@ const MemberModify = () => {
         // NORMAL과 ADMIN 데이터를 합쳐서 상태 업데이트
         const combinedMembers = [...normalMembers, ...adminMembers];
         setMembers(combinedMembers);
+        setTotalPage(Math.ceil(combinedMembers.length / membersPerPage)); // 전체 페이지 수 설정
+
     };
 
     // "가입 신청된 회원" 버튼을 눌렀을 때 SUSPENDED 회원을 가져옴
@@ -186,6 +188,8 @@ const MemberModify = () => {
         }
     }, [currentPage, searchTerm]); // currentPage와 searchTerm 상태가 변경될 때 실행
 
+
+
     const openPasswordChangeEmailModal = (member) => {
         setSelectedMember(member);
         setIsModalOpen(true);
@@ -208,7 +212,10 @@ const MemberModify = () => {
             console.error("비밀번호 초기화 중 오류 발생:", error);
         }
 
+
     };
+    const displayedMembers = members.slice((currentPage - 1) * membersPerPage, currentPage * membersPerPage);
+
 
     return (
         <BookInfoContainer>
