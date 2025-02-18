@@ -1845,6 +1845,7 @@ background-color:rgba(57, 55, 53, 1);
 color:rgba(249, 249, 246, 1);
 display:inline-block;
 margin-bottom:21px;
+overflow-y:visible;
 } 
   white-space: nowrap;
 
@@ -1861,8 +1862,10 @@ background-color: rgba(234, 233, 227, 1);
 }
   color: black;pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
 cursor: pointer;
-margin-right: 23px;
-margin-bottom:10px;
+margin-bottom:16px;
+padding-left:15px;
+padding-right:15px;
+margin-right:-60px;
 `;
 
 
@@ -1876,7 +1879,7 @@ export const BookIndexList = styled.div`
   flex-direction: column;
   align-items: flex-start; /* 인덱스를 더 오른쪽으로 정렬 */
   max-height: 100dvh; /* 뷰포트 높이에 맞게 설정 */
-  overflow-y: auto; /* 긴 내용은 스크롤 가능 */
+  overflow-y: visible; /* 긴 내용은 스크롤 가능 */
   padding: 10px;
   margin-left: auto; /* 여유 공간을 왼쪽에 두어 요소가 더 오른쪽으로 이동 */
   z-index:1000;
@@ -1900,24 +1903,20 @@ export const AnimatedBookIndexList = styled(BookIndexList)`
   left: 0;
   width: 93dvw;
   height: 70dvh; /* 세로 길이 조정 */
-overflow: scroll;
   background-color: black;
   color: white;
   padding: 20px;
   transition: bottom 0.5s ease-in-out;
   z-index: 1000;
-  overflow: scroll;
   font-family: 'MaruBuri-Regular';
-
 }
 `;
 
 export const BookIndexAlign = styled.div`
   flex-direction: column; /* 세로 방향으로 정렬 */
     align-items: flex-start;
-    overflow: scroll;
-
-`;
+    display:flex;
+    `;
 export const BookIndexHeader = styled.div`
   display: flex;
   justify-content: space-between;

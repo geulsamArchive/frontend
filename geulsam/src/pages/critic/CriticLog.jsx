@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import SearchWork from '../../components/Search/SearchWork';
 import {
+  Margin,
+  MobileCriticLogsContainer,
   CriticLogContainer,
   CriticLogsContainer,
   LogDate,
@@ -8,6 +10,7 @@ import {
   LogName,
   LogPassword,
   LogRight,
+  MobileLogs,
   Logs,
   LogSearchFailed,
   LogTitle,
@@ -58,7 +61,7 @@ const CriticLog = () => {
     try {
       await navigator.clipboard.writeText(text);
       alert('클로버노트의 비밀번호가 복사되었어요. Ctrl+V를 입력해주세요');
-    } catch (err) {}
+    } catch (err) { }
   };
 
   useEffect(() => {
@@ -138,14 +141,85 @@ const CriticLog = () => {
                 renderEmptyLogs(12 - criticList.length)}{' '}
             </>
           )}
+
+
+
+          <Margin>
+            <Pagination
+              isDark="true"
+              page={page}
+              totalPage={totalPage}
+              onChangePage={setPage}
+            />
+          </Margin>
         </CriticLogsContainer>
+
+
+        <MobileCriticLogsContainer>
+          {criticList.length === 0 ? (
+            <>
+              <LogSearchFailed>
+                <Red>'{keyword}'</Red>에 해당하는 검색결과를 찾을 수 없습니다.
+              </LogSearchFailed>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+            </>
+          ) : (
+            <>
+              {criticList.map((log) => (
+                <MobileLogs>
+                  <LogLeft>
+                    <LogName>{log.userName}</LogName>
+                  </LogLeft>
+                  <LogRight>
+                    <LogType>{translateType(log.genre)}</LogType>
+                    <LogTitle>
+                      {CheckTitleLength(log.contentTitle, 25)}
+                    </LogTitle>
+                    <LogDate>{formatDate(log.localDate)}</LogDate>
+                    <LogPassword
+                      onClick={() =>
+                        handleCopyClipBoard(`${log.cloverNotePassword}`)
+                      }
+                    >
+                      {log.cloverNotePassword}
+                    </LogPassword>
+                    <LogURL target="_blank" href={log.cloverNoteUrl}>
+                      합평 기록 바로가기
+                    </LogURL>
+                  </LogRight>
+
+                </MobileLogs>
+              ))}
+              {criticList.length < 12 &&
+                renderEmptyLogs(12 - criticList.length)}{' '}
+            </>
+          )}
+
+
+
+          <Margin>
+            <Pagination
+              isDark="true"
+              page={page}
+              totalPage={totalPage}
+              onChangePage={setPage}
+            />
+          </Margin>
+        </MobileCriticLogsContainer>
+
+
+
       </CriticLogContainer>
-      <Pagination
-        isDark="true"
-        page={page}
-        totalPage={totalPage}
-        onChangePage={setPage}
-      />
     </>
   );
 };
