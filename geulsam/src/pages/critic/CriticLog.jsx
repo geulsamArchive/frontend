@@ -26,6 +26,7 @@ import { translateType } from '../../components/Translate';
 import Pagination from '../../components/Paging/Pagination';
 import { CheckTitleLength } from './../../components/CheckLength';
 import CriticLogModal from './CriticLogModal';
+import { Desktop, Mobile } from '../../hooks/useMediaQuery';
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleDateString('ko-KR', {
@@ -42,7 +43,6 @@ const CriticLog = () => {
   const [keyword, setKeyword] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedLog, setSelectedLog] = useState(null); // 선택된 합평 로그 저장
-
 
   const getCriticLogs = async () => {
     try {
@@ -64,7 +64,7 @@ const CriticLog = () => {
     try {
       await navigator.clipboard.writeText(text);
       alert('클로버노트의 비밀번호가 복사되었어요. Ctrl+V를 입력해주세요');
-    } catch (err) { }
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -155,8 +155,6 @@ const CriticLog = () => {
             </>
           )}
 
-
-
           <Margin>
             <Pagination
               isDark="true"
@@ -166,8 +164,6 @@ const CriticLog = () => {
             />
           </Margin>
         </CriticLogsContainer>
-
-
         <MobileCriticLogsContainer>
           {criticList.length === 0 ? (
             <>
@@ -189,14 +185,17 @@ const CriticLog = () => {
           ) : (
             <>
               {criticList.map((log) => (
-                <MobileLogs onClick={() => openCriticLogModal(log)} key={log.id}>
+                <MobileLogs
+                  onClick={() => openCriticLogModal(log)}
+                  key={log.id}
+                >
                   {isModalOpen && selectedLog && (
                     <CriticLogModal
                       isModalOpen={isModalOpen}
                       closeModal={closeCriticLogModal}
-                      logTitle={selectedLog.contentTitle}  // 제목
-                      logDate={formatDate(selectedLog.localDate)}  // 날짜
-                      logPassword={selectedLog.cloverNotePassword}  // 비밀번호
+                      logTitle={selectedLog.contentTitle} // 제목
+                      logDate={formatDate(selectedLog.localDate)} // 날짜
+                      logPassword={selectedLog.cloverNotePassword} // 비밀번호
                       logUrl={selectedLog.cloverNoteUrl}
                     />
                   )}
@@ -225,21 +224,7 @@ const CriticLog = () => {
                 renderEmptyLogs(12 - criticList.length)}{' '}
             </>
           )}
-
-
-
-          <Margin>
-            <Pagination
-              isDark="true"
-              page={page}
-              totalPage={totalPage}
-              onChangePage={setPage}
-            />
-          </Margin>
         </MobileCriticLogsContainer>
-
-
-
       </CriticLogContainer>
     </>
   );
