@@ -25,7 +25,7 @@ import { normalAPI } from '../../apis/Api';
 import { translateType } from '../../components/Translate';
 import Pagination from '../../components/Paging/Pagination';
 import { CheckTitleLength } from './../../components/CheckLength';
-
+import CriticLogModal from './CriticLogModal';
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleDateString('ko-KR', {
@@ -40,6 +40,9 @@ const CriticLog = () => {
   const [totalPage, setTotalPage] = useState(1);
   const [criticList, setCriticList] = useState([]);
   const [keyword, setKeyword] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedLog, setSelectedLog] = useState(null); // 선택된 합평 로그 저장
+
 
   const getCriticLogs = async () => {
     try {
@@ -78,6 +81,16 @@ const CriticLog = () => {
       emptyLogs.push(<Logs key={`empty-${i}`}>&nbsp;</Logs>);
     }
     return emptyLogs;
+  };
+
+  const openCriticLogModal = (log) => {
+    setSelectedLog(log); // 선택된 로그 저장
+    setIsModalOpen(true);
+  };
+
+  const closeCriticLogModal = () => {
+    setIsModalOpen(false);
+    setSelectedLog(null); // 모달 닫을 때 선택된 로그 초기화
   };
 
   return (
@@ -176,28 +189,36 @@ const CriticLog = () => {
           ) : (
             <>
               {criticList.map((log) => (
-                <MobileLogs>
+                <MobileLogs onClick={() => openCriticLogModal(log)} key={log.id}>
+                  {isModalOpen && selectedLog && (
+                    <CriticLogModal
+                      isModalOpen={isModalOpen}
+                      closeModal={closeCriticLogModal}
+                      logTitle={selectedLog.contentTitle}  // 제목
+                      logDate={formatDate(selectedLog.localDate)}  // 날짜
+                      logPassword={selectedLog.cloverNotePassword}  // 비밀번호
+                      logUrl={selectedLog.cloverNoteUrl}
+                    />
+                  )}
                   <LogLeft>
                     <LogName>{log.userName}</LogName>
                   </LogLeft>
                   <LogRight>
-                    <LogType>{translateType(log.genre)}</LogType>
                     <LogTitle>
                       {CheckTitleLength(log.contentTitle, 25)}
                     </LogTitle>
                     <LogDate>{formatDate(log.localDate)}</LogDate>
-                    <LogPassword
+                    {/* <LogPassword
                       onClick={() =>
                         handleCopyClipBoard(`${log.cloverNotePassword}`)
                       }
                     >
                       {log.cloverNotePassword}
-                    </LogPassword>
+                    </LogPassword> */}
                     <LogURL target="_blank" href={log.cloverNoteUrl}>
                       합평 기록 바로가기
                     </LogURL>
                   </LogRight>
-
                 </MobileLogs>
               ))}
               {criticList.length < 12 &&

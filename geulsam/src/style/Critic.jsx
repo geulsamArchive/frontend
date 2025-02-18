@@ -206,26 +206,24 @@ export const MarginLeft = styled.div`
     margin-left: 5dvw;
 `
 export const CriticLogsContainer = styled.div`
-  margin-top: 30px;
+  @media only screen and (max-width: 1023px) {
+    display: none;
+  }  
+margin-top: 30px;
   margin-bottom: 50px;
   margin-left: 60px;
   width: 90dvw;
-
-  @media only screen and (max-width: 1023px) {
-    display: none;
-  }
 `;
 
 export const MobileCriticLogsContainer = styled.div`
-  display: none;
-
   @media only screen and (max-width: 1023px) {
-    display: flex !important; /* ✅ 강제 적용 */
+    display: flex 
     margin-top: 30px;
     margin-bottom: 50px;
     margin-left: 60px;
     width: 90dvw;
-  }
+  }  
+    display:none;
 `;
 
 
@@ -233,9 +231,7 @@ export const LogType = styled.div`
     width: 100px;
         color: rgba(171, 170, 170, 1);
         font-size: 14px;
-            @media only screen and (max-width:1023px ){
-            display:none;
-            }
+
 `
 export const LogTitle = styled.div`
     color: rgba(29, 28, 28, 1);
@@ -250,6 +246,9 @@ export const LogTitle = styled.div`
 `
 
 export const Logs = styled.div`
+    @media only screen and (max-width:1023px ){
+    display:flex;
+    }
 &:first-child{
     border-top: 1px solid rgba(29, 28, 28, 1);
 }
@@ -259,9 +258,6 @@ export const Logs = styled.div`
 padding-top:12px ;
 justify-content: space-between;
     border-bottom: 1px solid rgba(29, 28, 28, 1);
-
-    @media only screen and (max-width:1023px ){
-    }
 `
 
 export const MobileLogs = styled.div`
