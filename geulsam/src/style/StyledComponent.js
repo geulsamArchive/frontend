@@ -190,9 +190,15 @@ export const FlexContainer = styled.div`
 `;
 export const LoginForm = styled.div`
  @media only screen and (max-width: 1023px) {
+    width: 408px; /* 작은 화면에서 더 작은 너비 */
+    height: 486px; /* 작은 화면에서 더 작은 높이 */
+  }
+
+ @media only screen and (max-width: 600px) {
     width: 90dvw; /* 작은 화면에서 더 작은 너비 */
     height: 102dvw; /* 작은 화면에서 더 작은 높이 */
   }
+
 background-color: white;
   border-radius: 8.6px;
   text-align: center;
@@ -241,6 +247,10 @@ margin-bottom: 5px;
 
 export const LoginInput = styled.input`
  @media only screen and (max-width: 1023px) {
+    width:  315px
+    /* margin-left: 7.5dvw; */
+  }
+  @media only screen and (max-width: 600px) {
     width:  75dvw;
     /* margin-left: 7.5dvw; */
   }
@@ -326,6 +336,9 @@ margin-right: 20px;
 
 export const IntroductionTextarea = styled.textarea`
  @media only screen and (max-width:1023px) {
+ width: 350px;
+}
+ @media only screen and (max-width:600px) {
  width: 75dvw;
 }
 border: none;
@@ -701,6 +714,9 @@ height: 150px;
 text-align: center;
 display: block;
 }
+position: fixed;
+bottom: 0;
+width: 100dvw;
 font-family: 'MaruBuri-Regular';
 background-color: rgba(234, 233, 227, 1);
 height: 41px;
@@ -742,7 +758,7 @@ text-align:right;
 `;
 
 export const SideBox = styled.div`
-margin-bottom: 40px;
+margin-bottom: 42px;
 `
 export const SideButton = styled.button`
 font-family: 'MaruBuri-Regular';
@@ -1153,14 +1169,13 @@ background-color:rgba(45, 43, 42, 1) ;
 
 export const PosterGridContainer = styled.div`
 @media only screen and (max-width:1023px) {
-  
   padding: 0;
   margin: 0;
   margin-top: 30px;
   margin-bottom: 30px;
   background-image: none;
 }
-background-image: linear-gradient(to bottom, #ffffff 150px,rgba(45, 43, 42, 1)100px);
+background-image: linear-gradient(to bottom, #F9F9F6 200px,rgba(45, 43, 42, 1)100px);
 
  // display: grid;
   //grid-template-columns: repeat(3, 1fr);
@@ -1171,6 +1186,7 @@ background-image: linear-gradient(to bottom, #ffffff 150px,rgba(45, 43, 42, 1)10
   justify-content: center;
   align-items: center;
   padding: 20px;
+  margin-top: 46px;
 
 `;
 export const PotserGridItems = styled.div`
@@ -1547,6 +1563,9 @@ border-radius:0 0 10px 10px ;
 //회원가입 폼 상단
 export const FormTop = styled.div`
 @media only screen and (max-width: 1023px) {
+    width: 408px; /* 작은 화면에서 더 작은 너비 */
+  }
+  @media only screen and (max-width: 600px) {
     width: 90dvw; /* 작은 화면에서 더 작은 너비 */
   }
 width: 408px;
@@ -1559,6 +1578,9 @@ box-shadow: 5px 1px 3px rgba(0,0,0, 0.1);
 `
 export const FormTopGray = styled.div`
 @media only screen and (max-width: 1023px) {
+    width: 408px; /* 작은 화면에서 더 작은 너비 */
+  }
+@media only screen and (max-width: 600px) {
     width: 90dvw; /* 작은 화면에서 더 작은 너비 */
   }
 width: 408px;
@@ -1798,7 +1820,6 @@ export const BookStyledTable = styled.table`
 @media only screen and (max-width: 1023px) {
   display:none;
     }
-  }
 `;
 export const BookStyledTableMobile = styled.table`
 display:none;
@@ -1818,7 +1839,6 @@ display:table;
       max-width:5px;
     }
     }
-  }
 `;
 export const CloseButton = styled.button`
 @media only screen and (max-width: 1023px) {
@@ -1952,7 +1972,8 @@ export const TableHeader = styled.th`
       border-left: none;
     }
     &:first-child {
-      border-bottom: 1px solid rgba(171, 170, 170, 1); ;
+      border-bottom: 1px solid rgba(171, 170, 170, 1);
+    }
     }
 `;
 
@@ -1984,7 +2005,6 @@ export const TableCell = styled.td`
         border-right: none;
     }
         
-
       @media only screen and (max-width: 1023px) {
       max-width:auto;
       border:1px solid rgba(171, 170, 170, 1);
