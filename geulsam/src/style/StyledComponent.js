@@ -706,6 +706,7 @@ border: none;
 
 export const Footers = styled.footer`
 @media only screen and (max-width:1023px){
+  position: relative;
 background-color: rgba(29, 28, 28, 1);
 width: 100dvw;
 font-size: 11px;
@@ -1174,21 +1175,24 @@ export const PosterGridContainer = styled.div`
   margin-top: 30px;
   margin-bottom: 30px;
   background-image: none;
+  padding-left: 5dvw;
 }
 background-image: linear-gradient(to bottom, #F9F9F6 200px,rgba(45, 43, 42, 1)100px);
 
- // display: grid;
-  //grid-template-columns: repeat(3, 1fr);
   display: flex;
   flex-wrap: wrap; /* 그리드 아이템이 줄 바꿈되도록 설정 */
-  justify-content: center; /* 가로 방향 가운데 정렬 */
+  justify-content: left; /* 가로 방향 가운데 정렬 */
   gap: 35px;
-  justify-content: center;
   align-items: center;
   padding: 20px;
   margin-top: 46px;
-
+  padding-left: 5.5%;
 `;
+export const PosterContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`
 export const PotserGridItems = styled.div`
   @media only screen and (max-width:1023px) {
   width: 90dvw;

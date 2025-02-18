@@ -8,6 +8,7 @@ export const AccordionHeader = styled.div`
   justify-content: center;
   align-items: center;
   font-family: 'MaruBuri-Regular';
+  margin-bottom: 40px;
 `;
 
 export const AccordionContainer = styled.div`
