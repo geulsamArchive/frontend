@@ -41,20 +41,20 @@ const CriticLogModal = ({ isModalOpen, closeModal, logTitle, logDate, logPasswor
             style={modalStyles}
         >
             <LoginForm>
-                <Title>합평회 정보</Title>
+                <Title></Title>
                 <Wrapper>
-                    <p><strong>제목:</strong> {logTitle}</p>
-                    <p><strong>날짜:</strong> {logDate}</p>
-                    <LogPassword
+                    <p>{logTitle}</p>
+                    <p>{logDate}</p>
+                    <p
                         onClick={() =>
-                            handleCopyClipBoard(`${log.cloverNotePassword}`)
+                            handleCopyClipBoard(`${logPassword}`)
                         }
                     >
                         {logPassword}
-                    </LogPassword>
-                    <LogURL target="_blank" href={log.cloverNoteUrl}>
+                    </p>
+                    <p target="_blank" href={logUrl}>
                         합평 기록 바로가기
-                    </LogURL>
+                    </p>
                 </Wrapper>
                 <Buttons>
                     <Button onClick={closeModal}>닫기</Button>
