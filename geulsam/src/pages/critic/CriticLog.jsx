@@ -26,7 +26,6 @@ import { translateType } from '../../components/Translate';
 import Pagination from '../../components/Paging/Pagination';
 import { CheckTitleLength } from './../../components/CheckLength';
 import CriticLogModal from './CriticLogModal';
-import { Desktop, Mobile } from '../../hooks/useMediaQuery';
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleDateString('ko-KR', {
@@ -43,6 +42,7 @@ const CriticLog = () => {
   const [keyword, setKeyword] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedLog, setSelectedLog] = useState(null); // 선택된 합평 로그 저장
+
 
   const getCriticLogs = async () => {
     try {
@@ -64,7 +64,7 @@ const CriticLog = () => {
     try {
       await navigator.clipboard.writeText(text);
       alert('클로버노트의 비밀번호가 복사되었어요. Ctrl+V를 입력해주세요');
-    } catch (err) {}
+    } catch (err) { }
   };
 
   useEffect(() => {
@@ -155,6 +155,8 @@ const CriticLog = () => {
             </>
           )}
 
+
+
           <Margin>
             <Pagination
               isDark="true"
@@ -164,67 +166,11 @@ const CriticLog = () => {
             />
           </Margin>
         </CriticLogsContainer>
-        <MobileCriticLogsContainer>
-          {criticList.length === 0 ? (
-            <>
-              <LogSearchFailed>
-                <Red>'{keyword}'</Red>에 해당하는 검색결과를 찾을 수 없습니다.
-              </LogSearchFailed>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-              <Logs>&nbsp;</Logs>
-            </>
-          ) : (
-            <>
-              {criticList.map((log) => (
-                <MobileLogs
-                  onClick={() => openCriticLogModal(log)}
-                  key={log.id}
-                >
-                  {isModalOpen && selectedLog && (
-                    <CriticLogModal
-                      isModalOpen={isModalOpen}
-                      closeModal={closeCriticLogModal}
-                      logTitle={selectedLog.contentTitle} // 제목
-                      logDate={formatDate(selectedLog.localDate)} // 날짜
-                      logPassword={selectedLog.cloverNotePassword} // 비밀번호
-                      logUrl={selectedLog.cloverNoteUrl}
-                    />
-                  )}
-                  <LogLeft>
-                    <LogName>{log.userName}</LogName>
-                  </LogLeft>
-                  <LogRight>
-                    <LogTitle>
-                      {CheckTitleLength(log.contentTitle, 25)}
-                    </LogTitle>
-                    <LogDate>{formatDate(log.localDate)}</LogDate>
-                    {/* <LogPassword
-                      onClick={() =>
-                        handleCopyClipBoard(`${log.cloverNotePassword}`)
-                      }
-                    >
-                      {log.cloverNotePassword}
-                    </LogPassword> */}
-                    <LogURL target="_blank" href={log.cloverNoteUrl}>
-                      합평 기록 바로가기
-                    </LogURL>
-                  </LogRight>
-                </MobileLogs>
-              ))}
-              {criticList.length < 12 &&
-                renderEmptyLogs(12 - criticList.length)}{' '}
-            </>
-          )}
-        </MobileCriticLogsContainer>
+
+
+        /
+
+
       </CriticLogContainer>
     </>
   );

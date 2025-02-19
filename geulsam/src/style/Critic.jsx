@@ -206,13 +206,10 @@ export const MarginLeft = styled.div`
     margin-left: 5dvw;
 `
 export const CriticLogsContainer = styled.div`
-  @media only screen and (max-width: 1023px) {
-    display: none;
-  }  
 margin-top: 30px;
   margin-bottom: 50px;
-  margin-left: 60px;
-  width: 90dvw;
+    margin-left: 5dvw;
+    width: 88dvw;
 `;
 
 export const MobileCriticLogsContainer = styled.div`
@@ -240,15 +237,28 @@ export const LogTitle = styled.div`
     font-family: 'MaruBuri-Regular';
     @media only screen and (max-width:1023px ){
         color: rgba(249, 249, 246, 1);
-        width: 20dvw;
+        width: 40dvw;
+        font-size:16px;
+        font-weight:bold;
 }
 
 `
 
 export const Logs = styled.div`
     @media only screen and (max-width:1023px ){
-    display:flex;
+    &:first-child{
+    border-top: 1px solid rgba(87, 86, 85, 1);
+}
     }
+    padding-top:15px;
+    display:flex;
+    position:relative;
+    padding-bottom:50px;
+    
+    border-top : 1px solid rgba(87, 86, 85, 1);
+        border-bottom : 1px solid rgba(87, 86, 85, 1);
+    }
+
 &:first-child{
     border-top: 1px solid rgba(29, 28, 28, 1);
 }
@@ -260,22 +270,7 @@ justify-content: space-between;
     border-bottom: 1px solid rgba(29, 28, 28, 1);
 `
 
-export const MobileLogs = styled.div`
-    @media only screen and (max-width:1023px ){
-    display: flex;
-    font-size: 14px;
-    padding-bottom: 12px;
-padding-top:12px ;
-justify-content: space-between;
-width: 90dvw;
- &:first-child {
-        border-top: 1px solid #575655;
-    }
 
-    border-bottom: 1px solid #575655;
-
-}
-`
 
 export const LogSearchFailed = styled.div`
    &:first-child{
@@ -292,24 +287,29 @@ export const LogName = styled.div`
     color: rgba(29, 28, 28, 1);
     width: 90px;
     font-family: 'MaruBuri-Regular';
+
+`
+export const MobileLogName = styled.div`
     @media only screen and (max-width:1500px ){
-    color:  rgba(249, 249, 246, 1);
+    color:  rgba(213, 213, 212, 1);
       font-size: 14px;
   width: 100px;
+  font-weight:bold;
+      font-family: 'MaruBuri-Regular';
     }
 
 `
-
 export const LogDate = styled.div`
     color: rgba(29, 28, 28, 1);
     width: 125px;
     font-family: 'MaruBuri-Regular';
   @media only screen and (max-width: 1023px) {
-    color:  rgba(249, 249, 246, 1);
+    color:  rgba(213, 213, 212, 1);
     font-size:10px;
-    bottom: 0px;
+    position:absolute;
+    bottom: 3dvw;
+    right:1px;
     width:20dvw;
-        margin-right:2dvw;
     }
 `
 
@@ -328,7 +328,8 @@ export const LogURL = styled.a`
     width: 114px;
     font-size: 11px;
     font-weight: bold; /* 글자를 굵게 */
-    padding: 4px 0; /* 위아래 여백 추가 */
+    padding: 8px 0; /* 위아래 여백 추가 */
+    display:inline-block;
     background-color: rgba(234, 233, 227, 1);
     border-radius: 20px;
     text-align: center;
@@ -377,5 +378,6 @@ export const LogLeft = styled.div`
 
 export const LogRight = styled.div`
     display: flex;
+    align-items: center;
 
 `

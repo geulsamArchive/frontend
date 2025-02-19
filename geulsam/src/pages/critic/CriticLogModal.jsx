@@ -12,8 +12,8 @@ const CriticLogModal = ({ isModalOpen, closeModal, logTitle, logDate, logPasswor
         content: {
             background: 'white',
             flexDirection: 'column',
-            height: 'auto',
-            width: '400px',
+            height: '198px',
+            width: '350px',
             borderRadius: '10px',
             border: 'none',
             display: 'flex',
@@ -42,20 +42,18 @@ const CriticLogModal = ({ isModalOpen, closeModal, logTitle, logDate, logPasswor
         >
             <LoginForm>
                 <Title></Title>
-                <Wrapper>
-                    <p>{logTitle}</p>
-                    <p>{logDate}</p>
-                    <p
-                        onClick={() =>
-                            handleCopyClipBoard(`${logPassword}`)
-                        }
-                    >
-                        {logPassword}
-                    </p>
-                    <p target="_blank" href={logUrl}>
-                        합평 기록 바로가기
-                    </p>
-                </Wrapper>
+                <p>{logDate}</p>
+                <p>{logTitle}</p>
+                <p
+                    onClick={() =>
+                        handleCopyClipBoard(`${logPassword}`)
+                    }
+                >
+                    {logPassword}
+                </p>
+                <p target="_blank" href={logUrl}>
+                    합평 기록 바로가기
+                </p>
                 <Buttons>
                     <Button onClick={closeModal}>닫기</Button>
                 </Buttons>
