@@ -246,17 +246,15 @@ export const LogTitle = styled.div`
 
 export const Logs = styled.div`
     @media only screen and (max-width:1023px ){
-    &:first-child{
-    border-top: 1px solid rgba(87, 86, 85, 1);
-}
-    }
-    padding-top:15px;
     display:flex;
     position:relative;
     padding-bottom:50px;
     
     border-top : 1px solid rgba(87, 86, 85, 1);
         border-bottom : 1px solid rgba(87, 86, 85, 1);
+&:first-child{
+    border-top: 1px solid rgba(87, 86, 85, 1);
+}
     }
 
 &:first-child{
@@ -271,6 +269,22 @@ justify-content: space-between;
 `
 
 
+export const MobileLogs = styled.div`
+    @media only screen and (max-width:1023px ){
+    display: flex;
+    font-size: 14px;
+    padding-bottom: 12px;
+padding-top:12px ;
+justify-content: space-between;
+width: 90dvw;
+ &:first-child {
+        border-top: 1px solid #575655;
+    }
+
+    border-bottom: 1px solid #575655;
+
+}
+`
 
 export const LogSearchFailed = styled.div`
    &:first-child{
