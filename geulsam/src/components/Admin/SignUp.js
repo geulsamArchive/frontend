@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForms } from '../../hooks/useForms';
 import axios from 'axios';
-import { ButtonSmall, Wrapper, Form, Input, Inputs, Button, InputTitle, FormTop, Silver, BackButton, LeftAlign, WhiteButtons, ErrorMessage, InputShort, LoginForm, LoginInputTitle, LoginInput } from '../../style/StyledComponent';
+import { ButtonSmall, Wrapper, Form, Input, Inputs, Button, InputTitle, FormTop, Silver, BackButton, LeftAlign, WhiteButtons, ErrorMessage, InputShort, LoginForm, LoginInputTitle, LoginInput, Wrapper2 } from '../../style/StyledComponent';
 import Left from '../../assets/images/grayLeft.png'
 import { normalAPI } from '../../apis/Api';
 
@@ -94,7 +94,7 @@ const SignUp = ({ prevStep, nextStep }) => {
 
     }
     return (
-        <Wrapper>
+        <Wrapper2>
             <LoginForm>
                 <FormTop>
                     <BackButton src={Left} onClick={prevStep} />
@@ -124,7 +124,7 @@ const SignUp = ({ prevStep, nextStep }) => {
                     <Button onClick={handleNext}>다음</Button>
                 </WhiteButtons>
             </LoginForm>
-        </Wrapper>
+        </Wrapper2>
     );
 };
 

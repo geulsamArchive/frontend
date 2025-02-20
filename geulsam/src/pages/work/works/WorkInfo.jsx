@@ -294,6 +294,7 @@ const WorkInfo = () => {
               <br />
               <br />
               <PDFDownload PDFLink={workData.pdf} />
+              <br />
               <CopyURL />
             </WorkButtons>
           </Desktop>

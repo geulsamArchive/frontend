@@ -163,16 +163,16 @@ const AuthorInfo = () => {
             <NoneLinkBookInfos>
               <B>키워드</B>
               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{' '}
-              {author.keywords?.map((word) => (
-                <span>{word}</span>
-              ))}
+              &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+              {author.keywords && author.keywords.length > 0
+                ? author.keywords.slice(0, 3).join(' / ')
+                : '키워드 없음'}
             </NoneLinkBookInfos>
             <NoneLinkBookInfos>
               <B>자기소개</B>
               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;&nbsp;
-              {author.introduce}
+              {author.introduce || '자기소개가 없습니다.'}
             </NoneLinkBookInfos>
             <MobileAuthorInfoWorkContainer>
               {work.map((w, index) => (

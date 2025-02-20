@@ -22,7 +22,6 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-background-image: url(${Notes});
 background-color: rgba(29, 28, 28, 1);
 background-position: center;
 background-repeat: no-repeat;
@@ -33,7 +32,17 @@ height: 100dvh;
 width: 100dvw;
 font-family: 'MaruBuri-Regular';
 `;
-
+export const Wrapper2 = styled.div`
+background-color: rgba(249, 249, 246, 1);
+background-position: center;
+background-repeat: no-repeat;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100dvh;
+width: 100dvw;
+font-family: 'MaruBuri-Regular';
+`;
 //입력 폼 관련 요소
 export const RightSubmit = styled.div`
   @media only screen and (max-width: 1023px) {
@@ -726,6 +735,7 @@ align-items: center;
 justify-content: space-between;
 font-size: 16px;
 color: rgba(87, 86, 85, 1)  ;
+z-index: 2;
 a{
   text-decoration: none;
 color: rgba(87, 86, 85, 1)  ;
@@ -983,7 +993,7 @@ export const BookInfoContainer = styled.div`
 font-family: 'MaruBuri-Regular';
 width: 90%;
 margin-left: 4%;
-padding-top: 100px;
+padding-top: 50px;
 background-color: rgba(249, 249, 246, 1);
 box-sizing: border-box;
 `
@@ -1006,12 +1016,12 @@ export const BookTitle = styled.div`
     font-size: 18px;
     padding-bottom: 15px;
     padding-left:10px;
-    border-bottom : 2px black solid;
+    border-bottom : 2px #81807F solid;
 }
 font-size: 27px;
 font-weight: 700;
 width: 100%;
-border-bottom:2px solid black;
+border-bottom:2px solid #81807F;
 padding-bottom: 18px;
 `
 export const BookInfos = styled.div`
