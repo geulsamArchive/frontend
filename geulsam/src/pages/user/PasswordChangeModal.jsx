@@ -7,7 +7,7 @@ import { ModalTop } from '../../style/Critic';
 import PasswordChangeModal2 from './PasswordChangeModal2';
 
 import {
-    LoginForm,ErrorMessage, Wrapper, Title, Form, Input, Inputs,
+    LoginForm, ErrorMessage, Wrapper, Title, Form, Input, Inputs,
     Button, InputTitle, Buttons
 } from '../../style/StyledComponent';
 
@@ -22,19 +22,22 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
             backgroundColor: 'inherit',
         },
         content: {
-           background:'inherit',
-           flexDirection:'column',
-           height: '100dvh',
+            background: 'inherit',
+            flexDirection: 'column',
+            height: '100dvh',
             width: '100dvw',
-            backgroundPosition:'center',
+            backgroundPosition: 'center',
             border: 'none',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             padding: '0',
             margin: 'auto',
+            left: '50%',
+            top: '70%',
+            transform: 'translate(-50%, -50%)', // 화면 정중앙으로 이동
             fontFamily: 'MaruBuri-Regular',
-            filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))', //transform: 'scale(0.4)',
+            filter: 'drop-shadw(0 10px 30px rgba(152, 147, 142, 0.25))', //transform: 'scale(0.4)',
         }
         // background-color: rgba(29, 28, 28, 1);
         // background-position: center;
@@ -124,20 +127,20 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
                 contentLabel="비밀번호 변경"
                 style={modalStyles}
             >
-                
-                    <LoginForm>
-                        <Title>비밀번호 변경</Title>
-                        <Inputs>
-                            <InputTitle>기존 비밀번호</InputTitle>
-                            <Input type='password' value={pw} onChange={onChangePw} />
-                            {pwError && <ErrorMessage>{pwError}</ErrorMessage>}
-                        </Inputs>
-                        <Buttons>
-                            <Button onClick={onClick}>변경하기</Button>
-                            <Button onClick={closeModal}>닫기</Button>
-                        </Buttons>
-                    </LoginForm>
-                
+
+                <LoginForm>
+                    <Title>비밀번호 변경</Title>
+                    <Inputs>
+                        <InputTitle>기존 비밀번호</InputTitle>
+                        <Input type='password' value={pw} onChange={onChangePw} />
+                        {pwError && <ErrorMessage>{pwError}</ErrorMessage>}
+                    </Inputs>
+                    <Buttons>
+                        <Button onClick={onClick}>변경하기</Button>
+                        <Button onClick={closeModal}>닫기</Button>
+                    </Buttons>
+                </LoginForm>
+
             </Modal>
             <PasswordChangeModal2
                 isModalOpen={isModal2Open}

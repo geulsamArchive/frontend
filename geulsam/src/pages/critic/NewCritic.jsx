@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SearchWork from '../../components/Search/SearchWork';
 import {
+    MobileColor,
     CriticLogContainer,
     CriticLogsContainer,
     LogDate,
@@ -168,7 +169,7 @@ const NewCritic = () => {
                         <MarginLeft>
                             <SearchWork
                                 onSearch={handleSearch}
-                                placeholder="찾으시는 합평회의 제목, 작가, 날짜를 입력해주세요."
+                                placeholder="작품명이나 작가 이름을 검색하세요."
                             />
                         </MarginLeft>
                     </Centering>

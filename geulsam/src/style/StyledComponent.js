@@ -219,6 +219,65 @@ background-color: white;
   align-items: center;
   filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
 `
+
+export const CriticModalForm = styled.div`
+ @media only screen and (max-width: 1023px) {
+    width: 408px; /* 작은 화면에서 더 작은 너비 */
+    height: 486px; /* 작은 화면에서 더 작은 높이 */
+  }
+
+ @media only screen and (max-width: 600px) {
+    width: 90dvw; /* 작은 화면에서 더 작은 너비 */
+    height: 102dvw; /* 작은 화면에서 더 작은 높이 */
+  }
+position:relative;
+background-color: white;
+  border-radius: 8.6px;
+  text-align: center;
+  width: 408px;
+  height: 486px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
+
+   &::after {
+    content: '합평 기록 바로가기'; 
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px; /* 하단 색상 영역 높이 조절 가능 */
+    background-color: rgba(87, 86, 85, 1); /* 원하는 색상 */
+    color: white; /* 글자 색상 */
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow:hidden;
+    border-bottom-left-radius: 8.6px;
+    border-bottom-right-radius: 8.6px;
+  }
+`
+export const CriticModalLink = styled.a`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: rgba(87, 86, 85, 1);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-bottom-left-radius: 8.6px;
+  border-bottom-right-radius: 8.6px;
+`;
+
 export const EmailForm = styled.div`
  @media only screen and (max-width: 1023px) {
     width: 85dvw; /* 작은 화면에서 더 작은 너비 */
@@ -381,6 +440,27 @@ justify-content:right ;
 border-bottom-left-radius: 8.6px;
 border-bottom-right-radius: 8.6px;
 `
+
+export const CriticModalDate = styled.p`
+font-family: 'MaruBuri-Regular';
+color:rgba(171, 170, 170, 1);
+font-size:12px;
+
+`
+
+export const CriticModalTitle = styled.p`
+font-family: 'MaruBuri-Regular';
+color:rgba(29, 28, 28, 1);
+font-size:20px;
+font-weight:bold;
+`
+
+export const CriticModalPassword = styled.p`
+font-family: 'MaruBuri-Regular';
+color: rgba(129, 128, 127, 1);
+font-size:16px;
+`
+
 export const ConnectButton = styled.button`
    @media only screen and (max-width:1023px) {
 font-family: 'MaruBuri-Regular';
@@ -1857,6 +1937,26 @@ display:table;
 export const CloseButton = styled.button`
 @media only screen and (max-width: 1023px) {
   position: absolute;
+  right: 20px;
+  background:none;
+  bottom:6px;
+  border: none;
+  cursor: pointer;
+  width: 6.45px;
+height: 6.45px;
+z-index:0px;
+flex-shrink: 0;
+  svg path {
+    stroke: var(--60, #81807F);
+    stroke-width: 1.86px;
+  }
+}
+`;
+
+export const CriticCloseButton = styled.button`
+@media only screen and (max-width: 1023px) {
+  position: absolute;
+  top:0px;
   right: 20px;
   background:none;
   bottom:6px;

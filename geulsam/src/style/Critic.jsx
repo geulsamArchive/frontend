@@ -199,6 +199,10 @@ export const CriticLogContainer = styled.div`
     color:black;
 `
 
+export const MobileColor = styled.div`
+    color:rgba(249, 249, 246, 1);
+`
+
 export const MarginRight = styled.div`
     margin-right: 5dvw;
 `
