@@ -43,55 +43,56 @@ const MemberModify = () => {
         navigate(route);
     };
     // 비동기 함수로 회원 데이터를 GET 요청으로 가져옴
-    const getMemberData = async (level, page, search) => {
+    const getMemberData = async (level, search) => {
         const accessToken = localStorage.getItem('access');
         try {
             const resp = await normalAPI.get(`/user`, {
                 params: {
-                    page: page,
                     order: order,
                     level: level,
-                    size: membersPerPage, // 페이지당 회원 수
-                    search: search // 검색어 추가
+                    size: 10000, // 전체 데이터를 가져오기 위해 큰 값 사용
+                    search: search, // 검색어 추가
                 },
                 headers: {
                     'accessToken': accessToken,
                 },
             });
-            setTotalPage(resp.data.data.pageTotal); // 전체 페이지 수 설정
-            return resp.data.data.content || []; // 데이터를 반환
+            // API에서 totalPage 관련 처리는 제거합니다.
+            return resp.data.data.content || [];
         } catch (error) {
             console.error("회원 데이터를 가져오는 중 오류 발생:", error);
-            return []; // 오류 시 빈 배열 반환
+            return [];
         }
     };
 
     // NORMAL과 ADMIN 회원 데이터를 모두 가져옴
-    const handleNormalMembers = async () => {
-        setCurrentPage(1); // 첫 페이지로 리셋
-        setIsSuspendedActive(false); // SUSPENDED 버튼 비활성화
-        setIsNormalActive(true); // NORMAL 버튼 활성화
-
-        // NORMAL 회원과 ADMIN 회원 데이터를 각각 가져오고 합침
-        const normalMembers = await getMemberData('NORMAL', currentPage, searchTerm);
-        const adminMembers = await getMemberData('ADMIN', currentPage, searchTerm);
-
-        // NORMAL과 ADMIN 데이터를 합쳐서 상태 업데이트
+    // NORMAL과 ADMIN 회원 전체 데이터를 받아온 후 합침
+    const handleNormalMembers = async (search) => {
+        setIsSuspendedActive(false);
+        setIsNormalActive(true);
+        const normalMembers = await getMemberData('NORMAL', search);
+        const adminMembers = await getMemberData('ADMIN', search);
         const combinedMembers = [...normalMembers, ...adminMembers];
         setMembers(combinedMembers);
-        setTotalPage(Math.ceil(combinedMembers.length / membersPerPage)); // 전체 페이지 수 설정
-
+        setTotalPage(Math.ceil(combinedMembers.length / membersPerPage));
     };
 
-    // "가입 신청된 회원" 버튼을 눌렀을 때 SUSPENDED 회원을 가져옴
     const handleSuspendedMembers = async () => {
         setCurrentLevel('SUSPENDED');
         setCurrentPage(1); // 첫 페이지로 리셋
-        setIsSuspendedActive(true); // SUSPENDED 버튼 활성화
-        setIsNormalActive(false); // NORMAL 버튼 비활성화
-        const suspendedMembers = await getMemberData('SUSPENDED', currentPage, searchTerm);
+        setIsSuspendedActive(true);
+        setIsNormalActive(false);
+        const suspendedMembers = await getMemberData('SUSPENDED', searchTerm);
         setMembers(suspendedMembers);
+        setTotalPage(Math.ceil(suspendedMembers.length / membersPerPage));
     };
+
+    const handleNormalMembersButtonClick = async () => {
+        setCurrentPage(1);
+        await handleNormalMembers(searchTerm);
+    };
+
+
 
     // 검색어가 변경될 때 호출되는 함수
     const handleSearch = (searchValue) => {
@@ -177,17 +178,16 @@ const MemberModify = () => {
         }
     };
     useEffect(() => {
-        handleNormalMembers(); // 컴포넌트가 처음 렌더링될 때 실행
-    }, []); // 빈 의존성 배열로 한 번만 실행
+        handleNormalMembers(searchTerm);
+    }, []); // 초기 렌더링
 
     useEffect(() => {
         if (isNormalActive) {
-            handleNormalMembers();
+            handleNormalMembers(searchTerm);
         } else if (isSuspendedActive) {
             handleSuspendedMembers();
         }
-    }, [currentPage, searchTerm]); // currentPage와 searchTerm 상태가 변경될 때 실행
-
+    }, [searchTerm]);
 
 
     const openPasswordChangeEmailModal = (member) => {
@@ -214,7 +214,10 @@ const MemberModify = () => {
 
 
     };
-    const displayedMembers = members.slice((currentPage - 1) * membersPerPage, currentPage * membersPerPage);
+    const displayedMembers = members.slice(
+        (currentPage - 1) * membersPerPage,
+        currentPage * membersPerPage
+    );
 
 
     return (
@@ -228,7 +231,8 @@ const MemberModify = () => {
             <MemberTitle>
                 <MemberTitleTop>회원 목록</MemberTitleTop> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <ButtonForMember isActive={isNormalActive} onClick={handleNormalMembers} >등록회원</ButtonForMember>
+                <ButtonForMember isActive={isNormalActive} onClick={handleNormalMembersButtonClick}
+                >등록회원</ButtonForMember>
                 <ButtonForMember2 isActive={isSuspendedActive} onClick={handleSuspendedMembers} >가입신청</ButtonForMember2>
                 <SearchWorkForMember onSearch={handleSearch} placeholder='찾으시는 회원의 이름 혹은 학번을 적어주세요.' />
             </MemberTitle>
@@ -245,8 +249,8 @@ const MemberModify = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {members.length > 0 ? (
-                            members.map((member) => (
+                        {displayedMembers.length > 0 ? (
+                            displayedMembers.map((member) => (
                                 <TableRow key={member.userId}>
                                     {member.level !== "SUSPENDED" && (
                                         <TableCell>

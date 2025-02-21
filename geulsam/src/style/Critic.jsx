@@ -200,7 +200,7 @@ export const CriticLogContainer = styled.div`
 `
 
 export const MobileColor = styled.div`
-    color:rgba(249, 249, 246, 1);
+    background-color:rgba(249, 249, 246, 1);
 `
 
 export const MarginRight = styled.div`
@@ -240,7 +240,7 @@ export const LogTitle = styled.div`
         width: 500px;
     font-family: 'MaruBuri-Regular';
     @media only screen and (max-width:1023px ){
-        color: rgba(249, 249, 246, 1);
+        color: rgba(29, 28, 28, 1);
         width: 40dvw;
         font-size:16px;
         font-weight:bold;

@@ -223,12 +223,10 @@ background-color: white;
 export const CriticModalForm = styled.div`
  @media only screen and (max-width: 1023px) {
     width: 408px; /* 작은 화면에서 더 작은 너비 */
-    height: 486px; /* 작은 화면에서 더 작은 높이 */
   }
 
  @media only screen and (max-width: 600px) {
     width: 90dvw; /* 작은 화면에서 더 작은 너비 */
-    height: 102dvw; /* 작은 화면에서 더 작은 높이 */
   }
 position:relative;
 background-color: white;
@@ -238,32 +236,12 @@ background-color: white;
   height: 486px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
++ justify-content: flex-start; /* 내용이 위부터 쌓이고, 버튼이 마지막에 붙도록 */
   align-items: center;
   filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
-
-   &::after {
-    content: '합평 기록 바로가기'; 
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50px; /* 하단 색상 영역 높이 조절 가능 */
-    background-color: rgba(87, 86, 85, 1); /* 원하는 색상 */
-    color: white; /* 글자 색상 */
-    font-size: 14px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow:hidden;
-    border-bottom-left-radius: 8.6px;
-    border-bottom-right-radius: 8.6px;
   }
 `
 export const CriticModalLink = styled.a`
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
   height: 50px;
   background-color: rgba(87, 86, 85, 1);
@@ -455,11 +433,24 @@ font-size:20px;
 font-weight:bold;
 `
 
-export const CriticModalPassword = styled.p`
+export const CriticModalPassword = styled.div`
 font-family: 'MaruBuri-Regular';
+background-color:#eaeaea;
+height:27px;
+text-align: center;        /* 가운데 정렬 */
+width:294px;
+display:flex,
+justify-content:center,
+align-items:center,
 color: rgba(129, 128, 127, 1);
 font-size:16px;
+padding-top:6px;
+line-height:normal;
 `
+export const HalfBreak = styled.div`
+  line-height: 0.5em; /* 기존 줄의 반만큼 높이 */
+  content: '';        /* 내용 없음 */
+`;
 
 export const ConnectButton = styled.button`
    @media only screen and (max-width:1023px) {

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import {
-    CriticCloseButton, CriticModalLink, CriticModalForm, CriticModalPassword, LoginForm, Wrapper, Title, Button, Buttons, CriticModalDate, CriticModalTitle
+    HalfBreak, CriticCloseButton, CriticModalLink, CriticModalForm, CriticModalPassword, LoginForm, Wrapper, Title, Button, Buttons, CriticModalDate, CriticModalTitle
 } from '../../style/StyledComponent';
 
 const CriticLogModal = ({ isModalOpen, closeModal, logTitle, logDate, logPassword, logUrl }) => {
@@ -12,14 +12,14 @@ const CriticLogModal = ({ isModalOpen, closeModal, logTitle, logDate, logPasswor
         content: {
             background: 'white',
             flexDirection: 'column',
-            height: '198px',
             width: '350px',
+            height: '211px',
             borderRadius: '10px',
             border: 'none',
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             alignItems: 'center',
-            padding: '20px',
+            padding: '2px 16px 0px 16px',
             margin: 'auto',
             fontFamily: 'MaruBuri-Regular',
             boxShadow: '0 10px 30px rgba(0, 0, 0, 0.25)',
@@ -39,6 +39,17 @@ const CriticLogModal = ({ isModalOpen, closeModal, logTitle, logDate, logPasswor
         } catch (err) { }
     };
 
+    const handleClose = () => {
+        console.log("모달 닫기 버튼 클릭됨!"); // 로그 출력
+        closeModal();
+        console.log(isModalOpen);
+    };
+
+    useEffect(() => {
+        console.log("isModalOpen 상태:", isModalOpen);
+    }, [isModalOpen]);
+
+
     return (
         <Modal
             isOpen={isModalOpen}
@@ -47,7 +58,7 @@ const CriticLogModal = ({ isModalOpen, closeModal, logTitle, logDate, logPasswor
             style={modalStyles}
         >
             <CriticModalForm>
-                <CriticCloseButton onClick={closeModal}>
+                <CriticCloseButton onClick={handleClose}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="23"
@@ -75,16 +86,19 @@ const CriticLogModal = ({ isModalOpen, closeModal, logTitle, logDate, logPasswor
                         />
                     </svg>
                 </CriticCloseButton>
-                <br />
+                <br /><br /><br />
                 <CriticModalDate>{logDate}</CriticModalDate>
+                <br />
                 <CriticModalTitle>{logTitle}</CriticModalTitle>
+                <br /><HalfBreak />
                 <CriticModalPassword
                     onClick={() =>
                         handleCopyClipBoard(`${logPassword}`)
                     }
-                >
+                ><HalfBreak /><HalfBreak />
                     {logPassword}
                 </CriticModalPassword>
+                <br />
                 <CriticModalLink target="_blank" href={logUrl}>
                     합평 기록 바로가기
                 </CriticModalLink>

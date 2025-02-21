@@ -57,6 +57,8 @@ const NewCritic = () => {
     const closeCriticLogModal = () => {
         setIsModalOpen(false);
         setSelectedLog(null); // 모달 닫을 때 선택된 로그 초기화
+        console.log("NewCritic에서 closeModal 실행됨");
+        console.log(isModalOpen);
     };
     const getCriticLogs = async () => {
         try {
@@ -163,79 +165,60 @@ const NewCritic = () => {
                 </CriticLogContainer>
                 <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />{' '}
             </Desktop>
+            {/* Mobile 부분 */}
             <Mobile>
-                <CriticLogContainer>
-                    <Centering>
-                        <MarginLeft>
-                            <SearchWork
-                                onSearch={handleSearch}
-                                placeholder="작품명이나 작가 이름을 검색하세요."
-                            />
-                        </MarginLeft>
-                    </Centering>
-                    <br />
-                    <CriticLogsContainer>
-                        {criticList.length === 0 ? (
-                            <>
-                                <LogSearchFailed>
-                                    <Red>'{keyword}'</Red>에 해당하는 검색결과를 찾을 수 없습니다.
-                                </LogSearchFailed>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                                <Logs>&nbsp;</Logs>
-                            </>
-                        ) : (
-                            <>
-                                {criticList.map((log) => (
-                                    <Logs onClick={() => openCriticLogModal(log)} key={log.id}>
-                                        {isModalOpen && selectedLog && (
-                                            <CriticLogModal
-                                                isModalOpen={isModalOpen}
-                                                closeModal={closeCriticLogModal}
-                                                logTitle={selectedLog.contentTitle}  // 제목
-                                                logDate={formatDate(selectedLog.localDate)}  // 날짜
-                                                logPassword={selectedLog.cloverNotePassword}  // 비밀번호
-                                                logUrl={selectedLog.cloverNoteUrl}
-                                            />)}
-                                        <LogLeft>
-                                            <MobileLogName>{log.userName}</MobileLogName>
-                                            <LogTitle>
-                                                {CheckTitleLength(log.contentTitle, 25)}
-                                            </LogTitle>
-                                        </LogLeft>
-                                        <LogRight>
-
-                                            <LogDate>{formatDate(log.localDate)}</LogDate>
-                                            {/*<LogPassword
-                                                onClick={() =>
-                                                    handleCopyClipBoard(`${log.cloverNotePassword}`)
-                                                }
-                                            >
-                                                {log.cloverNotePassword}
-                                            </LogPassword>*/}
-                                            {/*<LogURL target="_blank" href={log.cloverNoteUrl}></LogURL>*/}
-                                            {/* <LogURLMobile target="_blank" href={log.cloverNoteUrl}>
-                                            합평 기록 
-                                        </LogURLMobile> */}
-                                        </LogRight>
-                                    </Logs>
-                                ))}
-                                {criticList.length < 12 &&
-                                    renderEmptyLogs(12 - criticList.length)}{' '}
-                            </>
-                        )}
-                    </CriticLogsContainer>
-                </CriticLogContainer>
-                <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />{' '}
+                <MobileColor>
+                    <CriticLogContainer>
+                        <Centering>
+                            <MarginLeft>
+                                <SearchWork
+                                    onSearch={handleSearch}
+                                    placeholder="작품명이나 작가 이름을 검색하세요."
+                                />
+                            </MarginLeft>
+                        </Centering>
+                        <br />
+                        <CriticLogsContainer>
+                            {criticList.length === 0 ? (
+                                <>
+                                    <LogSearchFailed>
+                                        <Red>'{keyword}'</Red>에 해당하는 검색결과를 찾을 수 없습니다.
+                                    </LogSearchFailed>
+                                    {renderEmptyLogs(12)}
+                                </>
+                            ) : (
+                                <>
+                                    {criticList.map((log) => (
+                                        <Logs onClick={() => openCriticLogModal(log)} key={log.id}>
+                                            <LogLeft>
+                                                <MobileLogName>{log.userName}</MobileLogName>
+                                                <LogTitle>{CheckTitleLength(log.contentTitle, 25)}</LogTitle>
+                                            </LogLeft>
+                                            <LogRight>
+                                                <LogDate>{formatDate(log.localDate)}</LogDate>
+                                            </LogRight>
+                                        </Logs>
+                                    ))}
+                                    {criticList.length < 12 && renderEmptyLogs(12 - criticList.length)}
+                                </>
+                            )}
+                        </CriticLogsContainer>
+                    </CriticLogContainer>
+                    <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
+                    {/* 모달은 map 밖에서 한 번만 렌더링 */}
+                    {isModalOpen && selectedLog && (
+                        <CriticLogModal
+                            isModalOpen={isModalOpen}
+                            closeModal={closeCriticLogModal}
+                            logTitle={selectedLog.contentTitle}  // 제목
+                            logDate={formatDate(selectedLog.localDate)}  // 날짜
+                            logPassword={selectedLog.cloverNotePassword}  // 비밀번호
+                            logUrl={selectedLog.cloverNoteUrl}
+                        />
+                    )}
+                </MobileColor>
             </Mobile>
+
         </>
     );
 };

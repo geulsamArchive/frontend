@@ -20,6 +20,7 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
     const modalStyles = {
         overlay: {
             backgroundColor: 'inherit',
+            zIndex: 999,
         },
         content: {
             background: 'inherit',
