@@ -249,28 +249,22 @@ export const LogTitle = styled.div`
 `
 
 export const Logs = styled.div`
-    @media only screen and (max-width:1023px ){
-    display:flex;
-    position:relative;
-    padding-bottom:50px;
-    
-    border-top : 1px solid rgba(87, 86, 85, 1);
-        border-bottom : 1px solid rgba(87, 86, 85, 1);
-&:first-child{
-    border-top: 1px solid rgba(87, 86, 85, 1);
-}
-    }
+  display: flex;
+  font-size: 14px;
+  padding: 12px 0; /* 위아래 동일한 패딩 */
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(87, 86, 85, 1); /* 색상 통일 */
+  box-sizing: border-box; /* padding과 border 충돌 방지 */
 
-&:first-child{
-    border-top: 1px solid rgba(29, 28, 28, 1);
-}
-    display: flex;
-    font-size: 14px;
-    padding-bottom: 12px;
-padding-top:12px ;
-justify-content: space-between;
-    border-bottom: 1px solid rgba(29, 28, 28, 1);
-`
+  &:first-child {
+    border-top: 1px solid rgba(87, 86, 85, 1); /* 모든 화면에서 같은 색상 유지 */
+  }
+
+  @media only screen and (max-width: 1023px) {
+    padding-bottom: 50px; /* 모바일에서 추가 여백 필요 시 */
+    position:relative;
+  }
+`;
 
 
 export const MobileLogs = styled.div`

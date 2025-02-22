@@ -17,10 +17,8 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            padding: '0',
             margin: 'auto',
-            left: '50%',
-            top: '70%',
-            transform: 'translate(-50%, -50%)', // 화면 정중앙으로 이동
             fontFamily: 'MaruBuri-Regular',
             filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))',
         }

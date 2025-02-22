@@ -35,7 +35,7 @@ const PasswordChangeModal = ({ isModalOpen, closeModal, openPasswordChangeModal2
             padding: '0',
             margin: 'auto',
             left: '50%',
-            top: '70%',
+            top: '100%',
             transform: 'translate(-50%, -50%)', // 화면 정중앙으로 이동
             fontFamily: 'MaruBuri-Regular',
             filter: 'drop-shadw(0 10px 30px rgba(152, 147, 142, 0.25))', //transform: 'scale(0.4)',
