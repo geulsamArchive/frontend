@@ -1230,8 +1230,8 @@ height: 100%;
 //PDF 뷰어 관련
 export const PDFPage = styled(Page)`
 canvas {
-        width: 50dvw !important; /* PDF 페이지의 너비를 80dvw로 설정 */
-        height: auto !important; /* 높이는 자동 조정 */
+        width: auto !important; /* PDF 페이지의 너비를 80dvw로 설정 */
+        height: 35dvw!important; /* 높이는 자동 조정 */
     }
     .react-pdf__Page__textContent {
         width: 100% !important; /* Canvas와 같은 너비 */

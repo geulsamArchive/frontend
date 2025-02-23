@@ -111,6 +111,7 @@ const NewCritic = () => {
             </MarginLeft>
           </Centering>
           <br />
+          <br />
           <CriticLogsContainer>
             {criticList.length === 0 ? (
               <>
@@ -162,7 +163,8 @@ const NewCritic = () => {
             )}
           </CriticLogsContainer>
         </CriticLogContainer>
-        <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />{' '}
+        <br />
+        <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
       </Desktop>
       {/* Mobile 부분 */}
       <Mobile>

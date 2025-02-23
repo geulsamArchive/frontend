@@ -240,7 +240,8 @@ export const LogTitle = styled.div`
 export const Logs = styled.div`
   display: flex;
   font-size: 14px;
-  padding: 12px 0; /* 위아래 동일한 패딩 */
+  height: 43px;
+  /* padding: 12px 0; */
   justify-content: space-between;
   border-bottom: 1px solid rgba(87, 86, 85, 1); /* 색상 통일 */
   box-sizing: border-box; /* padding과 border 충돌 방지 */
