@@ -219,6 +219,43 @@ background-color: white;
   align-items: center;
   filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
 `
+
+export const CriticModalForm = styled.div`
+ @media only screen and (max-width: 1023px) {
+    width: 408px; /* 작은 화면에서 더 작은 너비 */
+  }
+
+ @media only screen and (max-width: 600px) {
+    width: 90dvw; /* 작은 화면에서 더 작은 너비 */
+  }
+position:relative;
+background-color: white;
+  border-radius: 8.6px;
+  text-align: center;
+  width: 408px;
+  height: 486px;
+  display: flex;
+  flex-direction: column;
++ justify-content: flex-start; /* 내용이 위부터 쌓이고, 버튼이 마지막에 붙도록 */
+  align-items: center;
+  filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
+  }
+`
+export const CriticModalLink = styled.a`
+  width: 100%;
+  height: 50px;
+  background-color: rgba(87, 86, 85, 1);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-bottom-left-radius: 8.6px;
+  border-bottom-right-radius: 8.6px;
+`;
+
 export const EmailForm = styled.div`
  @media only screen and (max-width: 1023px) {
     width: 85dvw; /* 작은 화면에서 더 작은 너비 */
@@ -381,6 +418,40 @@ justify-content:right ;
 border-bottom-left-radius: 8.6px;
 border-bottom-right-radius: 8.6px;
 `
+
+export const CriticModalDate = styled.p`
+font-family: 'MaruBuri-Regular';
+color:rgba(171, 170, 170, 1);
+font-size:12px;
+
+`
+
+export const CriticModalTitle = styled.p`
+font-family: 'MaruBuri-Regular';
+color:rgba(29, 28, 28, 1);
+font-size:20px;
+font-weight:bold;
+`
+
+export const CriticModalPassword = styled.div`
+font-family: 'MaruBuri-Regular';
+background-color:#eaeaea;
+height:27px;
+text-align: center;        /* 가운데 정렬 */
+width:294px;
+display:flex,
+justify-content:center,
+align-items:center,
+color: rgba(129, 128, 127, 1);
+font-size:16px;
+padding-top:6px;
+line-height:normal;
+`
+export const HalfBreak = styled.div`
+  line-height: 0.5em; /* 기존 줄의 반만큼 높이 */
+  content: '';        /* 내용 없음 */
+`;
+
 export const ConnectButton = styled.button`
    @media only screen and (max-width:1023px) {
 font-family: 'MaruBuri-Regular';
@@ -1890,6 +1961,26 @@ display:table;
 export const CloseButton = styled.button`
 @media only screen and (max-width: 1023px) {
   position: absolute;
+  right: 20px;
+  background:none;
+  bottom:6px;
+  border: none;
+  cursor: pointer;
+  width: 6.45px;
+height: 6.45px;
+z-index:0px;
+flex-shrink: 0;
+  svg path {
+    stroke: var(--60, #81807F);
+    stroke-width: 1.86px;
+  }
+}
+`;
+
+export const CriticCloseButton = styled.button`
+@media only screen and (max-width: 1023px) {
+  position: absolute;
+  top:0px;
   right: 20px;
   background:none;
   bottom:6px;

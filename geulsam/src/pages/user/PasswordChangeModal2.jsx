@@ -8,6 +8,7 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
     const modalStyles = {
         overlay: {
             backgroundColor: 'inherit',
+            zIndex: 999,
         },
         content: {
             width: '408px',
@@ -20,7 +21,6 @@ const PasswordChangeModal2 = ({ isModalOpen, closeModal, beforePw }) => {
             margin: 'auto',
             fontFamily: 'MaruBuri-Regular',
             filter: 'drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25))',
-            //transform: 'scale(0.4)',
         }
     };
     const [pw, onChangePw] = useForms();

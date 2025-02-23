@@ -168,7 +168,65 @@ const CriticLog = () => {
         </CriticLogsContainer>
 
 
-        /
+        <MobileCriticLogsContainer>
+          {criticList.length === 0 ? (
+            <>
+              <LogSearchFailed>
+                <Red>'{keyword}'</Red>에 해당하는 검색결과를 찾을 수 없습니다.
+              </LogSearchFailed>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+              <Logs>&nbsp;</Logs>
+            </>
+          ) : (
+            <>
+              {criticList.map((log) => (
+                <MobileLogs onClick={() => openCriticLogModal(log)} key={log.id}>
+                  {isModalOpen && selectedLog && (
+                    <CriticLogModal
+                      isModalOpen={isModalOpen}
+                      closeModal={closeCriticLogModal}
+                      logTitle={selectedLog.contentTitle}  // 제목
+                      logDate={formatDate(selectedLog.localDate)}  // 날짜
+                      logPassword={selectedLog.cloverNotePassword}  // 비밀번호
+                      logUrl={selectedLog.cloverNoteUrl}
+                    />
+                  )}
+                  <LogLeft>
+                    <LogName>{log.userName}</LogName>
+                  </LogLeft>
+                  <LogRight>
+                    <LogTitle>
+                      {CheckTitleLength(log.contentTitle, 25)}
+                    </LogTitle>
+                    <LogDate>{formatDate(log.localDate)}</LogDate>
+                    {/* <LogPassword
+                      onClick={() =>
+                        handleCopyClipBoard(`${log.cloverNotePassword}`)
+                      }
+                    >
+                      {log.cloverNotePassword}
+                    </LogPassword> */}
+                    <LogURL target="_blank" href={log.cloverNoteUrl}>
+                      합평 기록 바로가기
+                    </LogURL>
+                  </LogRight>
+                </MobileLogs>
+              ))}
+              {criticList.length < 12 &&
+                renderEmptyLogs(12 - criticList.length)}{' '}
+            </>
+          )}
+        </MobileCriticLogsContainer>
+
 
 
       </CriticLogContainer>
