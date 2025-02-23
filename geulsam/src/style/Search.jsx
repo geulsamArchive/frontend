@@ -10,7 +10,7 @@ export const SearchButton = styled.button`
 `;
 export const SearchBox = styled.div`
   @media only screen and (max-width: 1023px) {
-    height: 42px;
+    height: 50px;
     width: 90dvw;
     margin-left: 5dvw;
   }
@@ -52,7 +52,8 @@ export const SearchBoxForMember = styled.div`
 
 export const SearchInput = styled.input`
   @media only screen and (max-width: 1023px) {
-    height: 22px;
+    padding-bottom: 3px;
+    height: 24px;
     width: 80dvw;
     font-size: 20px;
     &::placeholder {

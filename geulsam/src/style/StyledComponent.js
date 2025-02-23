@@ -802,6 +802,36 @@ background-color: rgba(45, 43, 42, 1);
 }
 `
 
+export const SideModalP = styled.div`
+font-family: 'MaruBuri-Regular';
+font-size: 14px;
+`
+
+export const ModalButtonBlack = styled.button`
+background-color: rgba(87, 86, 85, 1);
+font-family: 'MaruBuri-Regular';
+border: none;
+border-radius: 30px;
+width: 106px;
+height: 36px;
+color: #F9F9F6;
+font-weight: 700;
+font-size: 17px;
+`
+
+export const ModalButtonWhite = styled.button`
+background-color:#D5D5D4;
+font-family: 'MaruBuri-Regular';
+border: none;
+border-radius: 30px;
+width: 106px;
+height: 36px;
+color: #F9F9F6;
+font-weight: 700;
+font-size: 17px;
+`
+
+
 export const SideLink2 = styled(Link)`
 font-family: 'MaruBuri-Regular';
 color: rgba(87, 86, 85, 1);
@@ -1017,6 +1047,9 @@ export const BookTitle = styled.div`
     padding-bottom: 15px;
     padding-left:10px;
     border-bottom : 2px #81807F solid;
+  color: rgba(29, 28, 28, 1);
+  font-family: 'MaruBuriSemiBold';
+
 }
 font-size: 27px;
 font-weight: 700;

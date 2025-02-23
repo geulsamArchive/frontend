@@ -59,9 +59,9 @@ const Footer = () => {
                         <a href='https://www.instagram.com/hongik_geulsaem/'>
                             인스타그램
                         </a>
-                        <button onClick={openModal}>
+                        <span onClick={openModal}>
                             이용약관
-                        </button>
+                        </span>
                     </Right>
                 </Footers>
             </Desktop>
