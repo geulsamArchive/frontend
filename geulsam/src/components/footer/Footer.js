@@ -3,7 +3,8 @@ import { Footers, Left, Right } from '../../style/StyledComponent';
 import { Link, useLocation } from 'react-router-dom';
 import { Desktop, Mobile } from '../../hooks/useMediaQuery';
 import ReactModal from 'react-modal';
-import { ModalBottomContainer, ModalTopContainer } from '../../style/footerModal';
+import { BigRed, DIV, Infom, ModalBottomContainer, ModalTopContainer, OpenChat } from '../../style/footerModal';
+import { ALink } from './../../style/footerModal';
 
 const Footer = () => {
     const location = useLocation();
@@ -89,15 +90,30 @@ const Footer = () => {
                 onRequestClose={() => setIsModalOpen(false)}
                 style={ModalStyle}>
                 <ModalTopContainer>
-                    사이트 이용에 문제가 있나요?<br />
-                    사이트 관리 및 이용 중 발생한 오류 및 문제 사항은
-                    아래 연락처로 문의해주세요.<br />
-                    <a href=''>
-                        TEAM 글샘웹 오픈채팅방 바로가기
-                    </a>
+                    <BigRed>
+                        사이트 이용에 문제가 있나요?
+                    </BigRed>
+
+                    <DIV>
+                        사이트 관리 및 이용 중 발생한 오류 및 문제 사항은<br />
+                        아래 연락처로 문의해주세요.
+                    </DIV>
+                    <OpenChat >
+                        <ALink href='https://open.kakao.com/o/gm0dzCbh'>
+                            TEAM 글샘웹 오픈채팅방 바로가기
+                        </ALink>
+                    </OpenChat>
                 </ModalTopContainer>
                 <ModalBottomContainer>
-                    개인정보 이용 약관 확인하기
+                    <Infom>
+                        개인정보 이용 약관 확인하기
+                        &nbsp;
+                        <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.22229 7.15008L11.2501 14.1779M11.2501 14.1779L18.2778 7.15008M11.2501 14.1779L11.2501 1.52786" stroke="#81807F" stroke-width="2.13525" stroke-linecap="round" />
+                            <path d="M1.41107 16.2555L1.41107 17.661C1.41107 19.2136 2.66965 20.4722 4.22218 20.4722L18.2777 20.4722C19.8303 20.4722 21.0889 19.2136 21.0889 17.6611V16.2555" stroke="#81807F" stroke-width="2.42977" stroke-linecap="round" />
+                        </svg>
+
+                    </Infom>
                 </ModalBottomContainer>
             </ReactModal>
         </>

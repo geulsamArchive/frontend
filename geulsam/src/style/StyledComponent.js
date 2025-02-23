@@ -10,7 +10,7 @@ justify-content: center;
 align-items: center;
 `
 export const MarginBottom = styled.div`
-margin-bottom: 75px;
+margin-bottom: 55px;
 
 `
 
@@ -22,7 +22,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-background-color: rgba(29, 28, 28, 1);
+background-color: rgba(249, 249, 246, 1);
 background-position: center;
 background-repeat: no-repeat;
 display: flex;
@@ -33,7 +33,7 @@ width: 100dvw;
 font-family: 'MaruBuri-Regular';
 `;
 export const Wrapper2 = styled.div`
-background-color: rgba(249, 249, 246, 1);
+background-color: rgba(29, 28, 28, 1);
 background-position: center;
 background-repeat: no-repeat;
 display: flex;
@@ -962,7 +962,7 @@ margin-right: 86px;
 //최근 공개된 작품 관련 요소
 export const RecentWorks = styled.div`
 width: 100%;
-height: 1150px;
+height: 1050px;
 background-color: rgba(45, 43, 42, 1);
 font-family: 'MaruBuri-Regular';
 color: white;
@@ -1897,7 +1897,6 @@ font-size: 27px;
 font-weight: 700;
 margin-right : 20px;
 width: 100%;
-border-top:2px solid black;
 padding-bottom: 18px;
 padding-top:25px;
 position:absolute;
@@ -1977,11 +1976,16 @@ flex-shrink: 0;
 }
 `;
 
+export const ScrollToTop = styled.div`
+cursor: pointer;
+`
+
+
 export const CriticCloseButton = styled.button`
 @media only screen and (max-width: 1023px) {
   position: absolute;
-  top:0px;
-  right: 20px;
+  top:7px;
+  right: 30px;
   background:none;
   bottom:6px;
   border: none;

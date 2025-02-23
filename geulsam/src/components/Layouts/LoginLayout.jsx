@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Back } from '../../style/StyledComponent';
-import { SignupContainer } from '../../style/login.jsx';
+import {
+  Gray,
+  SignupContainer,
+  SignupContainer2,
+  Yellow,
+} from '../../style/login.jsx';
 
 const LoginLayout = () => {
   const path = useLocation();
@@ -11,8 +16,10 @@ const LoginLayout = () => {
       {path.pathname === '/login' ? (
         <>
           <SignupContainer>
-            글샘문학회가 처음이라면?
-            <Link to="/signup">신규 회원 글샘웹 가입 신청하기</Link>
+            글샘문학회가 처음이라면?&nbsp;&nbsp;
+            <Link to="/signup" style={{ textDecoration: 'none' }}>
+              <Yellow>신규 회원 글샘웹 가입 신청하기</Yellow>
+            </Link>
           </SignupContainer>
           <Back>
             <Outlet />
@@ -20,9 +27,12 @@ const LoginLayout = () => {
         </>
       ) : (
         <>
-          <SignupContainer>
-            <Link to="/login">로그인 화면으로 돌아가기</Link>
-          </SignupContainer>
+          <SignupContainer2>
+            글샘웹 기존 회원이라면? &nbsp;&nbsp;
+            <Link to="/login" style={{ textDecoration: 'none' }}>
+              <Gray>로그인 화면으로 돌아가기</Gray>
+            </Link>
+          </SignupContainer2>
           <Back>
             <Outlet />
           </Back>

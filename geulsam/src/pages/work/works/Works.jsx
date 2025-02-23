@@ -304,6 +304,11 @@ const Works = () => {
           </Desktop>
         </BookInfoAndButton>
       </WorkInfoContainer>
+      <Mobile>
+        <br />
+        <br />
+        <br />
+      </Mobile>
       <Margin>
         <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
       </Margin>

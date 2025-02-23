@@ -340,6 +340,44 @@ export const GenreButton = styled.button`
   cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
 `;
 
+export const AdminButton = styled.button`
+  @media only screen and (max-width: 1023px) {
+    border-radius: 30px;
+    border: 1px solid rgba(87, 86, 85, 1);
+    background-color: ${(props) =>
+      props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
+    color: ${(props) =>
+      props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
+    cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
+    width: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border: 1px solid rgba(129, 128, 127, 1);
+  border-left: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: max-content;
+  font-size: 14px;
+  height: 34px;
+  font-family: 'MaruBuri-Regular';
+  margin-top: 11px;
+  padding-right: 10px;
+
+  background-color: ${(props) =>
+    props.disabled ? 'rgba(129, 128, 127, 1)' : 'transparent'};
+  color: ${(props) =>
+    props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(129, 128, 127, 1)'};
+  cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
+`;
+
 export const MobileWorkContainer = styled.div`
   border-bottom: 1px solid black;
   width: 90dvw;

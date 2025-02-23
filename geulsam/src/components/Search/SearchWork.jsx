@@ -22,8 +22,9 @@ const SearchWork = ({ onSearch, placeholder }) => {
   };
   return (
     <div>
-      <br />
-      <br />
+      <Desktop>
+        <br />
+      </Desktop>
       <SearchBox>
         <SearchInput
           type="text"
