@@ -1119,7 +1119,7 @@ export const BookTitle = styled.div`
     padding-bottom: 15px;
     padding-left:10px;
     border-bottom : 2px #81807F solid;
-color: rgba(87, 86, 85, 1);
+color: rgba(45, 43, 42, 1);
   
   font-family: 'MaruBuriSemiBold';
 
@@ -1910,11 +1910,20 @@ export const StyledTable = styled.table`
     margin-top: 20px;
 `;
 
+export const TableWrapper = styled.div`
+  margin: 0;
+  padding: 0;
+  flex: 1;
+`;
 export const MemberStyledTable = styled.table`
+     @media only screen and (max-width: 1023px) {
+  overflow-x: auto; /* 가로 스크롤 활성화 */
+  width: 100%; /* 부모 요소에 맞춰서 전체 너비 사용 */
+}
     border-collapse: collapse;
-    margin-top: 20px;
     width: 100%;
-    
+    margin-left:0px;
+    padding-left:0px;
 `;
 
 export const ScrolledContainerTable = styled.div`
@@ -2110,7 +2119,7 @@ export const TableHeader = styled.th`
     min-width: 50px; /* 최소 너비 */
     max-width: 80px; /* 최대 너비 */
     border: 1px solid rgba(171, 170, 170, 1);
-    color: rgba(87, 86, 85, 1);
+    color: rgba(129, 128, 127, 1)
 
     &:first-child {
       border-left: none;

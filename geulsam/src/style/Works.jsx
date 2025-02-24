@@ -29,6 +29,12 @@ export const WorkTopBorder = styled.div`
   padding-bottom: 18px;
 `;
 
+export const BookInfoAndButton = styled.div`
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding-bottom: 18px;
+`;
+
 export const WorkInfo = styled.div`
   width: 78dvw;
   font-size: 14px;
@@ -309,9 +315,9 @@ export const GenreButton = styled.button`
     border-radius: 30px;
     border: 1px solid rgba(87, 86, 85, 1);
     background-color: ${(props) =>
-      props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
+    props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
     color: ${(props) =>
-      props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
+    props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
     cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
     width: auto;
     padding-right: 15px;
@@ -346,9 +352,9 @@ export const AdminButton = styled.button`
     border-radius: 30px;
     border: 1px solid rgba(87, 86, 85, 1);
     background-color: ${(props) =>
-      props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
+    props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
     color: ${(props) =>
-      props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
+    props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
     cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
     width: auto;
     padding-right: 15px;
