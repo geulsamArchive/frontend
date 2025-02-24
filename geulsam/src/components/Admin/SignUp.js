@@ -112,7 +112,7 @@ const SignUp = ({ prevStep, nextStep }) => {
                         학번
                     </LoginInputTitle>
                     <InputShort placeholder='예) C012345' type='text' value={schoolNum} onChange={onChangeSchoolNum} />
-                    <ButtonSmall type='button' onClick={checkSchoolNum}>중복</ButtonSmall>
+                    <ButtonSmall type='button' onClick={checkSchoolNum}>중복확인</ButtonSmall>
                     {schoolNumError ? <ErrorMessage>{schoolNumError}</ErrorMessage> : <ErrorMessage>&nbsp;</ErrorMessage>}
                     <LoginInputTitle>
                         글샘 가입연도
