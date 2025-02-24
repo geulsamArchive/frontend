@@ -7,6 +7,7 @@ import {
   SignupContainer2,
   Yellow,
 } from '../../style/login.jsx';
+import { Desktop } from '../../hooks/useMediaQuery.jsx';
 
 const LoginLayout = () => {
   const path = useLocation();
@@ -16,7 +17,7 @@ const LoginLayout = () => {
       {path.pathname === '/login' ? (
         <>
           <SignupContainer>
-            글샘문학회가 처음이라면?&nbsp;&nbsp;
+            <Desktop>글샘문학회가 처음이라면?&nbsp;&nbsp;</Desktop>
             <Link to="/signup" style={{ textDecoration: 'none' }}>
               <Yellow>신규 회원 글샘웹 가입 신청하기</Yellow>
             </Link>
@@ -28,7 +29,7 @@ const LoginLayout = () => {
       ) : (
         <>
           <SignupContainer2>
-            글샘웹 기존 회원이라면? &nbsp;&nbsp;
+            <Desktop>글샘웹 기존 회원이라면? &nbsp;&nbsp;</Desktop>
             <Link to="/login" style={{ textDecoration: 'none' }}>
               <Gray>로그인 화면으로 돌아가기</Gray>
             </Link>
