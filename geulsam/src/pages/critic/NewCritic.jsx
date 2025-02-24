@@ -29,7 +29,16 @@ import Pagination from '../../components/Paging/Pagination';
 import { CheckTitleLength } from './../../components/CheckLength';
 import { Desktop, Mobile } from '../../hooks/useMediaQuery';
 import CriticLogModal from './CriticLogModal';
-import { Margin } from '../../style/Works';
+import {
+  Margin,
+  MobileWorkBottom,
+  MobileWorkContainer,
+  MobileWorkTop,
+  MobileWorkTopLeft,
+  MobileWorkTopRight,
+  WorkLink,
+  WorkTopBorder,
+} from '../../style/Works';
 
 export const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -179,6 +188,7 @@ const NewCritic = () => {
               </MarginLeft>
             </Centering>
             <CriticLogsContainer>
+              <WorkTopBorder />
               {criticList.length === 0 ? (
                 <>
                   <LogSearchFailed>
@@ -190,17 +200,22 @@ const NewCritic = () => {
               ) : (
                 <>
                   {criticList.map((log) => (
-                    <Logs onClick={() => openCriticLogModal(log)} key={log.id}>
-                      <LogLeft>
-                        <MobileLogName>{log.userName}</MobileLogName>
-                        <LogTitle>
-                          {CheckTitleLength(log.contentTitle, 25)}
-                        </LogTitle>
-                      </LogLeft>
-                      <LogRight>
-                        <LogDate>{formatDate(log.localDate)}</LogDate>
-                      </LogRight>
-                    </Logs>
+                    <WorkLink>
+                      <MobileWorkContainer
+                        onClick={() => openCriticLogModal(log)}
+                        key={log.id}
+                      >
+                        <MobileWorkTop>
+                          <MobileWorkTopLeft>{log.userName}</MobileWorkTopLeft>
+                          <MobileWorkTopRight>
+                            {CheckTitleLength(log.contentTitle, 25)}
+                          </MobileWorkTopRight>
+                        </MobileWorkTop>
+                        <MobileWorkBottom>
+                          {formatDate(log.localDate)}
+                        </MobileWorkBottom>
+                      </MobileWorkContainer>
+                    </WorkLink>
                   ))}
                   {criticList.length < 12 &&
                     renderEmptyLogs(12 - criticList.length)}

@@ -221,13 +221,13 @@ background-color: white;
 `
 
 export const CriticModalForm = styled.div`
- @media only screen and (max-width: 1023px) {
-    width: 408px; /* 작은 화면에서 더 작은 너비 */
+ /* @media only screen and (max-width: 1023px) {
+    width: 408px;
   }
 
  @media only screen and (max-width: 600px) {
-    width: 90dvw; /* 작은 화면에서 더 작은 너비 */
-  }
+    width: 90dvw;
+  } */
 position:relative;
 background-color: white;
   border-radius: 8.6px;
@@ -236,10 +236,9 @@ background-color: white;
   height: 486px;
   display: flex;
   flex-direction: column;
-+ justify-content: flex-start; /* 내용이 위부터 쌓이고, 버튼이 마지막에 붙도록 */
+justify-content: flex-start; /* 내용이 위부터 쌓이고, 버튼이 마지막에 붙도록 */
   align-items: center;
   filter: drop-shadow(0 10px 30px rgba(152, 147, 142, 0.25));
-  }
 `
 export const CriticModalLink = styled.a`
   width: 100%;
@@ -1987,7 +1986,7 @@ export const CriticCloseButton = styled.button`
 @media only screen and (max-width: 1023px) {
   position: absolute;
   top:7px;
-  right: 30px;
+  right: 60px;
   background:none;
   bottom:6px;
   border: none;

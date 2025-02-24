@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const WorksContainer = styled.div`
+  @media only screen and (min-width: 1024px) {
+    height: 100dvh;
+  }
   border-radius: 0 0 16px 16px;
-  height: 100dvh;
   background-color: rgba(249, 249, 246, 1);
 `;
 export const WorkLink = styled(Link)`

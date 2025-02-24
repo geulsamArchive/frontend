@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const SignupContainer = styled.div`
+  @media only screen and (max-width: 1023px) {
+    position: fixed;
+    bottom: 0;
+  }
+
   background-color: rgba(29, 28, 28, 1);
   width: 100dvw;
   height: 39px;
@@ -22,6 +27,10 @@ export const Yellow = styled.span`
 `;
 
 export const SignupContainer2 = styled.div`
+  @media only screen and (max-width: 1023px) {
+    position: fixed;
+    bottom: 0;
+  }
   background-color: #eae9e3;
   width: 100dvw;
   height: 39px;
