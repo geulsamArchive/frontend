@@ -2054,7 +2054,7 @@ export const BookIndexList = styled.div`
   overflow-y: visible; /* 긴 내용은 스크롤 가능 */
   padding: 10px;
   margin-left: auto; /* 여유 공간을 왼쪽에 두어 요소가 더 오른쪽으로 이동 */
-  z-index:1000;
+  z-index:1;
 }
   /* 모바일 화면에서 하단 슬라이드 애니메이션 */
   @media only screen and (max-width: 1023px) {
