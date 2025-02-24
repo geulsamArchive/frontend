@@ -43,8 +43,8 @@ export const SearchBoxForMember = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  margin-left: 60dvw;
-  margin-top: 30px;
+  margin-left: 50dvw;
+  margin-top: 20px;
   display: flex;
   margin-bottom: 20px;
   flex-direction: row;

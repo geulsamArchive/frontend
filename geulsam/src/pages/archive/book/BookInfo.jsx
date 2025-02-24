@@ -58,6 +58,7 @@ const BookInfo = () => {
       console.log(bookData.data.designer);
       console.log("디자인", bookData.designer);
       console.log("판형", bookData.plate);
+      console.log("타이틀", bookData.title);
       // "data": {
       //   "id": "1",
       //   "release": "2024년 5월 6일",

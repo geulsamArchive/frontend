@@ -1118,7 +1118,7 @@ export const BookTitle = styled.div`
     padding-bottom: 15px;
     padding-left:10px;
     border-bottom : 2px #81807F solid;
-color: rgba(87, 86, 85, 1);
+color: rgba(45, 43, 42, 1);
   
   font-family: 'MaruBuriSemiBold';
 
@@ -1161,11 +1161,19 @@ display: flex;
 flex-direction: column;
 `
 export const BookInfoAndButton = styled.div`
-display: flex;
-justify-content: space-between;
-align-items: stretch;
-height: auto;
-`
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  height: auto;
+
+  @media only screen and (max-width: 1023px) {
+    /* 모바일에서는 Flex 대신 Block으로 전환 */
+    display: block;
+    justify-content: normal;
+    align-items: normal;
+  }
+`;
+
 export const AuthorInfoAndButton = styled.div`
 display: flex;
 justify-content: space-between;
@@ -1917,17 +1925,34 @@ export const StyledTable = styled.table`
     margin-top: 20px;
 `;
 
+export const TableWrapper = styled.div`
+  margin: 0;
+  padding: 0;
+  flex: 1;
+    @media only screen and (max-width: 1023px) {
+  overflow-x: scroll;
+  width: 100%; /* 부모 요소에 맞춰서 전체 너비 사용 */
+
+}
+`;
 export const MemberStyledTable = styled.table`
+     @media only screen and (max-width: 1023px) {
+    white-space: nowrap;
+  overflow-x: scroll;
+}
     border-collapse: collapse;
-    margin-top: 20px;
     width: 100%;
-    
+    margin-left:0px;
+    padding-left:0px;
 `;
 
 export const ScrolledContainerTable = styled.div`
+  min-width: 0;  /* 오버플로우를 가능하게 */
+flex:1;
      @media only screen and (max-width: 1023px) {
-  overflow-x: auto; /* 가로 스크롤 활성화 */
+  overflow-x: scroll;
   width: 100%; /* 부모 요소에 맞춰서 전체 너비 사용 */
+
 }
 `;
 
@@ -2045,15 +2070,15 @@ export const BookIndexList = styled.div`
   flex: 1; /* 인덱스가 차지하는 비율 */
   display: flex;
   position: absolute;
-  top: 48%;
-  right: 20%;
+  top: 43%;
+  right: 23%;
   flex-direction: column;
   align-items: flex-start; /* 인덱스를 더 오른쪽으로 정렬 */
   max-height: 100dvh; /* 뷰포트 높이에 맞게 설정 */
   overflow-y: visible; /* 긴 내용은 스크롤 가능 */
   padding: 10px;
   margin-left: auto; /* 여유 공간을 왼쪽에 두어 요소가 더 오른쪽으로 이동 */
-  z-index:1000;
+  z-index:1;
 }
   /* 모바일 화면에서 하단 슬라이드 애니메이션 */
   @media only screen and (max-width: 1023px) {
@@ -2066,6 +2091,7 @@ export const BookIndexList = styled.div`
     transition: bottom 0.3s ease-in-out;
     z-index: 999;
   }
+
 `;
 export const AnimatedBookIndexList = styled(BookIndexList)`
   @media only screen and (max-width: 1023px) {
@@ -2117,7 +2143,7 @@ export const TableHeader = styled.th`
     min-width: 50px; /* 최소 너비 */
     max-width: 80px; /* 최대 너비 */
     border: 1px solid rgba(171, 170, 170, 1);
-    color: rgba(87, 86, 85, 1);
+    color: rgba(129, 128, 127, 1)
 
     &:first-child {
       border-left: none;
