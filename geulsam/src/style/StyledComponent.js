@@ -2047,8 +2047,8 @@ export const BookIndexList = styled.div`
   flex: 1; /* 인덱스가 차지하는 비율 */
   display: flex;
   position: absolute;
-  top: 48%;
-  right: 20%;
+  top: 43%;
+  right: 23%;
   flex-direction: column;
   align-items: flex-start; /* 인덱스를 더 오른쪽으로 정렬 */
   max-height: 100dvh; /* 뷰포트 높이에 맞게 설정 */
@@ -2068,6 +2068,7 @@ export const BookIndexList = styled.div`
     transition: bottom 0.3s ease-in-out;
     z-index: 999;
   }
+
 `;
 export const AnimatedBookIndexList = styled(BookIndexList)`
   @media only screen and (max-width: 1023px) {
