@@ -1,29 +1,28 @@
 @media print {
-    body {
-        margin: 0 !important;
-    }
+  body {
+    margin: 0 !important;
+  }
 }
 
 .main-container {
-    font-family: '';
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-
+  font-family: '';
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ck-content {
-    font-family: 'RIDIBatang';
-    line-height: 1.6;
-    word-break: keep-all;
-    max-height: 850px;
+  font-family: 'RIDIBatang';
+  line-height: 1.6;
+  word-break: keep-all;
+  height: 850px;
 }
 
 .ck-content ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .editor-container_inline-editor .editor-container__editor {
-    min-width: 795px;
-    max-width: 795px;
+  min-width: 795px;
+  max-width: 795px;
 }

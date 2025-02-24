@@ -171,9 +171,13 @@ const NewCritic = () => {
               </>
             )}
           </CriticLogsContainer>
+          <br />
+          <Pagination
+            page={page}
+            totalPage={totalPage}
+            onChangePage={setPage}
+          />
         </CriticLogContainer>
-        <br />
-        <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
       </Desktop>
       {/* Mobile 부분 */}
       <Mobile>

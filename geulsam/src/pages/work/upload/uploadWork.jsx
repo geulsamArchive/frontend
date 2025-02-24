@@ -5,6 +5,7 @@ import {
   FileInput,
   GenreButton,
   GenreContainer,
+  GrayReg,
   SentenceContainer,
   SentenceInput,
   TitleContainer,
@@ -19,6 +20,7 @@ import Editor from '../../../components/Editor/CKEditor';
 import { normalAPI } from '../../../apis/Api';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../store/Auth';
+import { useDropzone } from 'react-dropzone';
 
 const UploadWork = () => {
   const [title, onChangeTitle] = useForms();
@@ -80,6 +82,16 @@ const UploadWork = () => {
       setFile(file);
     }
   };
+
+  const handleDrop = (acceptedFiles) => {
+    setFile(acceptedFiles[0]); // 드래그 앤 드롭 시 첫 번째 파일을 설정
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: handleDrop,
+    accept: '.pdf', // PDF만 허용
+    maxFiles: 1, // 한 번에 하나의 파일만 허용
+  });
 
   const handleSubmit = async () => {
     const accesstoken = localStorage.getItem('access');
@@ -203,10 +215,26 @@ const UploadWork = () => {
             수필
           </GenreButton>
         </GenreContainer>
-        <GenreContainer>
+        <GenreContainer {...getRootProps()}>
           <B>PDF 파일</B>
           <br />
-          <input
+          <br />
+          <br />
+          <GrayReg>
+            여기에 파일을 드래그 앤 드랍하거나
+            <br />
+            PC에서 파일을 찾아 첨부합니다.
+          </GrayReg>
+          <input {...getInputProps()} />
+          {file ? (
+            <>
+              <FileInput>파일 찾기</FileInput>
+              <B>{file.name}</B>
+            </>
+          ) : (
+            <FileInput>파일 찾기</FileInput>
+          )}
+          {/* <input
             id="fileInput"
             type="file"
             accept=".pdf"
@@ -214,7 +242,7 @@ const UploadWork = () => {
             style={{ display: 'none' }}
           />
           <FileInput onClick={handleButtonClick}>파일 찾기</FileInput>
-          {file && <B>{file.name}</B>}
+          {file && <B>{file.name}</B>} */}
         </GenreContainer>
         <SentenceContainer onClick={handleSentenceContainerClick}>
           <SentenceInput

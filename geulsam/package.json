@@ -14,6 +14,7 @@
     "pdfjs-dist": "^4.3.136",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.3.8",
     "react-image-file-resizer": "^0.4.8",
     "react-modal": "^3.16.1",
     "react-model": "^4.3.1",

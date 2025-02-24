@@ -1266,6 +1266,7 @@ export const GridContainer = styled.div`
  @media only screen and (max-width:1023px) {
   margin: 0;
  }
+
   display: flex;
   flex-wrap: wrap; /* 그리드 아이템이 줄 바꿈되도록 설정 */
   justify-content: center; /* 가로 방향 가운데 정렬 */
@@ -1478,6 +1479,13 @@ export const BookcoverImg = styled.img`
 max-width: 50%;
 height: auto;
 `
+
+export const BookCon = styled.div`
+ @media only screen and (min-width: 1024px) {
+    height: 100dvh;
+    background-color: rgba(249, 249, 246, 1);
+  }
+  `
 
 //이미지 모달
 export const ModalOverlay = styled.div`

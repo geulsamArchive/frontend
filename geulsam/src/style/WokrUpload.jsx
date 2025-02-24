@@ -46,7 +46,7 @@ export const VisibleSelect = styled.select`
   border-radius: 8px;
   padding: 0.6em 1.4em 0.5em 0.8em;
   height: 40px;
-  margin: 0;
+  margin-top: 15px;
   cursor: pointer;
   background: url(${arrow}) no-repeat 100% 55%/15px auto;
   /* &:hover{
@@ -58,11 +58,14 @@ export const VisibleSelect = styled.select`
 `;
 
 export const GenreContainer = styled.div`
-  margin-top: 50px;
+  padding-top: 50px;
   font-family: 'MaruBuri-Regular';
   font-size: 14px;
   width: 80%;
   border-bottom: 1px solid rgba(129, 128, 127, 1);
+  &:hover {
+    background-color: #eae9e3;
+  }
 `;
 export const GenreButton = styled.button`
   border: 1px solid
@@ -105,6 +108,12 @@ export const SentenceContainer = styled.div`
   font-family: 'RIDIBatang';
   margin-top: 50px;
   filter: drop-shadow(0 2px 24px rgba(182, 182, 182, 0.15));
+  &:hover {
+    background-color: rgba(182, 182, 182, 1);
+    textarea {
+      background-color: rgba(182, 182, 182, 1);
+    }
+  }
 `;
 export const SentenceInput = styled.textarea`
   width: 70%;
@@ -116,7 +125,11 @@ export const SentenceInput = styled.textarea`
   resize: none;
   outline: none;
   height: 100px;
-  overflow: visible;
+  overflow: scroll;
+  &::placeholder {
+    line-height: 100px;
+  }
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -139,6 +152,8 @@ export const EditorContainer = styled.div`
   filter: drop-shadow(0 2px 24px rgba(182, 182, 182, 0.15));
   font-family: 'RIDIBatang';
   margin-top: 50px;
+  padding-top: 70px;
+  padding-bottom: 70px;
 `;
 
 export const UploadButton = styled.button`
@@ -156,4 +171,10 @@ export const UploadButton = styled.button`
   margin-left: 72%;
   margin-top: 30px;
   margin-bottom: 50px;
+`;
+
+export const GrayReg = styled.div`
+  line-height: 1.7;
+  font-size: 14px;
+  color: #81807f;
 `;

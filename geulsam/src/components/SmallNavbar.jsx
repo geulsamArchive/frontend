@@ -195,6 +195,8 @@ const SmallNavbar = ({ path }) => {
         />
       </SmallNavContainer>
       <SmallNavMenu isOpen={isMenuOpen} closeMenu={onCloseMenu} />
+      <br />
+      <br />
     </>
   );
 };

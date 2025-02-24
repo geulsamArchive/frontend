@@ -121,7 +121,7 @@ export const MobileNovelViewerContainer = styled.div`
   height: calc(100dvh + 130px); //글의 길이만큼 늘어나야함.
   background-color: white;
   position: absolute;
-  top: 120px;
+  top: 140px;
   font-family: 'RIDIBatang';
 `;
 

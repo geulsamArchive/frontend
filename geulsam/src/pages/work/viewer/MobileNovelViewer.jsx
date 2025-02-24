@@ -190,6 +190,12 @@ export default function MobileNovelViewer({ novelHTML, isOpen }) {
         fontSize={fontSize}
         lineHeight={lineHeight}
       />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </MobileNovelViewerContainer>
   );
 }

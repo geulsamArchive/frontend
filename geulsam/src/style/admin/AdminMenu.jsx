@@ -8,8 +8,8 @@ export const AdminMenusContainer = styled.div`
 `;
 
 export const AdminMenuTitle = styled.div`
-  width: 85dvw;
-  border-bottom: 2px solid rgba(87, 86, 85, 1);
+  width: 81dvw;
+  border-bottom: 1.5px solid rgba(87, 86, 85, 1);
   font-size: 22px;
   font-weight: 700;
   @media only screen and (max-width: 1024px) {
@@ -19,7 +19,7 @@ export const AdminMenuTitle = styled.div`
 
 export const AdminMenu = styled.div`
   border-bottom: 1.5px solid rgba(87, 86, 85, 1);
-  width: 40dvw;
+  width: 37dvw;
   font-size: 18px;
   line-height: 2.5;
   &:hover {

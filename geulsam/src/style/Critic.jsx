@@ -187,6 +187,10 @@ export const CloseButton = styled.button`
 `;
 
 export const CriticLogContainer = styled.div`
+  @media only screen and (min-width: 1024px) {
+    height: 100dvh;
+    background-color: rgba(249, 249, 246, 1);
+  }
   width: 88dvw;
   color: black;
 `;
