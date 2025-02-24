@@ -1161,11 +1161,19 @@ display: flex;
 flex-direction: column;
 `
 export const BookInfoAndButton = styled.div`
-display: flex;
-justify-content: space-between;
-align-items: stretch;
-height: auto;
-`
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  height: auto;
+
+  @media only screen and (max-width: 1023px) {
+    /* 모바일에서는 Flex 대신 Block으로 전환 */
+    display: block;
+    justify-content: normal;
+    align-items: normal;
+  }
+`;
+
 export const AuthorInfoAndButton = styled.div`
 display: flex;
 justify-content: space-between;
@@ -1913,11 +1921,16 @@ export const TableWrapper = styled.div`
   margin: 0;
   padding: 0;
   flex: 1;
+    @media only screen and (max-width: 1023px) {
+  overflow-x: scroll;
+  width: 100%; /* 부모 요소에 맞춰서 전체 너비 사용 */
+
+}
 `;
 export const MemberStyledTable = styled.table`
      @media only screen and (max-width: 1023px) {
-  overflow-x: auto; /* 가로 스크롤 활성화 */
-  width: 100%; /* 부모 요소에 맞춰서 전체 너비 사용 */
+    white-space: nowrap;
+  overflow-x: scroll;
 }
     border-collapse: collapse;
     width: 100%;
@@ -1926,9 +1939,12 @@ export const MemberStyledTable = styled.table`
 `;
 
 export const ScrolledContainerTable = styled.div`
+  min-width: 0;  /* 오버플로우를 가능하게 */
+flex:1;
      @media only screen and (max-width: 1023px) {
-  overflow-x: auto; /* 가로 스크롤 활성화 */
+  overflow-x: scroll;
   width: 100%; /* 부모 요소에 맞춰서 전체 너비 사용 */
+
 }
 `;
 
