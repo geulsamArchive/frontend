@@ -940,6 +940,7 @@ export const CalendarTitle = styled.div`
 @media only screen and (max-width:1023px) {
  margin-left: 0px;
 margin-right: 0px;
+
 }
 color: rgba(87, 86, 85, 1);
 font-family: 'MaruBuri-Regular';
@@ -1118,7 +1119,8 @@ export const BookTitle = styled.div`
     padding-bottom: 15px;
     padding-left:10px;
     border-bottom : 2px #81807F solid;
-  color: rgba(29, 28, 28, 1);
+color: rgba(87, 86, 85, 1);
+  
   font-family: 'MaruBuriSemiBold';
 
 }

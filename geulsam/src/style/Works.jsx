@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const WorksContainer = styled.div`
   border-radius: 0 0 16px 16px;
+  height: 100dvh;
   background-color: rgba(249, 249, 246, 1);
 `;
 export const WorkLink = styled(Link)`
@@ -451,7 +452,7 @@ export const MobileWork = styled.div`
 export const AuthorWorkInfo = styled.div`
   width: 75dvw;
   font-size: 14px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(129, 128, 127, 1);
   padding-bottom: 14px;
   padding-top: 14px;
   display: flex;
