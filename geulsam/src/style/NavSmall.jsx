@@ -62,6 +62,7 @@ export const SmallNavLink = styled(Link)`
 export const SmallNavLinks = styled.div`
   font-size: 14px;
   display: flex;
-  gap: 20px;
+  gap: 15px;
   margin-right: 10px;
+  align-items: center;
 `;

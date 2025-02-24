@@ -36,7 +36,7 @@ const SmallNavMenu = ({ isOpen, closeMenu, isAdmin }) => {
   );
 };
 
-const LoginMenu = ({ isOpen, path, menuOn, isAdmin }) => {
+const LoginMenu = ({ isOpen, path, menuOn, isAdmin, closeMenu }) => {
   const { isAuthenticated, logout } = useAuth();
   const onClickLogout = () => {
     logout();
@@ -75,6 +75,27 @@ const LoginMenu = ({ isOpen, path, menuOn, isAdmin }) => {
             {isAdmin ? '관리자페이지' : '마이페이지'}
           </SmallNavLink>
           <SmallNavLink onClick={onClickLogout}>로그아웃</SmallNavLink>
+          <svg
+            width="31"
+            height="31"
+            viewBox="0 0 31 31"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            onClick={closeMenu}
+          >
+            <path
+              d="M8.52002 8.98267L21.5545 22.0171"
+              stroke="white"
+              stroke-width="1.90909"
+              stroke-linecap="round"
+            />
+            <path
+              d="M21.5544 8.98267L8.52 22.0171"
+              stroke="white"
+              stroke-width="1.90909"
+              stroke-linecap="round"
+            />
+          </svg>
         </SmallNavLinks>
       ) : (
         <SmallNavLinks>
@@ -114,7 +135,7 @@ const SmallNavbar = ({ path }) => {
 
   const onClickLoginMenu = () => {
     setIsLoginMenuOpen(true);
-    setTimeout(() => setIsLoginMenuOpen(false), 5000);
+    setTimeout(() => setIsLoginMenuOpen(false), 10000);
   };
 
   const onClickMenu = () => {
@@ -125,6 +146,9 @@ const SmallNavbar = ({ path }) => {
     setIsMenuOpen(false);
   };
 
+  const onCloseLoginMenu = () => {
+    setIsLoginMenuOpen(false);
+  };
   const pathTranslate = (path) => {
     if (path.pathname.startsWith('/work')) return '작품';
     else if (path.pathname.startsWith('/archive')) return '포스터·문집';
@@ -192,6 +216,7 @@ const SmallNavbar = ({ path }) => {
           menuOn={onClickLoginMenu}
           loading={loading}
           isAdmin={isAdmin}
+          closeMenu={onCloseLoginMenu}
         />
       </SmallNavContainer>
       <SmallNavMenu isOpen={isMenuOpen} closeMenu={onCloseMenu} />
