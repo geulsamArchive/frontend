@@ -596,6 +596,20 @@ cursor: pointer;
 margin-right: 23px;
 `;
 
+export const ButtonForPasswordMember = styled.button`
+font-family: 'MaruBuri-Regular';
+border: none;
+font-size: 17px;
+border-radius: 30px;
+width:180px;
+height: 36px;
+font-weight:700;
+color:${props => (props.disabled ? '' : 'rgba(249, 249, 246, 1)')};
+background-color: ${props => (props.disabled ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
+pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+cursor: pointer;
+margin-right: 23px;
+`;
 export const Option = styled.option`
 font-family: 'MaruBuri-Regular';
 border: none;
@@ -620,7 +634,8 @@ font-size: 17px;
 border-radius: 30px;
 width:93px;
 height: 36px;
-color:${props => (props.isActive ? '' : 'rgba(249, 249, 246, 1)')};
+font-weight:bold;
+color:${props => (props.isActive ? 'rgba(249, 249, 246, 1)' : 'rgba(249, 249, 246, 1)')};
 background-color: ${props => (props.isActive ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
 pointer-events: ${props => (props.isActive ? 'none' : 'auto')};
 cursor: pointer;
@@ -635,9 +650,10 @@ font-family: 'MaruBuri-Regular';
 border: none;
 font-size: 17px;
 border-radius: 30px;
+font-weight:bold;
 width:93px;
 height: 36px;
-color:${props => (props.isActive ? '' : 'rgba(249, 249, 246, 1)')};
+color:${props => (props.isActive ? 'rgba(249, 249, 246, 1)' : 'rgba(249, 249, 246, 1)')};
 background-color: ${props => (props.isActive ? 'rgba(213, 213, 212, 1)' : 'rgba(87, 86, 85, 1)')};
 pointer-events: ${props => (props.isActive ? 'none' : 'auto')};
 cursor: pointer;
@@ -1820,6 +1836,16 @@ export const BackButtonAtMyInfoModify = styled(Button)`
     background-color: #f0f0f0;
     color: #333;
 `;
+export const BackButtonAtMemberModify = styled(Button)`
+@media only screen and (max-width:1023px) {
+    margin-left:60px;
+}
+    background-color: transparent;
+    color: rgba(87, 86, 85, 1);
+    border: 2px solid rgba(87, 86, 85, 1);
+    font-weight:bold;
+    margin-left:38dvw;
+`;
 
 export const EditButton = styled(Button)`
  @media only screen and (max-width: 1023px) {
@@ -2127,9 +2153,8 @@ export const BookIndexHeader = styled.div`
 export const TableHeader = styled.th`
   background-color: inherit;
   text-align: center;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid rgba(129, 128, 127, 1);
   border-top: none;
-  border-right: 1px solid black;
   padding-bottom:5px;
   font-weight: bold;
     &:last-child {
@@ -2172,9 +2197,9 @@ export const TableRow = styled.tr`
 export const TableCell = styled.td`
     padding: 12px;
     background-color:inherit;
-    border-bottom: 1px solid black;
-        border-right: 1px solid black;  /* 오른쪽 경계 추가 */
-    font-weight:bold;
+    border-bottom: 1px solid rgba(129, 128, 127, 1);
+        border-right: 1px solid rgba(213, 213, 212, 1);  /* 오른쪽 경계 추가 */
+    font-weight:600;
     text-align:center;
 
     /* 마지막 셀에 오른쪽 경계 제거 */

@@ -7,6 +7,7 @@ import {
     ResponsiveButton,
     ScrolledContainerTable,
     ButtonForPassword,
+    ButtonForPasswordMember,
     MemberStyledTable,
     MemberTitle,
     BookInfoContainer,
@@ -16,6 +17,7 @@ import {
     TableHeader,
     TableRow,
     TableCell,
+    BackButtonAtMemberModify,
     BackButtonAtMyInfoModify,
     AllowButtonForPassword,
     Option,
@@ -148,7 +150,7 @@ const MemberModify = () => {
                 `/user/level`,
                 {
                     userId: member.userId,
-                    level: 'NORMAL', // 예시로 정상 회원으로 승인하는 경우
+                    level: 'NORMAL',
                 },
                 {
                     headers: {
@@ -157,13 +159,19 @@ const MemberModify = () => {
                 }
             );
             alert('회원이 승인되었습니다!');
-            setMembers(
-                members.map((approvedMember) =>
-                    approvedMember.userId === member.userId
-                        ? { ...approvedMember, level: 'NORMAL' }
-                        : approvedMember
-                )
-            );
+
+            // 만약 가입신청 탭이 활성화되어 있다면 승인된 회원을 리스트에서 제거
+            if (isSuspendedActive) {
+                setMembers(members.filter(m => m.userId !== member.userId));
+            } else {
+                setMembers(
+                    members.map(existingMember =>
+                        existingMember.userId === member.userId
+                            ? { ...existingMember, level: 'NORMAL' }
+                            : existingMember
+                    )
+                );
+            }
         } catch (error) {
             console.error('회원 승인 중 오류 발생:', error);
         }
@@ -273,16 +281,16 @@ const MemberModify = () => {
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <ButtonForMember
-                                isActive={isNormalActive}
-                                onClick={handleNormalMembersButtonClick}
-                            >
-                                등록회원
-                            </ButtonForMember>
-                            <ButtonForMember2
                                 isActive={isSuspendedActive}
                                 onClick={handleSuspendedMembers}
                             >
                                 가입신청
+                            </ButtonForMember>
+                            <ButtonForMember2
+                                isActive={isNormalActive}
+                                onClick={handleNormalMembersButtonClick}
+                            >
+                                등록회원
                             </ButtonForMember2>
                             <SearchWorkForMember
                                 onSearch={handleSearch}
@@ -339,18 +347,19 @@ const MemberModify = () => {
                                                             </>
                                                         ) : (
                                                             <>
-                                                                <BackButtonAtMyInfoModify
+
+                                                                <BackButtonAtMemberModify
                                                                     onClick={() => deleteMember(member.schoolNum)}
                                                                 >
                                                                     회원 탈퇴
-                                                                </BackButtonAtMyInfoModify>
-                                                                <ButtonForPassword
+                                                                </BackButtonAtMemberModify>
+                                                                <ButtonForPasswordMember
                                                                     onClick={() =>
                                                                         openPasswordChangeEmailModal(member)
                                                                     }
                                                                 >
                                                                     비밀번호 초기화
-                                                                </ButtonForPassword>
+                                                                </ButtonForPasswordMember>
                                                                 {isModalOpen && (
                                                                     <PasswordChangeEmail
                                                                         member={selectedMember}

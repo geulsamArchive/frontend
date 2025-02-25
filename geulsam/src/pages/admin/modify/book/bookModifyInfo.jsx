@@ -56,7 +56,6 @@ const BookUpload = () => {
     const addRow = () => {
         setRows([...rows, { pageNumber: '', author: '', title: '', error: '', showButton: true, workName: '', workId: '' }]);
     };
-
     const handleFindWork = async (index, author, title, page) => {
         const accessToken = localStorage.getItem('access');
         setLoading(true);
@@ -65,27 +64,23 @@ const BookUpload = () => {
                 params: { userName: author, contentTitle: title },
                 headers: { 'accessToken': accessToken }
             });
-            const id = response.data.data; // Assuming the first ID is used
-            console.log(id);
+            const id = response.data.data; // 작품 ID
+            console.log("찾은 작품 ID:", id);
 
             if (!id) {
                 const updatedRows = [...rows];
                 updatedRows[index].error = '현재 사이트에 게시되지 않은 작품입니다.';
                 updatedRows[index].showButton = false;
                 setRows(updatedRows);
-                addBookContent(id, null, null, null); // 데이터 추가
             } else {
                 const workResponse = await normalAPI.get(`/content/${id}`, {
                     headers: { 'accessToken': accessToken }
                 });
                 const workData = workResponse.data;
-                console.log(workData);
+                console.log("작품 데이터:", workData);
+                // 작품 데이터가 유효하면 bookContentList에 추가합니다.
                 if (workData) {
-                    console.log(id, title, author, page);
-                    if (!id) {
-                        id = null;
-                    }
-                    addBookContent(id, title, author, page); // 데이터 추가
+                    addBookContent(id, title, author, page);
                 }
                 const updatedRows = [...rows];
                 updatedRows[index].workName = workData.title;
@@ -102,6 +97,7 @@ const BookUpload = () => {
         }
         setLoading(false);
     };
+
 
     const handleRetry = (index) => {
         const updatedRows = [...rows];
