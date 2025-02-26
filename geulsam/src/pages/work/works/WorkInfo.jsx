@@ -316,6 +316,9 @@ const WorkInfo = () => {
         onRequestClose={closeModal}
         contentLabel="Novel Viewer"
         style={{
+          overlay: {
+            zIndex: '3',
+          },
           content: {
             top: '0',
             left: '0',

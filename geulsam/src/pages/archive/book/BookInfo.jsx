@@ -116,9 +116,7 @@ const BookInfo = () => {
             <Mobile>
               <BookCoverContainer>
                 <BookCover src={bookData.bookCover} onClick={onClickBook} />
-                <BookButton onClick={onClickBook}>
-                  꾹 눌러 문집 미리보기
-                </BookButton>
+                <BookButton onClick={onClickBook}>문집 미리보기</BookButton>
               </BookCoverContainer>
             </Mobile>
           </ViewerAndLinks>
