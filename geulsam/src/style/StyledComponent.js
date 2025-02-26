@@ -1091,6 +1091,10 @@ export const BookInfoContainer = styled.div`
   padding-left: 5dvw;
   padding-right: 5dvw;
 }
+@media only screen and (min-width: 1024px) {
+    height: 100dvh;
+    background-color: rgba(249, 249, 246, 1);
+  }
 font-family: 'MaruBuri-Regular';
 width: 90%;
 margin-left: 4%;
@@ -1233,7 +1237,7 @@ text-align:center;
 
 //문집페이지 뷰어와 링크
 export const ViewerAndLinks = styled.div`
-height: 100%;
+/* height: 100%; */
 `
 
 //PDF 뷰어 관련
