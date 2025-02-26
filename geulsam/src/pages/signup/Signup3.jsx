@@ -78,9 +78,10 @@ const Signup3 = ({ prevStep, nextStep }) => {
         <LeftAlign>
           <ModalDiv>
             <Modalp>
-              사이트에서 사용할 비밀번호를 입력해주세요.영문자와 숫자가 포함된
-              8자리 이상으로 설정해주세요.특수문자는 ~`!@#$%^&*()-_+= 만
-              가능합니다.
+              사이트에서 사용할 비밀번호를 입력해주세요.
+              <br />
+              영문과 숫자가 포함된 8자리 이상으로 설정해주세요. (특수문자는
+              ~`!@#$%^&*()-_+= 만 가능합니다.)
             </Modalp>
             <ModalMobilep>
               사이트에서 사용할 비밀번호를 입력해주세요.영문자와 숫자가 포함된
@@ -101,7 +102,7 @@ const Signup3 = ({ prevStep, nextStep }) => {
             <br />
             <br />
           </ModalMobilep>
-          <LoginInputTitle>&nbsp;&nbsp;&nbsp;&nbsp;비밀번호</LoginInputTitle>
+          <LoginInputTitle>&nbsp;&nbsp;비밀번호</LoginInputTitle>
           &nbsp;&nbsp;&nbsp;
           <LoginInput
             placeholder="abcd1234!"
@@ -110,9 +111,7 @@ const Signup3 = ({ prevStep, nextStep }) => {
             onChange={onChangePw}
           />
           {pwError && <ErrorMessage>{pwError}</ErrorMessage>}
-          <LoginInputTitle>
-            &nbsp;&nbsp;&nbsp;&nbsp;비밀번호 확인
-          </LoginInputTitle>
+          <LoginInputTitle>&nbsp;&nbsp;비밀번호 확인</LoginInputTitle>
           &nbsp;&nbsp;&nbsp;
           <LoginInput
             placeholder="abcd1234!"

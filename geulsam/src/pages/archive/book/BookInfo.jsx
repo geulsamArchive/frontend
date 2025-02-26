@@ -56,9 +56,9 @@ const BookInfo = () => {
       setBookIndexList(resp.data.data.bookContentResList);
       setLoading(false);
       console.log(bookData.data.designer);
-      console.log("디자인", bookData.designer);
-      console.log("판형", bookData.plate);
-      console.log("타이틀", bookData.title);
+      console.log('디자인', bookData.designer);
+      console.log('판형', bookData.plate);
+      console.log('타이틀', bookData.title);
       // "data": {
       //   "id": "1",
       //   "release": "2024년 5월 6일",
@@ -74,8 +74,9 @@ const BookInfo = () => {
   };
 
   const handleWorkClick = (id) => {
-    if (!id || id === "null") { // id가 null, undefined, 또는 "null"일 때 처리
-      alert("아직 등록되지 않은 작품입니다.");
+    if (!id || id === 'null') {
+      // id가 null, undefined, 또는 "null"일 때 처리
+      alert('아직 등록되지 않은 작품입니다.');
       window.location.reload(); // 페이지 새로고침
       return; // navigate 호출 방지
     }

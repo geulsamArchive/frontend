@@ -142,13 +142,14 @@ export const EditorContainer = styled.div`
   @media only screen and (max-width: 1023px) {
     display: none;
   }
-  width: 80%;
+  width: 68.5%;
   background-color: white;
   border-radius: 11px;
   height: 850px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
+  padding-left: 11.5%;
   filter: drop-shadow(0 2px 24px rgba(182, 182, 182, 0.15));
   font-family: 'RIDIBatang';
   margin-top: 50px;

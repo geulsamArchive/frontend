@@ -154,7 +154,7 @@ display:flex;
 `
 export const Modalp = styled.span`
 font-family:'MaruBuri-Regular';
-font-size : 16px;
+font-size : 14px;
 line-height:1.5;
     @media only screen and (max-width:1023px) {
     display:none;
@@ -173,6 +173,8 @@ line-height:1.5;
 export const ModalDiv = styled.div`
   margin-top:0px;
   position:absolute;
+  margin-left: 10px;
+  line-height: 1.7;
   top:105px;
     @media only screen and (max-width:1023px) {
     top:75px;
@@ -1097,6 +1099,13 @@ background-color: rgba(249, 249, 246, 1);
 `
 
 
+export const Backg = styled.div`
+@media only screen and (min-width: 1024px) {
+    height: calc(100dvh - 100px);
+    background-color: rgba(249, 249, 246, 1);
+  }
+`
+
 //문집 페이지
 export const BookInfoContainer = styled.div`
   @media only screen and (max-width:1023px) {
@@ -1108,7 +1117,7 @@ export const BookInfoContainer = styled.div`
   padding-right: 5dvw;
 }
 @media only screen and (min-width: 1024px) {
-    height: 100dvh;
+    height: auto;
     background-color: rgba(249, 249, 246, 1);
   }
 font-family: 'MaruBuri-Regular';
@@ -1837,7 +1846,9 @@ export const BackButtonAtMyInfoModify = styled(Button)`
 @media only screen and (max-width:1023px) {
     margin-left:60px;
 }
-    background-color: #f0f0f0;
+font-size: 14px;
+font-family: 'MaruBuriSemiBold';
+background-color: #f0f0f0;
     color: #333;
 `;
 export const BackButtonAtMemberModify = styled(Button)`
@@ -1855,10 +1866,11 @@ export const EditButton = styled(Button)`
  @media only screen and (max-width: 1023px) {
     margin-left:15px;
   }
+  font-family: 'MaruBuriSemiBold';
+
     color: white;
     margin-right:10px;
-    font-weight: 700;
-    font-size: 11.5px;
+    font-size: 14px;
 `;
 
 export const SaveButton = styled(Button)`

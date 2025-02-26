@@ -261,6 +261,8 @@ const UploadWork = () => {
         </EditorContainer>
         <UploadButton onClick={handleSubmit}>게시하기</UploadButton>
       </Container>
+      <br />
+      <br />
     </WorkUploadContainer>
   );
 };
