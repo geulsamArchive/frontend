@@ -224,7 +224,7 @@ const MyInfoModify = () => {
   return (
     <Backg>
       <BookInfoContainer>
-        <BookTitle>회원 정보</BookTitle>
+        <BookTitle>마이페이지</BookTitle>
         <br />
         <br />
         <Inputs>
@@ -355,7 +355,11 @@ const MyInfoModify = () => {
             </>
           ) : (
             <>
-              <EditButton onClick={handleEditClick}>수정하기</EditButton>
+              <EditButton onClick={handleEditClick}>
+                회원 정보 수정하기
+              </EditButton>
+              <br />
+              <br />
               <PasswordText onClick={openPasswordChangeModal}>
                 비밀번호 변경
               </PasswordText>

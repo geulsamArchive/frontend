@@ -1859,7 +1859,7 @@ export const BackButtonAtMemberModify = styled(Button)`
     color: rgba(87, 86, 85, 1);
     border: 2px solid rgba(87, 86, 85, 1);
     font-weight:bold;
-    margin-left:38dvw;
+    margin-left:20dvw;
 `;
 
 export const EditButton = styled(Button)`
@@ -1867,7 +1867,7 @@ export const EditButton = styled(Button)`
     margin-left:15px;
   }
   font-family: 'MaruBuriSemiBold';
-
+  width: 143px;
     color: white;
     margin-right:10px;
     font-size: 14px;

@@ -317,9 +317,9 @@ export const GenreButton = styled.button`
     border-radius: 30px;
     border: 1px solid rgba(87, 86, 85, 1);
     background-color: ${(props) =>
-    props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
+      props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
     color: ${(props) =>
-    props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
+      props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
     cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
     width: auto;
     padding-right: 15px;
@@ -354,9 +354,9 @@ export const AdminButton = styled.button`
     border-radius: 30px;
     border: 1px solid rgba(87, 86, 85, 1);
     background-color: ${(props) =>
-    props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
+      props.disabled ? 'rgba(87, 86, 85, 1)' : 'transparent'};
     color: ${(props) =>
-    props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
+      props.disabled ? 'rgba(249, 249, 246, 1)' : 'rgba(87, 86, 85, 1)'};
     cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
     width: auto;
     padding-right: 15px;

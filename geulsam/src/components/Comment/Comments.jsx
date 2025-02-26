@@ -652,6 +652,8 @@ const Comments = ({ id }) => {
   return (
     <div>
       <Accordion name="독자 후기" content={Comment} contentId={id} />
+      <br />
+      <br />
     </div>
   );
 };

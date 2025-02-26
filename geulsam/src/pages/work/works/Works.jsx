@@ -309,9 +309,8 @@ const Works = () => {
         <br />
         <br />
       </Mobile>
-      <Margin>
-        <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
-      </Margin>
+      <br />
+      <Pagination page={page} totalPage={totalPage} onChangePage={setPage} />
     </WorksContainer>
   );
 };

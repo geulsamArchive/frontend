@@ -6,34 +6,60 @@ import { Paging, PageButton } from '../../style/StyledComponent';
 // onChangePage -> 페이지가 바뀔 때마다 setPage로 바뀐 페이지 저장
 
 const Pagination = ({ page, totalPage, onChangePage, isDark }) => {
+  const handlePageChange = (pageNumber) => {
+    if (pageNumber < 1 || pageNumber > totalPage) return;
+    onChangePage(pageNumber);
+  };
 
-    const handlePageChange = (pageNumber) => {
-        if (pageNumber < 1 || pageNumber > totalPage) return;
-        onChangePage(pageNumber);
-    };
+  const pageCheck = (totalPage) => {
+    if (totalPage === 0 || totalPage === 1) return;
+    else
+      return (
+        <svg
+          width="10"
+          height="14"
+          viewBox="0 0 11 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2.12565 2.6665L8.45898 9.39567L2.12565 16.1248"
+            stroke="#999999"
+            strokeWidth="3.62353"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+  };
 
-    const renderPageNumbers = () => {
-        const pages = [];
-        for (let i = 1; i <= totalPage; i++) {
-            pages.push(
-                <PageButton key={i} onClick={() => handlePageChange(i)} disabled={i === page}>
-                    {i}
-                </PageButton>
-            );
-        }
-        return pages;
-    };
+  const renderPageNumbers = () => {
+    const pages = [];
+    for (let i = 1; i <= totalPage; i++) {
+      pages.push(
+        <PageButton
+          key={i}
+          onClick={() => handlePageChange(i)}
+          disabled={i === page}
+        >
+          {i}
+        </PageButton>
+      );
+    }
+    return pages;
+  };
 
-    return (
-        <Paging isDark={isDark}>
-            {renderPageNumbers()}
-            <PageButton isDark={isDark} onClick={() => handlePageChange(page + 1)}>
-                <svg width="10" height="14" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  return (
+    <Paging isDark={isDark}>
+      {renderPageNumbers()}
+      <PageButton isDark={isDark} onClick={() => handlePageChange(page + 1)}>
+        {pageCheck(totalPage)}
+        {/* <svg width="10" height="14" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.12565 2.6665L8.45898 9.39567L2.12565 16.1248" stroke="#999999" strokeWidth="3.62353" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-            </PageButton>
-        </Paging>
-    );
+                </svg> */}
+      </PageButton>
+    </Paging>
+  );
 };
 
 export default Pagination;
