@@ -32,20 +32,14 @@ const BookUpload = () => {
     const [rows, setRows] = useState([{ pageNumber: '', author: '', title: '', error: '', showButton: true, workName: '', workId: '', uuid: ' ' }]);
     const [bookContentList, setBookContentList] = useState([]);
 
-    const addBookContent = (bookContentId, title, name, page) => {
-        // bookContentId가 빈 문자열 또는 공백일 경우 null로 설정
-        const contentId =
-            (!bookContentId || bookContentId.trim() === "" || bookContentId === " " || bookContentId === undefined) ? null :
-                (Array.isArray(bookContentId) ? bookContentId[0] : bookContentId);
 
-        console.log("처리한 contentId", contentId);
+    const addBookContent = (bookContentId, title, name, page) => {
+        const contentId = bookContentId[0];
         const newContent = { contentId, title, name, page };
         console.log(contentId, title, name, page);
         console.log(newContent);
-
         setBookContentList([...bookContentList, newContent]);
     };
-
 
     const handleInputChange = (index, field, value) => {
         const updatedRows = [...rows];
@@ -56,6 +50,7 @@ const BookUpload = () => {
     const addRow = () => {
         setRows([...rows, { pageNumber: '', author: '', title: '', error: '', showButton: true, workName: '', workId: '' }]);
     };
+
     const handleFindWork = async (index, author, title, page) => {
         const accessToken = localStorage.getItem('access');
         setLoading(true);
@@ -64,8 +59,8 @@ const BookUpload = () => {
                 params: { userName: author, contentTitle: title },
                 headers: { 'accessToken': accessToken }
             });
-            const id = response.data.data; // 작품 ID
-            console.log("찾은 작품 ID:", id);
+            const id = response.data.data; // Assuming the first ID is used
+            console.log(id);
 
             if (!id) {
                 const updatedRows = [...rows];
@@ -77,10 +72,10 @@ const BookUpload = () => {
                     headers: { 'accessToken': accessToken }
                 });
                 const workData = workResponse.data;
-                console.log("작품 데이터:", workData);
-                // 작품 데이터가 유효하면 bookContentList에 추가합니다.
+                console.log(workData);
                 if (workData) {
-                    addBookContent(id, title, author, page);
+                    console.log(id, title, author, page);
+                    addBookContent(id, title, author, page); // 데이터 추가
                 }
                 const updatedRows = [...rows];
                 updatedRows[index].workName = workData.title;
@@ -109,6 +104,7 @@ const BookUpload = () => {
     };
 
     const handleWorkClick = (id) => {
+        console.log("작품 id", id);
         navigate(`/work/${id}`); // 작품 페이지로 이동
     }
 

@@ -102,6 +102,7 @@ const BookUpload = () => {
   };
 
   const handleWorkClick = (id) => {
+    console.log("작품 id 찾기 함수 실행함");
     navigate(`/work/${id}`); // 작품 페이지로 이동
   }
 
