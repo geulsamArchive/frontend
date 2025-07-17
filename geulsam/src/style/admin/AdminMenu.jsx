@@ -41,6 +41,8 @@ export const AdminMenus = styled.div`
 `;
 
 export const AdminWallpaper = styled.div`
-  background-color: #f9f9f6;
-  height: calc(100dvh - 100px);
+  @media only screen and (min-width: 1024px) {
+    background-color: #f9f9f6;
+    height: calc(100dvh - 100px);
+  }
 `;

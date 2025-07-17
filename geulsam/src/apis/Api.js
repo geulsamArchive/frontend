@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseURL = 'https://geulsaem.store'
+const baseURL = 'https://geulsam.com'
 
 const axiosAPI = (url, options) => {
     const instance = axios.create({

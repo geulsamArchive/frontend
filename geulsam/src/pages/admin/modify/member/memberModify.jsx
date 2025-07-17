@@ -61,14 +61,15 @@ const MemberModify = () => {
         params: {
           order: order,
           level: level,
-          size: 10000, // 전체 데이터를 가져오기 위해 큰 값 사용
           search: search, // 검색어 추가
         },
         headers: {
           accessToken: accessToken,
         },
       });
+
       // API에서 totalPage 관련 처리는 제거합니다.
+      console.log(resp.data);
       return resp.data.data.content || [];
     } catch (error) {
       console.error('회원 데이터를 가져오는 중 오류 발생:', error);
@@ -256,24 +257,6 @@ const MemberModify = () => {
       <WorkInfoContainer>
         <WorkTopBorder />
         <BookInfoAndButton>
-          {/* <ResponsiveButton
-        isActive={activeButton === 1}
-        onClick={() => navigate('/admin/critic')}
-      >
-        일정 & 콘텐츠
-      </ResponsiveButton>
-      <ResponsiveButton
-        isActive={activeButton === 2}
-        onClick={() => navigate('/admin/member/modify')}
-      >
-        회원 관리
-      </ResponsiveButton>
-      <ResponsiveButton
-        isActive={activeButton === 3}
-        onClick={() => navigate('/user/mypage')}
-      >
-        관리자 정보
-      </ResponsiveButton> */}
           <div style={{ flex: 1 }}>
             <MemberTitle>
               <MemberTitleTop>회원 목록</MemberTitleTop>{' '}
